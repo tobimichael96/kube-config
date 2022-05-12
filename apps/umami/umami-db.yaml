@@ -29,7 +29,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: umami-config
-                  key: pg-password
+                  key: db-password
       volumes:
         - name: umami-db-mount
           persistentVolumeClaim:
