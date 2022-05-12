@@ -10,11 +10,6 @@ data:
         listen  [::]:80;
         server_name  localhost;
 
-        # cache static files
-        location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {
-          expires 365d;
-        }
-
         location / {
             root   /usr/share/nginx/html;
             index  index.html;
