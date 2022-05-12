@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sz-service-cron
+  namespace: sz-service
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - args:
+                - /bin/sh
+                - -ec
+                - 'curl "http://sz-service:8000/cron"'
+              image: curlimages/curl:latest
+              name: sz-service-cron
+          restartPolicy: OnFailure
+  schedule: '0 */6 * * *'
+  successfulJobsHistoryLimit: 1

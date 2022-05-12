@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: oauth2-proxy-config
+    namespace: oauth2-proxy
+data:
+    oauth2-proxy.cfg: ENC[AES256_GCM,data:5v5BcBsZsu7OfeBurgFWit/KYoi4VXbJr5hUD/w2xZh/nvbEDLp2vhhjzbubqxVqH6z+XyqUdTOM9OqDI0Qudzai/1OdUWZWLbAGmigPq2Hyc8E+EDFgx++tz+dAmBnQVjIJOxS5gmdgEKtN+HXe3f3C6WD1yuIZwe8MkWPmXLL2BDn88IXjSPdlTuzn8SvRpAQFQji8iJKn7VwB23BtjRRRDfg5ZFOJpFN4lhUB7TQDa6+IAH/ElmcX5vJlFw01ibTXRG+hxaSsbyhacMKq9l5aHDUKbcNXDBGRI3xiBFIUO3CqmQ89MTiCmQudXwBrC4RaE7bg+IcS0VyueX1sVVodv/RMuGyr1W1lotIM6HSbWYdRLBrtg7qw2f3HymdNIutcxwMAIvHRWCMcmafSpXkc1HgDxAQYkZh50t8uvGv2Bt01dNKkrpq+0ubQ72SzqORKtr8fu0hgM3Oe37vAafi6H07QkyQFN3AY+sOIa4GTXm9GJ5bX6rZeumqzebWjKuMbqF1EVWpxV+uJuUpKHXwuE/SuyYJQJl0oCP0MM6govc+4VpDybTy1Q1MZxBRStrV3Sbmy2sZ361IrynO8U0Bk4442TjdjzNBvaBp10zaC5j6Jbgb+OQL+tKGhTDTaEcWn/xj5sTodp6sdYbKcLvCb5kxgpyKm1JwfM5dgsftXcpAxILI2yiKBK2pYeTbOHUn3jLdVguxvISqHLUYlqHxxvF+u9RmOqiNuFv5scR0VHyhz6N86KiqQOR3uD+cBtQ4TVUWvy/aSPb7EVvi0XJopcUNXIgt3juVh5+PPdU8MvCA4+365TIaKGkgtm7+5Bm7LPjqxE4fKkQqLimjM0EzVbMplCMvGOLqt+YIID/I69DaEs8Dc2AgVvYfb1mSSrySm/b9b355l+5VdkJB9TgvCCs0lSyVJq0nLisnR3/TozmGYo8kZakJ4HO7E3D0VUu/ZTrmNl7ZvNouCeSpj,iv:9i6M8yku0jigB/giIYGIQu+Ml1+n1yEmHhWcXbz0ce8=,tag:oDnnVCMjH/75jQwvNeEljQ==,type:str]
+    authenticated_emails.cfg: ENC[AES256_GCM,data:j2ywUQ2f4QnbTPwXhzPvH2cJy1G7UlsJlVMpS1rXcQraVp/DVg7JRGLVVYQ9yABENd1Nl6AQ+GFR,iv:7ynixN4BOS6l89Lvr/vXkEnKGdkEw9TZzy2gh6eFsto=,tag:ymbE1KQA2POor8n1ZWH7Bg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1099kpzqp5v429mcyekxxnnyfkyuqxgq3esxvamc0kv7tf7nh9g9qymcpmx
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmWkhRMW9NbTlNbXg4SWFW
+            KzRidnB5bS9GT3pTaXFMdHJFMjRVemk5N3pzCmo2WmYydWFwdlRZQkVjRHQ5Q3Aw
+            ZktRd0puZG5oZlBmUEMzSEZCL3RZM3cKLS0tIG9aVk0vbG84bGRGVmpEd0haeE1K
+            M2lOSEEyQ0ZhbGpWK29OLzRWdXcza0kKlJCOcMK66dxCturUcxMtDLhla659fhXY
+            7OxA+QfGPd5dEvO7llThZ3YNj7hX09SwVck93ZrmOSNp6bDzdLdxXw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-05-10T11:10:42Z"
+    mac: ENC[AES256_GCM,data:rZC54bYhAfXMfYyEB+mZQCosbRVSuEeeSBrDGyHmfBANx0rFSEO2pBZOJZuwbIrIGRO3jF3nhm4DFdNoUyBM6XyU8pidgsTRP2GEavddCZDUV6bJe6zwbw7wpWTUaRFQI/YvyH1mYhrhP/dkaPcckurvhgSFPk5GpK4UMu6nJoM=,iv:qZSiclp4Iz7HAReN58STo1or8k6on9S8nQC/Rd/i1eA=,tag:+WSrkgzZpthGXJGVVQAkTg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.2

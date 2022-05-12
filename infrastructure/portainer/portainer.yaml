@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: portainer
+  namespace: portainer
+spec:
+  chart:
+    spec:
+      chart: portainer
+      sourceRef:
+        kind: HelmRepository
+        name: portainer
+  interval: 5m
+  releaseName: portainer
+  targetNamespace: portainer
+  values:
+    service:
+      type: ClusterIP
+
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "nginx"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        cert-manager.io/cluster-issuer: "letsencrypt"
+        nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+      tls:
+        - hosts:
+            - portainer.tmem.de
+          secretName: portainer-tls
+      hosts:
+        - host: portainer.tmem.de
+          paths:
+            - path: /
+
+    persistence:
+      existingClaim: portainer

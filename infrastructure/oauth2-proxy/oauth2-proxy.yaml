@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oauth2-proxy
+  name: oauth2-proxy
+  namespace: oauth2-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oauth2-proxy
+  template:
+    metadata:
+      labels:
+        app: oauth2-proxy
+    spec:
+      containers:
+        - name: oauth2-proxy
+          image: "bitnami/oauth2-proxy:latest"
+          args:
+            - --config=/etc/oauth2-proxy.cfg
+          volumeMounts:
+            - name: oauth2-proxy-config
+              mountPath: /etc/oauth2-proxy.cfg
+              subPath: oauth2-proxy.cfg
+            - name: oauth2-proxy-config
+              mountPath: /etc/authenticated_emails.cfg
+              subPath: authenticated_emails.cfg
+            - name: oauth2-templates
+              mountPath: /templates
+      volumes:
+        - name: oauth2-proxy-config
+          configMap:
+            name: oauth2-proxy-config
+        - name: oauth2-templates
+          configMap:
+            name: oauth2-templates
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: oauth2-proxy
+  name: oauth2-proxy
+  namespace: oauth2-proxy
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4180
+      targetPort: 4180
+      protocol: TCP
+      name: oauth2-proxy
+  selector:
+    app: oauth2-proxy

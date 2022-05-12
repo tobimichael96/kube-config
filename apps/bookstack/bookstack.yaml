@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstack
+  namespace: bookstack
+spec:
+  selector:
+    matchLabels:
+      app: bookstack
+  template:
+    metadata:
+      labels:
+        app: bookstack
+    spec:
+      containers:
+        - name: bookstack
+          image: ghcr.io/linuxserver/bookstack
+          volumeMounts:
+            - name: bookstack-mount
+              mountPath: /config
+          env:
+            - name: APP_URL
+              value: "https://wiki.tmem.de"
+            - name: DB_HOST
+              value: "bookstack-db"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: bookstack
+                  key: MYSQL_USER
+                  optional: false
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: bookstack
+                  key: MYSQL_PASSWORD
+                  optional: false
+            - name: DB_DATABASE
+              value: "bookstack"
+          ports:
+            - containerPort: 80
+      volumes:
+      - name: bookstack-mount
+        persistentVolumeClaim:
+          claimName: bookstack-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookstack
+  namespace: bookstack
+spec:
+  selector:
+    app: bookstack
+  ports:
+    - protocol: TCP
+      port: 80

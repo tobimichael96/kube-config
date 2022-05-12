@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quick-share
+  namespace: quick-share
+spec:
+  selector:
+    matchLabels:
+      app: quick-share
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: quick-share
+    spec:
+      containers:
+        - name: quick-share
+          image: ausraster/quickshare:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quick-share
+  namespace: quick-share
+spec:
+  selector:
+    app: quick-share
+  ports:
+    - protocol: TCP
+      port: 8080

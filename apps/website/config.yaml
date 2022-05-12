@@ -1,0 +1,453 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx
+  namespace: website
+data:
+  default.conf: |
+    server {
+        listen       80;
+        listen  [::]:80;
+        server_name  localhost;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html;
+        }
+
+        error_page 400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 421 422 423 424 425 426 428 429 431 451 500 501 502 503 504 505 506 507 508 510 511 /error.html;
+        location = /error.html {
+          ssi on;
+          internal;
+          root /usr/share/nginx/html;
+        }
+
+        # Gzip Settings
+        gzip on;
+        gzip_disable "msie6";
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_buffers 32 16k;
+        gzip_http_version 1.1;
+        gzip_min_length 250;
+        gzip_types image/jpeg image/bmp image/svg+xml text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript image/x-icon;
+    }
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="./style.css"/>
+        <script src="./mail.js"></script>
+        <link rel="icon" href="https://tm-website-static.s3.eu-central-1.amazonaws.com/logo.ico">
+        <title>TM</title>
+      </head>
+      <body>
+        <div class="grid-2">
+          <div class="section-left">
+            <img alt="Logo" src="https://tm-website-static.s3.eu-central-1.amazonaws.com/logo.gif" width=250" oncontextmenu="return false">
+            <h1>Tobias Michael Effner</h1>
+            <a target="_blank" href="https://www.linkedin.com/in/tobias-michael-effner"><i class="fab fa-linkedin"></i></a>
+            <a target="_blank" href="https://github.com/TobiMichael96"><i class="fab fa-github"></i></a>
+            <a target="_blank" href="https://gitlab.com/tobimichael"><i class="fab fa-gitlab"></i></a>
+            <a target="_blank" href="https://open.spotify.com/user/tobimichael"><i class="fab fa-spotify"></i></a>
+            <a target="_blank" href="https://soundcloud.com/user-867112514"><i class="fab fa-soundcloud"></i></a>
+          </div>
+          <div class="section-right">
+            <h2>Career</h2>
+            <ul>
+              <li>Bachelor of Science degree in Business Informatics</li>
+              <li>Working student at retarus GmbH in the Operations-Team</li>
+              <li>DevOps/GitOps Engineer at Valtech Mobility</li>
+              <li>DevOps/GitOps Engineer at Rackspace Technology</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <div class="section-list">
+              <i class="fab fa-aws"></i>
+              <skill>Azure</skill>
+              <i class="fab fa-python"></i>
+              <skill>Terraform</skill>
+              <skill>Pulumi</skill>
+              <i class="fab fa-git-square"></i>
+              <skill>Bash</skill>
+              <i class="fas fa-database"></i>
+              <skill>Kubernetes</skill>
+              <i class="fab fa-docker"></i>
+              <skill>Golang</skill>
+              <i class="fab fa-jenkins"></i>
+              <skill>Flux</skill>
+              <i class="fab fa-java"></i>
+              <skill>Helm</skill>
+              <i class="fab fa-linux"></i>
+              <skill>Arch</skill>
+              <i class="fas fa-terminal"></i>
+              <i class="fab fa-apple"></i>
+              <i class="fab fa-raspberry-pi"></i>
+              <i class="fab fa-windows"></i>
+            </div>
+
+            <h2>Personal Interests</h2>
+            <div class="section-list">
+              <a target="_blank" href="https://up.tmem.de/status"><i class="fas fa-server highlight"></i></a>
+              <skill>Selfhosting</skill>
+              <a target="_blank" href="https://steamcommunity.com/id/ausraster8/"><i class="fas fa-gamepad highlight"></i></a>
+              <skill>Techno</skill>
+              <i class="fas fa-futbol"></i>
+              <skill>Tattoos</skill>
+              <i class="fas fa-dog"></i>
+              <i class="fas fa-cat"></i>
+            </div>
+
+            <h2>Contact</h2>
+            <div class="section-list">
+              <a class="highlight" href="/" onclick="show_mail(this)"><i class="far fa-envelope highlight"></i></a>
+              <a target="_blank" href="https://keys.openpgp.org/search?q=52270C8D7910DD282EDC1FB4B396A8B5A21BBCB8"><i
+              class="fas fa-key highlight"></i></a>
+            </div>
+            <div class="disclaimer">
+              If you find an error or a typo on this page, please send me a mail. Thanks!
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+  style.css: |
+    /* global */
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* media */
+    @media (min-width: 1024px) {
+        ul {
+            margin-left: -1rem;
+        }
+
+        li {
+            padding: 5px 5px 5px 0;
+            font-size: 1.2rem;
+        }
+
+        .disclaimer {
+            margin: 0 1rem 1rem 0;
+        }
+
+        .section-left {
+            padding-top: 25vh;
+        }
+
+        .section-right {
+            padding-top: 10vh;
+            width: 70%;
+        }
+
+        .section-right i {
+            padding: 5px 5px 5px 0;
+        }
+    }
+
+    @media (min-width: 785px) and (max-width: 1024px) {
+        ul {
+            margin-left: -1rem;
+        }
+
+        li {
+            padding: 5px 5px 5px 0;
+            font-size: 1.2rem;
+        }
+
+        .disclaimer {
+            margin: 0 1rem 1rem 0;
+        }
+
+        .section-left {
+            padding-top: 25vh;
+        }
+
+        .section-right {
+            padding-top: 4vh;
+            width: 70%;
+        }
+
+        .section-right i {
+            padding: 5px 5px 5px 0;
+        }
+    }
+
+    @media (max-width: 785px) {
+        .grid-2 {
+            grid-template-columns: 1fr;
+        }
+
+        h2, h3, a, skill {
+            text-align: center;
+        }
+
+        ul {
+            margin-left: 5%;
+            padding-right: 2rem;
+        }
+
+        li {
+            font-size: 1.2rem;
+        }
+
+        .disclaimer {
+            text-align: center;
+            margin: 0 1rem 1rem;
+        }
+
+        .section-left {
+            padding-top: 10vh;
+            padding: 5rem 0 0;
+        }
+
+        .section-right {
+            padding-top: 5vh;
+            width: 100%;
+        }
+
+        .section-list {
+            padding-left: 2vh;
+            text-align: center;
+            margin: 0;
+        }
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: #222831;
+        color: darkgray;
+    }
+
+    .disclaimer {
+        font-size: 0.8rem;
+        padding-top: 1rem;
+    }
+
+    .disclaimer a {
+        color: #eeeeee;
+        text-decoration: none;
+        padding: 1px;
+        font-size: 0.8rem;
+    }
+
+    h1, .white {
+        color: #ffd369;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #ffd369;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    h3 {
+        color: #ffd369;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+
+    a {
+        color: #eeeeee;
+        text-decoration: none;
+        padding: 2px;
+        font-size: 1.2rem;
+    }
+
+    skill {
+        font-size: 1.2rem;
+        text-decoration: none;
+        padding: 15px;
+    }
+
+    ul {
+        list-style: none; /* Remove default bullets */
+    }
+
+    ul li::before {
+        content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+        font-size: 1.2rem;
+        color: #eeeeee;
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+
+    i {
+        font-size: 1.4rem;
+    }
+
+    p {
+        padding: 5px 5px 5px 0;
+        font-size: 1.2rem;
+    }
+
+    ul {
+        font-size: 1.2rem;
+    }
+
+    .section-left {
+        text-align: center;
+    }
+
+    .section-left i {
+        font-size: 1.6rem;
+        padding: 15px;
+    }
+
+    /* section extra */
+    .section-extra {
+        margin: 5px 5px 5px -15px;
+        width: 70%;
+    }
+
+    .section-extra i {
+        color: #eeeeee;
+        padding: 15px;
+    }
+
+
+    /* section list */
+    .section-list {
+        margin: 5px 5px 5px -15px;
+    }
+
+    .section-list skill {
+    }
+
+    .section-list i {
+        padding: 15px;
+    }
+
+    /* animations / utilities */
+    .section-extra i:hover {
+        color: #ade6e1;
+        cursor: pointer;
+        transform: scale(1.5);
+        transition: 0.3s;
+    }
+
+    .section-left i:hover {
+        color: #ade6e1;
+        cursor: pointer;
+        transform: scale(1.5);
+        transition: 0.3s;
+    }
+
+    .section-right i.highlight:hover {
+        color: #ade6e1;
+        cursor: pointer;
+        transform: scale(1.5);
+        transition: 0.3s;
+    }
+
+    .white:hover {
+        position: relative;
+        padding-left: 10px;
+    }
+  error.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="./error.css">
+        <link rel="icon" href="https://tm-website-static.s3.eu-central-1.amazonaws.com/logo.ico">
+        <title>TM-Error</title>
+    </head>
+    <body>
+
+    <div class="container">
+        <h2>Error</h2>
+        <h1>I think you went the wrong direction.</h1>
+
+        <p><i>“Sometimes life is like this tunnel. You can’t always see the light at the end of the tunnel, but if you keep moving, you will come to a better place.”</i> — Iroh</p>
+        <span class="go-back"><a href="https://www.tobiasmichael.de">Home</a></span>
+    </div>
+
+    </body>
+    </html>
+  error.css: |
+    body {
+        padding: 30px 20px;
+        font-family: 'Roboto', sans-serif;
+        background-color: #222831;
+        color: darkgray;
+        line-height: 1.6;
+    }
+    .container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    h1 {
+        margin: 0 0 40px;
+        font-size: 50px;
+        line-height: 1;
+        color: #ffd369;
+        font-weight: 700;
+    }
+    h2 {
+        margin: 30px 0 0;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        color: #ffd369;
+        text-transform: uppercase;
+    }
+    p {
+        font-size: 20px;
+        margin: 1em 0;
+    }
+    .go-back a {
+        display: inline-block;
+        margin-top: 3em;
+        padding: 10px;
+        color: #eeeeee;
+        font-weight: 700;
+        border: solid 2px #eeeeee;
+        text-decoration: none;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+    .go-back a:hover {
+        border-color: #ade6e1;
+        color: #ade6e1;
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: 0.3s;
+    }
+    @media screen and (min-width: 768px) {
+        body {
+            padding: 130px;
+        }
+    }
+    @media screen and (max-width: 480px) {
+        h1 {
+            font-size: 48px;
+        }
+    }
+  mail.js: |
+    function show_mail(mail) {
+        let domain = "tobiasmichael.de"
+        let name = "info"
+
+        mail.setAttribute('href', "mailto:" + name + "@" + domain);
+    }
+---

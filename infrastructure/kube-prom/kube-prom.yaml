@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitor
+spec:
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+  interval: 5m
+  releaseName: kube-prometheus-stack
+  targetNamespace: monitor
+  values:
+    alertmanager:
+      enabled: false
+    grafana:
+      enabled: true
+      defaultDashboardsTimezone: Europe/Berlin
+
+      admin:
+        ## Name of the secret. Can be templated.
+        existingSecret: kube-prom
+        userKey: admin-user
+        passwordKey: admin-password
+
+      grafana.ini:
+        security:
+          disable_initial_admin_creation: false
+        server:
+          # The full public facing url you use in browser, used for redirects and emails
+          root_url: "https://status.tmem.de"
+        auth.anonymous:
+          enabled: true
+          org_role: Viewer
+          hide_version: true
+        auth:
+          disable_login_form: false
+        dashboards:
+          default_home_dashboard_path: /tmp/dashboards/k8s-resources-cluster.json
+
+      ingress:
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+          nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+        enabled: true
+        tls:
+          - hosts:
+              - status.tmem.de
+            secretName: status-tls
+        hosts:
+          - status.tmem.de

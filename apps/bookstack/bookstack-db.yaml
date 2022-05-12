@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstack-db
+  namespace: bookstack
+spec:
+  selector:
+    matchLabels:
+      app: bookstack-db
+  template:
+    metadata:
+      labels:
+        app: bookstack-db
+    spec:
+      containers:
+        - name: bookstack-db
+          image: ghcr.io/linuxserver/mariadb
+          volumeMounts:
+            - name: bookstack-db-mount
+              mountPath: /config
+          env:
+            - name: MYSQL_DATABASE
+              value: "bookstack"
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: bookstack
+                  key: MYSQL_USER
+                  optional: false
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bookstack
+                  key: MYSQL_PASSWORD
+                  optional: false
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bookstack
+                  key: MYSQL_ROOT_PASSWORD
+                  optional: false
+          ports:
+            - containerPort: 3306
+      volumes:
+        - name: bookstack-db-mount
+          persistentVolumeClaim:
+            claimName: bookstack-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookstack-db
+  namespace: bookstack
+spec:
+  selector:
+    app: bookstack-db
+  ports:
+    - protocol: TCP
+      port: 3306
