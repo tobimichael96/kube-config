@@ -45,6 +45,7 @@ data:
         <script src="./mail.js"></script>
         <link rel="icon" href="https://tm-website-static.s3.eu-central-1.amazonaws.com/logo.ico">
         <title>TM</title>
+        <script async defer data-website-id="9ff2fad0-99a9-4c5b-8450-279dff4b87ad" src="https://stats.tmem.de/umami.js"></script>
       </head>
       <body>
         <div class="grid-2">
