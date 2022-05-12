@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sz-service
-          image: ausraster/sz-download:latest
+          image: ausraster/sz-download:latest #{"$imagepolicy": "flux-system:sz-service"}
           ports:
             - containerPort: 8000
           env:
