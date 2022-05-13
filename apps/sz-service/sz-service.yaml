@@ -42,7 +42,7 @@ spec:
                   key: bot_token
                   optional: false
             - name: GROUP_ID
-              value: '-487488034'
+              value: '-1605722515'
             - name: HOST_URL
               value: 'https://sz-service.tmem.de'
           volumeMounts:
