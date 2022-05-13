@@ -18,5 +18,5 @@ spec:
               image: curlimages/curl:latest
               name: sz-service-cron
           restartPolicy: OnFailure
-  schedule: '0 */6 * * *'
+  schedule: '30 0,2 * * *'
   successfulJobsHistoryLimit: 1
