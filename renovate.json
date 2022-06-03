@@ -8,5 +8,11 @@
   },
   "kubernetes": {
     "fileMatch": ["\\.yaml$"]
-  }
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
 }
