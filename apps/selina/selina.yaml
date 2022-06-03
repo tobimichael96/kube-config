@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: selina
-          image: nginx:alpine
+          image: nginx:1.22.0-alpine
           resources:
             requests:
               cpu: 50m
