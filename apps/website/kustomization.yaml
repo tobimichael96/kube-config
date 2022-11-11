@@ -4,6 +4,5 @@ resources:
 - namespace.yaml
 - config.yaml
 - website.yaml
-- hpa.yaml
 - ingress.yaml
 - ingress-redirect.yaml
