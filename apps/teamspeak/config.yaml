@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: udp-services
-  namespace: teamspeak
-data:
-  port: "teamspeak/teamspeak-service:9987"
