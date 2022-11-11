@@ -42,7 +42,7 @@ metadata:
   labels:
     app: teamspeak
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 9987
       targetPort: ts
