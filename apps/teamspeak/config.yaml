@@ -4,4 +4,4 @@ metadata:
   name: udp-services
   namespace: teamspeak
 data:
-  9987: "teamspeak/teamspeak-service:9987"
+  port: "teamspeak/teamspeak-service:9987"
