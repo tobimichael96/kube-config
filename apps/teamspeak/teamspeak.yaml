@@ -21,9 +21,13 @@ spec:
         - name: teamspeak-server
           image: teamspeak
           ports:
-            - name: ts
+            - name: ts-voice
               hostPort: 9987
               containerPort: 9987
+              protocol: UDP
+            - name: ts-files
+              hostPort: 30033
+              containerPort: 30033
               protocol: UDP
           env:
             - name: TS3SERVER_LICENSE
