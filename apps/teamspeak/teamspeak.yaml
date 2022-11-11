@@ -21,6 +21,7 @@ spec:
           image: teamspeak
           ports:
             - name: ts
+              hostPort: 9987
               containerPort: 9987
               protocol: UDP
           env:
@@ -33,20 +34,4 @@ spec:
         - name: teamspeak-data
           persistentVolumeClaim:
             claimName: teamspeak-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: teamspeak-service
-  namespace: teamspeak
-  labels:
-    app: teamspeak
-spec:
-  type: NodePort
-  ports:
-    - port: 9987
-      targetPort: ts
-      protocol: UDP
-      name: ts
-  selector:
-    app: teamspeak
+      hostNetwork: true
