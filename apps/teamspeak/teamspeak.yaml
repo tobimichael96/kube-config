@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: teamspeak-server
-          image: teamspeak
+          image: teamspeak:3.13.7
           ports:
             - name: ts-voice
               hostPort: 9987
