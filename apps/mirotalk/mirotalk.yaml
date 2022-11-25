@@ -24,7 +24,7 @@ spec:
             - containerPort: 3010
           volumeMounts:
             - name: mirotalk
-              mountPath: /src/app/src/config.js
+              mountPath: mirotalksfu/app/src/config.js
               subPath: config.js
               readOnly: true
       volumes:
