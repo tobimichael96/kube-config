@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mirotalk
+  namespace: mirotalk
+spec:
+  selector:
+    matchLabels:
+      app: website
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      containers:
+        - name: mirotalk
+          image: mirotalk/sfu
+#          resources:
+#            requests:
+#              cpu: 50m
+#            limits:
+#              cpu: 100m
+          ports:
+            - containerPort: 3010
+          volumeMounts:
+            - name: config
+              mountPath: app/src/config.js
+              subPath: config.js
+              readOnly: true
+      volumes:
+        - name: nginx
+          configMap:
+            name: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mirotalk
+  namespace: mirotalk
+spec:
+  selector:
+    app: mirotalk
+  ports:
+    - protocol: TCP
+      port: 3010
