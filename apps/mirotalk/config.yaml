@@ -4,136 +4,56 @@ metadata:
   name: mirotalk
   namespace: mirotalk
 data:
-  config.js: |
-    'use strict';
-    
-    const os = require('os');
-    const http = require('http');
-    
-    const getPublicIp = async () => {
-        http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function (resp) {
-            resp.on('data', function (ip) {
-                console.log("Public IP address is: " + ip);
-                return ip;
-            });
-        });
-    };
-    
-    module.exports = {
-        /*
-            Host Protection (default False)
-            In order to protect your host set 
-            hostProtected to true and set your own Username and Password
-        */
-        hostProtected: false,
-        hostUsername: 'username',
-        hostPassword: 'password',
-        // app listen on
-        listenIp: '0.0.0.0',
-        listenPort: process.env.PORT || 3010,
-        // ssl/README.md
-        sslCrt: '../ssl/cert.pem',
-        sslKey: '../ssl/key.pem',
-        /* 
-        Ngrok
-            1. Goto https://ngrok.com
-            2. Get started for free 
-            3. Copy YourNgrokAuthToken: https://dashboard.ngrok.com/get-started/your-authtoken
-        */
-        ngrokAuthToken: '',
-        apiKeySecret: 'mirotalksfu_default_secret',
-        sentry: {
-            /*
-            Sentry
-                1. Goto https://sentry.io/
-                2. Create account
-                3. On dashboard goto Settings/Projects/YourProjectName/Client Keys (DSN)
-            */
-            enabled: false,
-            DSN: '',
-            tracesSampleRate: 0.5,
-        },
-        slack: {
-            /*
-                1. Goto https://api.slack.com/apps/
-                2. Create your app
-                3. On Settings - Basic Information - App Credentials, chose your Signing Secret
-                4. Create a Slash Commands and put as Request URL: https://your.domain.name/slack
-            */
-            enabled: false,
-            signingSecret: '',
-        },
-        mediasoup: {
-            // Worker settings
-            numWorkers: Object.keys(os.cpus()).length,
-            worker: {
-                rtcMinPort: 40000,
-                rtcMaxPort: 40100,
-                logLevel: 'error',
-                logTags: ['info', 'ice', 'dtls', 'rtp', 'srtp', 'rtcp'],
-            },
-            // Router settings
-            router: {
-                mediaCodecs: [
-                    {
-                        kind: 'audio',
-                        mimeType: 'audio/opus',
-                        clockRate: 48000,
-                        channels: 2,
-                    },
-                    {
-                        kind: 'video',
-                        mimeType: 'video/VP8',
-                        clockRate: 90000,
-                        parameters: {
-                            'x-google-start-bitrate': 1000,
-                        },
-                    },
-                    {
-                        kind: 'video',
-                        mimeType: 'video/VP9',
-                        clockRate: 90000,
-                        parameters: {
-                            'profile-id': 2,
-                            'x-google-start-bitrate': 1000,
-                        },
-                    },
-                    {
-                        kind: 'video',
-                        mimeType: 'video/h264',
-                        clockRate: 90000,
-                        parameters: {
-                            'packetization-mode': 1,
-                            'profile-level-id': '4d0032',
-                            'level-asymmetry-allowed': 1,
-                            'x-google-start-bitrate': 1000,
-                        },
-                    },
-                    {
-                        kind: 'video',
-                        mimeType: 'video/h264',
-                        clockRate: 90000,
-                        parameters: {
-                            'packetization-mode': 1,
-                            'profile-level-id': '42e01f',
-                            'level-asymmetry-allowed': 1,
-                            'x-google-start-bitrate': 1000,
-                        },
-                    },
-                ],
-            },
-            // WebRtcTransport settings
-            webRtcTransport: {
-                listenIps: [
-                    {
-                        ip: '0.0.0.0',
-                        announcedIp: getPublicIp(), // replace by public static IP address https://api.ipify.org
-                    },
-                ],
-                initialAvailableOutgoingBitrate: 1000000,
-                minimumAvailableOutgoingBitrate: 600000,
-                maxSctpMessageSize: 262144,
-                maxIncomingBitrate: 1500000,
-            },
-        },
-    };
+    env: |
+        # Signaling Server listen port
+
+        PORT=3000
+
+        # Ngrok
+        # 1. Goto https://ngrok.com
+        # 2. Get started for free 
+        # 3. Copy YourNgrokAuthToken: https://dashboard.ngrok.com/get-started/your-authtoken
+
+        NGROK_ENABLED=true|false
+        NGROK_AUTH_TOKEN=YourNgrokAuthToken
+
+        # Stun
+        # Check: https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/
+
+        STUN=stun:stun.l.google.com:19302
+
+        # Turn
+        # Recommended: https://github.com/coturn/coturn
+        # Check: https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/
+
+        TURN_ENABLED=true|false
+        TURN_URLS=turn:YourTurnServer
+        TURN_USERNAME=YourTurnUsername
+        TURN_PASSWORD=YourTurnPassword
+
+        # API
+        # The response will give you a entrypoint / Room URL for your meeting.
+        # curl -X POST "http://localhost:3000/api/v1/meeting" -H  "authorization: mirotalk_default_secret" -H  "Content-Type: application/json"
+
+        API_KEY_SECRET=mirotalk_default_secret
+
+        # Sentry (optional)
+        # 1. Goto https://sentry.io/
+        # 2. Create account
+        # 3. Goto Settings/Projects/YourProjectName/Client Keys (DSN)
+
+        SENTRY_ENABLED=true|false
+        SENTRY_DSN=YourClientKeyDSN
+        SENTRY_TRACES_SAMPLE_RATE=1.0
+
+        # Slack Integration (optional)
+        # 1. Goto https://api.slack.com/apps/
+        # 2. Create your app
+        # 3. On Settings - Basic Information - App Credentials chose your Signing Secret
+        # 4. Create a Slash Commands and put as Request URL: https://your.domain.name/slack
+
+        SLACK_ENABLED=true|false
+        SLACK_SIGNING_SECRET=YourSlackSigningSecret
+
+        # Auto deploy on Railway
+        # https://railway.app/new/template/mirotalk?referralCode=mirotalk

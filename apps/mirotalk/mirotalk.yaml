@@ -14,19 +14,19 @@ spec:
     spec:
       containers:
         - name: mirotalk
-          image: ghcr.io/tobimichael96/mirotalksfu:0.0.3
+          image: ghcr.io/tobimichael96/mirotalk:latest
 #          resources:
 #            requests:
 #              cpu: 50m
 #            limits:
 #              cpu: 100m
           ports:
-            - containerPort: 3010
-          volumeMounts:
-            - name: mirotalk
-              mountPath: /src/app/src/config.js
-              subPath: config.js
-              readOnly: true
+            - containerPort: 3000
+#          volumeMounts:
+#            - name: mirotalk
+#              mountPath: /src/app/src/config.js
+#              subPath: config.js
+#              readOnly: true
       volumes:
         - name: mirotalk
           configMap:
@@ -42,4 +42,4 @@ spec:
     app: mirotalk
   ports:
     - protocol: TCP
-      port: 3010
+      port: 3000
