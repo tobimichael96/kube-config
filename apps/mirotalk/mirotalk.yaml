@@ -28,9 +28,9 @@ spec:
               subPath: config.js
               readOnly: true
       volumes:
-        - name: nginx
+        - name: mirotalk
           configMap:
-            name: nginx
+            name: mirotalk
 ---
 apiVersion: v1
 kind: Service
