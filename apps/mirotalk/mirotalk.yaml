@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mirotalk
-          image: mirotalk/sfu
+          image: ghcr.io/tobimichael96/mirotalksfu:0.0.3
 #          resources:
 #            requests:
 #              cpu: 50m

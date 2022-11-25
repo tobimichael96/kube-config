@@ -6,18 +6,24 @@ metadata:
 data:
   config.js: |
     'use strict';
+    
     const os = require('os');
-    const getPublicIp = () => {
-        fetch('https://api.ipify.org')
-            .then((response) => response.json())
-            .then((data) => console.log(data));
-        return data;
+    const http = require('http');
+    
+    const getPublicIp = async () => {
+        http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function (resp) {
+            resp.on('data', function (ip) {
+                console.log("Public IP address is: " + ip);
+                return ip;
+            });
+        });
     };
+    
     module.exports = {
         /*
-        Host Protection (default False)
-        In order to protect your host set
-        hostProtected to true and set your own Username and Password
+            Host Protection (default False)
+            In order to protect your host set 
+            hostProtected to true and set your own Username and Password
         */
         hostProtected: false,
         hostUsername: 'username',
@@ -28,34 +34,34 @@ data:
         // ssl/README.md
         sslCrt: '../ssl/cert.pem',
         sslKey: '../ssl/key.pem',
-        /*
+        /* 
         Ngrok
-        1. Goto https://ngrok.com
-        2. Get started for free
-        3. Copy YourNgrokAuthToken: https://dashboard.ngrok.com/get-started/your-authtoken
+            1. Goto https://ngrok.com
+            2. Get started for free 
+            3. Copy YourNgrokAuthToken: https://dashboard.ngrok.com/get-started/your-authtoken
         */
         ngrokAuthToken: '',
         apiKeySecret: 'mirotalksfu_default_secret',
         sentry: {
             /*
             Sentry
-            1. Goto https://sentry.io/
-            2. Create account
-            3. On dashboard goto Settings/Projects/YourProjectName/Client Keys (DSN)
+                1. Goto https://sentry.io/
+                2. Create account
+                3. On dashboard goto Settings/Projects/YourProjectName/Client Keys (DSN)
             */
             enabled: false,
             DSN: '',
-            tracesSampleRate: 0.5
+            tracesSampleRate: 0.5,
         },
         slack: {
             /*
-            1. Goto https://api.slack.com/apps/
-            2. Create your app
-            3. On Settings - Basic Information - App Credentials, chose your Signing Secret
-            4. Create a Slash Commands and put as Request URL: https://your.domain.name/slack
+                1. Goto https://api.slack.com/apps/
+                2. Create your app
+                3. On Settings - Basic Information - App Credentials, chose your Signing Secret
+                4. Create a Slash Commands and put as Request URL: https://your.domain.name/slack
             */
             enabled: false,
-            signingSecret: ''
+            signingSecret: '',
         },
         mediasoup: {
             // Worker settings
@@ -64,7 +70,7 @@ data:
                 rtcMinPort: 40000,
                 rtcMaxPort: 40100,
                 logLevel: 'error',
-                logTags: ['info', 'ice', 'dtls', 'rtp', 'srtp', 'rtcp']
+                logTags: ['info', 'ice', 'dtls', 'rtp', 'srtp', 'rtcp'],
             },
             // Router settings
             router: {
@@ -73,15 +79,15 @@ data:
                         kind: 'audio',
                         mimeType: 'audio/opus',
                         clockRate: 48000,
-                        channels: 2
+                        channels: 2,
                     },
                     {
                         kind: 'video',
                         mimeType: 'video/VP8',
                         clockRate: 90000,
                         parameters: {
-                            'x-google-start-bitrate': 1000
-                        }
+                            'x-google-start-bitrate': 1000,
+                        },
                     },
                     {
                         kind: 'video',
@@ -89,8 +95,8 @@ data:
                         clockRate: 90000,
                         parameters: {
                             'profile-id': 2,
-                            'x-google-start-bitrate': 1000
-                        }
+                            'x-google-start-bitrate': 1000,
+                        },
                     },
                     {
                         kind: 'video',
@@ -100,8 +106,8 @@ data:
                             'packetization-mode': 1,
                             'profile-level-id': '4d0032',
                             'level-asymmetry-allowed': 1,
-                            'x-google-start-bitrate': 1000
-                        }
+                            'x-google-start-bitrate': 1000,
+                        },
                     },
                     {
                         kind: 'video',
@@ -111,24 +117,23 @@ data:
                             'packetization-mode': 1,
                             'profile-level-id': '42e01f',
                             'level-asymmetry-allowed': 1,
-                            'x-google-start-bitrate': 1000
-                        }
-                    }
-                ]
+                            'x-google-start-bitrate': 1000,
+                        },
+                    },
+                ],
             },
             // WebRtcTransport settings
             webRtcTransport: {
                 listenIps: [
                     {
                         ip: '0.0.0.0',
-                        announcedIp: getPublicIp()
-                    }
+                        announcedIp: getPublicIp(), // replace by public static IP address https://api.ipify.org
+                    },
                 ],
                 initialAvailableOutgoingBitrate: 1000000,
                 minimumAvailableOutgoingBitrate: 600000,
                 maxSctpMessageSize: 262144,
-                maxIncomingBitrate: 1500000
-            }
-        }
+                maxIncomingBitrate: 1500000,
+            },
+        },
     };
-      
