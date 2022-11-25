@@ -6,11 +6,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: website
+      app: mirotalk
   template:
     metadata:
       labels:
-        app: website
+        app: mirotalk
     spec:
       containers:
         - name: mirotalk
