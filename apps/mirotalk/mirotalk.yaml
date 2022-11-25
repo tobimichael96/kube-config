@@ -15,18 +15,11 @@ spec:
       containers:
         - name: mirotalk
           image: ghcr.io/tobimichael96/mirotalk:latest
-#          resources:
-#            requests:
-#              cpu: 50m
-#            limits:
-#              cpu: 100m
+          resources:
+            limits:
+              cpu: 200m
           ports:
             - containerPort: 3000
-#          volumeMounts:
-#            - name: mirotalk
-#              mountPath: /src/app/src/config.js
-#              subPath: config.js
-#              readOnly: true
       volumes:
         - name: mirotalk
           configMap:
