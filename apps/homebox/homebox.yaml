@@ -21,6 +21,8 @@ spec:
           env:
             - name: TZ
               value: "Europe/Berlin"
+            - name: HBOX_OPTIONS_ALLOW_REGISTRATION
+              value: "false"
           volumeMounts:
             - name: homebox-pv
               mountPath: /data/
