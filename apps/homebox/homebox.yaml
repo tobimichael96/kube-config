@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homebox
+  namespace: homebox
+spec:
+  selector:
+    matchLabels:
+      app: homebox
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: homebox
+    spec:
+      containers:
+        - name: homebox
+          image: ghcr.io/hay-kot/homebox:latest
+          ports:
+            - containerPort: 7745
+          env:
+            - name: TZ
+              value: "Europe/Berlin"
+          volumeMounts:
+            - name: homebox-pv
+              mountPath: /data/
+      volumes:
+        - name: homebox-pv
+          persistentVolumeClaim:
+            claimName: homebox-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homebox
+  namespace: homebox
+spec:
+  selector:
+    app: homebox
+  ports:
+    - protocol: TCP
+      port: 7745
