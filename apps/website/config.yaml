@@ -95,7 +95,7 @@ data:
 
             <h2>Personal Interests</h2>
             <div class="section-list">
-              <a target="_blank" href="https://up.tmem.de/status"><i class="fas fa-server highlight"></i></a>
+              <i class="fas fa-server highlight"></i>
               <skill>Selfhosting</skill>
               <a target="_blank" href="https://steamcommunity.com/id/ausraster8/"><i class="fas fa-gamepad highlight"></i></a>
               <skill>Techno</skill>
