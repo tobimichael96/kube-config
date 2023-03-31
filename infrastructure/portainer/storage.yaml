@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/portainer
+    path: /mnt/internal/portainer
   nodeAffinity:
     required:
       nodeSelectorTerms:
