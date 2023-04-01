@@ -16,10 +16,13 @@ spec:
         - ha.tmem.de
       secretName: local-redirect-tls
   rules:
-  - host: ha.tmem.de
-    http:
-      paths:
-      - backend:
-          serviceName: ha
-          servicePort: 80
-        path: /
+    - host: ha.tmem.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ha
+                port:
+                  number: 80
