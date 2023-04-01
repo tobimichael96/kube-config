@@ -17,10 +17,8 @@ spec:
     database:
       type: sqlite
       wal: true
-      
     image:
       tag: "1.27.0"
-
     vaultwarden:
       admin:
         enabled: true
