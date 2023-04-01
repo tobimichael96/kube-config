@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: local-redirect-ingress
-  namespace: website
+  namespace: local-services
   annotations:
     kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
@@ -10,20 +10,16 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/permanent-redirect: http://192.168.178.91$request_uri
 spec:
   tls:
     - hosts:
         - ha.tmem.de
       secretName: local-redirect-tls
   rules:
-    - host: ha.tmem.de
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: website
-                port:
-                  number: 80
+  - host: ha.tmem.de
+    http:
+      paths:
+      - backend:
+          serviceName: ha
+          servicePort: 80
+        path: /
