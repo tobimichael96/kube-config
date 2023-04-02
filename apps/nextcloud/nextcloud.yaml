@@ -49,11 +49,9 @@ spec:
           }
       hosts:
         - cloud.tmem.de
-        - test.tmem.de
       tls:
         - hosts:
             - cloud.tmem.de
-            - test.tmem.de
           secretName: nextcloud-tls
 
     nextcloud:
