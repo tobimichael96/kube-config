@@ -53,7 +53,7 @@ spec:
           port: 465
           authtype: LOGIN
 
-      configs: {  }
+      configs: {}
 
     lifecycle:
       postStartCommand:
