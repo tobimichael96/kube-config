@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/wiki/app
+    path: /mnt/internal/wiki/app
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -19,7 +19,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - tmcloud
+                - homeserver
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

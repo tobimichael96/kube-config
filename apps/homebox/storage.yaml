@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: teamspeak-pv
+  name: homebox-pv
 spec:
   capacity:
-    storage: 3Gi
+    storage: 10Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/internal/teamspeak
+    path: /mnt/internal/homebox
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -24,12 +24,13 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: teamspeak-pvc
-  namespace: teamspeak
+  name: homebox-pvc
+  namespace: homebox
 spec:
+  storageClassName: local-storage
+  volumeName: homebox-pv
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-storage
   resources:
     requests:
-      storage: 3Gi
+      storage: 10Gi

@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/nextcloud
+    path: /mnt/internal/nextcloud
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -19,7 +19,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - tmcloud
+                - homeserver
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -48,7 +48,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/nextcloud-db
+    path: /mnt/internal/nextcloud-db
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -56,7 +56,7 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - tmcloud
+                - homeserver
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

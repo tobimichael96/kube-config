@@ -17,10 +17,11 @@ spec:
     database:
       type: sqlite
       wal: true
-
+    image:
+      tag: "1.28.0"
     vaultwarden:
       admin:
-        enabled: true
+        enabled: false
         disableAdminToken: true
         existingSecret: vaultwarden
 
