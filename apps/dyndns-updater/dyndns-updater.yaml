@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dyndns-updater
-          image: ghcr.io/tobimichael96/dyndns-updater-netcup:0.0.4
+          image: ghcr.io/tobimichael96/dyndns-updater-netcup:0.0.5
           env:
             - name: TZ
               value: "Europe/Berlin"
