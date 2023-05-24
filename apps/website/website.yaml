@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: website
-          image: nginx:1.24.0-alpine
+          image: nginx:1.25.0-alpine
           resources:
             requests:
               cpu: 50m
