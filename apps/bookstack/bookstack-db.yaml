@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bookstack-db
-          image: ghcr.io/linuxserver/mariadb:10.11.3
+          image: ghcr.io/linuxserver/mariadb:10.11.4
           volumeMounts:
             - name: bookstack-db-mount
               mountPath: /config
