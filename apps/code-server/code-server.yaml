@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: code-server
-          image: linuxserver/code-server:4.13.0
+          image: linuxserver/code-server:4.14.0
           volumeMounts:
             - name: code-server-mount
               mountPath: /config
