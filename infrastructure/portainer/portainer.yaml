@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: portainer
-      version: 1.0.42
+      version: 1.0.43
       sourceRef:
         kind: HelmRepository
         name: portainer
@@ -15,6 +15,9 @@ spec:
   releaseName: portainer
   targetNamespace: portainer
   values:
+    image:
+      repository: "portainer/portainer-ee"
+    
     service:
       type: ClusterIP
 
