@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bookstack
-          image: ghcr.io/linuxserver/bookstack:23.06.20230630
+          image: ghcr.io/linuxserver/bookstack:23.06.20230703
           volumeMounts:
             - name: bookstack-mount
               mountPath: /config
