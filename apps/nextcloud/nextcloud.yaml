@@ -109,7 +109,7 @@ spec:
       storageClassName: local-storage
       existingClaim: nextcloud-pvc
       accessMode: ReadWriteOnce
-      size: 50Gi
+      size: 150Gi
 
     cronjob:
       enabled: false
