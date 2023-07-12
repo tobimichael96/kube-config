@@ -4,7 +4,7 @@ metadata:
   name: nextcloud-pv
 spec:
   capacity:
-    storage: 50Gi
+    storage: 150Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -33,7 +33,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 50Gi
+      storage: 150Gi
 ---
 apiVersion: v1
 kind: PersistentVolume
