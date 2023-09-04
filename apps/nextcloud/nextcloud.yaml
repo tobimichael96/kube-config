@@ -63,8 +63,6 @@ spec:
           port: 465
           authtype: LOGIN
 
-      configs: {}
-
     lifecycle:
       postStartCommand:
         - "sh"
