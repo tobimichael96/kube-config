@@ -42,13 +42,13 @@ spec:
         passwordKey: nextcloud-password
         smtpUsernameKey: smtp_username
         smtpPasswordKey: smtp_password
+        smtpHostKey: smtp_host
 
       mail:
         enabled: true
         fromAddress: TM-webmaster
         domain: tobiasmichael.de
         smtp:
-          host: smtp.strato.de
           secure: ssl
           port: 465
           authtype: LOGIN
