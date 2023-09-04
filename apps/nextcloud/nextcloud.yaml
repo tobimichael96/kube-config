@@ -33,7 +33,6 @@ spec:
 
     nextcloud:
       host: cloud.tmem.de
-      update: 1
 
       existingSecret:
         enabled: true
