@@ -21,8 +21,8 @@ spec:
       tag: "1.28.0"
     vaultwarden:
       admin:
-        enabled: false
-        disableAdminToken: true
+        enabled: true
+        disableAdminToken: false
         existingSecret: vaultwarden
 
       yubico:
