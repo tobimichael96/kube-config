@@ -66,7 +66,7 @@ spec:
     lifecycle: {}
 
     # Number of replicas to be deployed
-    replicaCount: 2
+    replicaCount: 3
 
     image:
       repository: nextcloud
