@@ -74,11 +74,7 @@ spec:
 
     image:
       repository: nextcloud
-      flavor: fpm
       pullPolicy: IfNotPresent
-
-    nginx:
-      enabled: true
 
     internalDatabase:
       enabled: false
