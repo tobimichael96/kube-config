@@ -63,11 +63,7 @@ spec:
           port: 465
           authtype: LOGIN
 
-    lifecycle:
-      postStartCommand:
-        - "sh"
-        - "-c"
-        - "apk add openrc && start-stop-daemon --background /cron.sh"
+    lifecycle: {}
 
     # Number of replicas to be deployed
     replicaCount: 2
