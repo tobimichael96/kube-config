@@ -102,7 +102,6 @@ data:
     permit_join: true
     # Home Assistant integration (MQTT discovery)
     homeassistant: true
-    # Docker-Compose makes the MQTT-Server available using "mqtt" hostname
     # MQTT server URL
     mqtt:
       base_topic: zigbee2mqtt
