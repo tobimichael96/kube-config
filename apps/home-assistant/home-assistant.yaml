@@ -29,10 +29,10 @@ spec:
 
     persistence:
       existingClaim: "home-assistant-pvc"
-      additionalVolumes:
-        - name: ttyacm
-          hostPath:
-            path: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230325080752-if00
-      additionalMounts:
-        - name: ttyacm
-          mountPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230325080752-if00
+#      additionalVolumes:
+#        - name: ttyacm
+#          hostPath:
+#            path: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230325080752-if00
+#      additionalMounts:
+#        - name: ttyacm
+#          mountPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230325080752-if00
