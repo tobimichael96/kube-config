@@ -1,19 +1,19 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: homeassistant
-  namespace: homeassistant
+  name: home-assistant
+  namespace: home-assistant
 spec:
   chart:
     spec:
-      chart: homeassistant
+      chart: home-assistant
       version: 0.5.8
       sourceRef:
         kind: HelmRepository
-        name: homeassistant
+        name: home-assistant
   interval: 5m
-  releaseName: homeassistant
-  targetNamespace: homeassistant
+  releaseName: home-assistant
+  targetNamespace: home-assistant
   values:
     ingress:
       enabled: true
@@ -25,7 +25,7 @@ spec:
       tls:
         - hosts:
             - test.tmem.de
-          secretName: homeassistant-tls
+          secretName: home-assistant-tls
 
     persistence:
-      existingClaim: "homeassistant-pvc"
+      existingClaim: "home-assistant-pvc"

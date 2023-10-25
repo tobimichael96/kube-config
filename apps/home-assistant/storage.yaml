@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: homeassistant-pv
+  name: home-assistant-pv
 spec:
   capacity:
     storage: 20Gi
@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/internal/homeassistant
+    path: /mnt/internal/home-assistant
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -24,11 +24,11 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: homeassistant-pvc
-  namespace: homeassistant
+  name: home-assistant-pvc
+  namespace: home-assistant
 spec:
   storageClassName: local-storage
-  volumeName: homeassistant-pv
+  volumeName: home-assistant-pv
   accessModes:
     - ReadWriteOnce
   resources:
