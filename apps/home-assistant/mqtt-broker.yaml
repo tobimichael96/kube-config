@@ -19,7 +19,7 @@ spec:
         image: eclipse-mosquitto:2.0.18
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8883
+        - containerPort: 1883
         - containerPort: 9001
         volumeMounts:
         - mountPath: /mosquitto/config/mosquitto.conf
@@ -50,7 +50,7 @@ spec:
   selector:
     app: mosquitto-mqtt
   ports:
-  - port: 8883
+  - port: 1883
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -66,8 +66,7 @@ data:
     persistence true
     persistence_location /mosquitto/data
 
-    # MQTT with TLS (MQTTS)
-    listener 8883
+    listener 1883
     protocol mqtt
 
     # Fetch the generated certificates
