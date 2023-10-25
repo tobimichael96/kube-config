@@ -38,7 +38,7 @@ spec:
           secretName: mosquitto-certs
       - name: data
         persistentVolumeClaim:
-          claimName: mosquitto-data
+          claimName: mqtt-broker-pvc
 ---
 apiVersion: v1
 kind: Service
