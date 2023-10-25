@@ -106,7 +106,7 @@ data:
     # MQTT server URL
     mqtt:
       base_topic: zigbee2mqtt
-      server: "mqtt://mosquitto-mqtt" # mqtt://<name_of_pod>.<name_of_namespace> (mosquitto)
+      server: "mqtt://mosquitto-mqtt.home-assistant" # mqtt://<name_of_pod>.<name_of_namespace> (mosquitto)
     # Zigbee Adapter path
     serial:
       port: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2292211-if00
