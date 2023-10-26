@@ -16,10 +16,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - ha.tmem.de
+        - test.tmem.de
       secretName: local-redirect-tls
   rules:
-    - host: ha.tmem.de
+    - host: test.tmem.de
       http:
         paths:
           - path: /
