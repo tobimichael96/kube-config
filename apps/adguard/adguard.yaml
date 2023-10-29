@@ -15,7 +15,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: adguard
+      chart: adguard-home
       version: 5.5.2
       sourceRef:
         kind: HelmRepository
