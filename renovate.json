@@ -4,11 +4,18 @@
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "flux": {
-    "fileMatch": ["\\.yaml$"]
+    "fileMatch": ["\\.ya?ml$"]
   },
   "kubernetes": {
-    "fileMatch": ["\\.yaml$"],
+    "fileMatch": ["\\.ya?ml$"],
     "ignorePaths": ["**/flux-system/**"]
+  },
+  "helm": {
+    "commitMessageTopic": "Helm values {{depName}}",
+    "fileMatch": [
+      "(^|/)values\\.ya?ml$"
+    ],
+    "pinDigests": false
   },
   "packageRules": [
     {
