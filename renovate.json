@@ -12,7 +12,7 @@
   },
   "helm-values": {
     "commitMessageTopic": "Helm values {{depName}}",
-    "fileMatch": ["(^|/)values\\.ya?ml$"]
+    "fileMatch": ["\\.ya?ml$"]
   },
   "packageRules": [
     {
