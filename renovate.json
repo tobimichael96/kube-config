@@ -12,7 +12,8 @@
   },
   "helm-values": {
     "commitMessageTopic": "Helm values {{depName}}",
-    "fileMatch": ["\\.ya?ml$"]
+    "fileMatch": ["\\.ya?ml$"],
+    "ignorePaths": ["**/flux-system/**"]
   },
   "packageRules": [
     {
