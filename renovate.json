@@ -10,7 +10,7 @@
     "fileMatch": ["\\.ya?ml$"],
     "ignorePaths": ["**/flux-system/**"]
   },
-  "helm": {
+  "docker": {
     "commitMessageTopic": "Helm values {{depName}}",
     "fileMatch": [
       "(^|/)values\\.ya?ml$"
