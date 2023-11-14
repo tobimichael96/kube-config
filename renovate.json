@@ -4,7 +4,7 @@
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "flux": {
-    "fileMatch": ["flux-system/.+\\.yaml$"]
+    "fileMatch": ["\\.ya?ml$"]
   },
   "kubernetes": {
     "fileMatch": ["\\.ya?ml$"],
