@@ -45,6 +45,7 @@ spec:
           secretName: home-assistant-tls
 
     securityContext:
+      allowPrivilegeEscalation: true
       capabilities:
         add:
           - NET_ADMIN
