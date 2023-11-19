@@ -50,6 +50,6 @@ spec:
         - name: dbus
           hostPath:
             path: /var/run/dbus
-      additionalVolumes:
+      additionalMounts:
         - name: dbus
           mountPath: /var/run/dbus
