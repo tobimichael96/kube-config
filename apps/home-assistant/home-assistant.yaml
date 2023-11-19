@@ -44,6 +44,11 @@ spec:
             - ha.tmem.de
           secretName: home-assistant-tls
 
+    securityContext:
+      capabilities:
+        add:
+          - NET_ADMIN
+
     persistence:
       existingClaim: "home-assistant-pvc"
       additionalVolumes:
