@@ -46,3 +46,10 @@ spec:
 
     persistence:
       existingClaim: "home-assistant-pvc"
+      additionalVolumes:
+        - name: dbus
+          hostPath:
+            path: /var/run/dbus
+      additionalVolumes:
+        - name: dbus
+          mountPath: /var/run/dbus
