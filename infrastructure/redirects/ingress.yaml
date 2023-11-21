@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: redirect-ingress
+  name: tm28-redirect-ingress
   namespace: redirects
   annotations:
     kubernetes.io/ingress.class: "nginx"
@@ -22,7 +22,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: redirect-ingress
+  name: tmem-redirect-ingress
   namespace: redirects
   annotations:
     kubernetes.io/ingress.class: "nginx"
