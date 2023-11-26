@@ -6,5 +6,5 @@ resources:
 - home-assistant.yaml
 - mqtt-broker.yaml
 - zigbee2mqtt.yaml
-- zigbee2mqtt-sonoff.yaml
+#- zigbee2mqtt-sonoff.yaml
 - zigbee2mqtt-ingress.yaml
