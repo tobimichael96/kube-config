@@ -21,14 +21,14 @@ spec:
     - host: zigbee2mqtt.tmem.de
       http:
         paths:
-          - path: /conbee/(.*)
+          - path: /conbee(/|$)(.*)
             pathType: Prefix
             backend:
               service:
                 name: zigbee2mqtt
                 port:
                   number: 8080
-          - path: /sonoff/(.*)
+          - path: /sonoff(/|$)(.*)
             pathType: Prefix
             backend:
               service:
