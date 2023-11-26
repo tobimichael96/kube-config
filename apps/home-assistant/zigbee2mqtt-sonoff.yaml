@@ -36,7 +36,7 @@ spec:
             - name: zigbee2mqtt-data
               mountPath: /data/sonoff
             - name: zigbee2mqtt-sonoff-config
-              mountPath: /data/configuration.yaml
+              mountPath: /data/sonoff/configuration.yaml
               subPath: configuration.yaml
             - name: zigbee2mqtt-udev
               mountPath: /run/udev
