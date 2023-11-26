@@ -25,7 +25,7 @@ spec:
             - name: TZ
               value: Europe/Berlin
             - name: "ZIGBEE2MQTT_DATA"
-              value: "/data/sonoff"
+              value: "/data"
           securityContext:
             privileged: true
           ports:
@@ -34,9 +34,9 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: zigbee2mqtt-data
-              mountPath: /data/sonoff
+              mountPath: /data
             - name: zigbee2mqtt-sonoff-config
-              mountPath: /data/sonoff/configuration.yaml
+              mountPath: /data/configuration.yaml
               subPath: configuration.yaml
             - name: zigbee2mqtt-udev
               mountPath: /run/udev
@@ -66,7 +66,7 @@ spec:
       volumes:
         - name: zigbee2mqtt-data
           persistentVolumeClaim:
-            claimName: zigbee2mqtt-pvc
+            claimName: zigbee2mqtt-sonoff-pvc
         - name: zigbee2mqtt-udev
           hostPath:
             path: /run/udev
@@ -134,7 +134,8 @@ data:
       - console
       - file
       channel: 15
+      last_seen: 'ISO_8601'
 
     ## Map devices to persistent /data directory
-    devices: /data/sonoff/devices.yaml
-    groups: /data/sonoff/groups.yaml
+    devices: /data/devices.yaml
+    groups: /data/groups.yaml
