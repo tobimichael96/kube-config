@@ -14,16 +14,16 @@ metadata:
 spec:
   tls:
     - hosts:
-        - test.tmem.de
+        - adguard.tmem.de
       secretName: local-redirect-tls
   rules:
-    - host: test.tmem.de
+    - host: adguard.tmem.de
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: ha
+                name: adguard
                 port:
                   number: 80
