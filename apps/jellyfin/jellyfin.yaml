@@ -41,17 +41,19 @@ spec:
     persistence:
       config:
         type: pvc
-        existingClaim: jellyfin-pvc
+        existingClaim: jellyfin-config-pvc
         enabled: true
         mountPath: "/config"
+        targetSelectAll: true
+      media:
+        type: pvc
+        existingClaim: jellyfin-media-pvc
+        enabled: true
+        mountPath: "/media"
         targetSelectAll: true
       cache:
         enabled: true
         mountPath: "/cache"
-        type: "emptyDir"
-      transcode:
-        enabled: true
-        mountPath: "/config/transcodes"
         type: "emptyDir"
     portal:
       open:
