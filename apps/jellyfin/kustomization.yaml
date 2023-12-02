@@ -5,3 +5,4 @@ resources:
 - repo.yaml
 - storage.yaml
 - jellyfin.yaml
+- ingress.yaml
