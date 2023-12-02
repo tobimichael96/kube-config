@@ -4,5 +4,5 @@ resources:
 - namespace.yaml
 - repo.yaml
 - storage.yaml
-#- jellyfin.yaml
-#- ingress.yaml
+- jellyfin.yaml
+- ingress.yaml
