@@ -4,7 +4,7 @@ metadata:
   name: mosquitto-mqtt
   namespace: home-assistant
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: mosquitto-mqtt
@@ -63,7 +63,7 @@ data:
     allow_anonymous true
 
     # Persistent data store
-    persistence true
+    persistence false
     persistence_location /mosquitto/data
 
     listener 1883
