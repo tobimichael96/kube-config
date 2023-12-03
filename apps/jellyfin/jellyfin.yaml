@@ -80,7 +80,7 @@ spec:
           terminationGracePeriodSeconds: 3
           containers:
             broadcastproxy:
-              enabled: true
+              enabled: false
               primary: true
               imageSelector: broadcastProxyImage
               securityContext:
