@@ -107,7 +107,6 @@ data:
       base_topic: zigbee2mqtt
       server: "mqtt://mosquitto-mqtt.home-assistant:1883" # mqtt://<name_of_pod>.<name_of_namespace> (mosquitto)
       include_device_information: true
-      version: 5
     # Zigbee Adapter path
     serial:
       port: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2292211-if00
