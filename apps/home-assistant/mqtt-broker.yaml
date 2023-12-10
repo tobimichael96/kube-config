@@ -32,7 +32,7 @@ spec:
 
     deployment:
       replicas: 1
-      name: mosquitto-mqtt-test
+      name: mosquitto-mqtt
       containerPort: 1883
 
     ingress:
