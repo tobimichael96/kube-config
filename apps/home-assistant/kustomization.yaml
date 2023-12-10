@@ -5,6 +5,7 @@ resources:
 - storage.yaml
 - home-assistant.yaml
 - mqtt-broker.yaml
+- mqtt-broker-helm.yaml
 - zigbee2mqtt.yaml
 #- zigbee2mqtt-sonoff.yaml
 - zigbee2mqtt-ingress.yaml
