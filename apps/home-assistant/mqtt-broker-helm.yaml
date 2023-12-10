@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: generic-helm
-      version: 0.0.1
+      version: 0.0.2
       sourceRef:
         kind: HelmRepository
         name: generic-helm
@@ -42,10 +42,6 @@ spec:
       enabled: false
       storageClass: local-storage
       existingClaim: mqtt-broker-pvc
-      additionalVolumes:
-        - name: config
-          configMap:
-            name: mosquitto-mqtt-config
       additionalMounts:
         - mountPath: /mosquitto/config/mosquitto.conf
           subPath: mosquitto.conf
