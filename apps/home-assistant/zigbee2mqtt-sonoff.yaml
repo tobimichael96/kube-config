@@ -41,7 +41,7 @@ spec:
             - name: zigbee2mqtt-udev
               mountPath: /run/udev
             - name: ttyacm
-              mountPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230325080752-if00
+              mountPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_4c99765bc59ded118ec0dba5a7669f5d-if00-port0
           livenessProbe:
             tcpSocket:
               port: 8080
@@ -72,7 +72,7 @@ spec:
             path: /run/udev
         - name: ttyacm
           hostPath:
-            path: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230325080752-if00
+            path: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_4c99765bc59ded118ec0dba5a7669f5d-if00-port0
         - name: zigbee2mqtt-sonoff-config
           configMap:
             name: zigbee2mqtt-sonoff-config
@@ -109,8 +109,7 @@ data:
       include_device_information: true
     # Zigbee Adapter path
     serial:
-      port: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230325080752-if00
-      adapter: ezsp
+      port: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_4c99765bc59ded118ec0dba5a7669f5d-if00-port0
     # Enable the Zigbee2MQTT frontend
     frontend:
       port: 8080
