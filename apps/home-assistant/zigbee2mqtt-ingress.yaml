@@ -11,24 +11,27 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2 # use this when using multiple paths
 spec:
   tls:
     - hosts:
-        - zigbee2mqtt.tmem.de
+        - conbee.zigbee2mqtt.tmem.de
+        - sonoff.zigbee2mqtt.tmem.de
       secretName: zigbee2mqtt-tls
   rules:
-    - host: zigbee2mqtt.tmem.de
+    - host: conbee.zigbee2mqtt.tmem.de
       http:
         paths:
-          - path: /conbee(/|$)(.*) # use this when using multiple paths /conbee(/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: zigbee2mqtt
                 port:
-                  number: 8080
-          - path: /sonoff(/|$)(.*)
+                  number: 8080     
+    - host: sonoff.zigbee2mqtt.tmem.de
+      http:
+        paths:     
+          - path: /
             pathType: Prefix
             backend:
               service:
