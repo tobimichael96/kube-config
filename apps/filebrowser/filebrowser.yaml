@@ -86,7 +86,7 @@ spec:
             "address": "",
             "log": "stdout",
             "database": "/data/database/filebrowser.db",
-            "root": "/data/files"
+            "root": "/data/files",
             "auth": {
               "method": "noauth"
             }
