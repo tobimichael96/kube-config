@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
   name: generic-helm
-  namespace: home-assistant
+  namespace: filebrowser
 spec:
   interval: 1h0m0s
   url: https://tobimichael96.github.io/helm-chart/
@@ -11,7 +11,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: filebrowser
-  namespace: home-assistant
+  namespace: filebrowser
 spec:
   chart:
     spec:
