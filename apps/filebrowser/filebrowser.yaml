@@ -87,7 +87,5 @@ spec:
             "log": "stdout",
             "database": "/data/database/filebrowser.db",
             "root": "/data/files",
-            "auth": {
-              "method": "noauth"
-            }
+            "noauth": true
           }
