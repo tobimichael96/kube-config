@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: generic-helm
-      version: 0.0.5
+      version: 0.0.6
       sourceRef:
         kind: HelmRepository
         name: generic-helm
@@ -64,18 +64,25 @@ spec:
       existingClaim: "filebrowser-pvc"
       mountPath: "/data"
       # if you need any additional volumes, you can define them here
-      additionalVolumes:
-        - name: config-volume
-          configMap:
-            name: filebrowser-config
+      additionalVolumes: []
       # if you need any additional volume mounts, you can define them here
       additionalMounts:
-        - name: config-volume
-          mountPath: /
+        - mountPath: /.filebrowser.json
+          subPath: filebrowser.json
+          name: config
 
     deploymentStrategy:
       type: RollingUpdate
 
     configMap:
-      enabled: false
-      data: {}
+      enabled: true
+      data:
+        filebrowser.json: |-
+          {
+            "port": 80,
+            "baseURL": "",
+            "address": "",
+            "log": "stdout",
+            "database": "/data/database/filebrowser.db",
+            "root": "/data/files"
+          }
