@@ -132,7 +132,7 @@ data:
       log_output:
       - console
       - file
-      channel: 15
+      channel: 25
       last_seen: 'ISO_8601'
 
     ## Map devices to persistent /data directory
