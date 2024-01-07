@@ -4,6 +4,7 @@ metadata:
   name: jellyfin
   namespace: jellyfin
 spec:
+  type: oci
   interval: 1h0m0s
   url: oci://tccr.io/truecharts
 ---
