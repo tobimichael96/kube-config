@@ -118,7 +118,7 @@ data:
       active:
         # Time after which an active device will be marked as offline in
         # minutes (default = 10 minutes)
-        timeout: 10
+        timeout: 20
       passive:
         # Time after which a passive device will be marked as offline in
         # minutes (default = 1500 minutes aka 25 hours)
