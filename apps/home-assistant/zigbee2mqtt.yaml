@@ -133,8 +133,9 @@ data:
       log_output:
       - console
       - file
-      channel: 11
       last_seen: 'ISO_8601'
+      channel: 11
+      adapter_delay: 200
 
     ## Map devices to persistent /data directory
     devices: /data/devices.yaml

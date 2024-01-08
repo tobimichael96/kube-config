@@ -132,9 +132,10 @@ data:
       log_output:
       - console
       - file
-      channel: 25
       last_seen: 'ISO_8601'
-
+      channel: 25
+      transmit_power: 20
+    
     ## Map devices to persistent /data directory
     devices: /data/devices.yaml
     groups: /data/groups.yaml
