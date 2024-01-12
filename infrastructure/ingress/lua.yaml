@@ -18,4 +18,6 @@ data:
     if not public_ip == client_ip then
         ngx.log(ngx.ERR, "Access denied for IP: ", client_ip)
         ngx.exit(ngx.HTTP_FORBIDDEN)
+    else
+        ngx.log(ngx.INFO, "Allowed access to IP: ", client_ip)
     end
