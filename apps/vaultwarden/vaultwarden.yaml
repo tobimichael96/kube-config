@@ -36,6 +36,7 @@ spec:
         kubernetes.io/tls-acme: "true"
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         cert-manager.io/cluster-issuer: "letsencrypt"
+        nginx.ingress.kubernetes.io/enable-lua: "true"
         nginx.ingress.kubernetes.io/configuration-snippet: |
           lua_package_path "/etc/nginx/lua/?.lua;;";
           init_by_lua_block {
