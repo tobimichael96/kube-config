@@ -36,7 +36,12 @@ spec:
         kubernetes.io/tls-acme: "true"
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         cert-manager.io/cluster-issuer: "letsencrypt"
-        nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.178.0/32"
+        nginx.ingress.kubernetes.io/configuration-snippet: |
+          lua_package_path "/etc/nginx/lua/?.lua;;";
+          init_by_lua_block {
+              ngx.var.dynamic_allowed_ip = ngx.location.capture("http://api.ipify.org").body
+          }
+        nginx.ingress.kubernetes.io/whitelist-source-range: "$dynamic_allowed_ip"
       host: vault.tmem.de
       tls:
         - secretName: vaultwarden-tls
