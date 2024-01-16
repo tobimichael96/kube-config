@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: dota-stats-bot-cron
+  namespace: dota-stats-bot
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - args:
+                - /bin/sh
+                - -ec
+                - 'curl "http://dota-stats-bot:8000/cron"'
+              image: curlimages/curl:latest
+              name: dota-stats-bot-cron
+          restartPolicy: OnFailure
+  schedule: '30 * * * *'
+  successfulJobsHistoryLimit: 1
