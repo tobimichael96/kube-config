@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: generic-helm
-      version: 0.0.6
+      version: 0.0.7
       sourceRef:
         kind: HelmRepository
         name: generic-helm
@@ -34,6 +34,8 @@ spec:
       replicas: 1
       name: mosquitto-mqtt
       containerPort: 1883
+      hostNetwork: true
+      hostPort: 1883
 
     ingress:
       enabled: false
