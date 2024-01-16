@@ -28,7 +28,7 @@ spec:
                   key: bot_token
                   optional: false
             - name: GROUP_ID
-              value: '-4051038481'
+              value: '-635015768'
             - name: PLAYER_ID
               value: '103722784'
       imagePullSecrets:
