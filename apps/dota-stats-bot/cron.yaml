@@ -24,7 +24,7 @@ spec:
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: dota-stats-bot-cron-daily
+  name: dota-stats-bot-cron-weekly
   namespace: dota-stats-bot
 spec:
   concurrencyPolicy: Forbid
@@ -39,7 +39,7 @@ spec:
                 - -ec
                 - 'curl "http://dota-stats-bot:8000/daily"'
               image: curlimages/curl:latest
-              name: dota-stats-bot-cron-daily
+              name: dota-stats-bot-cron-weekly
           restartPolicy: OnFailure
-  schedule: '30 19 * * *'
+  schedule: '30 19 * * 0'
   successfulJobsHistoryLimit: 1
