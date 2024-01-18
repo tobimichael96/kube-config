@@ -58,6 +58,8 @@ spec:
             - key: string
               path: credentials
 
+    deploymentStrategy:
+      type: Recreate
 
     configMap:
       enabled: true
