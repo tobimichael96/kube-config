@@ -41,7 +41,7 @@ spec:
           image: eclipse-mosquitto:2.0.18
           imagePullPolicy: Always
           command: [
-            "/bin/sh", "-c", "mkdir -p /mosquitto/config || true && cp /mosquitto/credentials/passwd.tmp /mosquitto/config/passwd && mosquitto_passwd -U /mosquitto/config/passwd && chmod 0700 /mosquitto/config/passwd"
+            "/bin/sh", "-c", "mkdir -p /mosquitto/config || true && cp /mosquitto/credentials/passwd.tmp /mosquitto/config/passwd && mosquitto_passwd -U /mosquitto/config/passwd"
           ]
           volumeMounts:
             - mountPath: /mosquitto/config/mosquitto.conf
