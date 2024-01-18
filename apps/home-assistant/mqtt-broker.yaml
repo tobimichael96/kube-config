@@ -36,20 +36,6 @@ spec:
       containerPort: 1883
       hostNetwork: true
       hostPort: 1883
-      initContainers:
-        - name: passwd
-          image: eclipse-mosquitto:2.0.18
-          imagePullPolicy: Always
-          command: [
-            "/bin/sh", "-c", "mkdir -p /mosquitto/config || true && cp /mosquitto/data/passwd.tmp /mosquitto/data/passwd && mosquitto_passwd -U /mosquitto/data/passwd"
-          ]
-          volumeMounts:
-            - mountPath: /mosquitto/config/mosquitto.conf
-              name: config
-              subPath: mosquitto.conf
-            - mountPath: /mosquitto/data/passwd.tmp
-              name: credentials
-              subPath: passwd.tmp
 
     ingress:
       enabled: false
@@ -63,10 +49,6 @@ spec:
         - mountPath: /mosquitto/config/mosquitto.conf
           name: config
           subPath: mosquitto.conf
-      additionalVolumes:
-        - name: credentials
-          secret:
-            secretName: mqtt-credentials
 
     deploymentStrategy:
       type: Recreate
