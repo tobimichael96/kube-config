@@ -41,13 +41,13 @@ spec:
           image: eclipse-mosquitto:2.0.18
           imagePullPolicy: Always
           command: [
-            "/bin/sh", "-c", "mkdir -p /mosquitto/config || true && cp /mosquitto/credentials/passwd.tmp /mosquitto/config/passwd && mosquitto_passwd -U /mosquitto/config/passwd"
+            "/bin/sh", "-c", "mkdir -p /mosquitto/config || true && cp /mosquitto/data/passwd.tmp /mosquitto/data/passwd && mosquitto_passwd -U /mosquitto/data/passwd"
           ]
           volumeMounts:
             - mountPath: /mosquitto/config/mosquitto.conf
               name: config
               subPath: mosquitto.conf
-            - mountPath: /mosquitto/credentials/passwd.tmp
+            - mountPath: /mosquitto/data/passwd.tmp
               name: credentials
               subPath: passwd.tmp
 
@@ -58,6 +58,7 @@ spec:
       enabled: true
       storageClass: local-storage
       existingClaim: mqtt-broker-pvc
+      mountPath: "/mosquitto/data"
       additionalMounts:
         - mountPath: /mosquitto/config/mosquitto.conf
           name: config
@@ -75,7 +76,7 @@ spec:
       data:
         mosquitto.conf: |
           allow_anonymous true
-          #password_file /mosquitto/config/passwd
+          #password_file /mosquitto/data/passwd
       
           # Persistent data store
           persistence false
