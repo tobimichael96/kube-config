@@ -4,7 +4,7 @@ metadata:
   name: generic-helm
   namespace: home-assistant
 spec:
-  interval: 1h0m0s
+  interval: 0h30m0s
   url: https://tobimichael96.github.io/helm-chart/
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
@@ -36,6 +36,20 @@ spec:
       containerPort: 1883
       hostNetwork: true
       hostPort: 1883
+      initContainers:
+        - name: passwd
+          image: eclipse-mosquitto:2.0.18
+          imagePullPolicy: Always
+          command: [
+            "/bin/sh", "-c", "mkdir -p /mosquitto/config || true && cp /mosquitto/credentials/passwd.tmp /mosquitto/config/passwd && mosquitto_passwd -U /mosquitto/config/passwd"
+          ]
+          volumeMounts:
+            - mountPath: /mosquitto/config/mosquitto.conf
+              name: config
+              subPath: mosquitto.conf
+            - mountPath: /mosquitto/credentials/passwd.tmp
+              name: credentials
+              subPath: passwd.tmp
 
     ingress:
       enabled: false
@@ -48,15 +62,10 @@ spec:
         - mountPath: /mosquitto/config/mosquitto.conf
           name: config
           subPath: mosquitto.conf
-        - mountPath: /mosquitto/credentials
-          name: credentials
       additionalVolumes:
         - name: credentials
           secret:
             secretName: mqtt-credentials
-            items:
-            - key: string
-              path: credentials
 
     deploymentStrategy:
       type: Recreate
@@ -66,7 +75,7 @@ spec:
       data:
         mosquitto.conf: |
           allow_anonymous true
-          #password_file /mosquitto/credentials
+          #password_file /mosquitto/config/passwd
       
           # Persistent data store
           persistence false
