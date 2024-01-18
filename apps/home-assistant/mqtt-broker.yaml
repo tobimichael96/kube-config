@@ -50,11 +50,14 @@ spec:
           subPath: mosquitto.conf
         - mountPath: /mosquitto/credentials
           name: credentials
+      additionalVolumes:
+        - name: credentials
           secret:
             secretName: mqtt-credentials
             items:
             - key: string
               path: credentials
+
 
     configMap:
       enabled: true
