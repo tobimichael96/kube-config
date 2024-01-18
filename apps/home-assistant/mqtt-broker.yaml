@@ -46,15 +46,22 @@ spec:
       existingClaim: mqtt-broker-pvc
       additionalMounts:
         - mountPath: /mosquitto/config/mosquitto.conf
-          subPath: mosquitto.conf
           name: config
+          subPath: mosquitto.conf
+        - mountPath: /mosquitto/credentials
+          name: credentials
+          secret:
+            secretName: mqtt-credentials
+            items:
+            - key: string
+              path: credentials
 
     configMap:
       enabled: true
       data:
         mosquitto.conf: |
-          # DO NOT USE IN PRODUCTION
           allow_anonymous true
+          #password_file /mosquitto/credentials
       
           # Persistent data store
           persistence false

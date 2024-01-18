@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - storage.yaml
+- secrets.yaml
 - home-assistant.yaml
 - mqtt-broker.yaml
 - zigbee2mqtt.yaml
