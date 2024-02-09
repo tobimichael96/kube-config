@@ -11,16 +11,16 @@ metadata:
 spec:
   tls:
     - hosts:
-        - ha-oto.tmem.de
+        - ha-ott.tmem.de
       secretName: home-assistant-oto-tls
   rules:
-    - host: ha-oto.tmem.de
+    - host: ha-ott.tmem.de
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: home-assistant-oto
+                name: home-assistant-ott
                 port:
                   number: 8000

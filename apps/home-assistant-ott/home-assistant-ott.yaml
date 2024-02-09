@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: home-assistant-oto
+  name: home-assistant-ott
   namespace: home-assistant-oto
 spec:
   selector:
     matchLabels:
-      app: home-assistant-oto
+      app: home-assistant-ott
   replicas: 1
   template:
     metadata:
       labels:
-        app: home-assistant-oto
+        app: home-assistant-ott
     spec:
       containers:
-        - name: home-assistant-oto
+        - name: home-assistant-ott
           image: ghcr.io/tobimichael96/home-assistant-ott:latest
           ports:
             - containerPort: 8000
@@ -53,11 +53,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: home-assistant-oto
+  name: home-assistant-ott
   namespace: home-assistant-oto
 spec:
   selector:
-    app: home-assistant-oto
+    app: home-assistant-ott
   ports:
     - protocol: TCP
       port: 8000
