@@ -16,6 +16,7 @@ spec:
       containers:
         - name: home-assistant-ott
           image: ghcr.io/tobimichael96/home-assistant-ott:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           env:
