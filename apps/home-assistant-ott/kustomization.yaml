@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - secrets.yaml
+- storage.yaml
 - home-assistant-ott.yaml
 - ingress.yaml

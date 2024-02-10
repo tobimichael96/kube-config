@@ -48,8 +48,13 @@ spec:
                   optional: false
             - name: HA_AUTOMATION_ID
               value: 'automation.iphone_open_door'
-      imagePullSecrets:
-        - name: docker-hub
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: home-assistant-ott-claim
 ---
 apiVersion: v1
 kind: Service
