@@ -48,6 +48,8 @@ spec:
                   optional: false
             - name: HA_AUTOMATION_ID
               value: 'automation.iphone_open_door'
+            - name: HA_URL
+              value: 'https://ha.tmem.de'
           volumeMounts:
             - name: data
               mountPath: /data
