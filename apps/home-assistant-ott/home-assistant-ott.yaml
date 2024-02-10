@@ -46,8 +46,8 @@ spec:
                   name: home-assistant-oto
                   key: HA_TOKEN
                   optional: false
-            - name: HA_AUTOMATION_ID
-              value: 'automation.iphone_open_door'
+            - name: HA_SCRIPT_ID
+              value: 'script.api_open_doors'
             - name: HA_URL
               value: 'https://ha.tmem.de'
           volumeMounts:
