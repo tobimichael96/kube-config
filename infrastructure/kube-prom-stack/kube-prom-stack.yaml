@@ -55,7 +55,7 @@ spec:
           # Defaults to false, but set to true to enable this feature
           enabled: true
           # HTTP Header name that will contain the username or email
-          header_name: X-WEBAUTH-USER
+          header_name: X-Forwarded-User
           # HTTP Header property, defaults to `username` but can also be `email`
           header_property: username
           # Set to `true` to enable auto sign up of users who do not exist in Grafana DB. Defaults to `true`.
