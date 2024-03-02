@@ -42,9 +42,6 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         hosts:
           - host: grafana.tmem.de
-            paths:
-              - path: /
-                pathType: ImplementationSpecific
         tls:
           - hosts:
               - grafana.tmem.de
@@ -62,9 +59,6 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         hosts:
           - host: prometheus.tmem.de
-            paths:
-              - path: /
-                pathType: ImplementationSpecific
         tls:
           - hosts:
               - prometheus.tmem.de
