@@ -48,6 +48,8 @@ spec:
               - grafana.tmem.de
             secretName: grafana-tls
 
+      defaultDashboardsEnabled: false
+
       grafana.ini:
         auth.proxy:
           # Defaults to false, but set to true to enable this feature
