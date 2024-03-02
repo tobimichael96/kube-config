@@ -55,9 +55,9 @@ spec:
           # Defaults to false, but set to true to enable this feature
           enabled: true
           # HTTP Header name that will contain the username or email
-          header_name: X-Forwarded-User
+          header_name: X-Forwarded-Email
           # HTTP Header property, defaults to `username` but can also be `email`
-          header_property: username
+          header_property: email
           # Set to `true` to enable auto sign up of users who do not exist in Grafana DB. Defaults to `true`.
           auto_sign_up: true
           # Define cache time to live in minutes
@@ -69,7 +69,7 @@ spec:
           whitelist:
           # Optionally define more headers to sync other user attributes
           # Example `headers: Name:X-WEBAUTH-NAME Role:X-WEBAUTH-ROLE Email:X-WEBAUTH-EMAIL Groups:X-WEBAUTH-GROUPS`
-          headers:
+          headers: Email:X-Forwarded-Email Name:X-Forwarded-User
           # Non-ASCII strings in header values are encoded using quoted-printable encoding
           ;headers_encoded: false
           # Check out docs on this for more details on the below setting
