@@ -41,11 +41,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt"
           nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            auth_request_set  $user   $upstream_http_x_forwarded_user;
-            auth_request_set  $email  $upstream_http_x_forwarded_email;
-            proxy_set_header  X-Forwarded-User   $user;
-            proxy_set_header  X-Forwarded-Email  $email;
+          nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
         hosts:
           - grafana.tmem.de
         tls:
