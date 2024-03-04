@@ -15,8 +15,8 @@ spec:
   cordon: false
   upgrade:
     image: rancher/rke2-upgrade
-  version: v1.27.2+rke2r1
-  channel: https://update.rke2.io/v1-release/channels/latest
+  # version: v1.27.2+rke2r1
+  channel: https://update.rke2.io/v1-release/channels/stable
 ---
 # Agent plan
 apiVersion: upgrade.cattle.io/v1
@@ -44,5 +44,5 @@ spec:
     skipWaitForDeleteTimeout: 60
   upgrade:
     image: rancher/rke2-upgrade
-  version: v1.27.2+rke2r1
-  channel: https://update.rke2.io/v1-release/channels/latest
+  # version: v1.27.2+rke2r1
+  channel: https://update.rke2.io/v1-release/channels/stable
