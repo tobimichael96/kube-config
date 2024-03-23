@@ -14,10 +14,10 @@ metadata:
         set $path_info $1;
       }
       if ($path_info = '/') {
-        rewrite ^ /static/index.html break;
+        rewrite ^ /test/index.html break;
       }
       if ($path_info ~ ^/(.*\.html)$) {
-        rewrite ^ /static/$1 break;
+        rewrite ^ /test/$1 break;
       }
 spec:
   tls:
