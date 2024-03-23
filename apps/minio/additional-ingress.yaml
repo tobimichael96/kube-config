@@ -18,7 +18,7 @@ spec:
     - host: test.tmem.de
       http:
         paths:
-          - path: /
+          - path: /tm28.de/
             pathType: Prefix
             backend:
               service:
