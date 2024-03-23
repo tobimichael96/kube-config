@@ -27,3 +27,7 @@ spec:
       hostname: minio.tmem.de
     auth:
       existingSecret: "minio-custom"
+    persistence:
+      existingClaim: "minio-pvc"
+      persistence:
+        size: 50Gi
