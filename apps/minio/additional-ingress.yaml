@@ -8,8 +8,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^/$ /test/index.html break;
+    nginx.ingress.kubernetes.io/rewrite-target: /test/index.html
 spec:
   tls:
     - hosts:
