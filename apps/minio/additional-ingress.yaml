@@ -10,10 +10,10 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       if ($1 = '/') {
-        rewrite ^ /static/index.html break;
+        rewrite ^ /test/index.html break;
       }
       if ($1 ~ ^/([^/]+\.html)$) {
-        rewrite ^ /static/$1 break;
+        rewrite ^ /test/$1 break;
       }
 spec:
   tls:
