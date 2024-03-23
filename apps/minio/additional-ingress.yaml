@@ -17,7 +17,7 @@ metadata:
         rewrite ^ /test/index.html break;
       }
       if ($path_info ~ ^/(.*\.html)$) {
-        rewrite ^ /test/$1 break;
+        rewrite ^ /test/bio.html break;
       }
 spec:
   tls:
