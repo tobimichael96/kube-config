@@ -14,7 +14,7 @@ metadata:
         rewrite ^ /test/index.html break;
       }
       if ($request_uri ~ ^/(.*html)$) {
-        rewrite ^ /test/$1 break;
+        rewrite ^/(.*html)$ /test/$1 break;
       }
 spec:
   tls:
