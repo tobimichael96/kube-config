@@ -8,7 +8,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: ^/$ /test/index.html break;
 spec:
   tls:
     - hosts:
@@ -24,4 +24,4 @@ spec:
               service:
                 name: minio
                 port:
-                  number: 9001
+                  number: 9000
