@@ -18,10 +18,11 @@ spec:
     - host: test.tmem.de
       http:
         paths:
-          - path: /tm28.de/
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: minio
                 port:
                   number: 9001
+                path: /tm28.de
