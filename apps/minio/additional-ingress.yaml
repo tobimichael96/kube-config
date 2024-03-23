@@ -9,14 +9,11 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($request_uri ~ ^/(.*)$) {
-        set $path_info $1;
+      if ($1 = '/') {
+        rewrite ^ /static/index.html break;
       }
-      if ($path_info = '/') {
-        rewrite ^ /test/index.html break;
-      }
-      if ($path_info ~ ^/([^/]+\.html)$) {
-        rewrite ^ /test/$1 break;
+      if ($1 ~ ^/([^/]+\.html)$) {
+        rewrite ^ /static/$1 break;
       }
 spec:
   tls:
@@ -27,7 +24,7 @@ spec:
     - host: test.tmem.de
       http:
         paths:
-          - path: /
+          - path: /(.*)$
             pathType: Prefix
             backend:
               service:
