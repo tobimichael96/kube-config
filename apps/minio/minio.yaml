@@ -1,0 +1,29 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  chart:
+    spec:
+      chart: minio
+      version: 14.1.2
+      sourceRef:
+        kind: HelmRepository
+        name: minio
+  interval: 5m
+  releaseName: minio
+  targetNamespace: minio
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: 10G
+        kubernetes.io/ingress.class: "nginx"
+        kubernetes.io/tls-acme: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        cert-manager.io/cluster-issuer: "letsencrypt"
+      hostname: minio.tmem.de
+    auth:
+      existingSecret: "minio-custom"
