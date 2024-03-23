@@ -10,15 +10,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt"
     #nginx.ingress.kubernetes.io/rewrite-target: /test/$1
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($request_uri ~ ^/(.*)$) {
-        set $path_info $1;
-      }
-      if ($path_info = '/') {
-        rewrite ^ /test/index.html break;
-      }
-      if ($path_info ~ ^/(.*\.html)$) {
-        rewrite ^ /test/bio.html break;
-      }
+      rewrite ^ /test/index.html break;
 spec:
   tls:
     - hosts:
