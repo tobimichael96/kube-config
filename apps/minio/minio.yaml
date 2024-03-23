@@ -25,6 +25,10 @@ spec:
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         cert-manager.io/cluster-issuer: "letsencrypt"
       hostname: minio.tmem.de
+      tls:
+        - hosts:
+            - minio.tmem.de
+          secretName: minio-tls
     auth:
       existingSecret: "minio-custom"
     persistence:
