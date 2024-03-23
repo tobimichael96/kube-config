@@ -8,6 +8,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   tls:
     - hosts:
@@ -17,10 +18,10 @@ spec:
     - host: test.tmem.de
       http:
         paths:
-          - path: /
-            pathType: ImplementationSpecific
+          - path: /test/
+            pathType: Prefix
             backend:
               service:
                 name: minio
                 port:
-                  number: 9000
+                  number: 9001
