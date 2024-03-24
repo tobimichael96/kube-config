@@ -19,7 +19,7 @@ spec:
     ingress:
       enabled: true
       annotations:
-        nginx.ingress.kubernetes.io/proxy-body-size: 10G
+        nginx.ingress.kubernetes.io/proxy-body-size: 5G
         kubernetes.io/ingress.class: "nginx"
         kubernetes.io/tls-acme: "true"
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -29,6 +29,19 @@ spec:
         - hosts:
             - minio.tmem.de
           secretName: minio-tls
+    apiIngress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: 5G
+        kubernetes.io/ingress.class: "nginx"
+        kubernetes.io/tls-acme: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        cert-manager.io/cluster-issuer: "letsencrypt"
+      hostname: api.minio.tmem.de
+      tls:
+        - hosts:
+            - api.minio.tmem.de
+          secretName: api-minio-tls
     auth:
       existingSecret: "minio-custom"
     persistence:

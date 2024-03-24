@@ -10,18 +10,19 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       if ($request_uri ~ ^/(.*/)?$) {
-        rewrite ^/(.*/)?$ /test/$1index.html break;
+        rewrite ^/(.*/)?$ /tobiasmichael/$1index.html break;
       }
       if ($request_uri ~ ^/(.*/)?(.*)$) {
-        rewrite ^/(.*/)?(.*)$ /test/$1$2 break;
+        rewrite ^/(.*/)?(.*)$ /tobiasmichael/$1$2 break;
       }
 spec:
   tls:
     - hosts:
-        - test.tmem.de
+        - tm28.tmem.de
+        - tmem.de
       secretName: test-tls
   rules:
-    - host: test.tmem.de
+    - host: tm28.tmem.de
       http:
         paths:
           - path: /
@@ -31,3 +32,14 @@ spec:
                 name: minio
                 port:
                   number: 9000
+    - host: tmem.tmem.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
+---
