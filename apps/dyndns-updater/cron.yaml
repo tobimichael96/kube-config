@@ -4,6 +4,9 @@ metadata:
   name: dyndns-job
 spec:
   schedule: '*/30 * * * *'
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
