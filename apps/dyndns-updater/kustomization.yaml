@@ -3,4 +3,6 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - secrets.yaml
+- configmap.yaml
+- cron.yaml
 - dyndns-updater.yaml

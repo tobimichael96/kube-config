@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: dyndns-strato-script
+data:
+    tobiasmichael.sh: ENC[AES256_GCM,data:8XpzI8KXGSrP/v9ResQLANRWYpWKbYXARwJfy78mjLYCE2cjUMalEgnthXvRNlgIN1g+ESkihX+76yVh33R5uka01N9NLR60MLq0x/eHfWZulS6Osgo4RSTuhCNKAbbre31qAkvd87oaDqMaEa9wx4Oa7cvVVRJ/3hN3GdATCljQJuRYT+CiHkp1g/O44Xq732+buyspPXtlSH9oWHNO8nQk1HfQE6srcEexh6k2Akoh7xA7ztrZPeyoZmS5M3VqvJE1qDQziKiz365yX61aWCRBB2/p5NPaBNmq29DDggF4dbtxLcQlTVfewipJM4D9lI8Jq2dErJqg1FtvLhv1CDcnmnej2cZNM1luaVv79AMBiXqGkbkAf/7WNLoMLqf0NQWtJ+JWRi2NCw9qZD7+0kfRSG0EKWV15nlhkxDzqHbqTzBvWsy8FPp0R+A+DBzj,iv:RM/dv+x3m9387d4UpOZqix9zS1RtoGDOz1phxTllStU=,tag:TpZJvHn/jRMVVFT+GCbakA==,type:str]
+    selinaklepic.sh: ENC[AES256_GCM,data:xoWrUyDk/D1kz9DZVa9vR94u1EH02Oq+vjlsKLius9GA0VgTK/cc/OF7uapZ4j87VrZTHfRolZBiNGaAkjyMeUK/n/CG4+oezihJtbAMJnr2BpwzmRK904RZZsUZg4vubHNWRaLoOxgCF5CyG3DDO7dnfOtSS12COXd6xolNHrpn0fFyZIJ4BLK/eo3FfBcfVpY3CB+UyvxIuJa10J65GFvYzARZATcwdCz8BcCMW1qQxshKzFEp42f3sS5S90XXSWQCzLbJiZ5DzOKg8IXz4kCL7QchLkZQw2hWHVbttX9cPZ8II87BEjFaFOwMDkAeUTOSbxW/zYRMCDdYkzD7ehCratrRMgZpO7fcxd5WfBlCZ350iV0l6UpVgYjz8Ml7FStXrusk3kUkbYjY0a4wJVeUaip33enTqBd2PsyyhrG2to7CsNPhrAXwc3adnAyP,iv:ExsFPBHXhl1gjgZyIHANfHUBw1HVIgORG8SetDxS9Zs=,tag:y93uFwvlcuBX7cAYLG5Kpw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1099kpzqp5v429mcyekxxnnyfkyuqxgq3esxvamc0kv7tf7nh9g9qymcpmx
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSbzAyYXhaeFp0elNWZ2p2
+            bUo0YlYzV2pXUjNZaGozK3ZjWVBXY1l1eFUwCnhFOGZyZVVSblBTUG1aeFh6ZFc1
+            dlFXV3U0aHBOYWQ4K09uMmUyVk56SWMKLS0tIEVSRWw2Qit3eVZNNmRDaHdkdDZa
+            TTNMVWtPUTFINFd4WGt6VHZTSG1zc3MKu87fQ48nDzzEclBY7kCN+gt/ioEE6PGI
+            /5GoBuTm9zk9QqXHuZZbU5/kElnZ+rzs6iO0DGqC1HdnVFb1Stwx5Q==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-03-24T20:20:17Z"
+    mac: ENC[AES256_GCM,data:41GPCJjPfwE+6aVsJaLAFpNGnGAKMNdygxjG8CYGX/XJc6Qm1lS+VDtt98jAW9IAcTipkMX9yvcx5dknUvcSTFJ7EOKl5xhtMdx6N2SeTnhj+fCUVCKEtlpo1PCL+b+6YkWhpW2suEP1meDR3xD03Hpcn28/mfGRjUYW+EITm2A=,iv:09nNRJqLZ9r7rroTWf0FE93NHhmk8QNgUOBGmBzsgzk=,tag:VmRolwAkcG3ZB639Z3ua6A==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
