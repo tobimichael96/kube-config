@@ -18,11 +18,11 @@ metadata:
 spec:
   tls:
     - hosts:
-        - tm28.tmem.de
+        - tm28.de
         - tmem.de
       secretName: tobiasmichael-tls
   rules:
-    - host: tm28.tmem.de
+    - host: tm28.de
       http:
         paths:
           - path: /
