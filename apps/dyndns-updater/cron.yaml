@@ -33,6 +33,7 @@ spec:
                 - name: dyndns-strato-data
                   mountPath: /selinaklepic.sh
                   subPath: selinaklepic.sh
+          restartPolicy: Never
           volumes:
             - name: dyndns-strato-data
               configMap:
