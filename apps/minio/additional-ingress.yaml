@@ -9,11 +9,11 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      if ($request_uri ~ ^/$) {
-        rewrite ^ /test/index.html break;
+      if ($request_uri ~ ^/(.*/)?$) {
+        rewrite ^/(.*/)?$ /test/$1index.html break;
       }
-      if ($request_uri ~ ^/(.*html)$) {
-        rewrite ^/(.*html)$ /test/$1 break;
+      if ($request_uri ~ ^/(.*/)?(.*)$) {
+        rewrite ^/(.*/)?(.*)$ /test/$1$2 break;
       }
 spec:
   tls:
