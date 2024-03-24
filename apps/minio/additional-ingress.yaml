@@ -8,6 +8,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       if ($request_uri ~ ^/(.*/)?$) {
         rewrite ^/(.*/)?$ /tobiasmichael/$1index.html break;
@@ -64,6 +65,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       if ($request_uri ~ ^/(.*/)?$) {
         rewrite ^/(.*/)?$ /selinaklepic/$1index.html break;
