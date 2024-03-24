@@ -38,3 +38,4 @@ spec:
             - name: dyndns-strato-data
               configMap:
                 name: dyndns-strato-script
+                defaultMode: 0777
