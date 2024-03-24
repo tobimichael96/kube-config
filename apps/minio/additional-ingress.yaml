@@ -32,7 +32,7 @@ spec:
                 name: minio
                 port:
                   number: 9000
-    - host: tmem.tmem.de
+    - host: tmem.de
       http:
         paths:
           - path: /
