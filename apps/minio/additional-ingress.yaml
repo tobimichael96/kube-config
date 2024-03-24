@@ -22,6 +22,7 @@ spec:
         - tm28.de
         - tmem.de
         - tobiasmichael.de
+        - www.tobiasmichael.de
       secretName: tobiasmichael-tls
   rules:
     - host: tm28.de
@@ -54,6 +55,16 @@ spec:
                 name: minio
                 port:
                   number: 9000
+    - host: www.tobiasmichael.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -77,9 +88,20 @@ spec:
   tls:
     - hosts:
         - selinaklepic.com
+        - www.selinaklepic.com
       secretName: selinaklepic-tls
   rules:
     - host: selinaklepic.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
+    - host: www.selinaklepic.com
       http:
         paths:
           - path: /
