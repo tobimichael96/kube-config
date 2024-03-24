@@ -20,6 +20,7 @@ spec:
     - hosts:
         - tm28.de
         - tmem.de
+        - tobiasmichael.de
       secretName: tobiasmichael-tls
   rules:
     - host: tm28.de
@@ -42,4 +43,81 @@ spec:
                 name: minio
                 port:
                   number: 9000
+    - host: tobiasmichael.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-selinaklepic
+  namespace: minio
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($request_uri ~ ^/(.*/)?$) {
+        rewrite ^/(.*/)?$ /selinaklepic/$1index.html break;
+      }
+      if ($request_uri ~ ^/(.*/)?(.*)$) {
+        rewrite ^/(.*/)?(.*)$ /selinaklepic/$1$2 break;
+      }
+spec:
+  tls:
+    - hosts:
+        - selinaklepic.com
+      secretName: selinaklepic-tls
+  rules:
+    - host: selinaklepic.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-moto
+  namespace: minio
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($request_uri ~ ^/(.*/)?$) {
+        rewrite ^/(.*/)?$ /moto/$1index.html break;
+      }
+      if ($request_uri ~ ^/(.*/)?(.*)$) {
+        rewrite ^/(.*/)?(.*)$ /moto/$1$2 break;
+      }
+spec:
+  tls:
+    - hosts:
+        - moto.tmem.de
+      secretName: moto-tls
+  rules:
+    - host: moto.tmem.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
