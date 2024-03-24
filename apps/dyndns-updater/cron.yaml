@@ -15,27 +15,23 @@ spec:
           containers:
             - name: dyndns-container-tobiasmichael
               image: curlimages/curl:8.6.0
-              args:
-                - /bin/sh
-                - -c
-                - /tobiasmichael.sh
+              command: [ "/bin/sh" ]
+              args: [ "/scripts/tobiasmichael.sh" ]
               volumeMounts:
                 - name: dyndns-strato-data
-                  mountPath: /tobiasmichael.sh
+                  mountPath: /scripts/tobiasmichael.sh
                   subPath: tobiasmichael.sh
             - name: dyndns-container-selinaklepic
               image: curlimages/curl:8.6.0
-              args:
-                - /bin/sh
-                - -c
-                - /selinaklepic.sh
+              command: [ "/bin/sh" ]
+              args: [ "/scripts/selinaklepic.sh" ]
               volumeMounts:
                 - name: dyndns-strato-data
-                  mountPath: /selinaklepic.sh
+                  mountPath: /scripts/selinaklepic.sh
                   subPath: selinaklepic.sh
           restartPolicy: Never
           volumes:
             - name: dyndns-strato-data
               configMap:
                 name: dyndns-strato-script
-                defaultMode: 0777
+                defaultMode: 511
