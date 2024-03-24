@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: dyndns-job
+  namespace: dyndns-updater
 spec:
   schedule: '*/30 * * * *'
   concurrencyPolicy: Forbid
