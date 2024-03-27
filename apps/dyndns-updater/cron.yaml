@@ -14,7 +14,7 @@ spec:
         spec:
           containers:
             - name: dyndns-container-tobiasmichael
-              image: curlimages/curl:8.6.0
+              image: curlimages/curl:8.7.1
               command: [ "/bin/sh" ]
               args: [ "/scripts/tobiasmichael.sh" ]
               volumeMounts:
@@ -22,7 +22,7 @@ spec:
                   mountPath: /scripts/tobiasmichael.sh
                   subPath: tobiasmichael.sh
             - name: dyndns-container-selinaklepic
-              image: curlimages/curl:8.6.0
+              image: curlimages/curl:8.7.1
               command: [ "/bin/sh" ]
               args: [ "/scripts/selinaklepic.sh" ]
               volumeMounts:
