@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: filebrowser/filebrowser # repository of the image
-      tag: v2.27.0 # tag of the image
+      tag: v2.28.0 # tag of the image
       imagePullPolicy: IfNotPresent
 
     deployment:
