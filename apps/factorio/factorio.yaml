@@ -51,3 +51,6 @@ spec:
       storageClass: local-storage
       dataDir:
         existingClaim: "factorio-pvc"
+
+    rcon:
+      external: false
