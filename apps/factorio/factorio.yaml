@@ -1,0 +1,53 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: logan-helm-charts
+  namespace: factorio
+spec:
+  interval: 1h0m0s
+  url: https://loganintech.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: factorio
+  namespace: factorio
+spec:
+  chart:
+    spec:
+      chart: generic-helm
+      version: 1.2.6
+      sourceRef:
+        kind: HelmRepository
+        name: logan-helm-charts
+  interval: 5m
+  releaseName: factorio
+  targetNamespace: factorio
+  values:
+    image:
+      repository: "factoriotools/factorio"
+      ## Container image pull policy
+      pullPolicy: Always
+      ## Overrides the image tag whose default is the chart appVersion.
+      tag: "1.1.106"
+
+    factorioServer:
+      save_name: "tme"
+
+    admin_list:
+      - Ausraster
+      - DiaEmperador
+
+    white_list:
+      - Ausraster
+      - DiaEmperador
+
+    service:
+      type: NodePort
+      port: 31497
+
+    persistence:
+      enabled: true
+      storageClass: local-storage
+      dataDir:
+        existingClaim: "factorio-pvc"
