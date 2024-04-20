@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: factorio
-      version: 1.2.6
+      version: 1.2.7
       sourceRef:
         kind: HelmRepository
         name: logan-helm-charts
@@ -44,7 +44,8 @@ spec:
 
     service:
       type: ClusterIP
-      port: 34197
+      port: 31497
+      hostNetwork: true
 
     persistence:
       enabled: true
