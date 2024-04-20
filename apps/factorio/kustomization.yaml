@@ -4,4 +4,3 @@ resources:
 - namespace.yaml
 - storage.yaml
 - factorio.yaml
-#- endpoint.yaml
