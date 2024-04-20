@@ -43,11 +43,10 @@ spec:
       - DiaEmperador
 
     service:
-      type: NodePort
+      type: ClusterIP
       port: 31497
       externalIPs:
         - 192.168.178.120
-      nodePort: 30001
 
     persistence:
       enabled: true
