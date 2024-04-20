@@ -47,7 +47,7 @@ spec:
       port: 31497
       externalIPs:
         - 192.168.178.120
-      nodePort: 31497
+      nodePort: 30001
 
     persistence:
       enabled: true
