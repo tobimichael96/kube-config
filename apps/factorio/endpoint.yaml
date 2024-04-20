@@ -7,4 +7,4 @@ subsets:
   - addresses:
       - ip: 192.168.178.120
     ports:
-      - port: 31497
+      - port: 34197

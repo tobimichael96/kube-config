@@ -44,7 +44,7 @@ spec:
 
     service:
       type: ClusterIP
-      port: 31497
+      port: 34197
 
     persistence:
       enabled: true
