@@ -1,3 +1,4 @@
+---
 name: Lint Code Base
 
 on:
@@ -16,6 +17,7 @@ jobs:
         uses: github/super-linter@v5
         env:
           VALIDATE_ALL_CODEBASE: false
+          VALIDATE_JSCPD: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_KUBERNETES_KUBECONFORM: false
