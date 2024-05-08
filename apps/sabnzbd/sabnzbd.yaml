@@ -37,6 +37,6 @@ spec:
         size: 1Gi
       downloads:
         enabled: true
-        mountPath: /config/downloads
+        mountPath: /config/Downloads
         existingClaim: "sabnzbd-pvc"
         size: 200Gi
