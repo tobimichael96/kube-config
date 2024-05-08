@@ -4,6 +4,7 @@ metadata:
   name: sabnzbd
   namespace: sabnzbd
   annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 2G
     kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
