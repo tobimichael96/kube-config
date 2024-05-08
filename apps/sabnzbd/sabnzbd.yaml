@@ -32,11 +32,11 @@ spec:
     persistence:
       config:
         enabled: true
-        mountPath: /mnt/internal/sabnzbd/config
+        mountPath: /config
         existingClaim: "sabnzbd-config-pvc"
         size: 1Gi
       downloads:
         enabled: true
-        mountPath: /mnt/internal/sabnzbd/downloads
+        mountPath: /downloads
         existingClaim: "sabnzbd-pvc"
         size: 200Gi
