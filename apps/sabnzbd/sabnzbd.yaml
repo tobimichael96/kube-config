@@ -34,7 +34,9 @@ spec:
         enabled: false
         mountPath: /mnt/internal/sabnzbd/config
         accessMode: "ReadWriteOnce"
+        size: 1Gi
       downloads:
         enabled: true
         mountPath: /mnt/internal/sabnzbd/downloads
         accessMode: "ReadWriteOnce"
+        size: 200Gi
