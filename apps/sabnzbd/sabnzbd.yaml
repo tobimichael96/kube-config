@@ -31,10 +31,10 @@ spec:
       TZ: Europe/Berlin
     persistence:
       config:
-        enabled: true
+        enabled: false
         mountPath: /mnt/internal/sabnzbd/config
         accessMode: "ReadWriteOnce"
       downloads:
-        enabled: true
+        enabled: false
         mountPath: /mnt/internal/sabnzbd/downloads
         accessMode: "ReadWriteOnce"
