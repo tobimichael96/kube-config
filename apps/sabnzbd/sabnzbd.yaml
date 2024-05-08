@@ -35,6 +35,6 @@ spec:
         mountPath: /mnt/internal/sabnzbd/config
         accessMode: "ReadWriteOnce"
       downloads:
-        enabled: false
+        enabled: true
         mountPath: /mnt/internal/sabnzbd/downloads
         accessMode: "ReadWriteOnce"
