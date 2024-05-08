@@ -33,10 +33,10 @@ spec:
       config:
         enabled: false
         mountPath: /mnt/internal/sabnzbd/config
-        accessMode: "ReadWriteOnce"
+        existingClaim: "sabnzbd-config-pvc"
         size: 1Gi
       downloads:
         enabled: true
         mountPath: /mnt/internal/sabnzbd/downloads
-        accessMode: "ReadWriteOnce"
+        existingClaim: "sabnzbd-pvc"
         size: 200Gi
