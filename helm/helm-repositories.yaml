@@ -2,11 +2,20 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: true-charts
+  name: k8s-at-home
   namespace: flux-system
 spec:
   interval: 1h0m0s
-  url: https://charts.truecharts.org
+  url: https://k8s-at-home.com/charts/
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: funkypenguin
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://geek-cookbook.github.io/charts/
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
