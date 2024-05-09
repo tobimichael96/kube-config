@@ -17,6 +17,8 @@ spec:
   releaseName: jellyfin
   targetNamespace: jellyfin
   values:
+    env:
+      TZ: "Europe/Berlin"
     image:
       repository: linuxserver/jellyfin
       pullPolicy: IfNotPresent
