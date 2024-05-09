@@ -75,5 +75,7 @@ spec:
             main:
               env:
                 JELLYFIN_PublishedServerUrl: "{{ $.Values.chartContext.APPURL }}"
+    autodiscovery:
+      enabled: true
     updated: true
 
