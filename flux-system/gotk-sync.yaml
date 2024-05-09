@@ -20,61 +20,8 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m0s
-  path: ./flux-system
+  path: ./
   prune: false
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: flux-system-helm
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  path: ./helm
-  prune: false
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: flux-system-rke2
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  path: ./rke2
-  prune: false
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
----
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: flux-system-apps
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  path: ./apps
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: flux-system-infrastructure
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  path: ./infrastructure
-  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
