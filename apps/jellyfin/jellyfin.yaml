@@ -54,7 +54,7 @@ spec:
         type: "emptyDir"
       transcode:
         enabled: true
-        mountPath: "/config/transcodes"
+        mountPath: "/transcodes"
         type: "emptyDir"
       amd-device:
         enabled: true
