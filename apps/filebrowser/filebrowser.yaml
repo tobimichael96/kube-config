@@ -1,11 +1,3 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: generic-helm
-  namespace: filebrowser
-spec:
-  interval: 1h0m0s
-  url: https://tobimichael96.github.io/helm-chart/
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
@@ -20,6 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: generic-helm
+        namespace: flux-system
   interval: 5m
   releaseName: filebrowser
   targetNamespace: filebrowser

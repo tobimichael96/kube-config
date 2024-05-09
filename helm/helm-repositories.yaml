@@ -1,0 +1,45 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: true-charts
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://charts.truecharts.org
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: generic-helm
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://tobimichael96.github.io/helm-chart/
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: home-assistant
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://charts.alekc.dev
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://charts.bitnami.com/bitnami
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: nextcloud
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://nextcloud.github.io/helm/

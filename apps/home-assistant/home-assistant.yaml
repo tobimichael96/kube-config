@@ -1,11 +1,4 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: home-assistant
-  namespace: home-assistant
-spec:
-  interval: 1h0m0s
-  url: https://charts.alekc.dev
+
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
@@ -20,6 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: home-assistant
+        namespace: flux-system
   interval: 5m
   releaseName: home-assistant
   targetNamespace: home-assistant
