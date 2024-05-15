@@ -1,5 +1,5 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: k8s-at-home
@@ -8,7 +8,7 @@ spec:
   interval: 1h0m0s
   url: https://k8s-at-home.com/charts/
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: funkypenguin
@@ -17,7 +17,7 @@ spec:
   interval: 1h0m0s
   url: https://geek-cookbook.github.io/charts/
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: generic-helm
@@ -26,7 +26,7 @@ spec:
   interval: 1h0m0s
   url: https://tobimichael96.github.io/helm-chart/
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: home-assistant
@@ -35,7 +35,7 @@ spec:
   interval: 1h0m0s
   url: https://charts.alekc.dev
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: bitnami
@@ -44,7 +44,7 @@ spec:
   interval: 1h0m0s
   url: https://charts.bitnami.com/bitnami
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: nextcloud
