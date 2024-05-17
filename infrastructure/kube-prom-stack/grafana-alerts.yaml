@@ -15,6 +15,35 @@ data:
           receiver: tme-notifications-bot
           group_by:
             - alertname
+  # language=yaml
+  message.yaml: |-
+    {{ define "telegram_message" }}
+      {{ if gt (len .Alerts.Firing) 0 }}
+      <b>🔥 {{ len .Alerts.Firing }} alert(s) firing:</b>
+        {{ range .Alerts.Firing }} {{ template "telegram_alert_firing" .}} {{ end }} {{ end }}
+      {{ if gt (len .Alerts.Resolved) 0 }}
+      <b>✅ {{ len .Alerts.Resolved }} alert(s) resolved:</b>
+        {{ range .Alerts.Resolved }} {{ template "telegram_alert_resolved" .}} {{ end }} {{ end }}
+    {{ end }}
+    
+    {{ define "telegram_alert_firing" }}
+      Severity: <b>{{ .Labels.severity }}</b>
+      <b>{{ .Labels.alertname }}</b>
+      {{ .Annotations.summary }}
+    
+      Node: <b>{{ .Annotations.Node }}</b>
+      {{ .Annotations.AlertValues }}
+      <a href="https://{grafana_URL}/alerting/silence/new?matcher=node%3D{{ .Annotations.Node }}">Silence all alerts for this node</a> - <a href="https://status.astar.network/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert for all nodes</a>
+      <a href="https://{grafana_URL}/d/{dashboard_id/name}">Access dashboard</a>
+    {{ end }}
+    
+      {{ define "telegram_alert_resolved" }}
+      <b>{{ .Labels.alertname }}</b>
+      
+      Node: <b>{{ .Annotations.Node }}</b>
+      {{ .Annotations.AlertValues }}
+      <a href="https://{grafana_URL}/d/{dashboard_id/name}">Access dashboard</a>
+    {{ end }}
   # language=json
   restart.json: |-
     {
