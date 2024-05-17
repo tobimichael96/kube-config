@@ -11,16 +11,16 @@ data:
   policy.yaml: |-
     apiVersion: 1
     policies:
-        - orgId: 1
-          receiver: grafana-default-email
-          group_by:
-            - alertname
-          routes:
-            - receiver: tme-notifications-bot
-              object_matchers:
-                - - telegram
-                  - =
-                  - "true"
+      - orgId: 1
+        receiver: grafana-default-email
+        group_by:
+          - alertname
+        routes:
+          - receiver: tme-notifications-bot
+            object_matchers:
+              - - telegram
+                - =
+                - "true"
   # language=yaml
   message.yaml: |-
     templates:
@@ -50,7 +50,7 @@ data:
           
             {{ define "telegram_alert_resolved" }}
             <b>{{ .Labels.alertname }}</b>
-            
+          
             {{ if .Annotations -}}
               <b>Summary<b>: {{ .Annotations.summary}}
               <b>Description<b>: {{ .Annotations.description }}
@@ -138,10 +138,9 @@ data:
               "execErrState": "Error",
               "for": "1m",
               "annotations": {
-                "description": "",
+                "description": "Container {{ index $labels \"container\" }} is in a restart loop.",
                 "runbook_url": "",
-                "summary": ""
-              },
+                "summary": "Container in restart loop!"},
               "labels": {
                 "": "",
                 "telegram": "true"
