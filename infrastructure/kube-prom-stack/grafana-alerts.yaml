@@ -142,7 +142,6 @@ data:
                 "runbook_url": "",
                 "summary": "Container in restart loop!"},
               "labels": {
-                "": "",
                 "telegram": "true"
               },
               "isPaused": false
