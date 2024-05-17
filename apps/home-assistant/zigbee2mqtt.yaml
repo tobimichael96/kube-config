@@ -73,7 +73,7 @@ spec:
         - name: ttyacm
           hostPath:
             path: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2292211-if00
-            type: File
+            type: Directory
         - name: zigbee2mqtt-config
           configMap:
             name: zigbee2mqtt-config
