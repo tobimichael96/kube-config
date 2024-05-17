@@ -19,7 +19,7 @@ data:
   message.yaml: |-
     templates:
       - orgID: 1
-        name: slack.message
+        name: telegram_message
         template: |-
           {{ define "telegram_message" }}
             {{ if gt (len .Alerts.Firing) 0 }}
