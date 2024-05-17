@@ -12,7 +12,9 @@ data:
     apiVersion: 1
     policies:
         - orgId: 1
-          receiver: tme-notifications-bot
+        - receiver: telegram-bot
+          object_matchers:
+            - ['telegram', '=', 'true']
           group_by:
             - alertname
   # language=yaml
