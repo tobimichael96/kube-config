@@ -73,7 +73,7 @@ spec:
         - name: ttyacm
           hostPath:
             path: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_4c99765bc59ded118ec0dba5a7669f5d-if00-port0
-            type: Directory
+            type: CharDevice
         - name: zigbee2mqtt-sonoff-config
           configMap:
             name: zigbee2mqtt-sonoff-config
