@@ -7,6 +7,14 @@ metadata:
   labels:
     grafana_alert: "1"
 data:
+  # language=yaml
+  policy.yaml: |-
+    apiVersion: 1
+    policies:
+        - orgId: 1
+          receiver: tme-notifications-bot
+          group_by:
+            - alertname
   # language=json
   restart.json: |-
     {
@@ -32,7 +40,7 @@ data:
                   "datasourceUid": "prometheus",
                   "model": {
                     "editorMode": "code",
-                    "expr": "(sum(increase(kube_pod_container_status_restarts_total[10m])) by (container)) > 0",
+                    "expr": "(sum(increase(kube_pod_container_status_restarts_total[10m])) by (container))",
                     "instant": true,
                     "intervalMs": 1000,
                     "legendFormat": "__auto",
