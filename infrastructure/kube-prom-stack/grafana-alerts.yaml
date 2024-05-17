@@ -8,7 +8,7 @@ metadata:
     grafana_alert: "1"
 data:
   # language=json
-  rules: |-
+  restart: |-
     {
       "apiVersion": 1,
       "groups": [
