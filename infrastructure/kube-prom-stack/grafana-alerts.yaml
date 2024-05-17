@@ -12,7 +12,7 @@ data:
     apiVersion: 1
     policies:
         - orgId: 1
-          receiver: default-channel-name
+          receiver: default
           routes:
             - receiver: telegram
               object_matchers:
