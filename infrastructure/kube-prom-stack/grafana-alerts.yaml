@@ -7,7 +7,20 @@ metadata:
   labels:
     grafana_alert: "1"
 data:
-
+  # language=yaml
+  policy.yaml: |-
+    apiVersion: 1
+    policies:
+        - orgId: 1
+          receiver: grafana-default-email
+          group_by:
+            - alertname
+          routes:
+            - receiver: tme-notifications-bot
+              object_matchers:
+                - - telegram
+                  - =
+                  - "true"
   # language=yaml
   message.yaml: |-
     templates:
@@ -24,21 +37,24 @@ data:
           {{ end }}
           
           {{ define "telegram_alert_firing" }}
-            Severity: <b>{{ .Labels.severity }}</b>
             <b>{{ .Labels.alertname }}</b>
-            {{ .Annotations.summary }}
+            {{ if .Annotations -}}
+              <b>Summary<b>: {{ .Annotations.summary}}
+              <b>Description<b>: {{ .Annotations.description }}
+            {{ end -}}
           
-            Node: <b>{{ .Annotations.Node }}</b>
             {{ .Annotations.AlertValues }}
-            <a href="https://{grafana_URL}/alerting/silence/new?matcher=node%3D{{ .Annotations.Node }}">Silence all alerts for this node</a> - <a href="https://status.astar.network/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert for all nodes</a>
+            <a href="https://{grafana_URL}/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert</a>
             <a href="https://{grafana_URL}/d/{dashboard_id/name}">Access dashboard</a>
           {{ end }}
           
             {{ define "telegram_alert_resolved" }}
             <b>{{ .Labels.alertname }}</b>
             
-            Node: <b>{{ .Annotations.Node }}</b>
-            {{ .Annotations.AlertValues }}
+            {{ if .Annotations -}}
+              <b>Summary<b>: {{ .Annotations.summary}}
+              <b>Description<b>: {{ .Annotations.description }}
+            {{ end -}}
             <a href="https://{grafana_URL}/d/{dashboard_id/name}">Access dashboard</a>
           {{ end }}
   # language=json
