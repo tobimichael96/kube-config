@@ -55,6 +55,13 @@ spec:
 
       defaultDashboardsEnabled: false
 
+      sidecar:
+        alerts:
+          enabled: true
+          label: "grafana_alert"
+          labelValue: "1"
+          skipReload: false
+
       grafana.ini:
         users:
           # disable user signup / registration

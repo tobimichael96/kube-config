@@ -1,0 +1,104 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-alerts
+  namespace: kube-prom-stack
+  labels:
+    grafana_alert: "1"
+data:
+  # language=json
+  rules: |-
+    {
+      "apiVersion": 1,
+      "groups": [
+        {
+          "orgId": 1,
+          "name": "default",
+          "folder": "default",
+          "interval": "30s",
+          "rules": [
+            {
+              "uid": "fdlzr1acdyygwe",
+              "title": "restart-loop",
+              "condition": "C",
+              "data": [
+                {
+                  "refId": "A",
+                  "relativeTimeRange": {
+                    "from": 600,
+                    "to": 0
+                  },
+                  "datasourceUid": "prometheus",
+                  "model": {
+                    "editorMode": "code",
+                    "expr": "(sum(increase(kube_pod_container_status_restarts_total[10m])) by (container)) > 0",
+                    "instant": true,
+                    "intervalMs": 1000,
+                    "legendFormat": "__auto",
+                    "maxDataPoints": 43200,
+                    "range": false,
+                    "refId": "A"
+                  }
+                },
+                {
+                  "refId": "C",
+                  "relativeTimeRange": {
+                    "from": 600,
+                    "to": 0
+                  },
+                  "datasourceUid": "__expr__",
+                  "model": {
+                    "conditions": [
+                      {
+                        "evaluator": {
+                          "params": [
+                            1
+                          ],
+                          "type": "gt"
+                        },
+                        "operator": {
+                          "type": "and"
+                        },
+                        "query": {
+                          "params": [
+                            "C"
+                          ]
+                        },
+                        "reducer": {
+                          "params": [],
+                          "type": "last"
+                        },
+                        "type": "query"
+                      }
+                    ],
+                    "datasource": {
+                      "type": "__expr__",
+                      "uid": "__expr__"
+                    },
+                    "expression": "A",
+                    "intervalMs": 1000,
+                    "maxDataPoints": 43200,
+                    "refId": "C",
+                    "type": "threshold"
+                  }
+                }
+              ],
+              "noDataState": "NoData",
+              "execErrState": "Error",
+              "for": "1m",
+              "annotations": {
+                "description": "",
+                "runbook_url": "",
+                "summary": ""
+              },
+              "labels": {
+                "": "",
+                "telegram": "true"
+              },
+              "isPaused": false
+            }
+          ]
+        }
+      ]
+    }
