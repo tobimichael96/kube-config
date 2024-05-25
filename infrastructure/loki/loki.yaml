@@ -42,5 +42,8 @@ spec:
       replicas: 0
     lokiCanary:
       enabled: false
+    gateway:
+      ingress:
+        enabled: false
     test:
       enabled: false
