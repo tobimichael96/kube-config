@@ -40,34 +40,41 @@ spec:
           type: local
     singleBinary:
       replicas: 1
-    read:
-      enabled: false
-      replicas: 0
+
     backend:
-      enabled: false
+      replicas: 0
+    read:
       replicas: 0
     write:
-      enabled: false
+      replicas: 0
+
+    ingester:
+      replicas: 0
+    querier:
       replicas: 0
     queryFrontend:
-      enabled: false
-    ingester:
-      enabled: false
-    distributor:
-      enabled: false
-    compactor:
-      enabled: false
+      replicas: 0
     queryScheduler:
-      enabled: false
+      replicas: 0
+    distributor:
+      replicas: 0
+    compactor:
+      replicas: 0
+    indexGateway:
+      replicas: 0
+    bloomCompactor:
+      replicas: 0
+    bloomGateway:
+      replicas: 0
     gateway:
-      extraVolumes:
-        - name: nginx-config
-          configMap:
-            name: loki-nginx-config
-      extraVolumeMounts:
-        - name: nginx-config
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
+#      extraVolumes:
+#        - name: nginx-config
+#          configMap:
+#            name: loki-nginx-config
+#      extraVolumeMounts:
+#        - name: nginx-config
+#          mountPath: /etc/nginx/nginx.conf
+#          subPath: nginx.conf
       affinity: { }
     test:
       enabled: false
