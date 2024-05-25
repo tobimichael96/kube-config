@@ -5,7 +5,7 @@ metadata:
   name: k8s-at-home
   namespace: flux-system
 spec:
-  interval: 1h0m0s
+  interval: 30m
   url: https://k8s-at-home.com/charts/
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -14,7 +14,7 @@ metadata:
   name: funkypenguin
   namespace: flux-system
 spec:
-  interval: 1h0m0s
+  interval: 30m
   url: https://geek-cookbook.github.io/charts/
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -23,7 +23,7 @@ metadata:
   name: generic-helm
   namespace: flux-system
 spec:
-  interval: 1h0m0s
+  interval: 30m
   url: https://tobimichael96.github.io/helm-chart/
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -32,7 +32,7 @@ metadata:
   name: home-assistant
   namespace: flux-system
 spec:
-  interval: 1h0m0s
+  interval: 30m
   url: https://charts.alekc.dev
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -41,7 +41,7 @@ metadata:
   name: bitnami
   namespace: flux-system
 spec:
-  interval: 1h0m0s
+  interval: 30m
   url: https://charts.bitnami.com/bitnami
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
@@ -50,5 +50,15 @@ metadata:
   name: nextcloud
   namespace: flux-system
 spec:
-  interval: 1h0m0s
+  interval: 30m
   url: https://nextcloud.github.io/helm/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: sabnzbd
+  namespace: flux-system
+spec:
+  type: oci
+  interval: 30m
+  url: oci://tccr.io/truecharts/sabnzbd
