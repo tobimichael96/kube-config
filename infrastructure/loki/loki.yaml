@@ -35,9 +35,6 @@ spec:
               period: 24h
             object_store: filesystem
             schema: v13
-      rulerConfig:
-        storage:
-          type: local
     singleBinary:
       replicas: 1
       persistence:
