@@ -68,7 +68,6 @@ spec:
         - name: nginx-config
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
-      affinity:
-        podAntiAffinity: { }
+      affinity: { }
     test:
       enabled: false
