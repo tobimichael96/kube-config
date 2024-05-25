@@ -42,7 +42,8 @@ spec:
       replicas: 1
       persistence:
         storageClass: "local-storage"
-        selector: ""
+        selector:
+          use-case: loki
 
     backend:
       replicas: 0
