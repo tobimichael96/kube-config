@@ -49,8 +49,6 @@ spec:
     gateway:
       ingress:
         enabled: false
-      deploymentStrategy:
-        type: Recreate
       affinity:
         podAntiAffinity: { }
     test:
