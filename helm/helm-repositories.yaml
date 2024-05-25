@@ -56,9 +56,8 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: sabnzbd
+  name: amd-gpu
   namespace: flux-system
 spec:
-  type: oci
   interval: 30m
-  url: oci://tccr.io/truecharts/sabnzbd
+  url: https://rocm.github.io/k8s-device-plugin/
