@@ -43,7 +43,8 @@ spec:
       persistence:
         storageClass: null
         selector:
-          use-case: loki
+          matchLabels:
+            use-case: loki
 
     backend:
       replicas: 0
