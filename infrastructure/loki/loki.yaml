@@ -41,7 +41,7 @@ spec:
     singleBinary:
       replicas: 1
       persistence:
-        storageClass: local-storage
+        storageClass: null
         selector:
           use-case: loki
 
