@@ -17,6 +17,8 @@ spec:
   releaseName: loki
   targetNamespace: loki
   values:
+    global:
+      dnsService: "rke2-coredns-rke2-coredns"
     mode: SingleBinary
     loki:
       commonConfig:
