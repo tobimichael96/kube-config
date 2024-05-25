@@ -46,9 +46,17 @@ spec:
       replicas: 0
     write:
       replicas: 0
+    queryFrontend:
+      enabled: false
+    ingester:
+      enabled: false
+    distributor:
+      enabled: false
+    compactor:
+      enabled: false
+    queryScheduler:
+      enabled: false
     gateway:
-      ingress:
-        enabled: false
       affinity:
         podAntiAffinity: { }
     test:
