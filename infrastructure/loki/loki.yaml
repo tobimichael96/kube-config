@@ -28,13 +28,13 @@ spec:
         type: 'filesystem'
       schemaConfig:
         configs:
-        - from: "2024-01-01"
-          store: tsdb
-          index:
-            prefix: loki_index_
-            period: 24h
-          object_store: filesystem
-          schema: v13
+          - from: "2024-01-01"
+            store: tsdb
+            index:
+              prefix: loki_index_
+              period: 24h
+            object_store: filesystem
+            schema: v13
       rulerConfig:
         storage:
           type: local
@@ -51,5 +51,7 @@ spec:
         enabled: false
       deploymentStrategy:
         type: Recreate
+      affinity:
+        podAntiAffinity: { }
     test:
       enabled: false
