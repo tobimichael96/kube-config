@@ -60,6 +60,14 @@ spec:
     queryScheduler:
       enabled: false
     gateway:
+      extraVolumes:
+        - name: nginx-config
+          configMap:
+            name: loki-nginx-config
+      extraVolumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
       affinity:
         podAntiAffinity: { }
     test:
