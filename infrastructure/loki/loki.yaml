@@ -49,5 +49,7 @@ spec:
     gateway:
       ingress:
         enabled: false
+      deploymentStrategy:
+        type: Recreate
     test:
       enabled: false
