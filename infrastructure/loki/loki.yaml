@@ -67,14 +67,6 @@ spec:
     bloomGateway:
       replicas: 0
     gateway:
-#      extraVolumes:
-#        - name: nginx-config
-#          configMap:
-#            name: loki-nginx-config
-#      extraVolumeMounts:
-#        - name: nginx-config
-#          mountPath: /etc/nginx/nginx.conf
-#          subPath: nginx.conf
-      affinity: { }
+      affinity: null
     test:
       enabled: false
