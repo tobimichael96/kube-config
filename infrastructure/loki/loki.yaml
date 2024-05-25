@@ -41,7 +41,8 @@ spec:
     singleBinary:
       replicas: 1
       persistence:
-        existingClaim: loki-pvc
+        storageClass: "local-storage"
+        selector: ""
 
     backend:
       replicas: 0

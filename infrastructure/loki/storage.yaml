@@ -26,6 +26,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: loki-pvc
   namespace: loki
+  labels:
+    use-case: "loki"
 spec:
   storageClassName: local-storage
   volumeName: loki-pv
