@@ -40,6 +40,8 @@ spec:
           type: local
     singleBinary:
       replicas: 1
+      persistence:
+        enabled: false
 
     backend:
       replicas: 0
