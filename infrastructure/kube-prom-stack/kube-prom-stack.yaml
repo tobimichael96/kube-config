@@ -1,11 +1,3 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: prometheus-community
-  namespace: kube-prom-stack
-spec:
-  interval: 1h0m0s
-  url: https://prometheus-community.github.io/helm-charts
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
