@@ -22,15 +22,24 @@ spec:
     deploymentMode: SimpleScalable
     loki:
       auth_enabled: false
+      storage:
+        secret:
+          name: "minio-secret"
+          type: s3
       schemaConfig:
         configs:
-          - from: "2024-04-01"
+          - from: "2024-01-01"
             store: tsdb
-            object_store: s3
-            schema: v13
             index:
               prefix: loki_index_
               period: 24h
+            object_store: s3
+            schema: v13
+      rulerConfig:
+        storage:
+          type: s3
+          secret:
+            name: "minio-secret"
       ingester:
         chunk_encoding: snappy
       tracing:
