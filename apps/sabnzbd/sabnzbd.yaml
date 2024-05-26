@@ -22,7 +22,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/buroa/sabnzbd
+              repository: linuxserver/sabnzbd
               tag: 4.3.1
             env:
               SABNZBD__PORT: &port 8080
