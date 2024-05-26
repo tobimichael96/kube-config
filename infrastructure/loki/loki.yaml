@@ -23,6 +23,10 @@ spec:
     loki:
       auth_enabled: false
       storage:
+        bucketNames:
+          chunks: ${S3_BUCKET}
+          ruler: ${S3_BUCKET}
+          admin: ${S3_BUCKET}
         type: 's3'
         s3:
           endpoint: ${S3_ENDPOINT}
