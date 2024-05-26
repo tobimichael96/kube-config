@@ -87,13 +87,11 @@ spec:
         globalMounts:
           - path: /config
         existingClaim: "sabnzbd-config-pvc"
-        size: 1Gi
       media:
         enabled: true
         globalMounts:
           - path: /mnt/internal/media
         existingClaim: "sabnzbd-media-pvc"
-        size: 1000Gi
       logs:
         type: emptyDir
         globalMounts:
