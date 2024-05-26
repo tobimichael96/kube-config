@@ -61,3 +61,9 @@ spec:
           initialDelaySeconds: 45
           periodSeconds: 120
           failureThreshold: 1
+        persistence:
+          modules:
+            enabled: true
+            type: hostPath
+            mountPath: /lib/modules
+            readonly: true
