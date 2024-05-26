@@ -2,26 +2,84 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sabnzbd
-  namespace: sabnzbd
+  name: &app sabnzbd
 spec:
   chart:
     spec:
-      chart: sabnzbd
-      version: 9.4.2
+      chart: app-template
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-charts
         namespace: flux-system
   interval: 5m
-  releaseName: sabnzbd
-  targetNamespace: sabnzbd
+  releaseName: *app
   values:
-    image:
-      repository: linuxserver/sabnzbd
-      tag: 4.3.1
-    env:
-      TZ: Europe/Berlin
+    controllers:
+      sabnzbd:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/buroa/sabnzbd
+              tag: 4.3.1
+            env:
+              SABNZBD__PORT: &port 8080
+              SABNZBD__HOST_WHITELIST_ENTRIES: >-
+                sabnzbd,
+                sabnzbd.sabnzbd,
+                sabnzbd.sabnzbd.svc,
+                sabnzbd.sabnzbd.svc.cluster,
+                sabnzbd.sabnzbd.svc.cluster.local,
+                sabnzbd.tmem.de
+              TZ: Europe/Berlin
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api?mode=version
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 65536
+    ingress:
+      app:
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+          nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+        hosts:
+          - host: &host sabnzbd.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: radarr-tls
     persistence:
       config:
         enabled: true
@@ -30,27 +88,30 @@ spec:
         size: 1Gi
       media:
         enabled: true
-        mountPath: /mnt/internal/media
+        globalMounts:
+          - path: /mnt/internal/media
         existingClaim: "sabnzbd-media-pvc"
         size: 1000Gi
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+      tmp:
+        type: emptyDir
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
     addons:
       vpn:
         enabled: true
-        type: wireguard
-        wireguard:
-          image:
-            repository: linuxserver/wireguard
-            tag: 1.0.20210914
-          securityContext:
-            capabilities:
-              add:
-                - NET_ADMIN
-                - SYS_ADMIN
-                - sysctl net.ipv4.conf.all.src_valid_mark=1
-        env:
-          TZ: Europe/Berlin
-          IPTABLES_BACKEND: legacy
-          KILLSWITCH: true
+        type: gluetun
+        environment:
+          - VPN_SERVICE_PROVIDER=custom
+          - VPN_TYPE=wireguard
+          - TZ=Europe/Berlin
         configFileSecret: sabnzbd-vpn-config
         livenessProbe:
           exec:
@@ -61,9 +122,8 @@ spec:
           initialDelaySeconds: 45
           periodSeconds: 120
           failureThreshold: 1
-        persistence:
-          modules:
-            enabled: true
-            type: hostPath
-            mountPath: /lib/modules
-            readonly: true
+#        additionalVolumeMounts:
+#          - mountPath: /lib/modules
+#            name: modules
+#            type: hostPath
+#            readonly: true
