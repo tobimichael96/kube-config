@@ -55,7 +55,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
-          - host: jellyseer.tmem.de
+          - host: jellyseerr.tmem.de
             paths:
               - path: /
                 pathType: Prefix
