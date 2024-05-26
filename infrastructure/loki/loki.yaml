@@ -1,0 +1,68 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app loki
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: *app
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    global:
+      dnsService: "rke2-coredns-rke2-coredns"
+    deploymentMode: SingleBinary
+    loki:
+      config:
+        auth_enabled: false
+        schema_config:
+          configs:
+            - from: 2020-10-24
+              store: tsdb
+              object_store: s3
+              schema: v11
+              index:
+                prefix: index_
+                period: 168h
+        storage:
+            bucketNames:
+              chunks: &bucket cluster-logs
+              ruler: *bucket
+              admin: *bucket
+            type: s3
+            s3:
+              endpoint: http://minio.minio:9000
+              accessKeyId: ${LOKI_MINIO_ACCESS_KEY_ID}
+              secretAccessKey: ${LOKI_MINIO_SECRET_ACCESS_KEY}
+              s3ForcePathStyle: true
+              insecure: true
+        storage_config:
+          aws:
+            s3: http://minio.minio:9000
+            bucketnames: *bucket
+            accessKeyId: ${LOKI_MINIO_ACCESS_KEY_ID}
+            secretAccessKey: ${LOKI_MINIO_SECRET_ACCESS_KEY}
+            s3ForcePathStyle: true
+            insecure: true
+        tsdb_shipper:
+          active_index_directory: /loki/index
+          cache_location: /loki/index_cache
+          cache_ttl: 24h
+
+        singleBinary:
+          persistence:
+            enabled: false
+          extraArgs:
+            - '-config.expand-env=true'
+          replicas: 1
+          extraEnvFrom:
+            - secretRef:
+                name: loki-minio-credentials
