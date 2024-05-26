@@ -69,7 +69,6 @@ spec:
               capabilities:
                 add:
                   - NET_ADMIN
-                  - SYS_
             probes:
               liveness:
                 enabled: true
@@ -142,7 +141,7 @@ spec:
         advancedMounts:
           sabnzbd:
             gluetun:
-              - path: /gluetun/wireguard/wg0.conf
+              - path: /gluetun/wireguard/
     service:
       app:
         controller: *app
