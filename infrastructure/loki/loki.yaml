@@ -44,11 +44,17 @@ spec:
           s3ForcePathStyle: true
           insecure: true
         tsdb_shipper:
-          active_index_directory: /loki/index
-          cache_location: /loki/index_cache
+          active_index_directory: var/loki/index
+          cache_location: var/loki/index_cache
           cache_ttl: 24h
 
     singleBinary:
+      extraVolumes:
+        - name: data
+          emptyDir: { }
+      extraVolumeMounts:
+        - name: data
+          mountPath: /var/loki
       persistence:
         enabled: false
       extraArgs:
