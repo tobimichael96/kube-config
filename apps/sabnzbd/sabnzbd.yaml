@@ -52,6 +52,31 @@ spec:
               capabilities:
                 drop:
                   - ALL
+          # Configure the gluetun sidecar
+          gluetun:
+            dependsOn: app
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: latest
+            env:
+              VPN_TYPE: wireguard
+              VPN_INTERFACE: wg0
+              TZ: Europe/Berlin
+            # Configure the container-specific securityContext
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - SYS_
+            livenessProbe:
+              exec:
+                command:
+                  - bash
+                  - -c
+                  - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit $?; fi
+              initialDelaySeconds: 45
+              periodSeconds: 120
+              failureThreshold: 1
     defaultPodOptions:
       securityContext:
         runAsNonRoot: false
@@ -84,46 +109,31 @@ spec:
     persistence:
       config:
         enabled: true
-        globalMounts:
+        app:
           - path: /config
         existingClaim: "sabnzbd-config-pvc"
       media:
         enabled: true
-        globalMounts:
+        app:
           - path: /mnt/internal/media
         existingClaim: "sabnzbd-media-pvc"
       logs:
         type: emptyDir
-        globalMounts:
+        app:
           - path: /config/logs
       tmp:
         type: emptyDir
+      vpn-config:
+        enabled: true
+        type: secret
+        name: sabnzbd-vpn-config
+        items:
+          - wg0.conf
+        gluetun:
+          - path: /gluetun/wireguard/wg0.conf
     service:
       app:
         controller: *app
         ports:
           http:
             port: *port
-    addons:
-      vpn:
-        enabled: true
-        type: gluetun
-        environment:
-          - VPN_SERVICE_PROVIDER=custom
-          - VPN_TYPE=wireguard
-          - TZ=Europe/Berlin
-        configFileSecret: sabnzbd-vpn-config
-        livenessProbe:
-          exec:
-            command:
-              - bash
-              - -c
-              -  if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit $?; fi
-          initialDelaySeconds: 45
-          periodSeconds: 120
-          failureThreshold: 1
-#        additionalVolumeMounts:
-#          - mountPath: /lib/modules
-#            name: modules
-#            type: hostPath
-#            readonly: true
