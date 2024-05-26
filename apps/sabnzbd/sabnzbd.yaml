@@ -110,18 +110,24 @@ spec:
     persistence:
       config:
         enabled: true
-        app:
-          - path: /config
+        advancedMounts:
+          sabnzbd:
+            app:
+              - path: /config
         existingClaim: "sabnzbd-config-pvc"
       media:
         enabled: true
-        app:
-          - path: /mnt/internal/media
+        advancedMounts:
+          sabnzbd:
+            app:
+              - path: /mnt/internal/media
         existingClaim: "sabnzbd-media-pvc"
       logs:
         type: emptyDir
-        app:
-          - path: /config/logs
+        advancedMounts:
+          sabnzbd:
+            app:
+              - path: /config/logs
       tmp:
         type: emptyDir
       vpn-config:
@@ -130,8 +136,10 @@ spec:
         name: sabnzbd-vpn-config
         items:
           - wg0.conf
-        gluetun:
-          - path: /gluetun/wireguard/wg0.conf
+        advancedMounts:
+          sabnzbd:
+            gluetun:
+              - path: /gluetun/wireguard/wg0.conf
     service:
       app:
         controller: *app
