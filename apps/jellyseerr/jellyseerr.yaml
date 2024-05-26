@@ -1,0 +1,74 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jellyseerr
+  namespace: jellyseerr
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: jellyseerr
+  targetNamespace: jellyseerr
+  values:
+    controllers:
+      main:
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
+        containers:
+          jellyseer:
+            image:
+              repository: docker.io/fallenbagel/jellyseerr
+              tag: 1.7.0
+            env:
+              TZ: Europe/Berlin
+              LOG_LEVEL: "info"
+              PORT: 8080
+            resources:
+              requests:
+                cpu: 15m
+                memory: 324M
+              limits:
+                memory: 324M
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8080
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: jellyseer.tmem.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - jellyseerr.tmem.de
+            secretName: jellyseerr-tls
+    persistence:
+      config:
+        enabled: true
+        existingClaim: jellyseerr-config-pvc
+        globalMounts:
+          - path: /app/config

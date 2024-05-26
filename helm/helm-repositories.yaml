@@ -79,3 +79,12 @@ metadata:
 spec:
   interval: 30m
   url: https://rocm.github.io/k8s-device-plugin/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: bjw-s
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: https://bjw-s.github.io/helm-charts
