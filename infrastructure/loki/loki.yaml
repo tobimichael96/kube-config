@@ -21,37 +21,28 @@ spec:
       dnsService: "rke2-coredns-rke2-coredns"
     deploymentMode: SingleBinary
     loki:
-      config:
-        auth_enabled: false
-        schema_config:
-          configs:
-            - from: 2020-10-24
-              store: tsdb
-              object_store: s3
-              schema: v11
-              index:
-                prefix: index_
-                period: 168h
-        storage:
-            bucketNames:
-              chunks: &bucket cluster-logs
-              ruler: *bucket
-              admin: *bucket
-            type: s3
-            s3:
-              endpoint: http://minio.minio:9000
-              accessKeyId: ${LOKI_MINIO_ACCESS_KEY_ID}
-              secretAccessKey: ${LOKI_MINIO_SECRET_ACCESS_KEY}
-              s3ForcePathStyle: true
-              insecure: true
-        storage_config:
-          aws:
-            s3: http://minio.minio:9000
-            bucketnames: *bucket
-            accessKeyId: ${LOKI_MINIO_ACCESS_KEY_ID}
-            secretAccessKey: ${LOKI_MINIO_SECRET_ACCESS_KEY}
-            s3ForcePathStyle: true
-            insecure: true
+      auth_enabled: false
+      schemaConfig:
+        configs:
+          - from: 2020-10-24
+            store: tsdb
+            object_store: s3
+            schema: v11
+            index:
+              prefix: index_
+              period: 168h
+      storage:
+        bucketNames:
+          chunks: &bucket cluster-logs
+          ruler: *bucket
+          admin: *bucket
+        type: s3
+        s3:
+          endpoint: http://minio.minio:9000
+          accessKeyId: ${LOKI_MINIO_ACCESS_KEY_ID}
+          secretAccessKey: ${LOKI_MINIO_SECRET_ACCESS_KEY}
+          s3ForcePathStyle: true
+          insecure: true
         tsdb_shipper:
           active_index_directory: /loki/index
           cache_location: /loki/index_cache
