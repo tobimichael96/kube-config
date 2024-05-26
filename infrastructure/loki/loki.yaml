@@ -21,6 +21,8 @@ spec:
       dnsService: "rke2-coredns-rke2-coredns"
     deploymentMode: SingleBinary
     loki:
+      commonConfig:
+        replication_factor: 1
       auth_enabled: false
       schemaConfig:
         configs:
