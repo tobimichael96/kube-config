@@ -28,13 +28,8 @@ spec:
         mountPath: /config
         existingClaim: "sabnzbd-config-pvc"
         size: 1Gi
-      downloads:
-        enabled: true
-        mountPath: /config/Downloads
-        existingClaim: "sabnzbd-pvc"
-        size: 200Gi
       media:
         enabled: true
-        mountPath: /mnt/media
+        mountPath: /mnt/internal/media
         existingClaim: "sabnzbd-media-pvc"
         size: 1000Gi
