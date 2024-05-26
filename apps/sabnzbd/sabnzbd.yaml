@@ -137,8 +137,6 @@ spec:
         enabled: true
         type: secret
         name: sabnzbd-vpn-config
-        items:
-          - wg0.conf
         advancedMounts:
           sabnzbd:
             gluetun:
