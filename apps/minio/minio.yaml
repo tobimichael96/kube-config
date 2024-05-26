@@ -32,8 +32,8 @@ spec:
               - --console-address
               - :9001
             env:
-              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.tmem.de
-              MINIO_BROWSER_REDIRECT_URL: https://minio.tmem.de
+              MINIO_API_CORS_ALLOW_ORIGIN: https://api.minio.tmem.de,https://minio.tmem.de
+              MINIO_BROWSER_REDIRECT_URL: https://api.minio.tmem.de
               MINIO_SERVER_URL: https://minio.tmem.de
             envFrom:
               - secretRef:
@@ -83,13 +83,13 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
-          - host: &host minio.tmem.de
+          - host: &host api.minio.tmem.de
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
-          - host: *host
+          - host: &s3Host minio.tmem.de
             paths:
               - path: /
                 service:
@@ -98,6 +98,7 @@ spec:
         tls:
           - hosts:
               - *host
+              - *s3Host
             secretName: minio-tls
     persistence:
       data:
