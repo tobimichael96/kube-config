@@ -69,15 +69,18 @@ spec:
                   - NET_ADMIN
                   - SYS_
             probes:
-              livenessProbe:
-                exec:
-                  command:
-                    - bash
-                    - -c
-                    - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit $?; fi
-                initialDelaySeconds: 45
-                periodSeconds: 120
-                failureThreshold: 1
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:
+                      - bash
+                      - -c
+                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit $?; fi
+                  initialDelaySeconds: 45
+                  periodSeconds: 120
+                  failureThreshold: 1
     defaultPodOptions:
       securityContext:
         runAsNonRoot: false
