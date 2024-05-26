@@ -32,7 +32,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /api?mode=version
+                    path: /
                     port: 8080
                   initialDelaySeconds: 0
                   periodSeconds: 10
