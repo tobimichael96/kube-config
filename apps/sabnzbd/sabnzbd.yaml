@@ -62,6 +62,7 @@ spec:
             env:
               VPN_TYPE: wireguard
               VPN_INTERFACE: wg0
+              VPN_SERVICE_PROVIDER: mullvad
               TZ: Europe/Berlin
             # Configure the container-specific securityContext
             securityContext:
