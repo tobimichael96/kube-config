@@ -78,7 +78,6 @@ spec:
             port: *port
     ingress:
       app:
-        className: public
         annotations:
           kubernetes.io/ingress.class: "nginx"
           kubernetes.io/tls-acme: "true"
