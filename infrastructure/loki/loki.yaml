@@ -48,12 +48,12 @@ spec:
           cache_location: /loki/index_cache
           cache_ttl: 24h
 
-        singleBinary:
-          persistence:
-            enabled: false
-          extraArgs:
-            - '-config.expand-env=true'
-          replicas: 1
-          extraEnvFrom:
-            - secretRef:
-                name: loki-minio-credentials
+    singleBinary:
+      persistence:
+        enabled: false
+      extraArgs:
+        - '-config.expand-env=true'
+      replicas: 1
+      extraEnvFrom:
+        - secretRef:
+            name: loki-minio-credentials
