@@ -19,13 +19,6 @@ spec:
   values:
     controllers:
       sabnzbd:
-        pod:
-          securityContext:
-            runAsNonRoot: false
-            runAsUser: 0
-            runAsGroup: 0
-            fsGroup: 0
-            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
@@ -76,15 +69,6 @@ spec:
                   initialDelaySeconds: 45
                   periodSeconds: 120
                   failureThreshold: 1
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: false
-        runAsUser: 0
-        runAsGroup: 0
-        fsGroup: 0
-        fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups:
-          - 65536
     ingress:
       app:
         annotations:
