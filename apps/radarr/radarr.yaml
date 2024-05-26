@@ -18,7 +18,8 @@ spec:
   releaseName: *app
   targetNamespace: *app
   dependsOn:
-    - name: sabnzbd/sabnzbd
+    - name: sabnzbd
+      namespace: sabnzbd
   values:
     controllers:
       radarr:
