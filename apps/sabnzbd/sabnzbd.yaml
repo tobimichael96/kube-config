@@ -33,3 +33,31 @@ spec:
         mountPath: /mnt/internal/media
         existingClaim: "sabnzbd-media-pvc"
         size: 1000Gi
+    addons:
+      vpn:
+        enabled: true
+        type: wireguard
+        wireguard:
+          image:
+            repository: ghcr.io/k8s-at-home/wireguard
+            tag: v1.0.20210914
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - SYS_ADMIN
+                - sysctl net.ipv4.conf.all.src_valid_mark=1
+        env:
+          TZ: Europe/Berlin
+          IPTABLES_BACKEND: legacy
+          KILLSWITCH: true
+        configFileSecret: sabnzbd-vpn-config
+        livenessProbe:
+          exec:
+            command:
+              - bash
+              - -c
+              -  if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit $?; fi
+          initialDelaySeconds: 45
+          periodSeconds: 120
+          failureThreshold: 1
