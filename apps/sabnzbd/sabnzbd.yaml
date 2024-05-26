@@ -39,6 +39,8 @@ spec:
 #                  timeoutSeconds: 1
 #                  failureThreshold: 5
 #              readiness: *probes
+#              startup:
+#                enabled: false
           # Configure the gluetun sidecar
           gluetun:
             dependsOn: app
@@ -46,6 +48,7 @@ spec:
               repository: ghcr.io/qdm12/gluetun
               tag: latest
             env:
+              FIREWALL: "off"
               VPN_TYPE: wireguard
               VPN_INTERFACE: wg0
               VPN_SERVICE_PROVIDER: mullvad
