@@ -65,7 +65,7 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: grafana-charts
+  name: grafana
   namespace: flux-system
 spec:
   interval: 30m
