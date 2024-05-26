@@ -26,9 +26,9 @@ spec:
         type: statefulset
         pod:
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 568
-            runAsGroup: 2000
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
             fsGroup: 0
             fsGroupChangePolicy: OnRootMismatch
         containers:
