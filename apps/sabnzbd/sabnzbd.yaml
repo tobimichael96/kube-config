@@ -15,6 +15,7 @@ spec:
         namespace: flux-system
   interval: 5m
   releaseName: *app
+  targetNamespace: *app
   values:
     controllers:
       sabnzbd:
