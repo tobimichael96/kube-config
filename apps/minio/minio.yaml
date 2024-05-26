@@ -7,45 +7,101 @@ metadata:
 spec:
   chart:
     spec:
-      chart: minio
-      version: 14.6.0
+      chart: app-template
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: bjw-s
         namespace: flux-system
   interval: 5m
   releaseName: minio
   targetNamespace: minio
   values:
+    controllers:
+      minio:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: quay.io/minio/minio
+              tag: RELEASE.2024-05-10T01-41-38Z
+            args:
+              - server
+              - /data
+              - --console-address
+              - :9001
+            env:
+              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.tmem.de
+              MINIO_BROWSER_REDIRECT_URL: https://minio.tmem.de
+              MINIO_SERVER_URL: https://minio.tmem.de
+            envFrom:
+              - secretRef:
+                  name: minio-custom
+            resources:
+              requests:
+                cpu: 5m
+                memory: 100Mi
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /minio/health/live
+                    port: 9000
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 6
+              readiness: *probes
+              startup:
+                enabled: false
+    service:
+      app:
+        controller: minio
+        ports:
+          http:
+            port: 9001
+          s3:
+            port: 9000
+    serviceMonitor:
+      app:
+        serviceName: minio
+        endpoints:
+          - port: s3
+            scheme: http
+            path: /minio/v2/metrics/cluster
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-body-size: 5G
-        kubernetes.io/ingress.class: "nginx"
-        kubernetes.io/tls-acme: "true"
-        nginx.ingress.kubernetes.io/ssl-redirect: "true"
-        cert-manager.io/cluster-issuer: "letsencrypt"
-      hostname: minio.tmem.de
-      tls:
-        - hosts:
-            - minio.tmem.de
-          secretName: minio-tls
-    apiIngress:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-body-size: 5G
-        kubernetes.io/ingress.class: "nginx"
-        kubernetes.io/tls-acme: "true"
-        nginx.ingress.kubernetes.io/ssl-redirect: "true"
-        cert-manager.io/cluster-issuer: "letsencrypt"
-      hostname: api.minio.tmem.de
-      tls:
-        - hosts:
-            - api.minio.tmem.de
-          secretName: api-minio-tls
-    auth:
-      existingSecret: "minio-custom"
+      app:
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: 5G
+          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host minio.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+          - host: *host
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: s3
+        tls:
+          - hosts:
+              - *host
+            secretName: minio-tls
     persistence:
-      existingClaim: "minio-pvc"
-      persistence:
-        size: 50Gi
+      data:
+        enabled: true
+        existingClaim: "minio-pvc"
+        globalMounts:
+          - path: /data
