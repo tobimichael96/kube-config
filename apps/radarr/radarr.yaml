@@ -104,6 +104,6 @@ spec:
       media:
         existingClaim: radarr-media-pvc
         globalMounts:
-          - path: /media
+          - path: /mnt/internal/media
       tmp:
         type: emptyDir
