@@ -2,17 +2,17 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: sabnzbd-pv
+  name: radarr-config-pv
 spec:
   capacity:
-    storage: 200Gi
+    storage: 5Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/internal/sabnzbd/downloads
+    path: /mnt/internal/radarr/config
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -25,58 +25,21 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sabnzbd-pvc
-  namespace: sabnzbd
+  name: radarr-config-pvc
+  namespace: radarr
 spec:
   storageClassName: local-storage
-  volumeName: sabnzbd-pv
+  volumeName: radarr-config-pv
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Gi
+      storage: 5Gi
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: sabnzbd-config-pv
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  local:
-    path: /mnt/internal/sabnzbd/config
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - homeserver
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sabnzbd-config-pvc
-  namespace: sabnzbd
-spec:
-  storageClassName: local-storage
-  volumeName: sabnzbd-config-pv
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: sabnzbd-media-pv
+  name: radarr-media-pv
 spec:
   capacity:
     storage: 1000Gi
@@ -99,11 +62,11 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sabnzbd-media-pvc
-  namespace: sabnzbd
+  name: radarr-media-pvc
+  namespace: radarr
 spec:
   storageClassName: local-storage
-  volumeName: sabnzbd-media-pv
+  volumeName: radarr-media-pv
   accessModes:
     - ReadWriteOnce
   resources:
