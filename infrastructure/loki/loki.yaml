@@ -57,3 +57,9 @@ spec:
       extraEnvFrom:
         - secretRef:
             name: loki-minio-credentials
+    read:
+      replicas: 0
+    backend:
+      replicas: 0
+    write:
+      replicas: 0
