@@ -58,7 +58,7 @@ spec:
             dependsOn: app
             image:
               repository: ghcr.io/qdm12/gluetun
-              tag: v3.38.0
+              tag: latest
             env:
               VPN_TYPE: wireguard
               VPN_INTERFACE: wg0
@@ -132,8 +132,6 @@ spec:
           sabnzbd:
             app:
               - path: /config/logs
-      tmp:
-        type: emptyDir
       vpn-config:
         enabled: true
         type: secret
