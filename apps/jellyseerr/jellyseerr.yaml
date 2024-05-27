@@ -21,10 +21,11 @@ spec:
       main:
         pod:
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: "OnRootMismatch"
+            runAsNonRoot: true
+            runAsUser: 911
+            runAsGroup: 911
+            fsGroup: 0
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           jellyseer:
             image:
@@ -34,12 +35,6 @@ spec:
               TZ: Europe/Berlin
               LOG_LEVEL: "info"
               PORT: 8080
-            resources:
-              requests:
-                cpu: 15m
-                memory: 324M
-              limits:
-                memory: 324M
     service:
       main:
         controller: main

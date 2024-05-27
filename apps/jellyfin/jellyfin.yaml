@@ -48,7 +48,7 @@ spec:
         type: pvc
         existingClaim: jellyfin-media-pvc
         enabled: true
-        mountPath: "/media"
+        mountPath: "/mnt/internal/media"
         targetSelectAll: true
       cache:
         enabled: true
@@ -80,4 +80,3 @@ spec:
     autodiscovery:
       enabled: true
     updated: true
-
