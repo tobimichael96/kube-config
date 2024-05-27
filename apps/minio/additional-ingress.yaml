@@ -20,22 +20,11 @@ spec:
   tls:
     - hosts:
         - tm28.de
-        - tmem.de
         - tobiasmichael.de
         - www.tobiasmichael.de
       secretName: tobiasmichael-tls
   rules:
     - host: tm28.de
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: minio
-                port:
-                  number: 9000
-    - host: tmem.de
       http:
         paths:
           - path: /
