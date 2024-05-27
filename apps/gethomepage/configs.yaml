@@ -55,6 +55,7 @@ data:
             href: http://minio.tmem.de/
             description: Website and storage
         - Quick-Share:
+            icon: https://share.tmem.de/static/favicon.png
             href: http://share.tmem.de/
             description: Share something
     - Utils:
@@ -67,5 +68,6 @@ data:
             href: http://bin.tmem.de/
             description: Share texts
         - StirlingPDF:
+            icon: stirlingpdf.png
             href: http://pdf.tmem.de/
             description: Work with PDFs
