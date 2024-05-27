@@ -9,6 +9,14 @@ data:
     title: TME Service Overview
     theme: dark
     color: slate
+    showStats: false
+    layout:
+      Media:
+        style: row
+      Storage:
+        style: row
+      Utils:
+        style: row
     quicklaunch:
       searchDescriptions: true
       hideInternetSearch: true
