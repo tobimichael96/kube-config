@@ -29,47 +29,51 @@ data:
     - Media:
         - Jellyfin:
             icon: jellyfin.png
-            href: http://jellyfin.tmem.de/
+            href: https://jellyfin.tmem.de/
             description: Watch everything
         - Jellyseerr:
             icon: jellyseerr.png
-            href: http://jellyseerr.tmem.de/
+            href: https://jellyseerr.tmem.de/
             description: Request everything
         - Sonarr:
             icon: sonarr.png
-            href: http://sonarr.tmem.de/
+            href: https://sonarr.tmem.de/
             description: Series management
         - Radarr:
             icon: radarr.png
-            href: http://radarr.tmem.de/
+            href: https://radarr.tmem.de/
             description: Movie management
+        - SABnzbd:
+            icon: sabnzbd.png
+            href: https://sabnzbd.tmem.de/
+            description: Download stuff
     - Storage:
         - Nextcloud:
             icon: nextcloud.png
-            href: http://cloud.tmem.de/
+            href: https://cloud.tmem.de/
             description: Store everything
         - Filebrowser:
             icon: filebrowser.png
-            href: http://files.tmem.de/
+            href: https://files.tmem.de/
             description: Store something
         - MinIO:
             icon: minio.png
-            href: http://minio.tmem.de/
+            href: https://minio.tmem.de/
             description: Website and storage
         - Quick-Share:
             icon: https://share.tmem.de/static/favicon.png
-            href: http://share.tmem.de/
+            href: https://share.tmem.de/
             description: Share something
     - Utils:
         - Vaultwarden:
             icon: bitwarden.png
-            href: http://vault.tmem.de/
+            href: https://vault.tmem.de/
             description: Store passwords
         - Privatebin:
             icon: privatebin.png
-            href: http://bin.tmem.de/
+            href: https://bin.tmem.de/
             description: Share texts
         - StirlingPDF:
             icon: https://pdf.tmem.de/apple-touch-icon.png
-            href: http://pdf.tmem.de/
+            href: https://pdf.tmem.de/
             description: Work with PDFs
