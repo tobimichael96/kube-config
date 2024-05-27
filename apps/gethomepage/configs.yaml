@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: homepage-files
+    namespace: homepage
+data:
+  # language=yaml
+  settings.yaml: |-
+    title: TME Service Overview
+    theme: dark
+    color: slate
+    quicklaunch:
+      searchDescriptions: true
+      hideInternetSearch: true
+      showSearchSuggestions: true
+      hideVisitURL: true
+  # language=yaml
+  services.yaml: |-
+    - Media:
+        - Jellyfin:
+            icon: jellyfin.png
+            href: http://jellyfin.tmem.de/
+            description: Watch everything
+        - Jellyseerr:
+            icon: jellyseerr.png
+            href: http://jellyseerr.tmem.de/
+            description: Request everything
+        - Sonarr:
+            icon: sonarr.png
+            href: http://sonarr.tmem.de/
+            description: Series management
+        - Radarr:
+            icon: radarr.png
+            href: http://radarr.tmem.de/
+            description: Movie management
+    - Storage:
+        - Nextcloud:
+            icon: nextcloud.png
+            href: http://cloud.tmem.de/
+            description: Store everything
+        - Filebrowser:
+            icon: filebrowser.png
+            href: http://files.tmem.de/
+            description: Store something
+        - MinIO:
+            icon: minio.png
+            href: http://minio.tmem.de/
+            description: Website and storage
+        - Quick-Share:
+            href: http://share.tmem.de/
+            description: Share something
+    - Utils:
+        - Vaultwarden:
+            icon: bitwarden.png
+            href: http://vault.tmem.de/
+            description: Store passwords
+        - Privatebin:
+            icon: privatebin.png
+            href: http://bin.tmem.de/
+            description: Share texts
+        - StirlingPDF:
+            href: http://pdf.tmem.de/
+            description: Work with PDFs
