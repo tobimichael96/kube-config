@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app radarr
+  name: &app sonarr
   namespace: *app
 spec:
   chart:
@@ -22,7 +22,7 @@ spec:
       namespace: sabnzbd
   values:
     controllers:
-      radarr:
+      sonarr:
         type: statefulset
         pod:
           securityContext:
@@ -34,16 +34,17 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/radarr
-              tag: 5.6.0.8846
+              repository: ghcr.io/onedr0p/sonarr
+              tag: 4.0.4.1491
             env:
-              RADARR__APP__INSTANCENAME: *app
-              RADARR__APP__THEME: "dark"
-              RADARR__AUTH__REQUIRED: "DisabledForLocalAddresses"
-              RADARR__LOG__DBENABLED: "False"
-              RADARR__LOG__LEVEL: info
-              RADARR__PORT: &port 80
-              RADARR__UPDATE__BRANCH: develop
+              SONARR__APP__INSTANCENAME: *app
+              SONARR__APP__THEME: dark
+              SONARR__AUTH__METHOD: External
+              SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              SONARR__LOG__DBENABLED: "False"
+              SONARR__LOG__LEVEL: info
+              SONARR__SERVER__PORT: &port 80
+              SONARR__UPDATE__BRANCH: develop
               TZ: Europe/Berlin
             probes:
               liveness: &probes
@@ -86,7 +87,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         hosts:
-          - host: &host radarr.tmem.de
+          - host: &host sonarr.tmem.de
             paths:
               - path: /
                 service:
@@ -95,14 +96,14 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: radarr-tls
+            secretName: sonarr-tls
     persistence:
       config:
-        existingClaim: radarr-config-pvc
+        existingClaim: sonarr-config-pvc
       logs:
         type: emptyDir
       media:
-        existingClaim: radarr-media-pvc
+        existingClaim: sonarr-media-pvc
         globalMounts:
           - path: /mnt/internal/media
       tmp:
