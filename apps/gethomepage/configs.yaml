@@ -68,6 +68,6 @@ data:
             href: http://bin.tmem.de/
             description: Share texts
         - StirlingPDF:
-            icon: stirlingpdf.png
+            icon: https://pdf.tmem.de/apple-touch-icon.png
             href: http://pdf.tmem.de/
             description: Work with PDFs
