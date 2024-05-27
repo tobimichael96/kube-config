@@ -6,7 +6,7 @@ metadata:
 data:
   # language=yaml
   settings.yaml: |-
-    title: TME Service Overview
+    title: TME Overview
     theme: dark
     color: slate
     showStats: false
