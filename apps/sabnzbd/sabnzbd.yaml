@@ -19,13 +19,6 @@ spec:
   values:
     controllers:
       sabnzbd:
-        pod:
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 911
-            runAsGroup: 911
-            fsGroup: 0
-            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
