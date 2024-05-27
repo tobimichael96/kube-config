@@ -10,6 +10,7 @@ data:
     theme: dark
     color: slate
     showStats: false
+    headerStyle: clean
     layout:
       Media:
         style: row
