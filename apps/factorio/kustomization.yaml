@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - storage.yaml
-- factorio.yaml
+- helmrelease.yaml

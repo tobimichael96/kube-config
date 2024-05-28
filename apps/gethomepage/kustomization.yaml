@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - configs.yaml
-- gethomepage.yaml
+- helmrelease.yaml

@@ -5,4 +5,4 @@ resources:
 - secrets.yaml
 - configmap.yaml
 - cron.yaml
-- dyndns-updater.yaml
+- helmrelease.yaml

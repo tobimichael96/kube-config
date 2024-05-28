@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - secrets.yaml
-- dota-stats-bot.yaml
+- helmrelease.yaml
 - cron.yaml
