@@ -17,12 +17,11 @@ spec:
   interval: 5m
   releaseName: *app
   targetNamespace: *app
-  dependsOn:
-    - name: sabnzbd
-      namespace: sabnzbd
   values:
     controllers:
       homepage:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
