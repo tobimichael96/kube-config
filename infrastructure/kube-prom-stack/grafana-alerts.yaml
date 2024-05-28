@@ -57,7 +57,7 @@ data:
             {{ end -}}
           {{ end }}
   # language=json
-  restart.json: |-
+  alerts.json: |-
     {
       "apiVersion": 1,
       "groups": [
@@ -140,6 +140,87 @@ data:
                 "description": "Container {{ index $labels \"container\" }} is in a restart loop.",
                 "runbook_url": "",
                 "summary": "Container in restart loop!"},
+              "labels": {
+                "telegram": "true"
+              },
+              "isPaused": false
+            },
+            {
+              "uid": "fdn2ucc4v8veob",
+              "title": "flux-error",
+              "condition": "B",
+              "data": [
+                {
+                  "refId": "A",
+                  "queryType": "range",
+                  "relativeTimeRange": {
+                    "from": 900,
+                    "to": 0
+                  },
+                  "datasourceUid": "loki",
+                  "model": {
+                    "datasource": {
+                      "type": "loki",
+                      "uid": "loki"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum by(app) (rate({namespace=\"flux-system\"} |= `\"level\":\"error\"` [$__interval]))",
+                    "intervalMs": 1000,
+                    "maxDataPoints": 43200,
+                    "queryType": "range",
+                    "refId": "A"
+                  }
+                },
+                {
+                  "refId": "B",
+                  "relativeTimeRange": {
+                    "from": 900,
+                    "to": 0
+                  },
+                  "datasourceUid": "__expr__",
+                  "model": {
+                    "conditions": [
+                      {
+                        "evaluator": {
+                          "params": [],
+                          "type": "gt"
+                        },
+                        "operator": {
+                          "type": "and"
+                        },
+                        "query": {
+                          "params": [
+                            "B"
+                          ]
+                        },
+                        "reducer": {
+                          "params": [],
+                          "type": "last"
+                        },
+                        "type": "query"
+                      }
+                    ],
+                    "datasource": {
+                      "type": "__expr__",
+                      "uid": "__expr__"
+                    },
+                    "expression": "A",
+                    "intervalMs": 1000,
+                    "maxDataPoints": 43200,
+                    "reducer": "sum",
+                    "refId": "B",
+                    "type": "reduce"
+                  }
+                }
+              ],
+              "noDataState": "OK",
+              "execErrState": "Error",
+              "for": "1m",
+              "annotations": {
+                "description": "{{ app }} threw an error in one or more log lines.",
+                "runbook_url": "",
+                "summary": "Flux {{ app }} threw an error!"
+              },
               "labels": {
                 "telegram": "true"
               },
