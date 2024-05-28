@@ -281,7 +281,7 @@ data:
           "options": {
             "dedupStrategy": "none",
             "enableLogDetails": true,
-            "prettifyLogMessage": true,
+            "prettifyLogMessage": false,
             "showCommonLabels": false,
             "showLabels": false,
             "showTime": true,
