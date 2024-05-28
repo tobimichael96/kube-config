@@ -30,12 +30,6 @@ spec:
               tag: v0.8.13
             env:
               TZ: Europe/Berlin
-            resources:
-              requests:
-                cpu: 10m
-                memory: 100Mi
-              limits:
-                memory: 200Mi
     service:
       app:
         controller: *app
