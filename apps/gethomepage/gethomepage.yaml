@@ -66,3 +66,6 @@ spec:
           - path: /app/config/services.yaml
             subPath: services.yaml
             readOnly: true
+          - path: /app/config/bookmarks.yaml
+            subPath: bookmarks.yaml
+            readOnly: true
