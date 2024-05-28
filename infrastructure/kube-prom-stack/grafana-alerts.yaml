@@ -40,21 +40,22 @@ data:
           
           {{ define "telegram_alert_firing" }}
             <b>{{ .Labels.alertname }}</b>
-            {{ if .Annotations -}}
-              <b>Summary</b>: {{ .Annotations.summary}}
-              <b>Description</b>: {{ .Annotations.description }}
-            {{ end -}}
+          
+            {{ if .Annotations }}
+            <b>Summary</b>: {{ .Annotations.summary}}
+            <b>Description</b>: {{ .Annotations.description }}
+            {{ end }}
           
             <a href="https://{grafana_URL}/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert</a>
           {{ end }}
           
           {{ define "telegram_alert_resolved" }}
-            <b>{{ .Labels.alertname }}</b>
-          
-            {{ if .Annotations -}}
-              <b>Summary</b>: {{ .Annotations.summary}}
-              <b>Description</b>: {{ .Annotations.description }}
-            {{ end -}}
+            <b>{{ .Labels.alertname }}</b>\n
+            
+            {{ if .Annotations }}
+            <b>Summary</b>: {{ .Annotations.summary}}
+            <b>Description</b>: {{ .Annotations.description }}
+            {{ end }}
           {{ end }}
   # language=json
   alerts.json: |-
