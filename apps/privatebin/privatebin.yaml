@@ -1,28 +1,21 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: privatebin
-  namespace: privatebin
-spec:
-  interval: 1h0m0s
-  url: https://privatebin.github.io/helm-chart
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: privatebin
-  namespace: privatebin
+  name: &app privatebin
+  namespace: *app
 spec:
   chart:
     spec:
-      chart: privatebin
+      chart: *app
       version: 0.21.2
       sourceRef:
         kind: HelmRepository
-        name: privatebin
+        name: *app
+        namespace: flux-system
   interval: 5m
-  releaseName: privatebin
-  targetNamespace: privatebin
+  releaseName: *app
+  targetNamespace: *app
   values:
     configs:
       conf.php: |-
