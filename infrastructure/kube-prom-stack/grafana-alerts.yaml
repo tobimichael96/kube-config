@@ -30,10 +30,12 @@ data:
           {{ define "telegram_message" }}
             {{ if gt (len .Alerts.Firing) 0 }}
             <b>🔥 {{ len .Alerts.Firing }} alert(s) firing:</b>
-              {{ range .Alerts.Firing }} {{ template "telegram_alert_firing" .}} {{ end }} {{ end }}
+              {{ range .Alerts.Firing }} {{ template "telegram_alert_firing" . }} {{ end }} 
+            {{ end }}
             {{ if gt (len .Alerts.Resolved) 0 }}
             <b>✅ {{ len .Alerts.Resolved }} alert(s) resolved:</b>
-              {{ range .Alerts.Resolved }} {{ template "telegram_alert_resolved" .}} {{ end }} {{ end }}
+              {{ range .Alerts.Resolved }} {{ template "telegram_alert_resolved" . }} {{ end }} 
+            {{ end }}
           {{ end }}
           
           {{ define "telegram_alert_firing" }}
@@ -43,19 +45,16 @@ data:
               <b>Description<b>: {{ .Annotations.description }}
             {{ end -}}
           
-            {{ .Annotations.AlertValues }}
             <a href="https://{grafana_URL}/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert</a>
-            <a href="https://{grafana_URL}/d/{dashboard_id/name}">Access dashboard</a>
           {{ end }}
           
-            {{ define "telegram_alert_resolved" }}
+          {{ define "telegram_alert_resolved" }}
             <b>{{ .Labels.alertname }}</b>
           
             {{ if .Annotations -}}
               <b>Summary<b>: {{ .Annotations.summary}}
               <b>Description<b>: {{ .Annotations.description }}
             {{ end -}}
-            <a href="https://{grafana_URL}/d/{dashboard_id/name}">Access dashboard</a>
           {{ end }}
   # language=json
   restart.json: |-
