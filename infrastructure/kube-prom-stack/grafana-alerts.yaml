@@ -41,8 +41,8 @@ data:
           {{ define "telegram_alert_firing" }}
             <b>{{ .Labels.alertname }}</b>
             {{ if .Annotations -}}
-              <b>Summary<b>: {{ .Annotations.summary}}
-              <b>Description<b>: {{ .Annotations.description }}
+              <b>Summary</b>: {{ .Annotations.summary}}
+              <b>Description</b>: {{ .Annotations.description }}
             {{ end -}}
           
             <a href="https://{grafana_URL}/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert</a>
@@ -52,8 +52,8 @@ data:
             <b>{{ .Labels.alertname }}</b>
           
             {{ if .Annotations -}}
-              <b>Summary<b>: {{ .Annotations.summary}}
-              <b>Description<b>: {{ .Annotations.description }}
+              <b>Summary</b>: {{ .Annotations.summary}}
+              <b>Description</b>: {{ .Annotations.description }}
             {{ end -}}
           {{ end }}
   # language=json
