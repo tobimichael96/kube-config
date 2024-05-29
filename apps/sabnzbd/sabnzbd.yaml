@@ -49,30 +49,34 @@ spec:
               repository: ghcr.io/qdm12/gluetun
               tag: latest
             env:
+              TZ: Europe/Berlin
               FIREWALL: "off"
               VPN_TYPE: wireguard
-              VPN_INTERFACE: wg0
               VPN_SERVICE_PROVIDER: mullvad
-              TZ: Europe/Berlin
+              SERVER_COUNTRIES: Germany
+              DOT: "on"
+            envFrom:
+              - secretRef:
+                  identifier: gluetun-private-key
             # Configure the container-specific securityContext
             securityContext:
               capabilities:
                 add:
                   - NET_ADMIN
                   - SYS_MODULE
-            probes:
-              liveness:
-                enabled: true
-                custom: true
-                spec:
-                  exec:
-                    command:
-                      - bash
-                      - -c
-                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit 1; fi
-                  initialDelaySeconds: 45
-                  periodSeconds: 120
-                  failureThreshold: 1
+#            probes:
+#              liveness:
+#                enabled: true
+#                custom: true
+#                spec:
+#                  exec:
+#                    command:
+#                      - bash
+#                      - -c
+#                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit 1; fi
+#                  initialDelaySeconds: 45
+#                  periodSeconds: 120
+#                  failureThreshold: 1
     ingress:
       app:
         annotations:
