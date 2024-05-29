@@ -57,7 +57,7 @@ spec:
               DOT: "on"
             envFrom:
               - secretRef:
-                  identifier: gluetun-private-key
+                  identifier: sabnzbd-vpn-config
             # Configure the container-specific securityContext
             securityContext:
               capabilities:
