@@ -54,7 +54,7 @@ spec:
               VPN_TYPE: wireguard
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
-              WIREGAURD_PERSISTENT_KEEPALIVE_INTERNAL: 60s
+              WIREGUARD_PERSISTENT_KEEPALIVE_INTERNAL: 60s
               DOT: "on"
             envFrom:
               - secretRef:
