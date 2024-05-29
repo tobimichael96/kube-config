@@ -64,6 +64,21 @@ spec:
                 add:
                   - NET_ADMIN
                   - SYS_MODULE
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9999
+                  initialDelaySeconds: 15
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 8
+              readiness: *probes
+              startup:
+                enabled: false
     ingress:
       app:
         annotations:
