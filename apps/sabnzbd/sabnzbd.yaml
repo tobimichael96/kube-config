@@ -64,19 +64,6 @@ spec:
                 add:
                   - NET_ADMIN
                   - SYS_MODULE
-            probes:
-              liveness:
-                enabled: true
-                custom: true
-                spec:
-                  exec:
-                    command:
-                      - bash
-                      - -c
-                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit 1; fi
-                  initialDelaySeconds: 15
-                  periodSeconds: 180
-                  failureThreshold: 1
     ingress:
       app:
         annotations:
