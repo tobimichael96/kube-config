@@ -91,7 +91,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: radarr-tls
+            secretName: sabnzbd-tls
     persistence:
       config:
         enabled: true
