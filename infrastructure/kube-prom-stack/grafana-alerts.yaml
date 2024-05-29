@@ -51,7 +51,7 @@ data:
           {{ end }}
           
           {{ define "telegram_alert_resolved" }}
-            <b>{{ .Labels.alertname }}</b>\n
+            <b>{{ .Labels.alertname }}</b>
             
             {{ if .Annotations }}
             <b>Summary</b>: {{ .Annotations.summary}}
@@ -221,9 +221,9 @@ data:
               "execErrState": "Error",
               "for": "1m",
               "annotations": {
-                "description": "{{ app }} threw an error in one or more log lines.",
+                "description": "{{ index $labels \"app\" }} threw an error in one or more log lines.",
                 "runbook_url": "",
-                "summary": "Flux {{ app }} threw an error!"
+                "summary": "Flux {{ index $labels \"app\" }} threw an error!"
               },
               "labels": {
                 "telegram": "true"
