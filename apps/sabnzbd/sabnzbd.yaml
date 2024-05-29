@@ -51,7 +51,7 @@ spec:
             env:
               TZ: Europe/Berlin
               FIREWALL: on
-              FIREWALL_INPUT_PORTS: 8080
+              FIREWALL_INPUT_PORTS: 8080,9999
               VPN_TYPE: openvpn
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
