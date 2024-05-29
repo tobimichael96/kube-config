@@ -225,6 +225,85 @@ data:
                 "telegram": "true"
               },
               "isPaused": false
+            },
+            {
+              "uid": "fdn2iop4v8veob",
+              "title": "pending",
+              "condition": "B",
+              "data": [
+                {
+                  "refId": "A",
+                  "queryType": "range",
+                  "relativeTimeRange": {
+                    "from": 900,
+                    "to": 0
+                  },
+                  "datasourceUid": "prometheus",
+                  "model": {
+                    "editorMode": "code",
+                    "expr": "sum by(pod) (kube_pod_status_phase{phase=\"Pending\"})",
+                    "intervalMs": 1000,
+                    "maxDataPoints": 43200,
+                    "queryType": "range",
+                    "refId": "A"
+                  }
+                },
+                {
+                  "refId": "B",
+                  "relativeTimeRange": {
+                    "from": 900,
+                    "to": 0
+                  },
+                  "datasourceUid": "__expr__",
+                  "model": {
+                    "conditions": [
+                      {
+                        "evaluator": {
+                          "params": [
+                            1
+                          ],
+                          "type": "gt"
+                        },
+                        "operator": {
+                          "type": "and"
+                        },
+                        "query": {
+                          "params": [
+                            "B"
+                          ]
+                        },
+                        "reducer": {
+                          "params": [],
+                          "type": "last"
+                        },
+                        "type": "query"
+                      }
+                    ],
+                    "datasource": {
+                      "type": "__expr__",
+                      "uid": "__expr__"
+                    },
+                    "expression": "A",
+                    "intervalMs": 1000,
+                    "maxDataPoints": 43200,
+                    "reducer": "sum",
+                    "refId": "B",
+                    "type": "reduce"
+                  }
+                }
+              ],
+              "noDataState": "NoData",
+              "execErrState": "Error",
+              "for": "3m",
+              "annotations": {
+                "description": "",
+                "runbook_url": "",
+                "summary": "{{ index $labels \"app\" }} is still in pending phase."
+              },
+              "labels": {
+                "telegram": "true"
+              },
+              "isPaused": false
             }
           ]
         }
