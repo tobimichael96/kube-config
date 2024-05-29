@@ -50,13 +50,13 @@ spec:
               tag: latest
             env:
               TZ: Europe/Berlin
-              FIREWALL: "off"
-              VPN_TYPE: wireguard
+              FIREWALL: off
+              VPN_TYPE: openvpn
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
-              WIREGUARD_PERSISTENT_KEEPALIVE_INTERNAL: "60s"
-              UPDATER_PERIOD: "12h"
-              DNS_KEEP_NAMESERVER: "on"
+              WIREGUARD_PERSISTENT_KEEPALIVE_INTERNAL: 60s
+              UPDATER_PERIOD: 12h
+              DNS_KEEP_NAMESERVER: on
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
               - secret: sabnzbd-vpn-config
@@ -77,7 +77,7 @@ spec:
                   initialDelaySeconds: 30
                   periodSeconds: 10
                   timeoutSeconds: 3
-                  failureThreshold: 8
+                  failureThreshold: 5
               startup:
                 enabled: false
     ingress:
