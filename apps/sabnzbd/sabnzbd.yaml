@@ -28,7 +28,19 @@ spec:
             env:
               TZ: Europe/Berlin
             probes:
-              liveness: &probes
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:
+                      - bash
+                      - -c
+                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit 1?; fi
+                  initialDelaySeconds: 30
+                  periodSeconds: 60
+                  failureThreshold: 1
+              readiness:
                 enabled: true
                 custom: true
                 spec:
@@ -39,7 +51,6 @@ spec:
                   periodSeconds: 10
                   timeoutSeconds: 3
                   failureThreshold: 5
-              readiness: *probes
               startup:
                 enabled: false
           # Configure the gluetun sidecar
