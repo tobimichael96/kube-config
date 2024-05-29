@@ -54,9 +54,7 @@ spec:
               VPN_TYPE: openvpn
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
-              WIREGUARD_PERSISTENT_KEEPALIVE_INTERNAL: 60s
               UPDATER_PERIOD: 12h
-              DNS_KEEP_NAMESERVER: on
               OPENVPN_PASSWORD: m
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
