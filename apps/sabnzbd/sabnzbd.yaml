@@ -57,8 +57,7 @@ spec:
               WIREGUARD_PERSISTENT_KEEPALIVE_INTERNAL: 60s
               DOT: "on"
             envFrom:
-              - secretRef:
-                  identifier: sabnzbd-vpn-config
+              - secret: sabnzbd-vpn-config
             # Configure the container-specific securityContext
             securityContext:
               capabilities:
