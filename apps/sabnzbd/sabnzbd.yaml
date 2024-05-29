@@ -55,7 +55,6 @@ spec:
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               WIREGUARD_PERSISTENT_KEEPALIVE_INTERNAL: 60s
-              DOT: "on"
             envFrom:
               - secret: sabnzbd-vpn-config
             # Configure the container-specific securityContext
@@ -64,19 +63,19 @@ spec:
                 add:
                   - NET_ADMIN
                   - SYS_MODULE
-#            probes:
-#              liveness:
-#                enabled: true
-#                custom: true
-#                spec:
-#                  exec:
-#                    command:
-#                      - bash
-#                      - -c
-#                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit 1; fi
-#                  initialDelaySeconds: 45
-#                  periodSeconds: 120
-#                  failureThreshold: 1
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:
+                      - bash
+                      - -c
+                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit 1; fi
+                  initialDelaySeconds: 15
+                  periodSeconds: 180
+                  failureThreshold: 1
     ingress:
       app:
         annotations:
