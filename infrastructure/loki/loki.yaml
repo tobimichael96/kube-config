@@ -53,6 +53,9 @@ spec:
           cache_location: var/loki/index_cache
           cache_ttl: 24h
 
+    gateway:
+      affinity: null
+
     singleBinary:
       extraVolumes:
         - name: data
