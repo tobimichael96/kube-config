@@ -29,18 +29,18 @@ data:
         template: |-
           {{ define "telegram_message" }}
             {{ if gt (len .Alerts.Firing) 0 }}
-            <b>🔥 {{ len .Alerts.Firing }} alert(s) firing: {{ .Alerts.Labels.alertname }}</b>
+            <b>🔥 {{ len .Alerts.Firing }} alert(s) firing:</b>
               {{ range .Alerts.Firing }} {{ template "telegram_alert_firing" . }} {{ end }} 
             {{ end }}
             {{ if gt (len .Alerts.Resolved) 0 }}
-            <b>✅ {{ len .Alerts.Resolved }} alert(s) resolved: {{ .Alerts.Labels.alertname }}</b>
+            <b>✅ {{ len .Alerts.Resolved }} alert(s) resolved:</b>
               {{ range .Alerts.Resolved }} {{ template "telegram_alert_resolved" . }} {{ end }} 
             {{ end }}
           {{ end }}
           
           {{ define "telegram_alert_firing" }}
             {{ if .Annotations }}
-            <b>Summary</b>: {{ .Annotations.summary}}
+            <b>{{ .Labels.alertname }}</b>: {{ .Annotations.summary}}
             {{ end }}
           
             <a href="https://grafana.tmem.de">Grafana</a>
@@ -50,7 +50,7 @@ data:
           
           {{ define "telegram_alert_resolved" }}
             {{ if .Annotations }}
-            <b>Summary</b>: {{ .Annotations.summary}}
+            <b>{{ .Labels.alertname }}</b>: {{ .Annotations.summary}}
             {{ end }}
           
             <a href="https://grafana.tmem.de">Grafana</a>
