@@ -46,8 +46,8 @@ data:
             <b>Description</b>: {{ .Annotations.description }}
             {{ end }}
           
-            <a href="{{ externalURL }}">Grafana</a>
-            <a href="{{ externalURL }}/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert</a>
+            <a href="https://grafana.tmem.de">Grafana</a>
+            <a href="https://grafana.tmem.de/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert</a>
           {{ end }}
           
           {{ define "telegram_alert_resolved" }}
@@ -58,7 +58,7 @@ data:
             <b>Description</b>: {{ .Annotations.description }}
             {{ end }}
           
-            <a href="{{ externalURL }}">Grafana</a>
+            <a href="https://grafana.tmem.de">Grafana</a>
           {{ end }}
   # language=json
   alerts.json: |-
