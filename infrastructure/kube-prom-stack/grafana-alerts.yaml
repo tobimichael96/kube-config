@@ -29,11 +29,11 @@ data:
         template: |-
           {{ define "telegram_message" }}
             {{ if gt (len .Alerts.Firing) 0 }}
-            <b>🔥 {{ len .Alerts.Firing }} alert(s) firing: {{ .Labels.alertname }}</b>
+            <b>🔥 {{ len .Alerts.Firing }} alert(s) firing: {{ .Alerts.Labels.alertname }}</b>
               {{ range .Alerts.Firing }} {{ template "telegram_alert_firing" . }} {{ end }} 
             {{ end }}
             {{ if gt (len .Alerts.Resolved) 0 }}
-            <b>✅ {{ len .Alerts.Resolved }} alert(s) resolved: {{ .Labels.alertname }}</b>
+            <b>✅ {{ len .Alerts.Resolved }} alert(s) resolved: {{ .Alerts.Labels.alertname }}</b>
               {{ range .Alerts.Resolved }} {{ template "telegram_alert_resolved" . }} {{ end }} 
             {{ end }}
           {{ end }}
