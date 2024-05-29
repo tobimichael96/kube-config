@@ -300,7 +300,7 @@ data:
               "annotations": {
                 "description": "",
                 "runbook_url": "",
-                "summary": "{{ index $labels \"app\" }} is still in pending phase."
+                "summary": "{{ index $labels \"pod\" }} is still in pending phase."
               },
               "labels": {
                 "telegram": "true"
