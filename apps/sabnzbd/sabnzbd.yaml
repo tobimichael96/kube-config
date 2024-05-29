@@ -51,7 +51,7 @@ spec:
             env:
               TZ: Europe/Berlin
               FIREWALL: off
-              VPN_TYPE: wireguard
+              VPN_TYPE: openvpn
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               WIREGUARD_PERSISTENT_KEEPALIVE_INTERNAL: 60s
