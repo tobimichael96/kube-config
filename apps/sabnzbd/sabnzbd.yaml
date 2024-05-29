@@ -55,6 +55,7 @@ spec:
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               WIREGUARD_PERSISTENT_KEEPALIVE_INTERNAL: 60s
+              DNS_KEEP_NAMESERVER: "on"
             envFrom:
               - secret: sabnzbd-vpn-config
             # Configure the container-specific securityContext
