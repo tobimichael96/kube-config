@@ -68,7 +68,7 @@ spec:
                     command:
                       - bash
                       - -c
-                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit $?; fi
+                      - if [[ $(curl -s https://am.i.mullvad.net/connected) =~ 'You are connected to Mullvad' ]]; then exit 0; else exit 1; fi
                   initialDelaySeconds: 45
                   periodSeconds: 120
                   failureThreshold: 1
