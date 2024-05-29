@@ -253,7 +253,7 @@ data:
                 {
                   "refId": "B",
                   "relativeTimeRange": {
-                    "from": 900,
+                    "from": 0,
                     "to": 0
                   },
                   "datasourceUid": "__expr__",
@@ -262,7 +262,8 @@ data:
                       {
                         "evaluator": {
                           "params": [
-                            1
+                            1,
+                            0
                           ],
                           "type": "gt"
                         },
@@ -270,27 +271,24 @@ data:
                           "type": "and"
                         },
                         "query": {
-                          "params": [
-                            "B"
-                          ]
+                          "params": []
                         },
                         "reducer": {
                           "params": [],
-                          "type": "last"
+                          "type": "avg"
                         },
                         "type": "query"
                       }
                     ],
                     "datasource": {
+                      "name": "Expression",
                       "type": "__expr__",
                       "uid": "__expr__"
                     },
                     "expression": "A",
-                    "intervalMs": 1000,
-                    "maxDataPoints": 43200,
-                    "reducer": "sum",
+                    "hide": false,
                     "refId": "B",
-                    "type": "reduce"
+                    "type": "threshold"
                   }
                 }
               ],
