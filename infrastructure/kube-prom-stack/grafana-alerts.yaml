@@ -29,33 +29,28 @@ data:
         template: |-
           {{ define "telegram_message" }}
             {{ if gt (len .Alerts.Firing) 0 }}
-            <b>🔥 {{ len .Alerts.Firing }} alert(s) firing:</b>
+            <b>🔥 {{ len .Alerts.Firing }} alert(s) firing: {{ .Labels.alertname }}</b>
               {{ range .Alerts.Firing }} {{ template "telegram_alert_firing" . }} {{ end }} 
             {{ end }}
             {{ if gt (len .Alerts.Resolved) 0 }}
-            <b>✅ {{ len .Alerts.Resolved }} alert(s) resolved:</b>
+            <b>✅ {{ len .Alerts.Resolved }} alert(s) resolved: {{ .Labels.alertname }}</b>
               {{ range .Alerts.Resolved }} {{ template "telegram_alert_resolved" . }} {{ end }} 
             {{ end }}
           {{ end }}
           
           {{ define "telegram_alert_firing" }}
-            <b>{{ .Labels.alertname }}</b>
-          
             {{ if .Annotations }}
             <b>Summary</b>: {{ .Annotations.summary}}
-            <b>Description</b>: {{ .Annotations.description }}
             {{ end }}
           
             <a href="https://grafana.tmem.de">Grafana</a>
+          
             <a href="https://grafana.tmem.de/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert</a>
           {{ end }}
           
           {{ define "telegram_alert_resolved" }}
-            <b>{{ .Labels.alertname }}</b>
-            
             {{ if .Annotations }}
             <b>Summary</b>: {{ .Annotations.summary}}
-            <b>Description</b>: {{ .Annotations.description }}
             {{ end }}
           
             <a href="https://grafana.tmem.de">Grafana</a>
@@ -141,9 +136,10 @@ data:
               "execErrState": "Error",
               "for": "1m",
               "annotations": {
-                "description": "Container {{ index $labels \"container\" }} is in a restart loop.",
+                "summary": "{{ index $labels \"container\" }} is in a restart loop.",
                 "runbook_url": "",
-                "summary": "Container in restart loop!"},
+                "description": ""
+              },
               "labels": {
                 "telegram": "true"
               },
@@ -221,7 +217,7 @@ data:
               "execErrState": "OK",
               "for": "1m",
               "annotations": {
-                "description": "{{ index $labels \"app\" }} threw an error in one or more log lines.",
+                "description": "",
                 "runbook_url": "",
                 "summary": "Flux {{ index $labels \"app\" }} threw an error!"
               },
