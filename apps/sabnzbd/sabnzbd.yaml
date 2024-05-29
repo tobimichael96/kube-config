@@ -70,7 +70,6 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    host: 127.0.0.1
                     path: /
                     port: 9999
                   initialDelaySeconds: 15
@@ -135,3 +134,8 @@ spec:
         ports:
           http:
             port: 8080
+      gluetun:
+        controller: *app
+        ports:
+          http:
+            port: 9999
