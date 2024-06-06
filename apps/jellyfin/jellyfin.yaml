@@ -22,7 +22,7 @@ spec:
     image:
       repository: linuxserver/jellyfin
       pullPolicy: IfNotPresent
-      tag: 10.9.5
+      tag: 10.9.6
     service:
       main:
         ports:
