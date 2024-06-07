@@ -29,7 +29,7 @@ spec:
       ## Container image pull policy
       pullPolicy: Always
       ## Overrides the image tag whose default is the chart appVersion.
-      tag: "1.1.108"
+      tag: "1.1.109"
 
     factorioServer:
       save_name: "tme"
