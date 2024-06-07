@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: dyndns-updater
+      annotations:
+        reloader.stakater.com/auto: "true"
     spec:
       containers:
         - name: dyndns-updater
