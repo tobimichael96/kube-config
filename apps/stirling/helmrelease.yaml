@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: frooodle/s-pdf # repository of the image
-      tag: 0.26.0 # tag of the image
+      tag: 0.26.1 # tag of the image
       imagePullPolicy: IfNotPresent
 
     deployment:
