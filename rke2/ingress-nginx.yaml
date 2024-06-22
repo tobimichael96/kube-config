@@ -8,3 +8,6 @@ spec:
   valuesContent: |-
     controller:
       allowSnippetAnnotations: true
+      config:
+        enable-modsecurity: true
+        enable-owasp-modsecurity-crs: "true"
