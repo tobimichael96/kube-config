@@ -18,6 +18,8 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    defaultPodOptions:
+      hostNetwork: true
     controllers:
       adguard:
         type: deployment
@@ -35,7 +37,7 @@ spec:
                 spec:
                   httpGet:
                     path: /
-                    port: &port 80
+                    port: &port 8080
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -72,5 +74,11 @@ spec:
               - *host
             secretName: adguard-tls
     persistence:
-      config:
+      app:
         existingClaim: adguard-pvc
+        globalMounts:
+          - path: /opt/adguardhome/work
+      config:
+        existingClaim: adguard-config-pvc
+        globalMounts:
+          - path: /opt/adguardhome/conf
