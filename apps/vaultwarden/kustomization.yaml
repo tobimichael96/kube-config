@@ -5,4 +5,4 @@ resources:
 - secrets.yaml
 - storage.yaml
 - repo.yaml
-- vaultwarden.yaml
+- helmrelease.yaml

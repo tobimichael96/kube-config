@@ -115,3 +115,12 @@ metadata:
 spec:
   interval: 1h0m0s
   url: https://loganintech.github.io/helm-charts
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: vaultwarden
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://gissilabs.github.io/charts/
