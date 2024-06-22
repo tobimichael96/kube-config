@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: adguard-pv
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/internal/adguard
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homeserver
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: adguard
+  namespace: adguard
+spec:
+  storageClassName: local-storage
+  volumeName: adguard-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
