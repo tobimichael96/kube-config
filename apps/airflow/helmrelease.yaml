@@ -29,6 +29,7 @@ spec:
       webserver:
         rbac: 'False'
         authenticate: 'False'
+        default_ui_timezone: 'Europe/Berlin'
 
     images:
       airflow:
