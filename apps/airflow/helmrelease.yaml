@@ -32,6 +32,8 @@ spec:
         default_ui_timezone: 'Europe/Berlin'
         AUTH_ROLE_PUBLIC: 'Admin'
         expose_config: 'True'
+      core:
+        default_timezone: 'Europe/Berlin'
 
     images:
       airflow:
