@@ -77,7 +77,10 @@ spec:
     postgresql:
       primary:
         persistence:
-          enabled: false
+          enabled: true
+          existingClaim: "airflow-pvc"
+          size: 10Gi
+          subPath: "database"
       readReplicas:
         persistence:
           enabled: false
