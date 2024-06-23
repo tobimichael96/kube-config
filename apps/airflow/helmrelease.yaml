@@ -104,3 +104,5 @@ spec:
     extraEnvFrom: |
      - secretRef:
         name: 'airflow'
+     - configMapRef:
+        name: 'airflow-additional'

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: airflow-additional
+    namespace: airflow
+data:
+    #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
+    STRATO_CONFIG: ENC[AES256_GCM,data:ObYKoCatRLYtwbEpaWRAIBwY77MTMLnfGCQUeJ19FXDQmHMOeiVCt13Jfnv0g90VIF2zJAjBJelqpfHyKxeGc8rtw+EtMgJx5Kwm+zP1oab8NADeBdksC4DWuirvl2G2eAZUvvJeRi91sbXO+ic6a51MgIQ0ZQ==,iv:FfpQL/mfvswpxc7P6Er5os5bOyLHHpByJZYPP4HilSM=,tag:anjclxl3jwULahD5WaIqMA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1099kpzqp5v429mcyekxxnnyfkyuqxgq3esxvamc0kv7tf7nh9g9qymcpmx
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwcksyVFFDWmVIWG96ZXI4
+            Y3V0NVJERzJDY1VnNThCYStWV0lreW9WNkEwClF4c2VHZzFjNkxDcXQwQ0srZnVh
+            RGN6Ni8zMWNsQmtwdExqRmVnMHBqN2cKLS0tIElJMHFROXVTZFFYbWZPVWowM2hD
+            LzYrTXdKVGJsbGhXRjE0UUVzU0RoeHMKXJ2rt6lA9zvF62d6dhTGOTMTAXtLG8uj
+            uZekqs1k07FQ6+Q6QxlUSditfl5JFGgGDG25uRXopRiu17skbn++fg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-06-23T18:35:24Z"
+    mac: ENC[AES256_GCM,data:cIIvVI7k90OskcaAg/Dlkng4QiCXveiR9xW7aFQRJ9O561lBOZ+u5c5X1OSU9XMQkebH8ZbxvVoUtIiesXJWHDKZO6uoTvS7Ycpy0F9XH/ohiD1dPuE+jUWeEQbhWfsPBNJxMkI1tWvQPluUGWt4JzqscBrAErQ2Wyn/Wt23cDM=,iv:0Bov5RIr4LEKLQ+uZqPvTiKWckyam+Mtk126l9wVoh0=,tag:hxdIzWklZ+0WI47qx/nLWw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
