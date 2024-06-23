@@ -40,10 +40,6 @@ spec:
           enabled: true
           secretName: airflow-tls
 
-    webserver:
-      waitForMigrations:
-        enabled: false
-
     workers:
       persistence:
         enabled: false
