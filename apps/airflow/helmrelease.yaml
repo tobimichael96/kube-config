@@ -35,6 +35,8 @@ spec:
       core:
         default_timezone: 'Europe/Berlin'
 
+    webserverSecretKeySecretName: airflow-webserver-key
+
     images:
       airflow:
         repository: apache/airflow
