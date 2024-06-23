@@ -66,20 +66,13 @@ spec:
       useHelmHooks: false
       applyCustomEnv: false
 
-    webserver:
-      annotations:
-        reloader.stakater.com/auto: "true"
-
-    scheduler:
-      annotations:
-        reloader.stakater.com/auto: "true"
+    airflowPodAnnotations:
+      reloader.stakater.com/auto: "true"
 
     workers:
       persistence:
         enabled: false
     triggerer:
-      annotations:
-        reloader.stakater.com/auto: "true"
       persistence:
         enabled: false
     redis:
