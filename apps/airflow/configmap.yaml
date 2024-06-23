@@ -6,6 +6,8 @@ metadata:
 data:
     #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
     STRATO_CONFIG: ENC[AES256_GCM,data:tamZpW8qq9QuDLkc6PjiwS0XTONhP9aNseMM5mSsia6hMWdQuQj91lC65tYi7hfybj8lMj6bzATvD42LUCj9Yd+lw8Wn1CH6rXGebdctNleH5fHzBkhqDj87Ar+F,iv:Fx9vQbJzLc8r8PI1h163HxKDXDW7NzJ3mMrhZ9nXx7Y=,tag:8LEdvaDHaVCIiKg3Tsthzw==,type:str]
+    #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
+    NETCUP_CONFIG: ENC[AES256_GCM,data:lBOIp3K4aajc7/ECbOdy8s8c+SLhWO/3uglpbamH11s=,iv:rtdvs2/2WZWVwsbiwz5mFp3NB/QsUlTm4n/bJXAwqmQ=,tag:kdr7nNReMFC9u1IbEH/adw==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -21,8 +23,8 @@ sops:
             LzYrTXdKVGJsbGhXRjE0UUVzU0RoeHMKXJ2rt6lA9zvF62d6dhTGOTMTAXtLG8uj
             uZekqs1k07FQ6+Q6QxlUSditfl5JFGgGDG25uRXopRiu17skbn++fg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-06-23T18:45:15Z"
-    mac: ENC[AES256_GCM,data:xoMR+8oodLzwpIK6uvRdJBLGmZj0esc3h6ImGy1lrN6YRsxRZMFIUDGiT7TofZwHUTqr5H0G+TEfRlUbzHLty56emJSh6vuLSSCj/zaW50e+/bK0bTLwIA+8xVj1spdmP/XX3dcLOEdXUxlMvpPJg+tSdXG5KVHaxSfLw3v0X4w=,iv:iND5rVGnRotNqOVgYm1SlBXbNRy/s6Pn4wW+IlVNGgw=,tag:L4t66j7knEeyvp3FpMxcsg==,type:str]
+    lastmodified: "2024-06-23T18:48:38Z"
+    mac: ENC[AES256_GCM,data:e5Sim2KHmUFIwW0NKwbOTrFD3p8W00SGtbvOwXIxhK91f1Y1GhkzDzt7QlDH/knfhoQUobV7wPEL2M/A6pme23ybGgAxTIvTZ4yuxOtbK9KPhNlU98Wd/7N2qfwLOII1EXbUkJaQ6wLg3h2iWK9t0ahuNp+w1/cE18topheXDJc=,iv:8IVs6gKCsr3ySbqoSAMLIGni75aCAQwQQD0hnTfqV+0=,tag:97Gyg/uBImit05w7P6ySaQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
