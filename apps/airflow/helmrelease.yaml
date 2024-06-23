@@ -67,6 +67,6 @@ spec:
         subPath: ""
         sshKeySecret: airflow-git
 
-    extraEnvFrom:
+    extraEnvFrom: |
       - secretRef:
         name: airflow
