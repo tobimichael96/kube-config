@@ -30,6 +30,7 @@ spec:
         rbac: 'False'
         authenticate: 'False'
         default_ui_timezone: 'Europe/Berlin'
+        AUTH_ROLE_PUBLIC: 'Admin'
 
     images:
       airflow:
