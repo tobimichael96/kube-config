@@ -70,10 +70,16 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
 
+    scheduler:
+      annotations:
+        reloader.stakater.com/auto: "true"
+
     workers:
       persistence:
         enabled: false
     triggerer:
+      annotations:
+        reloader.stakater.com/auto: "true"
       persistence:
         enabled: false
     redis:
