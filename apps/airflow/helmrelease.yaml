@@ -40,6 +40,9 @@ spec:
           enabled: true
           secretName: airflow-tls
 
+    migrateDatabaseJob:
+      enabled: true
+
     workers:
       persistence:
         enabled: false
