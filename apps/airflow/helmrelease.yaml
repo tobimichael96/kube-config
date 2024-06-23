@@ -59,6 +59,10 @@ spec:
       useHelmHooks: false
       applyCustomEnv: false
 
+    webserver:
+      annotations:
+        reloader.stakater.com/auto: "true"
+
     workers:
       persistence:
         enabled: false
