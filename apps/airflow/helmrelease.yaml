@@ -68,7 +68,7 @@ spec:
     dags:
       gitSync:
         enabled: true
-        repo: https://github.com/tobimichael96/dags
+        repo: git@github.com:tobimichael96/dags.git
         branch: main
         rev: HEAD
         ref: main
