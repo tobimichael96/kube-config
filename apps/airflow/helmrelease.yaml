@@ -105,6 +105,8 @@ spec:
         rev: HEAD
         ref: main
         subPath: ""
+        maxFailures: 5
+        period: 30s
         sshKeySecret: airflow-git
 
     extraEnvFrom: |
