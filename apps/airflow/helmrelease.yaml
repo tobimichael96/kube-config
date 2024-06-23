@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: airflow
-      version: 1.14.0
+      version: 1.13.1
       sourceRef:
         kind: HelmRepository
         name: *app
@@ -64,9 +64,10 @@ spec:
         repo: https://github.com/tobimichael96/dags
         branch: main
         rev: HEAD
+        ref: main
         subPath: ""
         sshKeySecret: airflow-git
 
     extraEnvFrom: |
-      - secretRef:
-        name: airflow
+     - secretRef:
+        name: 'airflow'
