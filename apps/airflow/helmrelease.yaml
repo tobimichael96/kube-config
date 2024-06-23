@@ -18,6 +18,35 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    airflow:
+      connections:
+        - id: aws_conn
+          type: aws
+          description: minio connection
+          login: ${S3_ACCESS_KEY_ID}
+          password: ${S3_ACCESS_KEY_SECRET}
+          extra: |
+            {
+              "endpoint_url": "http://minio.minio:9000"
+            }
+      connectionsTemplates:
+        ACCESS_KEY_ID:
+          kind: secret
+          name: airflow
+          key: S3_ACCESS_KEY_ID
+        SECRET_ACCESS_KEY:
+          kind: secret
+          name: airflow
+          key: S3_ACCESS_KEY_SECRET
+    config:
+      logging:
+        remote_logging: 'True'
+        logging_level: 'INFO'
+        remote_base_log_folder: 's3://airflow-logs'
+        remote_log_conn_id: 'aws_conn'
+        delete_worker_pods: 'False'
+        encrypt_s3_logs: 'False'
+
     images:
       airflow:
         repository: apache/airflow
