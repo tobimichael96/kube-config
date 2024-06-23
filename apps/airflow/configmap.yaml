@@ -5,7 +5,7 @@ metadata:
     namespace: airflow
 data:
     #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
-    STRATO_CONFIG: ENC[AES256_GCM,data:ObYKoCatRLYtwbEpaWRAIBwY77MTMLnfGCQUeJ19FXDQmHMOeiVCt13Jfnv0g90VIF2zJAjBJelqpfHyKxeGc8rtw+EtMgJx5Kwm+zP1oab8NADeBdksC4DWuirvl2G2eAZUvvJeRi91sbXO+ic6a51MgIQ0ZQ==,iv:FfpQL/mfvswpxc7P6Er5os5bOyLHHpByJZYPP4HilSM=,tag:anjclxl3jwULahD5WaIqMA==,type:str]
+    STRATO_CONFIG: ENC[AES256_GCM,data:tamZpW8qq9QuDLkc6PjiwS0XTONhP9aNseMM5mSsia6hMWdQuQj91lC65tYi7hfybj8lMj6bzATvD42LUCj9Yd+lw8Wn1CH6rXGebdctNleH5fHzBkhqDj87Ar+F,iv:Fx9vQbJzLc8r8PI1h163HxKDXDW7NzJ3mMrhZ9nXx7Y=,tag:8LEdvaDHaVCIiKg3Tsthzw==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -21,8 +21,8 @@ sops:
             LzYrTXdKVGJsbGhXRjE0UUVzU0RoeHMKXJ2rt6lA9zvF62d6dhTGOTMTAXtLG8uj
             uZekqs1k07FQ6+Q6QxlUSditfl5JFGgGDG25uRXopRiu17skbn++fg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-06-23T18:35:24Z"
-    mac: ENC[AES256_GCM,data:cIIvVI7k90OskcaAg/Dlkng4QiCXveiR9xW7aFQRJ9O561lBOZ+u5c5X1OSU9XMQkebH8ZbxvVoUtIiesXJWHDKZO6uoTvS7Ycpy0F9XH/ohiD1dPuE+jUWeEQbhWfsPBNJxMkI1tWvQPluUGWt4JzqscBrAErQ2Wyn/Wt23cDM=,iv:0Bov5RIr4LEKLQ+uZqPvTiKWckyam+Mtk126l9wVoh0=,tag:hxdIzWklZ+0WI47qx/nLWw==,type:str]
+    lastmodified: "2024-06-23T18:45:15Z"
+    mac: ENC[AES256_GCM,data:xoMR+8oodLzwpIK6uvRdJBLGmZj0esc3h6ImGy1lrN6YRsxRZMFIUDGiT7TofZwHUTqr5H0G+TEfRlUbzHLty56emJSh6vuLSSCj/zaW50e+/bK0bTLwIA+8xVj1spdmP/XX3dcLOEdXUxlMvpPJg+tSdXG5KVHaxSfLw3v0X4w=,iv:iND5rVGnRotNqOVgYm1SlBXbNRy/s6Pn4wW+IlVNGgw=,tag:L4t66j7knEeyvp3FpMxcsg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
