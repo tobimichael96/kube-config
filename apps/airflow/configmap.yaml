@@ -8,6 +8,8 @@ data:
     STRATO_CONFIG: ENC[AES256_GCM,data:tamZpW8qq9QuDLkc6PjiwS0XTONhP9aNseMM5mSsia6hMWdQuQj91lC65tYi7hfybj8lMj6bzATvD42LUCj9Yd+lw8Wn1CH6rXGebdctNleH5fHzBkhqDj87Ar+F,iv:Fx9vQbJzLc8r8PI1h163HxKDXDW7NzJ3mMrhZ9nXx7Y=,tag:8LEdvaDHaVCIiKg3Tsthzw==,type:str]
     #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
     NETCUP_CONFIG: ENC[AES256_GCM,data:lBOIp3K4aajc7/ECbOdy8s8c+SLhWO/3uglpbamH11s=,iv:rtdvs2/2WZWVwsbiwz5mFp3NB/QsUlTm4n/bJXAwqmQ=,tag:kdr7nNReMFC9u1IbEH/adw==,type:str]
+    #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
+    DOTA_STATS_GABEN: ENC[AES256_GCM,data:duhUsAd2Id9P9cLyykNDCHF9kXDFC1ENbzicb0zMhvth5tJA1lrWeLzOBWacJes6B7TtR6JILCQGPg7inR39bvLYruyCphFJ31E0epQYAwa8eGjGSQ7usEcme/ZK,iv:rMUD6N8gHSwprs+lnzlRsQgHmtj8D0BFzaBAufdZAPk=,tag:K8KF5A6CtG/arVrnz1kShA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -23,8 +25,8 @@ sops:
             LzYrTXdKVGJsbGhXRjE0UUVzU0RoeHMKXJ2rt6lA9zvF62d6dhTGOTMTAXtLG8uj
             uZekqs1k07FQ6+Q6QxlUSditfl5JFGgGDG25uRXopRiu17skbn++fg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-06-23T18:53:57Z"
-    mac: ENC[AES256_GCM,data:bxoT0pSLkcwh+AERn5n7dN2H22876fWJNsffRNeEiI/1GNZYZ01OUQFwWYQ1anvOXAD/XsDGqFTQqsvjKyn+k847MjPV/IZSf4udtOfsXcKJVhirj4DfSlnGgEStrHv5ivqyXmI/n+k6yQvJftsoNRo9geLe3pphUVaJyQMsyYY=,iv:FKYx5DHeTer3Tntmj/ju5Eev/pJlf4UGf2s4AIlSNts=,tag:eC0P7v+qnRtwnjEpnoRhqg==,type:str]
+    lastmodified: "2024-06-23T19:12:25Z"
+    mac: ENC[AES256_GCM,data:20vfcwQGs3Pogn88DdrBqYSe8a7DocFlwMIa7L3tNvZ8G08qgFJiMqXOhacBOLeCT9FE3RvLGRcc+8eoudQXmnJe+F2sT3GVFFbZyZH1veInmw7zpsRL4771RjBSom/SS7nTviSGTAu94nobswIb7wyE63rBKVDMopBeUq41Kfc=,iv:ur3whqMlng8maL34BAf/bGhFh4TIWfqSDiLPqIzm5Mw=,tag:Il2VVMwLwna+JeSSd/P/4A==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.8.1
