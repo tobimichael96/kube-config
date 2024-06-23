@@ -40,8 +40,12 @@ spec:
           enabled: true
           secretName: airflow-tls
 
+    createUserJob:
+      useHelmHooks: false
+      applyCustomEnv: false
     migrateDatabaseJob:
-      enabled: true
+      useHelmHooks: false
+      applyCustomEnv: false
 
     workers:
       persistence:
