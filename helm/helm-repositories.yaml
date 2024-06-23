@@ -124,3 +124,12 @@ metadata:
 spec:
   interval: 1h0m0s
   url: https://gissilabs.github.io/charts/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: airflow
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://airflow.apache.org/
