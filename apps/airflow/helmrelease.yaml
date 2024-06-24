@@ -69,6 +69,10 @@ spec:
     airflowPodAnnotations:
       reloader.stakater.com/auto: "true"
 
+    webserver:
+      defaultUser:
+        enabled: false
+
     workers:
       persistence:
         enabled: false
