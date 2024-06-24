@@ -113,7 +113,7 @@ spec:
       size: 150Gi
 
     cronjob:
-      enabled: false
+      enabled: true
 
     redis:
       enabled: true
