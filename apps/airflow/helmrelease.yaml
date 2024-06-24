@@ -70,16 +70,22 @@ spec:
       reloader.stakater.com/auto: "true"
 
     webserver:
+      safeToEvict: false
       defaultUser:
         enabled: false
 
     workers:
+      safeToEvict: false
       persistence:
         enabled: false
+    scheduler:
+      safeToEvict: false
     triggerer:
+      safeToEvict: false
       persistence:
         enabled: false
     redis:
+      safeToEvict: false
       persistence:
         enabled: false
 
