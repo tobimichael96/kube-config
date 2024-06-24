@@ -70,7 +70,6 @@ spec:
       reloader.stakater.com/auto: "true"
 
     webserver:
-      safeToEvict: false
       defaultUser:
         enabled: false
 
