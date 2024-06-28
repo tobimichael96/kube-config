@@ -32,7 +32,7 @@ spec:
               DISABLE_LOGIN: 1
               DATABASE_TYPE: postgresql
             envFrom:
-              - secret: umami-db-config
+              - secret: umami-app-config
             probes:
               liveness:
                 enabled: true
@@ -63,7 +63,7 @@ spec:
                 custom: true
                 spec:
                   exec:
-                    command: ["pg_isready" ,"-U" ,"$(POSTGRES_USER)", "-d" ,"$(POSTGRE_DB_NAME)"]
+                    command: ["pg_isready" ,"-U" ,"$POSTGRES_USER", "-d" ,"$POSTGRE_DB_NAME"]
                   initialDelaySeconds: 15
                   periodSeconds: 5
                   timeoutSeconds: 5
