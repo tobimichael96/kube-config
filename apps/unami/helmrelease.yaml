@@ -1,0 +1,113 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app umami
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          umami:
+            dependsOn: database
+            image:
+              repository: umamisoftware/umami
+              tag: postgresql-v2.12.1
+            env:
+              TZ: Europe/Berlin
+              DISABLE_LOGIN: 1
+              DATABASE_TYPE: postgresql
+            envFrom:
+              - secret: unami-db-config
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 3000
+                  initialDelaySeconds: 3
+                  periodSeconds: 3
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+              startup:
+                enabled: false
+      database:
+        containers:
+          postgres:
+            image:
+              repository: postgres
+              tag: 16.3-alpine
+            env:
+              TZ: Europe/Berlin
+            envFrom:
+              - secret: unami-db-config
+            probes:
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+                  initialDelaySeconds: 10
+                  periodSeconds: 3
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 3000
+      database:
+        controller: database
+        ports:
+          http:
+            port: 5432
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+          nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+        hosts:
+          - host: umami.tmem.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - umami.tmem.de
+            secretName: umami-tls
+    persistence:
+      config:
+        enabled: true
+        existingClaim: umami-config-pvc
+        advancedMounts:
+          database:
+            postgres:
+              - path: /var/lib/postgresql/data
