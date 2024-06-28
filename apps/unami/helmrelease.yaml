@@ -91,7 +91,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         hosts:
-          - host: umami.tmem.de
+          - host: analytics.tmem.de
             paths:
               - path: /
                 pathType: Prefix
@@ -100,7 +100,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - umami.tmem.de
+              - analytics.tmem.de
             secretName: umami-tls
     persistence:
       config:
