@@ -24,7 +24,6 @@ spec:
           reloader.stakater.com/auto: "true"
         containers:
           umami:
-            dependsOn: database
             image:
               repository: umamisoftware/umami
               tag: postgresql-v2.12.1
