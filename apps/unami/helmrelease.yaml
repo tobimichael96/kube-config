@@ -63,7 +63,7 @@ spec:
                 custom: true
                 spec:
                   exec:
-                    command: [ "pg_isready" ,"-U" ,"$POSTGRES_USER", "-d" ,"$POSTGRE_DB_NAME" ]
+                    command: [ "pg_isready" ,"-U" ,"$POSTGRES_USER" ]
                   initialDelaySeconds: 15
                   periodSeconds: 5
                   timeoutSeconds: 5
