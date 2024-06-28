@@ -29,7 +29,6 @@ spec:
               tag: postgresql-v2.12.1
             env:
               TZ: Europe/Berlin
-              DISABLE_LOGIN: 1
               DATABASE_TYPE: postgresql
             envFrom:
               - secret: umami-app-config
