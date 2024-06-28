@@ -32,7 +32,7 @@ spec:
               DISABLE_LOGIN: 1
               DATABASE_TYPE: postgresql
             envFrom:
-              - secret: unami-db-config
+              - secret: umami-db-config
             probes:
               liveness:
                 enabled: true
@@ -56,7 +56,7 @@ spec:
             env:
               TZ: Europe/Berlin
             envFrom:
-              - secret: unami-db-config
+              - secret: umami-db-config
             probes:
               startup:
                 enabled: true
