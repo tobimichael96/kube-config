@@ -42,17 +42,17 @@ data:
           {{ if .Annotations }}
           <b>{{ .Labels.alertname }}</b>: {{ .Annotations.summary}}
           {{ end }}
-        
+          
           <a href="https://grafana.tmem.de">Grafana</a>
-        
+          
           <a href="https://grafana.tmem.de/alerting/silence/new?matcher=alertname%3D{{ .Labels.alertname }}">Silence this alert</a>
           {{ end }}
-        
+          
           {{ define "telegram_alert_resolved" }}
           {{ if .Annotations }}
           <b>{{ .Labels.alertname }}</b>: {{ .Annotations.summary}}
           {{ end }}
-        
+          
           <a href="https://grafana.tmem.de">Grafana</a>
           {{ end }}
   # language=json
@@ -101,8 +101,7 @@ data:
                       {
                         "evaluator": {
                           "params": [
-                            3
-                          ],
+                            3],
                           "type": "gt"
                         },
                         "operator": {
@@ -136,9 +135,9 @@ data:
               "execErrState": "Error",
               "for": "1m",
               "annotations": {
-                "summary": "{{ index $labels \"container\" }} is in a restart loop.",
+                "description": "",
                 "runbook_url": "",
-                "description": ""
+                "summary": "{{ index $labels \"container\" }} is in a restart loop."
               },
               "labels": {
                 "telegram": "true"
@@ -148,35 +147,30 @@ data:
             {
               "uid": "fdn2ucc4v8veob",
               "title": "flux-error",
-              "condition": "B",
+              "condition": "C",
               "data": [
                 {
                   "refId": "A",
                   "queryType": "range",
                   "relativeTimeRange": {
                     "from": 900,
-                    "to": 0
-                  },
+                    "to": 0},
                   "datasourceUid": "loki",
                   "model": {
                     "datasource": {
                       "type": "loki",
-                      "uid": "loki"
-                    },
+                      "uid": "loki"},
                     "editorMode": "code",
                     "expr": "sum by(app) (rate({namespace=\"flux-system\"} |= `\"level\":\"error\"` [$__interval]))",
                     "intervalMs": 1000,
                     "maxDataPoints": 43200,
                     "queryType": "range",
-                    "refId": "A"
-                  }
-                },
+                    "refId": "A"}},
                 {
                   "refId": "B",
                   "relativeTimeRange": {
                     "from": 900,
-                    "to": 0
-                  },
+                    "to": 0},
                   "datasourceUid": "__expr__",
                   "model": {
                     "conditions": [
@@ -209,7 +203,58 @@ data:
                     "maxDataPoints": 43200,
                     "reducer": "sum",
                     "refId": "B",
+                    "settings": {
+                      "mode": "replaceNN",
+                      "replaceWithValue": 0
+                    },
                     "type": "reduce"
+                  }
+                },
+                {
+                  "refId": "C",
+                  "relativeTimeRange": {
+                    "from": 0,
+                    "to": 0},
+                  "datasourceUid": "__expr__",
+                  "model": {
+                    "conditions": [
+                      {
+                        "evaluator": {
+                          "params": [
+                            1,
+                            0
+                          ],
+                          "type": "gt"
+                        },
+                        "operator": {
+                          "type": "and"
+                        },
+                        "query": {
+                          "params": []
+                        },
+                        "reducer": {
+                          "params": [],
+                          "type": "avg"
+                        },
+                        "type": "query",
+                        "unloadEvaluator": {
+                          "params": [
+                            1,
+                            0
+                          ],
+                          "type": "lt"
+                        }
+                      }
+                    ],
+                    "datasource": {
+                      "name": "Expression",
+                      "type": "__expr__",
+                      "uid": "__expr__"
+                    },
+                    "expression": "B",
+                    "hide": false,
+                    "refId": "C",
+                    "type": "threshold"
                   }
                 }
               ],
@@ -222,6 +267,7 @@ data:
                 "summary": "Flux {{ index $labels \"app\" }} threw an error!"
               },
               "labels": {
+                "": "",
                 "telegram": "true"
               },
               "isPaused": false
@@ -287,6 +333,8 @@ data:
                     },
                     "expression": "A",
                     "hide": false,
+                    "intervalMs": 1000,
+                    "maxDataPoints": 43200,
                     "refId": "B",
                     "type": "threshold"
                   }
