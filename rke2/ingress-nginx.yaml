@@ -9,5 +9,6 @@ spec:
     controller:
       allowSnippetAnnotations: "true"
       config:
+        use-forwarded-headers: "true"
         enable-modsecurity: "false"
         enable-owasp-modsecurity-crs: "true"
