@@ -62,7 +62,7 @@ data:
             description: Share something
     - Utils:
         - AdGuard:
-            icon: adguard.png
+            icon: adguard-home.png
             href: https://adguard.tmem.internal/
             description: DNS blocker
         - Vaultwarden:
