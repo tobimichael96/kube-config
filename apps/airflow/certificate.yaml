@@ -2,7 +2,8 @@
 apiVersion: v1
 kind: Secret
 metadata:
- name: airflow-tls
- annotations:
-   reflector.v1.k8s.emberstack.com/reflects: "cert-manager/wildcard-tls"
+  name: wildcard-tls
+  namespace: airflow
+  annotations:
+    reflector.v1.k8s.emberstack.com/reflects: "cert-manager/wildcard-tls"
 data:
