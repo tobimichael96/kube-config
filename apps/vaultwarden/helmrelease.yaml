@@ -39,7 +39,7 @@ spec:
         kubernetes.io/tls-acme: "true"
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         cert-manager.io/cluster-issuer: "local-issuer"
-      host: &host vault.tmem.local
+      host: &host vault.tmem.internal
       tls:
         - secretName: vaultwarden-tls
           hosts:

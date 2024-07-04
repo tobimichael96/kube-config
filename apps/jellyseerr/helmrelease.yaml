@@ -50,7 +50,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "local-issuer"
         hosts:
-          - host: &host jellyseerr.tmem.local
+          - host: &host jellyseerr.tmem.internal
             paths:
               - path: /
                 pathType: Prefix

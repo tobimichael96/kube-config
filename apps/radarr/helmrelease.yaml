@@ -78,7 +78,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "local-issuer"
         hosts:
-          - host: &host radarr.tmem.local
+          - host: &host radarr.tmem.internal
             paths:
               - path: /
                 service:

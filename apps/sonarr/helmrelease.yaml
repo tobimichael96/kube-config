@@ -78,7 +78,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "local-issuer"
         hosts:
-          - host: &host sonarr.tmem.local
+          - host: &host sonarr.tmem.internal
             paths:
               - path: /
                 service:

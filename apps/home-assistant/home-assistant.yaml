@@ -29,7 +29,7 @@ spec:
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         cert-manager.io/cluster-issuer: "local-issuer"
       hosts:
-        - host: &host ha.tmem.local
+        - host: &host ha.tmem.internal
           paths:
             - path: /
               pathType: ImplementationSpecific

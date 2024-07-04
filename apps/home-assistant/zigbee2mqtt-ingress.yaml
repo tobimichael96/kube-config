@@ -12,8 +12,8 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &conbee-host conbee.tmem.local
-        - &sonoff-host sonoff.tmem.local
+        - &conbee-host conbee.tmem.internal
+        - &sonoff-host sonoff.tmem.internal
       secretName: zigbee2mqtt-tls
   rules:
     - host: *conbee-host

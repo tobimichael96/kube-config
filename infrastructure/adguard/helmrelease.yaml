@@ -61,7 +61,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "local-issuer"
         hosts:
-          - host: &host adguard.tmem.local
+          - host: &host adguard.tmem.internal
             paths:
               - path: /
                 service:

@@ -52,7 +52,7 @@ spec:
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "local-issuer"
-        host: airflow.tmem.local
+        host: airflow.tmem.internal
         tls:
           enabled: true
           secretName: airflow-tls
