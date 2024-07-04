@@ -39,10 +39,10 @@ spec:
             proxy_set_header  X-Auth-Request-User   $user;
             proxy_set_header  X-Auth-Request-Email  $email;
         hosts:
-          - grafana.tmem.de
+          - &host grafana.tmem.de
         tls:
           - hosts:
-              - grafana.tmem.de
+              - *host
             secretName: grafana-tls
 
       defaultDashboardsEnabled: false
@@ -104,14 +104,12 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
-          nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+          cert-manager.io/cluster-issuer: "local-issuer"
         hosts:
-          - prometheus.tmem.de
+          - &host prometheus.tmem.local
         tls:
           - hosts:
-              - prometheus.tmem.de
+              - *host
             secretName: prometheus-tls
 
       prometheusSpec:
