@@ -37,151 +37,6 @@ data:
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "description": "Expiration time in days of the local ca used in cert-manager.",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "d"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 6,
-            "x": 0,
-            "y": 0
-          },
-          "id": 5,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "11.0.0",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "expr": "(sum(certmanager_certificate_expiration_timestamp_seconds{name=\"tmem-local-ca\"}) - sum(certmanager_clock_time_seconds)) / 60 / 60 / 24",
-              "instant": false,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Local-Ca expiration (in days)",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "description": "Expiration time of the local ca used in cert-manager.",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "dateTimeAsIso"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 0
-          },
-          "id": 3,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "11.0.0",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "expr": "certmanager_certificate_expiration_timestamp_seconds{name=\"tmem-local-ca\"}  * 1000",
-              "instant": false,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Local-Ca expiration",
-          "type": "stat"
-        },
-        {
-          "collapsed": false,
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 8
-          },
-          "id": 4,
-          "panels": [],
-          "title": "Utilization",
-          "type": "row"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -238,7 +93,7 @@ data:
             "h": 11,
             "w": 24,
             "x": 0,
-            "y": 9
+            "y": 0
           },
           "id": 2,
           "options": {
@@ -249,7 +104,6 @@ data:
               "showLegend": false
             },
             "tooltip": {
-              "maxHeight": 600,
               "mode": "single",
               "sort": "none"
             }
@@ -336,7 +190,7 @@ data:
             "h": 11,
             "w": 24,
             "x": 0,
-            "y": 20
+            "y": 11
           },
           "id": 1,
           "options": {
@@ -347,7 +201,6 @@ data:
               "showLegend": false
             },
             "tooltip": {
-              "maxHeight": 600,
               "mode": "single",
               "sort": "none"
             }
@@ -380,7 +233,6 @@ data:
         "from": "now-3h",
         "to": "now"
       },
-      "timeRangeUpdatedDuringEditOrView": false,
       "timepicker": {},
       "timezone": "browser",
       "title": "Basic metrics",
