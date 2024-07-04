@@ -21,7 +21,7 @@ spec:
       - tmem
   privateKey:
     algorithm: ECDSA
-    size: 512
+    size: 521
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
