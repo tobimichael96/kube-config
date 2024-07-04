@@ -21,6 +21,7 @@ spec:
   privateKey:
     algorithm: ECDSA
     size: 521
+    rotationPolicy: Always
   duration: "8760h"
   issuerRef:
     name: selfsigned-issuer
