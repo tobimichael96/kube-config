@@ -10,7 +10,7 @@ spec:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: letsencrypt
   commonName: "*.internal.tmem.de"
   dnsNames:
