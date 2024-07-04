@@ -25,3 +25,7 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./infrastructure/cert-manager/config
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
