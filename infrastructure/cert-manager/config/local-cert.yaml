@@ -6,7 +6,6 @@ metadata:
 spec:
   selfSigned: {}
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/cert-manager/cert-manager/master/deploy/crds/crd-certificates.yaml
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -14,14 +13,7 @@ metadata:
   namespace: cert-manager
 spec:
   isCA: true
-  commonName: tmem-local-ca
-  secretName: root-secret
-  subject:
-    organizations:
-      - tmem
-  privateKey:
-    algorithm: ECDSA
-    size: 521
+  secretName: tmem-ca
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
@@ -34,4 +26,4 @@ metadata:
   namespace: cert-manager
 spec:
   ca:
-    secretName: root-secret
+    secretName: tmem-ca
