@@ -13,10 +13,15 @@ metadata:
   namespace: cert-manager
 spec:
   isCA: true
-  secretName: tmem-ca
+  commonName: tmem-local-ca
+  secretName: root-secret
+  subject:
+    organizations:
+      - tmem
   privateKey:
-    algorithm: RSA
-    size: 4096
+    algorithm: ECDSA
+    size: 521
+  duration: "8760h"
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
@@ -29,4 +34,4 @@ metadata:
   namespace: cert-manager
 spec:
   ca:
-    secretName: tmem-ca
+    secretName: root-secret
