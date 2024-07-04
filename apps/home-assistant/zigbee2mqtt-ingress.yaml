@@ -8,12 +8,12 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: "local-issuer"
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   tls:
     - hosts:
-        - &conbee-host conbee.tmem.internal
-        - &sonoff-host sonoff.tmem.internal
+        - &conbee-host conbee.internal.tmem.de
+        - &sonoff-host sonoff.internal.tmem.de
       secretName: zigbee2mqtt-tls
   rules:
     - host: *conbee-host

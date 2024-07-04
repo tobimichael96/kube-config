@@ -33,19 +33,19 @@ data:
             description: Watch everything
         - Jellyseerr:
             icon: jellyseerr.png
-            href: https://jellyseerr.tmem.internal/
+            href: https://jellyseerr.internal.tmem.de/
             description: Request everything
         - Sonarr:
             icon: sonarr.png
-            href: https://sonarr.tmem.internal/
+            href: https://sonarr.internal.tmem.de/
             description: Series management
         - Radarr:
             icon: radarr.png
-            href: https://radarr.tmem.internal/
+            href: https://radarr.internal.tmem.de/
             description: Movie management
         - SABnzbd:
             icon: sabnzbd.png
-            href: https://sabnzbd.tmem.internal/
+            href: https://sabnzbd.internal.tmem.de/
             description: Download stuff
     - Storage:
         - Nextcloud:
@@ -63,7 +63,7 @@ data:
     - Utils:
         - AdGuard:
             icon: adguard-home.png
-            href: https://adguard.tmem.internal/
+            href: https://adguard.internal.tmem.de/
             description: DNS blocker
         - Vaultwarden:
             icon: bitwarden.png

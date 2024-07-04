@@ -104,9 +104,9 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          cert-manager.io/cluster-issuer: "local-issuer"
+          cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
-          - &host prometheus.tmem.internal
+          - &host prometheus.internal.tmem.de
         tls:
           - hosts:
               - *host
