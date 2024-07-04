@@ -87,7 +87,7 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          cert-manager.io/cluster-issuer: "custom-ca-issuer"
+          cert-manager.io/cluster-issuer: "local-issuer"
         hosts:
           - host: &host sabnzbd.tmem.local
             paths:
