@@ -1,0 +1,31 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/kubernetes-sigs/external-dns/master/charts/external-dns/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app external-dns
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: *app
+      version: 1.14.5
+      sourceRef:
+        kind: HelmRepository
+        name: *app
+        namespace: flux-system
+  interval: 30m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    provider:
+      name: digitalocean
+    domainFilters:
+      - tmem.de
+    env:
+      - name: DO_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: digitalocean-dns
+            namespace: cert-manager
+            key: access-token

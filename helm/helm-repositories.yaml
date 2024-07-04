@@ -124,3 +124,12 @@ metadata:
 spec:
   interval: 1h0m0s
   url: https://airflow.apache.org/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: external-dns
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://kubernetes-sigs.github.io/external-dns/
