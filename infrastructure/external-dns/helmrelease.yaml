@@ -27,5 +27,4 @@ spec:
         valueFrom:
           secretKeyRef:
             name: digitalocean-dns
-            namespace: cert-manager
             key: access-token
