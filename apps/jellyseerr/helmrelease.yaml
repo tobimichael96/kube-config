@@ -48,11 +48,11 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
+          cert-manager.io/cluster-issuer: "local-issuer"
           nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         hosts:
-          - host: jellyseerr.tmem.de
+          - host: &host jellyseerr.tmem.local
             paths:
               - path: /
                 pathType: Prefix
@@ -61,7 +61,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - jellyseerr.tmem.de
+              - *host
             secretName: jellyseerr-tls
     persistence:
       config:
