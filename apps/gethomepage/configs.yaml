@@ -76,9 +76,9 @@ data:
             href: https://share.tmem.de/
             description: Share something
     - Utils:
-        - AdGuard:
-            icon: adguard-home.png
-            href: https://adguard.internal.tmem.de/
+        - Pi-hole:
+            icon: pi-hole.png
+            href: https://pihole.internal.tmem.de/
             description: DNS blocker
         - Vaultwarden:
             icon: bitwarden.png
@@ -92,6 +92,10 @@ data:
             icon: https://pdf.tmem.de/apple-touch-icon.png
             href: https://pdf.tmem.de/
             description: Work with PDFs
+        - DDNS:
+            icon: ddns.png
+            href: https://ddns.internal.tmem.de/
+            description: Dynamic DNS updater
         - Airflow:
             icon: apache-airflow.png
             href: https://airflow.internal.tmem.de/
