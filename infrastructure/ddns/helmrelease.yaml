@@ -21,7 +21,6 @@ spec:
     controllers:
       ddns:
         type: deployment
-        strategy: "RollingUpdate"
         containers:
           app:
             image:
