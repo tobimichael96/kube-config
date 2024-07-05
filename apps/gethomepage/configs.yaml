@@ -26,6 +26,19 @@ data:
       hideVisitURL: true
   # language=yaml
   services.yaml: |-
+    - Home-Automation:
+        - HomeAssistant:
+            icon: home-assistant.png
+            href: https://ha.internal.tmem.de/
+            description: Control everything
+        - Conbee:
+            icon: zigbee2mqtt.png
+            href: https://conbee.internal.tmem.de/
+            description: Zigbee2Mqtt - Conbee
+        - Sonoff:
+            icon: zigbee2mqtt.png
+            href: https://sonoff.internal.tmem.de/
+            description: Zigbee2Mqtt - Sonoff
     - Media:
         - Jellyfin:
             icon: jellyfin.png
@@ -54,7 +67,7 @@ data:
             description: Store everything
         - MinIO:
             icon: minio.png
-            href: https://minio.tmem.de/
+            href: https://minio.internal.tmem.de/
             description: Website and storage
         - Quick-Share:
             icon: https://share.tmem.de/static/favicon.png
@@ -67,7 +80,7 @@ data:
             description: DNS blocker
         - Vaultwarden:
             icon: bitwarden.png
-            href: https://vault.tmem.de/
+            href: https://vault.internal.tmem.de/
             description: Store passwords
         - Privatebin:
             icon: privatebin.png
