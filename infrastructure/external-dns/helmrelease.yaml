@@ -18,6 +18,7 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    provider: "pihole"
     pihole:
       ## @param pihole.server When using the Pi-hole provider, specify The address of the Pi-hole web server
       ##
