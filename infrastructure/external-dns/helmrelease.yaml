@@ -28,8 +28,11 @@ spec:
     # the policy to upsert-only, so they do not get deleted.
     policy: "upsert-only"
     env:
-      - secretRef:
-          name: pihole-dns
+      - name: EXTERNAL_DNS_PIHOLE_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: pihole-dns
+            key: password
     extraArgs:
       # Change this to the actual address of your Pi-hole web server
       - --pihole-server=http://192.168.178.91
