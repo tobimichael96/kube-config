@@ -70,12 +70,12 @@ spec:
           - hosts:
               - *host
             secretName: ddns-tls
-    persistence:
-      config:
-        enabled: true
-        type: configMap
-        name: ddns-settings
-        globalMounts:
-          - path: /updater/data/config.json
-            subPath: settings.json
-            readOnly: true
+#    persistence:
+#      config:
+#        enabled: true
+#        type: configMap
+#        name: ddns-settings
+#        globalMounts:
+#          - path: /updater/data/config.json
+#            subPath: settings.json
+#            readOnly: true
