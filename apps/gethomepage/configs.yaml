@@ -93,7 +93,7 @@ data:
             href: https://pdf.tmem.de/
             description: Work with PDFs
         - DDNS:
-            icon: ddns.png
+            icon: https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg
             href: https://ddns.internal.tmem.de/
             description: Dynamic DNS updater
         - Airflow:
