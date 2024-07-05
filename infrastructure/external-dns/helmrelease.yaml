@@ -32,6 +32,6 @@ spec:
           name: pihole-dns
     extraArgs:
       # Change this to the actual address of your Pi-hole web server
-      - --pihole-server=http://192.168.178.91
+      - --pihole-server=http://192.168.178.91/admin
     domainFilters:
       - internal.tmem.de
