@@ -13,11 +13,13 @@ data:
     headerStyle: clean
     favicon: https://tobiasmichael.de/assets/logo.ico
     layout:
+      Home-Automation:
+        style: row
       Media:
         style: row
-      Storage:
-        style: row
       Utils:
+        style: row
+      Storage:
         style: row
     quicklaunch:
       searchDescriptions: true
