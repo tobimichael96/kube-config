@@ -21,6 +21,8 @@ spec:
     controllers:
       ddns:
         type: deployment
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
