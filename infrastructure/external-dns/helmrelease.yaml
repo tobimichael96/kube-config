@@ -20,14 +20,14 @@ spec:
   values:
     provider:
       name: "pihole"
+    # Pihole only supports A/AAAA/CNAME records so there is no mechanism to track ownership.
+    # You don't need to set this flag, but if you leave it unset, you will receive warning
+    # logs when ExternalDNS attempts to create TXT records.
+    registry: "noop"
     envFrom:
       - secretRef:
           name: pihole-dns
     extraArgs:
-      # Pihole only supports A/AAAA/CNAME records so there is no mechanism to track ownership.
-      # You don't need to set this flag, but if you leave it unset, you will receive warning
-      # logs when ExternalDNS attempts to create TXT records.
-      - --registry=noop
       # IMPORTANT: If you have records that you manage manually in Pi-hole, set
       # the policy to upsert-only so they do not get deleted.
       - --policy=upsert-only
