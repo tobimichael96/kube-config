@@ -92,6 +92,10 @@ data:
             icon: https://pdf.tmem.de/apple-touch-icon.png
             href: https://pdf.tmem.de/
             description: Work with PDFs
+        - Airflow:
+            icon: airflow.png
+            href: https://airflow.internal.tmem.de/
+            description: Run tasks
   # language=yaml
   bookmarks.yaml: |-
     ---
