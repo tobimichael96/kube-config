@@ -93,7 +93,7 @@ data:
             href: https://pdf.tmem.de/
             description: Work with PDFs
         - Airflow:
-            icon: airflow.png
+            icon: apache-airflow.png
             href: https://airflow.internal.tmem.de/
             description: Run tasks
   # language=yaml
