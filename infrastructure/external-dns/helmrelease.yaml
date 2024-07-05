@@ -18,16 +18,20 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-    provider: "pihole"
-    pihole:
-      ## @param pihole.server When using the Pi-hole provider, specify The address of the Pi-hole web server
-      ##
-      server: "192.168.178.91" # "pihole.internal.tmem.de"
-      ## @param pihole.tlsSkipVerify When using the Pi-hole provider, specify whether to skip verification of any TLS certificates served by the Pi-hole web server
-      ##
-      tlsSkipVerify: "true"
-      ## @param pihole.secretName Use an existing secret with key "pihole_password" defined.
-      ##
-      secretName: "pihole-dns"
+    provider:
+      name: "pihole"
+    envFrom:
+      - secretRef:
+          name: pihole-dns
+    extraArgs:
+      # Pihole only supports A/AAAA/CNAME records so there is no mechanism to track ownership.
+      # You don't need to set this flag, but if you leave it unset, you will receive warning
+      # logs when ExternalDNS attempts to create TXT records.
+      - --registry=noop
+      # IMPORTANT: If you have records that you manage manually in Pi-hole, set
+      # the policy to upsert-only so they do not get deleted.
+      - --policy=upsert-only
+      # Change this to the actual address of your Pi-hole web server
+      - --pihole-server=http://192.168.178.91
     domainFilters:
       - internal.tmem.de
