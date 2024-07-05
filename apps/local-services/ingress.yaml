@@ -8,6 +8,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
+    ingress.kubernetes.io/rewrite-target: "/admin"
 spec:
   tls:
     - hosts:
@@ -17,7 +18,7 @@ spec:
     - host: *host
       http:
         paths:
-          - path: /admin
+          - path: /
             pathType: Prefix
             backend:
               service:
