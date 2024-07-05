@@ -21,7 +21,7 @@ spec:
     pihole:
       ## @param pihole.server When using the Pi-hole provider, specify The address of the Pi-hole web server
       ##
-      server: "192.168.178.91" # "pihole.internal.tmem.de"
+      server: "192.168.178.91/admin" # "pihole.internal.tmem.de"
       ## @param pihole.tlsSkipVerify When using the Pi-hole provider, specify whether to skip verification of any TLS certificates served by the Pi-hole web server
       ##
       tlsSkipVerify: "true"
