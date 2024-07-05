@@ -27,11 +27,11 @@ spec:
     # IMPORTANT: If you have records that you manage manually in Pi-hole, set
     # the policy to upsert-only, so they do not get deleted.
     policy: "upsert-only"
-    envFrom:
+    env:
       - secretRef:
           name: pihole-dns
     extraArgs:
       # Change this to the actual address of your Pi-hole web server
-      - --pihole-server=http://192.168.178.91/admin
+      - --pihole-server=http://192.168.178.91
     domainFilters:
       - internal.tmem.de
