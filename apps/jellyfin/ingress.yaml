@@ -12,10 +12,38 @@ metadata:
 spec:
   tls:
     - hosts:
-        - jellyfin.tmem.de
+        - &p-host jellyfin.tmem.de
       secretName: jellyfin-tls
   rules:
-    - host: jellyfin.tmem.de
+    - host: *p-host
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  number: 8096
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin-internal
+  namespace: jellyfin
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 5G
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  tls:
+    - hosts:
+        - &i-host jellyfin.internal.tmem.de
+      secretName: jellyfin-internal-tls
+  rules:
+    - host: *i-host
       http:
         paths:
           - path: /
