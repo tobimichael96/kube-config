@@ -14,13 +14,17 @@ data:
     favicon: https://tobiasmichael.de/assets/logo.ico
     layout:
       Home-Automation:
-        style: row
+        icon: home-assistant.png
+        style: columns
       Media:
-        style: row
+        icon: jellyfin.png
+        style: columns
       Utils:
-        style: row
+        icon: bitwarden.png
+        style: columns
       Storage:
-        style: row
+        icon: nextcloud.png
+        style: column
     quicklaunch:
       searchDescriptions: true
       hideInternetSearch: true
@@ -62,28 +66,15 @@ data:
             icon: sabnzbd.png
             href: https://sabnzbd.internal.tmem.de/
             description: Download stuff
-    - Storage:
-        - Nextcloud:
-            icon: nextcloud.png
-            href: https://cloud.tmem.de/
-            description: Store everything
-        - MinIO:
-            icon: minio.png
-            href: https://minio.internal.tmem.de/
-            description: Website and storage
-        - Quick-Share:
-            icon: https://share.tmem.de/static/favicon.png
-            href: https://share.tmem.de/
-            description: Share something
     - Utils:
-        - Pi-hole:
-            icon: pi-hole.png
-            href: https://pihole.internal.tmem.de/
-            description: DNS blocker
         - Vaultwarden:
             icon: bitwarden.png
             href: https://vault.internal.tmem.de/
             description: Store passwords
+        - Pi-hole:
+            icon: pi-hole.png
+            href: https://pihole.internal.tmem.de/
+            description: DNS blocker
         - Privatebin:
             icon: privatebin.png
             href: https://bin.tmem.de/
@@ -100,6 +91,19 @@ data:
             icon: apache-airflow.png
             href: https://airflow.internal.tmem.de/
             description: Run tasks
+    - Storage:
+        - Nextcloud:
+            icon: nextcloud.png
+            href: https://cloud.tmem.de/
+            description: Store everything
+        - MinIO:
+            icon: minio.png
+            href: https://minio.internal.tmem.de/
+            description: Website and storage
+        - Quick-Share:
+            icon: https://share.tmem.de/static/favicon.png
+            href: https://share.tmem.de/
+            description: Share something
   # language=yaml
   bookmarks.yaml: |-
     ---
