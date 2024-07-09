@@ -134,7 +134,6 @@ spec:
   interval: 1h0m0s
   url: https://kubernetes-sigs.github.io/external-dns/
 ---
-
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
@@ -143,3 +142,21 @@ metadata:
 spec:
   interval: 1h0m0s
   url: https://emberstack.github.io/helm-charts
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: ingress-nginx
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://kubernetes.github.io/ingress-nginx
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: metallb
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://metallb.github.io/metallb
