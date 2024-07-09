@@ -18,8 +18,3 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-    prometheus:
-      podMonitor:
-        enabled: true
-      serviceMonitor:
-        enabled: true
