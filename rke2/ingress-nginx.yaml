@@ -15,10 +15,8 @@ spec:
         enable-modsecurity: "false"
         enable-owasp-modsecurity-crs: "true"
       publishService:
-            enabled: "true"
+        enabled: "true"
       service:
         enabled: "true"
         type: "NodePort"
         externalTrafficPolicy: "Local"
-        internal:
-          externalTrafficPolicy: "Local"
