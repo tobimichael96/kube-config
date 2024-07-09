@@ -78,11 +78,10 @@ spec:
       app:
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 5G
-          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/ingress.class: "nginx-internal"
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          ingress.kubernetes.io/whitelist-source-range: "192.168.178.0/24"
         hosts:
           - host: &host api.minio.internal.tmem.de
             paths:
