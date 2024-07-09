@@ -12,5 +12,5 @@ spec:
         use-forwarded-headers: "true"
         enable-modsecurity: "false"
         enable-owasp-modsecurity-crs: "true"
-    service:
-      externalTrafficPolicy: "Local"
+      service:
+        externalTrafficPolicy: "Local"
