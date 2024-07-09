@@ -1,0 +1,75 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/kubernetes-sigs/ingress-nginx/master/charts/ingress-nginx/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ingress-nginx-internal
+  namespace: &app ingress-nginx
+spec:
+  chart:
+    spec:
+      chart: *app
+      version: 4.11.0
+      sourceRef:
+        kind: HelmRepository
+        name: *app
+        namespace: flux-system
+  interval: 30m
+  releaseName: ingress-nginx-internal
+  targetNamespace: *app
+  values:
+    controller:
+      electionID: "ingress-controller-internal-leader"
+      ingressClass: "nginx-internal"
+      ingressClassResource:
+        name: "internal-nginx"
+        enabled: "true"
+        default: "false"
+        controllerValue: "k8s.io/internal-nginx"
+      allowSnippetAnnotations: "true"
+      config:
+        use-forwarded-headers: "true"
+        enable-real-ip: "true"
+        enable-modsecurity: "false"
+        enable-owasp-modsecurity-crs: "true"
+      publishService:
+        enabled: "true"
+      service:
+        enabled: "true"
+        type: "LoadBalancer"
+        externalTrafficPolicy: "Local"
+        annotations:
+          metallb.universe.tf/address-pool: "private"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/kubernetes-sigs/ingress-nginx/master/charts/ingress-nginx/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app ingress-nginx
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: *app
+      version: 4.11.0
+      sourceRef:
+        kind: HelmRepository
+        name: *app
+        namespace: flux-system
+  interval: 30m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    controller:
+      allowSnippetAnnotations: "true"
+      config:
+        use-forwarded-headers: "true"
+        enable-real-ip: "true"
+        enable-modsecurity: "false"
+        enable-owasp-modsecurity-crs: "true"
+      publishService:
+        enabled: "true"
+      service:
+        enabled: "true"
+        type: "LoadBalancer"
+        externalTrafficPolicy: "Local"
