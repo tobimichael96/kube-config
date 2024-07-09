@@ -20,3 +20,5 @@ spec:
         enabled: "true"
         type: "NodePort"
         externalTrafficPolicy: "Local"
+        internal:
+          externalTrafficPolicy: "Local"
