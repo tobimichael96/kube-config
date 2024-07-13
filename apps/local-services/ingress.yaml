@@ -12,7 +12,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host pihole.internal.tmem.de
+        - &host adguard.internal.tmem.de
       secretName: local-redirect-tls
   rules:
     - host: *host
@@ -22,6 +22,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: pi-hole
+                name: adguard
                 port:
                   number: 80
