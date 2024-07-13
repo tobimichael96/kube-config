@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: adguard-local-redirect-ingress
+  name: adguard
   namespace: local-services
   annotations:
     kubernetes.io/ingress.class: "nginx-internal"
@@ -29,7 +29,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: flightradar-local-redirect-ingress
+  name: flightradar
   namespace: local-services
   annotations:
     kubernetes.io/ingress.class: "nginx-internal"
