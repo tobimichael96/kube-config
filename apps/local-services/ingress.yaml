@@ -13,7 +13,7 @@ spec:
   tls:
     - hosts:
         - &host adguard.internal.tmem.de
-      secretName: adguard-local-redirect-tls
+      secretName: adguard-tls
   rules:
     - host: *host
       http:
@@ -40,7 +40,7 @@ spec:
   tls:
     - hosts:
         - &host flightradar.internal.tmem.de
-      secretName: flightradar-local-redirect-tls
+      secretName: flightradar-tls
   rules:
     - host: *host
       http:
@@ -49,6 +49,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: adguard
+                name: flightradar
                 port:
                   number: 80
