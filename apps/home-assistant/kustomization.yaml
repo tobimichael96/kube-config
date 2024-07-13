@@ -4,7 +4,8 @@ resources:
 - namespace.yaml
 - storage.yaml
 - secrets.yaml
-- home-assistant.yaml
+- helmrelease.yaml
+- ingress.yaml
 - mqtt-broker.yaml
 - zigbee2mqtt-conbee.yaml
 - zigbee2mqtt-sonoff.yaml
