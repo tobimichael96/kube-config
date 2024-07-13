@@ -17,8 +17,8 @@ spec:
     - host: *host
       http:
         paths:
-          - path: /
-            pathType: ImplementationSpecific
+          - path: /api/alexa/smart_home
+            pathType: Prefix
             backend:
               service:
                 name: home-assistant
