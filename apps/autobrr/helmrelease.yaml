@@ -31,8 +31,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/autobrr
-              tag: 1.4.3
+              repository: ghcr.io/autobrr/autobrr
+              tag: v1.43.0
             env:
               AUTOBRR__APP__INSTANCENAME: *app
               AUTOBRR__APP__THEME: "dark"
