@@ -2,34 +2,34 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: nextcloud
-  namespace: nextcloud
+  name: &app nextcloud
+  namespace: *app
 spec:
   chart:
     spec:
-      chart: nextcloud
+      chart: *app
       version: 5.2.0
       sourceRef:
         kind: HelmRepository
-        name: nextcloud
+        name: *app
         namespace: flux-system
   interval: 5m
-  releaseName: nextcloud
-  targetNamespace: nextcloud
+  releaseName: *app
+  targetNamespace: *app
   values:
     ingress:
       enabled: true
       annotations:
         nginx.ingress.kubernetes.io/proxy-body-size: 10G
-        kubernetes.io/ingress.class: "nginx"
+        kubernetes.io/ingress.class: "nginx-internal"
         kubernetes.io/tls-acme: "true"
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         cert-manager.io/cluster-issuer: "letsencrypt"
       hosts:
-        - cloud.tmem.de
+        - cloud.internal.tmem.de
       tls:
         - hosts:
-            - cloud.tmem.de
+            - cloud.internal.tmem.de
           secretName: nextcloud-tls
 
     nextcloud:
