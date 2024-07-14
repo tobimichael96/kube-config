@@ -25,6 +25,9 @@ data:
       Storage:
         icon: nextcloud.png
         style: column
+      Other:
+        icon: apache-airflow.png
+        style: column
     quicklaunch:
       searchDescriptions: true
       hideInternetSearch: true
@@ -75,10 +78,6 @@ data:
             icon: adguard-home.png
             href: https://adguard.internal.tmem.de/
             description: DNS blocker
-        - Privatebin:
-            icon: privatebin.png
-            href: https://bin.tmem.de/
-            description: Share texts
         - StirlingPDF:
             icon: https://pdf.tmem.de/apple-touch-icon.png
             href: https://pdf.tmem.de/
@@ -87,15 +86,15 @@ data:
             icon: https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg
             href: https://ddns.internal.tmem.de/
             description: Dynamic DNS updater
-        - Airflow:
-            icon: apache-airflow.png
-            href: https://airflow.internal.tmem.de/
-            description: Run tasks
     - Storage:
         - Nextcloud:
             icon: nextcloud.png
             href: https://cloud.tmem.de/
             description: Store everything
+        - Privatebin:
+            icon: privatebin.png
+            href: https://bin.tmem.de/
+            description: Share texts
         - MinIO:
             icon: minio.png
             href: https://minio.internal.tmem.de/
@@ -104,6 +103,15 @@ data:
             icon: https://share.tmem.de/static/favicon.png
             href: https://share.tmem.de/
             description: Share something
+    - Other:
+        - Airflow:
+            icon: apache-airflow.png
+            href: https://airflow.internal.tmem.de/
+            description: Run tasks
+        - Umami:
+            icon: umami.png
+            href: https://analytics.tmem.de
+            description: Run tasks
   # language=yaml
   bookmarks.yaml: |-
     ---
