@@ -103,9 +103,9 @@ data:
     - Storage:
         - Nextcloud:
             icon: nextcloud.png
-            href: https://cloud.tmem.de/
+            href: https://cloud.internal.tmem.de/
             description: Store everything
-            siteMonitor: https://cloud.tmem.de/
+            siteMonitor: https://cloud.internal.tmem.de/
         - Privatebin:
             icon: privatebin.png
             href: https://bin.tmem.de/
