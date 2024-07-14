@@ -4,6 +4,6 @@ kind: ClusterRole
 metadata:
   name: custom:ingress-reader
 rules:
-  - apiGroups: [ "", "networking.k8s.io", "networking", "extensions" ]
+  - apiGroups: [ "", "networking.k8s.io", "networking", "extensions", "metrics.k8s.io" ]
     resources: [ "pods", "ingresses" ]
     verbs: [ "get", "watch", "list" ]
