@@ -44,7 +44,7 @@ spec:
             'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
           );
 
-      host: cloud.tmem.de
+      host: cloud.internal.tmem.de
 
       existingSecret:
         enabled: true
