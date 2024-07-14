@@ -5,5 +5,5 @@ metadata:
   name: custom:ingress-reader
 rules:
   - apiGroups: [ "", "networking.k8s.io", "networking", "extensions" ]
-    resources: [ "ingresses" ]
+    resources: [ "pods", "ingresses" ]
     verbs: [ "get", "watch", "list" ]
