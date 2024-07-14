@@ -12,6 +12,8 @@ data:
     showStats: false
     headerStyle: clean
     favicon: https://tobiasmichael.de/assets/logo.ico
+    fiveColumns: true
+    statusStyle: "dot"
     layout:
       Home-Automation:
         icon: home-assistant.png
@@ -40,78 +42,99 @@ data:
             icon: home-assistant.png
             href: https://ha.internal.tmem.de/
             description: Control everything
+            siteMonitor: https://ha.internal.tmem.de/
         - Conbee:
             icon: zigbee2mqtt.png
             href: https://conbee.internal.tmem.de/
             description: Zigbee2Mqtt - Conbee
+            siteMonitor: https://conbee.internal.tmem.de/
         - Sonoff:
             icon: zigbee2mqtt.png
             href: https://sonoff.internal.tmem.de/
             description: Zigbee2Mqtt - Sonoff
+            siteMonitor: https://sonoff.internal.tmem.de/
     - Media:
         - Jellyfin:
             icon: jellyfin.png
             href: https://jellyfin.tmem.de/
             description: Watch everything
+            siteMonitor: https://jellyfin.internal.tmem.de/
         - Jellyseerr:
             icon: jellyseerr.png
             href: https://jellyseerr.internal.tmem.de/
             description: Request everything
+            siteMonitor: https://jellyseerr.internal.tmem.de/
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.internal.tmem.de/
             description: Series management
+            siteMonitor: https://sonarr.internal.tmem.de/
         - Radarr:
             icon: radarr.png
             href: https://radarr.internal.tmem.de/
             description: Movie management
+            siteMonitor: https://radarr.internal.tmem.de/
         - SABnzbd:
             icon: sabnzbd.png
             href: https://sabnzbd.internal.tmem.de/
             description: Download stuff
+            siteMonitor: https://sabnzbd.internal.tmem.de/
     - Utils:
         - Vaultwarden:
             icon: bitwarden.png
             href: https://vault.internal.tmem.de/
             description: Store passwords
+            siteMonitor: https://vault.internal.tmem.de/
         - AdGuard:
             icon: adguard-home.png
             href: https://adguard.internal.tmem.de/
             description: DNS blocker
+            siteMonitor: https://adguard.internal.tmem.de/
         - StirlingPDF:
             icon: https://pdf.tmem.de/apple-touch-icon.png
             href: https://pdf.tmem.de/
             description: Work with PDFs
+            siteMonitor: https://pdf.tmem.de/
         - DDNS:
             icon: https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg
             href: https://ddns.internal.tmem.de/
             description: Dynamic DNS updater
+            siteMonitor: https://ddns.internal.tmem.de/
     - Storage:
         - Nextcloud:
             icon: nextcloud.png
             href: https://cloud.tmem.de/
             description: Store everything
+            siteMonitor: https://cloud.tmem.de/
         - Privatebin:
             icon: privatebin.png
             href: https://bin.tmem.de/
             description: Share texts
+            siteMonitor: https://bin.tmem.de/
         - MinIO:
             icon: minio.png
             href: https://minio.internal.tmem.de/
             description: Website and storage
+            siteMonitor: https://minio.internal.tmem.de/
         - Quick-Share:
             icon: https://share.tmem.de/static/favicon.png
             href: https://share.tmem.de/
             description: Share something
+            siteMonitor: https://share.tmem.de/
     - Other:
         - Airflow:
             icon: apache-airflow.png
             href: https://airflow.internal.tmem.de/
             description: Run tasks
+            siteMonitor: https://airflow.internal.tmem.de/
         - Umami:
             icon: umami.png
             href: https://analytics.tmem.de
             description: Run tasks
+            siteMonitor: https://analytics.tmem.de/
   # language=yaml
   bookmarks.yaml: |-
     ---
+  #language=yaml
+  kubernetes.yaml: |-
+    mode: default
