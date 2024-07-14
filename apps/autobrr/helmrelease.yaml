@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app bazarr
+  name: &app autobrr
   namespace: *app
 spec:
   chart:
@@ -17,14 +17,9 @@ spec:
   interval: 5m
   releaseName: *app
   targetNamespace: *app
-  dependsOn:
-    - name: sonarr
-      namespace: sonarr
-    - name: radarr
-      namespace: radarr
   values:
     controllers:
-      bazarr:
+      autobrr:
         type: statefulset
         pod:
           securityContext:
@@ -36,14 +31,14 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/bazarr
+              repository: ghcr.io/onedr0p/autobrr
               tag: 1.4.3
             env:
-              BAZARR__APP__INSTANCENAME: *app
-              BAZARR__APP__THEME: "dark"
-              BAZARR__LOG__LEVEL: info
-              BAZARR__SERVER__PORT: &port 6767
-              BAZARR__UPDATE__BRANCH: develop
+              AUTOBRR__APP__INSTANCENAME: *app
+              AUTOBRR__APP__THEME: "dark"
+              AUTOBRR__LOG__LEVEL: info
+              AUTOBRR__PORT: &port 7474
+              AUTOBRR__UPDATE__BRANCH: develop
               TZ: Europe/Berlin
             probes:
               liveness: &probes
@@ -78,7 +73,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
-          - host: &host bazarr.internal.tmem.de
+          - host: &host autobrr.internal.tmem.de
             paths:
               - path: /
                 service:
@@ -87,11 +82,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: bazarr-tls
+            secretName: autobrr-tls
     persistence:
       config:
-        existingClaim: bazarr-config-pvc
-      media:
-        existingClaim: bazarr-media-pvc
-        globalMounts:
-          - path: /mnt/internal/media
+        existingClaim: autobrr-config-pvc
