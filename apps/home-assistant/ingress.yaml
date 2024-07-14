@@ -24,3 +24,10 @@ spec:
                 name: home-assistant
                 port:
                   number: 8123
+          - path: /auth/
+            pathType: Prefix
+            backend:
+              service:
+                name: home-assistant
+                port:
+                  number: 8123
