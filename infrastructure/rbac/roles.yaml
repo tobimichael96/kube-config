@@ -1,0 +1,9 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: custom:ingress-reader
+rules:
+  - apiGroups: [ "networking.k8s.io", "networking", "extensions" ]
+    resources: [ "ingresses" ]
+    verbs: [ "get", "watch", "list" ]
