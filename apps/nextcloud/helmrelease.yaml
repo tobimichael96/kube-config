@@ -50,8 +50,7 @@ spec:
             'trusted_domains' =>
               array (
                0 => 'localhost',
-               1 => 'cloud.tmem.de',
-               2 => 'cloud.internal.tmem.de',
+               1 => 'cloud.internal.tmem.de',
               )
           );
 
@@ -78,7 +77,7 @@ spec:
     lifecycle: {}
 
     # Number of replicas to be deployed
-    replicaCount: 3
+    replicaCount: 2
 
     image:
       repository: nextcloud
