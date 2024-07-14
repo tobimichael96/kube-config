@@ -67,3 +67,6 @@ spec:
           - path: /app/config/bookmarks.yaml
             subPath: bookmarks.yaml
             readOnly: true
+          - path: /app/config/kubernetes.yaml
+            subPath: kubernetes.yaml
+            readOnly: true
