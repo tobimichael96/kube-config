@@ -130,7 +130,7 @@ data:
         - Umami:
             icon: umami.png
             href: https://analytics.tmem.de
-            description: Run tasks
+            description: Website analytics
             siteMonitor: https://analytics.tmem.de/
   # language=yaml
   bookmarks.yaml: |-
