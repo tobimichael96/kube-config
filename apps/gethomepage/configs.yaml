@@ -64,6 +64,11 @@ data:
             href: https://jellyseerr.internal.tmem.de/
             description: Request everything
             siteMonitor: https://jellyseerr.internal.tmem.de/
+        - Prowlarr:
+            icon: prowlarr.png
+            href: https://prowlarr.internal.tmem.de/
+            description: Indexer management
+            siteMonitor: https://prowlarr.internal.tmem.de/
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.internal.tmem.de/
