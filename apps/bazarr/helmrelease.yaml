@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app sonarr
+  name: &app bazarr
   namespace: *app
 spec:
   chart:
@@ -18,11 +18,13 @@ spec:
   releaseName: *app
   targetNamespace: *app
   dependsOn:
-    - name: sabnzbd
-      namespace: sabnzbd
+    - name: sonarr
+      namespace: sonarr
+    - name: radarr
+      namespace: radarr
   values:
     controllers:
-      sonarr:
+      bazarr:
         type: statefulset
         pod:
           securityContext:
@@ -34,15 +36,14 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/sonarr
-              tag: 4.0.6.1805
+              repository: ghcr.io/onedr0p/bazarr
+              tag: 1.4.3
             env:
-              SONARR__APP__INSTANCENAME: *app
-              SONARR__APP__THEME: "dark"
-              SONARR__LOG__DBENABLED: "False"
-              SONARR__LOG__LEVEL: info
-              SONARR__SERVER__PORT: &port 8989
-              SONARR__UPDATE__BRANCH: develop
+              BAZARR__APP__INSTANCENAME: *app
+              BAZARR__APP__THEME: "dark"
+              BAZARR__LOG__LEVEL: info
+              BAZARR__SERVER__PORT: &port 6767
+              BAZARR__UPDATE__BRANCH: develop
               TZ: Europe/Berlin
             probes:
               liveness: &probes
@@ -50,7 +51,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /ping
+                    path: /api
                     port: *port
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -77,7 +78,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
-          - host: &host sonarr.internal.tmem.de
+          - host: &host bazarr.internal.tmem.de
             paths:
               - path: /
                 service:
@@ -86,15 +87,11 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: sonarr-tls
+            secretName: bazarr-tls
     persistence:
       config:
-        existingClaim: sonarr-config-pvc
-      logs:
-        type: emptyDir
+        existingClaim: bazarr-config-pvc
       media:
-        existingClaim: sonarr-media-pvc
+        existingClaim: bazarr-media-pvc
         globalMounts:
           - path: /mnt/internal/media
-      tmp:
-        type: emptyDir
