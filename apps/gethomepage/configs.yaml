@@ -9,7 +9,7 @@ data:
     title: TME Overview
     theme: dark
     color: slate
-    showStats: true
+    showStats: false
     headerStyle: clean
     favicon: https://tobiasmichael.de/assets/logo.ico
     fiveColumns: true
