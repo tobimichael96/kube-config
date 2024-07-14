@@ -71,9 +71,9 @@ data:
             icon: bitwarden.png
             href: https://vault.internal.tmem.de/
             description: Store passwords
-        - Pi-hole:
-            icon: pi-hole.png
-            href: https://pihole.internal.tmem.de/
+        - AdGuard:
+            icon: adguard-home.png
+            href: https://adguard.internal.tmem.de/
             description: DNS blocker
         - Privatebin:
             icon: privatebin.png
