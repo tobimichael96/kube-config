@@ -50,6 +50,24 @@ spec:
         ports:
           http:
             port: *port
+    ingress:
+      app:
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host proxy.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: openssh-tls
     persistence:
       config:
         enabled: true
