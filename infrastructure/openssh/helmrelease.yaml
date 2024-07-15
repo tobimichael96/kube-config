@@ -27,6 +27,8 @@ spec:
               tag: 9.7_p1-r4-ls164
             env:
               TZ: Europe/Berlin
+              PUBLIC_KEY_DIR: /openssh/config/keys
+              PASSWORD_ACCESS: false
             probes:
               liveness: &probes
                 enabled: false
@@ -48,3 +50,11 @@ spec:
         ports:
           http:
             port: *port
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: public-keys
+        globalMounts:
+          - path: /openssh/config/keys
+            readOnly: true

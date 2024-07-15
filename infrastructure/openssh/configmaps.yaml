@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: public-keys
+    namespace: openssh
+data:
+    yubikey: ENC[AES256_GCM,data:IxEdEKaBdpfEf86U5T/yagl6QZ6sesGlCO/zMKC/skjPzeXMhvcGBJ290Fy5BCri8hG31IB6Xmj/pV5jM2c85ntYKip2Gd5doZ3hEOOvxCoCxx9yGVj6OvBufXseiPmmZcg=,iv:kc63aJykODKzDQVK+fEXp1X7w3zHORV+s0akZBPlQTE=,tag:9pY9122vEcyvyMhX2eY8dQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1099kpzqp5v429mcyekxxnnyfkyuqxgq3esxvamc0kv7tf7nh9g9qymcpmx
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuU1M1TlhMOTRnYXFaWkdu
+            dVZiZkNkRVRaMFdUaHdONFBBZUFBSEVzeVhrCmFIcWQvcjhFaS90QzliREFLUks0
+            K01RSkxjeFptVU9xSVljbDVzaEhIRlUKLS0tIDltcFJXcDBYZGtMNjMwSFNyK3JT
+            cHZ0ZktPMDl2VFJia1I1ZWlzWnFUaFkKz/3jZ4ZbWtYNSr/ns7qoOczCF19vJ/XN
+            +kjeu80RlHlJGY8OMnC5L862sf6PSLMtiHT65I5D1gJxoU23vDlEww==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-07-15T17:52:05Z"
+    mac: ENC[AES256_GCM,data:ogl1dEUO7fuK3ybCbV9UvnRvNh4VLPbj+gFwChtg+yLRXjmEGaSTCT9RdQIcykbKc2JmfrmWMzoN5BFYNTr6qzhZaWxFObIbIlpQkJRCWyYmLGkCjVngJCRWFwjfBuB2JG2i1CRs84UHKwWv2b0U6zFNCM2ScG5FILmNJ0u+TLU=,iv:xVtuhwKQBuMjcrIeS67ImoHSWnMeYWF4PDNFOeUYBR0=,tag:sFxMHKsP/8dqvyX58IDawQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
