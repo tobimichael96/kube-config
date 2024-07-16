@@ -137,6 +137,11 @@ data:
             href: https://analytics.tmem.de
             description: Website analytics
             siteMonitor: https://analytics.tmem.de/
+        - Uptime-Kuma:
+            icon: uptime-kuma.png
+            href: https://status.tmem.de
+            description: Status page
+            siteMonitor: https://status.tmem.de/
   # language=yaml
   bookmarks.yaml: |-
     ---
