@@ -70,7 +70,7 @@ spec:
           securityContext:
             runAsNonRoot: true
             runAsUser: 104
-            runAsGroup: 911
+            runAsGroup: 110
             fsGroup: 0
             fsGroupChangePolicy: OnRootMismatch
             seLinuxOptions:
