@@ -19,14 +19,14 @@ spec:
   targetNamespace: *app
   values:
     service:
-      main:
-        controller: main
+      app:
+        controller: app
         ports:
-          main:
+          app:
             port: 8096
             targetPort: 8096
       autodiscovery:
-        controller: main
+        controller: app
         type: "NodePort"
         ports:
           autodiscovery:
@@ -34,6 +34,24 @@ spec:
             protocol: UDP
             port: 7359
             targetPort: 7359
+    ingress:
+      app:
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host jellyfin.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: 8096
+        tls:
+          - hosts:
+              - *host
+            secretName: jellyfin-tls
     persistence:
       config:
         existingClaim: jellyfin-config-pvc
@@ -66,7 +84,7 @@ spec:
       open:
         enabled: true
     controllers:
-      main:
+      app:
         pod:
           securityContext:
             runAsNonRoot: true
@@ -75,9 +93,9 @@ spec:
             fsGroup: 0
             fsGroupChangePolicy: OnRootMismatch
         containers:
-          main:
+          app:
             image:
               repository: linuxserver/jellyfin
               tag: 10.9.7
             env:
-              JELLYFIN_PublishedServerUrl: "{{ $.Values.chartContext.APPURL }}"
+              JELLYFIN_PublishedServerUrl: *host
