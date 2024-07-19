@@ -68,7 +68,7 @@ spec:
       app:
         pod:
           securityContext:
-            runAsNonRoot: false
+            runAsNonRoot: true
             runAsUser: 104
             runAsGroup: 911
             fsGroup: 0
