@@ -27,7 +27,6 @@ spec:
             targetPort: 8096
       autodiscovery:
         controller: app
-        type: "NodePort"
         ports:
           autodiscovery:
             enabled: true
@@ -69,7 +68,7 @@ spec:
       app:
         pod:
           securityContext:
-            runAsNonRoot: true
+            runAsNonRoot: false
             runAsUser: 104
             runAsGroup: 911
             fsGroup: 0
@@ -77,7 +76,7 @@ spec:
         containers:
           app:
             image:
-              repository: linuxserver/jellyfin
+              repository: ghcr.io/jellyfin/jellyfin
               tag: 10.9.7
             env:
               JELLYFIN_PublishedServerUrl: "jellyfin.tmem.de"
