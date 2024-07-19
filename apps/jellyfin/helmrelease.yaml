@@ -84,3 +84,6 @@ spec:
               JELLYFIN_PublishedServerUrl: "jellyfin.tmem.de"
             securityContext:
               privileged: true
+            resources:
+              limits:
+                cpu: "2000m"
