@@ -65,7 +65,7 @@ spec:
     portal:
       open:
         enabled: true
-    controller:
+    controllers:
       main:
         pod:
           securityContext:
