@@ -34,24 +34,6 @@ spec:
             protocol: UDP
             port: 7359
             targetPort: 7359
-    ingress:
-      app:
-        annotations:
-          kubernetes.io/ingress.class: "nginx"
-          kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
-        hosts:
-          - host: &host jellyfin.tmem.de
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: 8096
-        tls:
-          - hosts:
-              - *host
-            secretName: jellyfin-tls
     persistence:
       config:
         existingClaim: jellyfin-config-pvc
