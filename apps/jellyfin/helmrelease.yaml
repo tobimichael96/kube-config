@@ -73,6 +73,8 @@ spec:
             runAsGroup: 911
             fsGroup: 0
             fsGroupChangePolicy: OnRootMismatch
+            seLinuxOptions:
+              type: spc_t
         containers:
           app:
             image:
