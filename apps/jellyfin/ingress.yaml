@@ -22,7 +22,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: jellyfin
+                name: jellyfin-app
                 port:
                   number: 8096
 ---
@@ -50,6 +50,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: jellyfin
+                name: jellyfin-app
                 port:
                   number: 8096
