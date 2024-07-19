@@ -86,4 +86,4 @@ spec:
               privileged: true
             resources:
               limits:
-                cpu: "2000m"
+                cpu: "3000m"
