@@ -79,7 +79,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jellyfin/jellyfin
-              tag: 10.9.7
+              tag: 10.9.8
             env:
               JELLYFIN_PublishedServerUrl: "jellyfin.tmem.de"
             securityContext:
