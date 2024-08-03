@@ -91,6 +91,8 @@ kind: Service
 metadata:
   name: zigbee2mqtt-sonoff
   namespace: home-assistant
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     app: zigbee2mqtt-sonoff
