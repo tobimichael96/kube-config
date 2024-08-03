@@ -38,6 +38,10 @@ spec:
           - name: zigbee2mqtt-config
             mountPath: /data/configuration.yaml
             subPath: configuration.yaml
+            readOnly: true
+          - name: zigbee2mqtt-secrets
+            mountPath: /data/secrets.yaml
+            readOnly: true
           - name: zigbee2mqtt-udev
             mountPath: /run/udev
           - name: ttyacm
@@ -77,6 +81,9 @@ spec:
         - name: zigbee2mqtt-config
           configMap:
             name: zigbee2mqtt-config
+        - name: zigbee2mqtt-secrets
+          secret:
+            secretName: zigbee2mqtt-config
 ---
 apiVersion: v1
 kind: Service
