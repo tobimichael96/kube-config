@@ -5,10 +5,6 @@ metadata:
     namespace: airflow
 data:
     #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
-    STRATO_CONFIG: ENC[AES256_GCM,data:tamZpW8qq9QuDLkc6PjiwS0XTONhP9aNseMM5mSsia6hMWdQuQj91lC65tYi7hfybj8lMj6bzATvD42LUCj9Yd+lw8Wn1CH6rXGebdctNleH5fHzBkhqDj87Ar+F,iv:Fx9vQbJzLc8r8PI1h163HxKDXDW7NzJ3mMrhZ9nXx7Y=,tag:8LEdvaDHaVCIiKg3Tsthzw==,type:str]
-    #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
-    NETCUP_CONFIG: ENC[AES256_GCM,data:lBOIp3K4aajc7/ECbOdy8s8c+SLhWO/3uglpbamH11s=,iv:rtdvs2/2WZWVwsbiwz5mFp3NB/QsUlTm4n/bJXAwqmQ=,tag:kdr7nNReMFC9u1IbEH/adw==,type:str]
-    #ENC[AES256_GCM,data:8Tpb2bL98G/8oLUYduM=,iv:MQfAglF55dYZr9rvyPaqYV2XfXDCoY6rAKoVmnGIq5U=,tag:pjsTwPhGhQ9weNDlGygnNg==,type:comment]
     DOTA_STATS_GABEN: ENC[AES256_GCM,data:xEsD+kw76pSX8W1LcWZFvVNQYzXv6VA0fMChyq3slUKKLLTQvGFdAn0p0/rthCERTKPiJ/oqFDa+2nbd/aQ5Vtxi8FTbk+bXHo6UgCc94AA5AexOb/sh15l+L4Si3OQeJ5s9,iv:Az0J1dkuA9ATw1zXZUVqXYgVeDvHiYFqdc/ZpSUttuk=,tag:tjPQRFYhfNQhN9HnIshchA==,type:str]
 sops:
     kms: []
@@ -25,8 +21,8 @@ sops:
             LzYrTXdKVGJsbGhXRjE0UUVzU0RoeHMKXJ2rt6lA9zvF62d6dhTGOTMTAXtLG8uj
             uZekqs1k07FQ6+Q6QxlUSditfl5JFGgGDG25uRXopRiu17skbn++fg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-06-23T20:00:56Z"
-    mac: ENC[AES256_GCM,data:nbuzZEg4iKMVZkwQkWaGylTg+o7vyun8zus8gSD4iQEecnlwoFmVGDSeRlU6CwjK1X1lAtm8jDwEzU/iCKFrglqksZ4CtxVGO3tUg5mrCEIz63BgcHUAVZJEN4/t/ZzTnc2UD8zNUOXtwruR4IW3Ux58zzCvzQ67dcXhAFXe2Y4=,iv:P/AOvmf31N5KEakA1R1EFqp66BxMq1JGyoC84GuAvMU=,tag:cJpOMREjkfu97BLOdgtZ5w==,type:str]
+    lastmodified: "2024-08-03T10:52:15Z"
+    mac: ENC[AES256_GCM,data:pmh2D0+sKJFAwpOAHEIm7MNv0E+2OLrbeesl78kDmdeE9S9ttTwn/3OWrmCrXNeQS64D8YysAe7zminT7XmCEDEHpdStF5jNWG0BAzXakoc1ShzjlKYJyrVDrQFFcqy1wDwB+toG7HYz83Zqrin0Euffy+B8a1NLkiycYf9kXU4=,iv:IH+AdpUf/Uf2372RoKgi7UpC9dcE7Zh8IzWBHWG8Kvo=,tag:MXPTHR5dvaBRFLfTyuRGJg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
-    version: 3.8.1
+    version: 3.9.0
