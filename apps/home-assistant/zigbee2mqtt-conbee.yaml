@@ -41,7 +41,6 @@ spec:
             readOnly: true
           - name: zigbee2mqtt-secrets
             mountPath: /data/secrets.yaml
-            subPath: secrets.yaml
             readOnly: true
           - name: zigbee2mqtt-udev
             mountPath: /run/udev
