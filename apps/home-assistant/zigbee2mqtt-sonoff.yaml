@@ -38,6 +38,11 @@ spec:
             - name: zigbee2mqtt-sonoff-config
               mountPath: /data/configuration.yaml
               subPath: configuration.yaml
+              readOnly: true
+            - name: zigbee2mqtt-secrets
+              mountPath: /data/secrets.yaml
+              subPath: secrets.yaml
+              readOnly: true
             - name: zigbee2mqtt-udev
               mountPath: /run/udev
             - name: ttyacm
@@ -77,6 +82,9 @@ spec:
         - name: zigbee2mqtt-sonoff-config
           configMap:
             name: zigbee2mqtt-sonoff-config
+        - name: zigbee2mqtt-secrets
+          secret:
+            secretName: zigbee2mqtt-credentials
 ---
 apiVersion: v1
 kind: Service
@@ -114,6 +122,7 @@ data:
     # Enable the Zigbee2MQTT frontend
     frontend:
       port: 8080
+      auth_token: '!secrets.yaml auth_token'
     # Overwrite availability
     availability:
       active:
