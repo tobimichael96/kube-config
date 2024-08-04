@@ -1,4 +1,3 @@
-
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -55,3 +54,64 @@ spec:
       additionalMounts:
         - name: dbus
           mountPath: /var/run/dbus
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: eclipse-mosquitto
+  namespace: home-assistant
+spec:
+  chart:
+    spec:
+      chart: generic-helm
+      version: 0.0.8
+      sourceRef:
+        kind: HelmRepository
+        name: generic-helm
+        namespace: flux-system
+  interval: 5m
+  releaseName: generic-helm
+  targetNamespace: home-assistant
+  values:
+    image:
+      repository: eclipse-mosquitto
+      tag: 2.0.18
+
+    namespace: home-assistant
+
+    deployment:
+      replicas: 1
+      name: mosquitto-mqtt
+      containerPort: 1883
+      hostNetwork: true
+      hostPort: 1883
+
+    ingress:
+      enabled: false
+
+    persistence:
+      enabled: true
+      storageClass: local-storage
+      existingClaim: mqtt-broker-pvc
+      mountPath: "/mosquitto/data"
+      additionalMounts:
+        - mountPath: /mosquitto/config/mosquitto.conf
+          name: config
+          subPath: mosquitto.conf
+
+    deploymentStrategy:
+      type: Recreate
+
+    configMap:
+      enabled: true
+      data:
+        mosquitto.conf: |
+          allow_anonymous true
+          #password_file /mosquitto/data/passwd
+      
+          # Persistent data store
+          persistence false
+          persistence_location /mosquitto/data
+      
+          listener 1883
+          protocol mqtt

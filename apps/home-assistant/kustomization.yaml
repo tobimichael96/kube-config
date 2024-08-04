@@ -5,8 +5,7 @@ resources:
 - storage.yaml
 - secrets.yaml
 - helmrelease.yaml
-- ingress.yaml
-- mqtt-broker.yaml
+- additional-ingress.yaml
 - zigbee2mqtt-conbee.yaml
 - zigbee2mqtt-sonoff.yaml
 - zigbee2mqtt-ingress.yaml

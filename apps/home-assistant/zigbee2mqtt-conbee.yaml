@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zigbee2mqtt
+  name: zigbee2mqtt-conbee
   namespace: home-assistant
   annotations:
     reloader.stakater.com/auto: "true"
@@ -10,17 +10,17 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: zigbee2mqtt
+      app: zigbee2mqtt-conbee
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: zigbee2mqtt
+        app: zigbee2mqtt-conbee
       namespace: home-assistant
     spec:
       containers:
-        - name: zigbee2mqtt
+        - name: zigbee2mqtt-conbee
           image: koenkk/zigbee2mqtt:1.39.1
           imagePullPolicy: IfNotPresent
           env:
@@ -37,7 +37,7 @@ spec:
           volumeMounts:
             - name: zigbee2mqtt-data
               mountPath: /data
-            - name: zigbee2mqtt-config
+            - name: zigbee2mqtt-conbee-config
               mountPath: /data/configuration.yaml
               subPath: configuration.yaml
               readOnly: true
@@ -81,9 +81,9 @@ spec:
           hostPath:
             path: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2292211-if00
             type: CharDevice
-        - name: zigbee2mqtt-config
+        - name: zigbee2mqtt-conbee-config
           configMap:
-            name: zigbee2mqtt-config
+            name: zigbee2mqtt-conbee-config
         - name: zigbee2mqtt-secrets
           secret:
             secretName: zigbee2mqtt-credentials
@@ -91,13 +91,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: zigbee2mqtt
+  name: zigbee2mqtt-conbee
   namespace: home-assistant
 spec:
   selector:
-    app: zigbee2mqtt
+    app: zigbee2mqtt-conbee
   ports:
-    - name: zigbee2mqtt
+    - name: zigbee2mqtt-conbee
       port: 8080
       targetPort: http
       protocol: TCP
@@ -105,7 +105,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: zigbee2mqtt-config
+  name: zigbee2mqtt-conbee-config
   namespace: home-assistant
 data:
   configuration.yaml: |-
