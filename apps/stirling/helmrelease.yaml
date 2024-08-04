@@ -75,6 +75,7 @@ spec:
             secretName: stirling-tls
     persistence:
       data:
+        enabled: false
         existingClaim: stirling-pvc
         globalMounts:
           - path: /data
