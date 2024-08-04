@@ -75,13 +75,3 @@ spec:
           - hosts:
               - *host
             secretName: stirling-tls
-    persistence:
-      data:
-        enabled: false
-        existingClaim: stirling-pvc
-        globalMounts:
-          - path: /data
-      logs:
-        type: emptyDir
-        globalMounts:
-          - path: /logs
