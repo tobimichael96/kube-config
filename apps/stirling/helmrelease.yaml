@@ -52,7 +52,6 @@ spec:
         ports:
           http:
             port: *port
-
     ingress:
       app:
         annotations:
