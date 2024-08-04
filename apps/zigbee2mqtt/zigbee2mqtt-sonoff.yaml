@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zigbee2mqtt-sonoff
-  namespace: home-assistant
+  namespace: zigbee2mqtt
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
@@ -17,7 +17,7 @@ spec:
     metadata:
       labels:
         app: zigbee2mqtt-sonoff
-      namespace: home-assistant
+      namespace: zigbee2mqtt
     spec:
       containers:
         - name: zigbee2mqtt-sonoff
@@ -92,7 +92,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: zigbee2mqtt-sonoff
-  namespace: home-assistant
+  namespace: zigbee2mqtt
   annotations:
     reloader.stakater.com/auto: "true"
 spec:

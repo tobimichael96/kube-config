@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: zigbee2mqtt-sonoff-config
-  namespace: home-assistant
+  namespace: zigbee2mqtt
 data:
   configuration.yaml: |-
     # Let new devices join our zigbee network
@@ -53,7 +53,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: zigbee2mqtt-conbee-config
-  namespace: home-assistant
+  namespace: zigbee2mqtt
 data:
   configuration.yaml: |-
     # Let new devices join our zigbee network

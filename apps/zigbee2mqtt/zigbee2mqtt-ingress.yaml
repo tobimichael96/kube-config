@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: zigbee2mqtt
-  namespace: home-assistant
+  namespace: zigbee2mqtt
   annotations:
     kubernetes.io/ingress.class: "nginx-internal"
     kubernetes.io/tls-acme: "true"
