@@ -20,6 +20,13 @@ spec:
   values:
     controllers:
       main:
+        pod:
+          securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
