@@ -37,7 +37,6 @@ spec:
         ports:
           other:
             port: 1883
-
     persistence:
       data:
         enabled: true
