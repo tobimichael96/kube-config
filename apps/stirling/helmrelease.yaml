@@ -20,6 +20,13 @@ spec:
   values:
     controllers:
       main:
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 911
+            runAsGroup: 911
+            fsGroup: 0
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
@@ -42,10 +49,6 @@ spec:
               readiness: *probes
               startup:
                 enabled: false
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: [ "ALL" ] }
     service:
       app:
         controller: main
