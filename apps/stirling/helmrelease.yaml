@@ -80,3 +80,5 @@ spec:
           - path: /data
       logs:
         type: emptyDir
+        globalMounts:
+          - path: /logs
