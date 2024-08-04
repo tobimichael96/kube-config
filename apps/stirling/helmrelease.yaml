@@ -78,3 +78,5 @@ spec:
         existingClaim: stirling-pvc
         globalMounts:
           - path: /data
+      logs:
+        type: emptyDir
