@@ -4,5 +4,7 @@ resources:
 - namespace.yaml
 - storage.yaml
 - secrets.yaml
-- helmrelease.yaml
-- additional-ingress.yaml
+- configmaps.yaml
+- zigbee2mqtt-conbee.yaml
+- zigbee2mqtt-sonoff.yaml
+- zigbee2mqtt-ingress.yaml
