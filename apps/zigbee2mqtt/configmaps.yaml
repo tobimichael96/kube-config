@@ -13,7 +13,7 @@ data:
     # MQTT server URL
     mqtt:
       base_topic: zigbee2mqtt-sonoff
-      server: "mqtt://mosquitto-mqtt.home-assistant:1883" # mqtt://<name_of_pod>.<name_of_namespace> (mosquitto)
+      server: "mqtt://mosquitto.home-assistant:1883" # mqtt://<name_of_pod>.<name_of_namespace> (mosquitto)
       include_device_information: true
     # Zigbee Adapter path
     serial:
@@ -63,7 +63,7 @@ data:
     # MQTT server URL
     mqtt:
       base_topic: zigbee2mqtt
-      server: "mqtt://mosquitto-mqtt.home-assistant:1883" # mqtt://<name_of_pod>.<name_of_namespace> (mosquitto)
+      server: "mqtt://mosquitto.home-assistant:1883" # mqtt://<name_of_pod>.<name_of_namespace> (mosquitto)
       include_device_information: true
     # Zigbee Adapter path
     serial:
