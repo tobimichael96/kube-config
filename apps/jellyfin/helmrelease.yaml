@@ -81,7 +81,7 @@ spec:
               repository: ghcr.io/jellyfin/jellyfin
               tag: 10.9.9
             env:
-              JELLYFIN_PublishedServerUrl: "jellyfin.tmem.de"
+              JELLYFIN_PublishedServerUrl: "jellyfin.internal.tmem.de"
             securityContext:
               privileged: true
             resources:

@@ -56,7 +56,7 @@ data:
     - Media:
         - Jellyfin:
             icon: jellyfin.png
-            href: https://jellyfin.tmem.de/
+            href: https://jellyfin.internal.tmem.de/
             description: Watch everything
             siteMonitor: https://jellyfin.internal.tmem.de/
         - Jellyseerr:
