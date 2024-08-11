@@ -21,7 +21,7 @@ spec:
       wal: true
     image:
       repository: vaultwarden/server
-      tag: "1.31.0"
+      tag: "1.32.0"
     vaultwarden:
       admin:
         enabled: false
