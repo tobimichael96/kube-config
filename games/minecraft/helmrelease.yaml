@@ -127,7 +127,7 @@ spec:
       # Maximum number of threads the server tries to use. If set to 0 or removed then it uses as many as possible.
       maxThreads: 8
       # Cheat like commands can be used.
-      cheats: false
+      cheats: true
       # Enable emit server telemetry.
       emitServerTelemetry: false
       # Enable lan visibility.
