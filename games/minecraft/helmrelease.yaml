@@ -107,7 +107,7 @@ spec:
       # Max view distance (in chunks).
       viewDistance: 32
       # The "level-name" value is used as the world name and its folder name. The player may also copy their saved game folder here, and change the name to the same as that folder's to load it instead.
-      levelName: babos
+      levelName: level
       # Define this if you want a specific map generation seed.
       levelSeed:
       # One of: creative, survival, adventure, spectator
