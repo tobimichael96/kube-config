@@ -86,12 +86,12 @@ spec:
       whitelist:
       # A comma-separated list of player names to whitelist with no whitespace.
       # ex: whitelistUsers: player1,player2,player3
-      whitelistUsers:
+      whitelistUsers: "2535431102966425"
       # A comma-seperated list of xuid's for operators on server with no
       # whitespaces.
       # The server logs will print xuids as players connect.
       # ex: ops: "12345678,0987654"
-      ops:
+      ops: "2535431102966425"
       # A comma-seperated list of xuid's for members on server with no
       # whitespaces.
       # ex: ops: "12345678,0987654"
@@ -131,7 +131,7 @@ spec:
       # Enable emit server telemetry.
       emitServerTelemetry: false
       # Enable lan visibility.
-      enableLanVisibility: false
+      enableLanVisibility: true
       # IPv4 UDP port of server. If using a nodePort, set serverPort and nodePort to the same value (e.g. 30000) so ping time displays.
       serverPort: 19132
       # type of kubernetes service to use
