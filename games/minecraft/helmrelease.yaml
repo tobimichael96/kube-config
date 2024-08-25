@@ -70,7 +70,7 @@ spec:
 
     # The value of the field will be interpreted as a template.
     extraPodSpec:
-      # hostNetwork: true
+      hostNetwork: true
 
     minecraftServer:
       # This must be overridden, since we can't accept this for the user.
@@ -137,8 +137,8 @@ spec:
       # type of kubernetes service to use
       serviceType: ClusterIP
       ## Set the port used if the serviceType is NodePort
-      nodePort: 19132
-      # loadBalancerIP:
+      # nodePort: 19132
+      loadBalancerIP:
       # loadBalancerSourceRanges: []
       ## Set the externalTrafficPolicy in the Service to either Cluster or Local
       # externalTrafficPolicy: Cluster
@@ -155,7 +155,7 @@ spec:
     # turn off the minecraft bedrock server and just run sleep in a loop, this way you can get to the server files to restore a server without the server already have loaded
     # them into memory or something
     # kubectl cp -n minecraft survival-server-minecraft-bedrock-b868f4464-nq22m:/data/worlds/. ./
-    restoreMode: true
+    restoreMode: false
 
     persistence:
       storageClass: "local-storage"
