@@ -151,3 +151,12 @@ metadata:
 spec:
   interval: 1h0m0s
   url: https://metallb.github.io/metallb
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: minecraft-bedrock
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://itzg.github.io/minecraft-server-charts/
