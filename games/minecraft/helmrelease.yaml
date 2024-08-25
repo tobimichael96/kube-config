@@ -68,6 +68,10 @@ spec:
     # https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
     shareProcessNamespace: false
 
+    # The value of the field will be interpreted as a template.
+    extraPodSpec:
+      # hostNetwork: true
+
     minecraftServer:
       # This must be overridden, since we can't accept this for the user.
       eula: "TRUE"
