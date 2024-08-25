@@ -103,9 +103,9 @@ spec:
       # Max connected players.
       maxPlayers: 10
       # The world is ticked this many chunks away from any player.
-      tickDistance: 8
+      tickDistance: 16
       # Max view distance (in chunks).
-      viewDistance: 18
+      viewDistance: 32
       # The "level-name" value is used as the world name and its folder name. The player may also copy their saved game folder here, and change the name to the same as that folder's to load it instead.
       levelName: level
       # Define this if you want a specific map generation seed.
