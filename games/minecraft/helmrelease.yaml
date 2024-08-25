@@ -70,7 +70,7 @@ spec:
 
     # The value of the field will be interpreted as a template.
     extraPodSpec:
-      hostNetwork: true
+      hostNetwork: "true"
 
     minecraftServer:
       # This must be overridden, since we can't accept this for the user.
