@@ -30,6 +30,9 @@ spec:
       requests:
         memory: 512Mi
         cpu: 500m
+      limits:
+        memory: 4096Mi
+        cpu: 4000m
 
     # If true the workload is defined as a StatefulSet instead of a Deployment.
     # Make sure to also update the strategyType!
