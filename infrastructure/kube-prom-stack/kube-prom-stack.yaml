@@ -116,3 +116,7 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
+        tolerations:
+        - effect: NoSchedule
+          key: cloud
+          operator: Exists
