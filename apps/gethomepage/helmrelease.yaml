@@ -28,10 +28,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-                - key: kubernetes.io/hostname
+                - key: cloud
                   operator: In
                   values:
-                    - ubuntu
+                    - "true"
     controllers:
       homepage:
         annotations:
