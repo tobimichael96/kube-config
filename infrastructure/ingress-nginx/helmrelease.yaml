@@ -61,6 +61,11 @@ spec:
   targetNamespace: *app
   values:
     controller:
+      kind: Deployment
+      tolerations:
+        - effect: NoSchedule
+          key: cloud
+          operator: Exists
       allowSnippetAnnotations: "true"
       config:
         use-forwarded-headers: "true"
@@ -73,3 +78,5 @@ spec:
         enabled: "true"
         type: "LoadBalancer"
         externalTrafficPolicy: "Local"
+        annotations:
+          metallb.universe.tf/address-pool: "cloud"
