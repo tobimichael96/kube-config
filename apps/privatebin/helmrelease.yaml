@@ -21,6 +21,16 @@ spec:
       - effect: NoSchedule
         key: cloud
         operator: Exists
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+                - key: cloud
+                  operator: In
+                  values:
+                    - "true"
     configs:
       conf.php: |-
         [main]
