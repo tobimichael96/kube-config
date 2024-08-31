@@ -18,11 +18,6 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-    controller:
-      tolerations:
-        - effect: NoSchedule
-          key: cloud
-          operator: Exists
     speaker:
       tolerations:
         - effect: NoSchedule
