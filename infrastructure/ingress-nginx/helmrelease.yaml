@@ -62,10 +62,6 @@ spec:
   values:
     controller:
       kind: Deployment
-      tolerations:
-        - effect: NoSchedule
-          key: cloud
-          operator: Exists
       allowSnippetAnnotations: "true"
       config:
         use-forwarded-headers: "true"
