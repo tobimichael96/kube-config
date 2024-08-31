@@ -5,3 +5,4 @@ resources:
   - https://github.com/rancher/system-upgrade-controller/releases/download/v0.10.0/crd.yaml
   - upgrade-plan.yaml
   - ingress-nginx.yaml
+  - core-dns.yaml
