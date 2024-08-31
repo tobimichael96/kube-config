@@ -72,4 +72,4 @@ spec:
       service:
         enabled: "true"
         type: "LoadBalancer"
-        externalTrafficPolicy: "Local"
+        externalTrafficPolicy: "Cluster"
