@@ -6,52 +6,25 @@ metadata:
 spec:
   addresses:
   - 192.168.178.120-192.168.178.121
----
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
-metadata:
-  name: default
-  namespace: metallb
-spec:
-  ipAddressPools:
-  - default
----
-apiVersion: metallb.io/v1beta1
-kind: BGPAdvertisement
-metadata:
-  name: default
-  namespace: metallb
-spec:
-  ipAddressPools:
-  - default
----
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: cloud
-  namespace: metallb
-spec:
-  addresses:
   - 192.168.178.210/32
-  autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: cloud
+  name: default
   namespace: metallb
 spec:
   ipAddressPools:
-  - cloud
+  - default
 ---
 apiVersion: metallb.io/v1beta1
 kind: BGPAdvertisement
 metadata:
-  name: cloud
+  name: default
   namespace: metallb
 spec:
   ipAddressPools:
-  - cloud
+  - default
 ---
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
