@@ -20,3 +20,7 @@ spec:
       clients:
         - url: http://loki-gateway.loki:80/loki/api/v1/push
           tenant_id: 1
+    tolerations:
+      - effect: NoSchedule
+        key: cloud
+        operator: Exists
