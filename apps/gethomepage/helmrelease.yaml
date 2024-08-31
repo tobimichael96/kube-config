@@ -18,6 +18,20 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    defaultPodOptions:
+      tolerations:
+        - effect: NoSchedule
+          key: cloud
+          operator: Exists
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - ubuntu
     controllers:
       homepage:
         annotations:

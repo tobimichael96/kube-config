@@ -17,6 +17,10 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    tolerations:
+      - effect: NoSchedule
+        key: cloud
+        operator: Exists
     configs:
       conf.php: |-
         [main]
