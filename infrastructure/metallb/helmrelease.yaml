@@ -23,3 +23,8 @@ spec:
         - effect: NoSchedule
           key: cloud
           operator: Exists
+    speaker:
+      tolerations:
+        - effect: NoSchedule
+          key: cloud
+          operator: Exists
