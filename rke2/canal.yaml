@@ -1,0 +1,13 @@
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: rke2-canal
+  namespace: kube-system
+spec:
+  # language=yaml
+  valuesContent: |-
+    tolerations:
+      - effect: NoSchedule
+        key: cloud
+        operator: Exists

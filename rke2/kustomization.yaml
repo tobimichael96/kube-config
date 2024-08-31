@@ -6,3 +6,4 @@ resources:
   - upgrade-plan.yaml
   - ingress-nginx.yaml
   - core-dns.yaml
+  - canal.yaml
