@@ -31,6 +31,10 @@ spec:
   nodeSelector:
     matchExpressions:
       - { key: node-role.kubernetes.io/control-plane, operator: NotIn, values: [ "true" ] }
+  tolerations:
+    - effect: NoSchedule
+      key: cloud
+      operator: Exists
   prepare:
     args:
       - prepare
