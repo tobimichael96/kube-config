@@ -1,0 +1,78 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app uptime-kuma
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    defaultPodOptions:
+      tolerations:
+        - effect: NoSchedule
+          key: cloud
+          operator: Exists
+    controllers:
+      main:
+        containers:
+          uptime-kuma:
+            image:
+              repository: louislam/uptime-kuma
+              tag: 1.23.13
+            env:
+              TZ: Europe/Berlin
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 3001
+                  initialDelaySeconds: 5
+                  periodSeconds: 3
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+              startup:
+                enabled: false
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 3001
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host status.tmem.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: uptime-kuma-tls
+    persistence:
+      config:
+        enabled: true
+        existingClaim: uptime-kuma-config-pvc
