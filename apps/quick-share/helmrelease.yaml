@@ -21,6 +21,20 @@ spec:
           env:
             - name: TZ
               value: "Europe/Berlin"
+    tolerations:
+      - effect: NoSchedule
+        key: cloud
+        operator: Exists
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+                - key: cloud
+                  operator: In
+                  values:
+                    - "true"
 ---
 apiVersion: v1
 kind: Service
