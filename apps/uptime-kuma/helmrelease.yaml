@@ -19,6 +19,8 @@ spec:
   targetNamespace: *app
   values:
     defaultPodOptions:
+      nodeSelector:
+        cloud: "true"
       tolerations:
         - effect: NoSchedule
           key: cloud
