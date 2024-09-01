@@ -8,7 +8,7 @@ spec:
   # language=yaml
   valuesContent: |-
     flannel:
-      backend: "wireguard"
+      backend: "host-gw"
     tolerations:
       - effect: NoSchedule
         key: cloud
