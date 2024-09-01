@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /etc/uptime-kuma
+    path: /etc/uptime-kuma/data
   nodeAffinity:
     required:
       nodeSelectorTerms:

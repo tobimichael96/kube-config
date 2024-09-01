@@ -77,4 +77,4 @@ spec:
         enabled: true
         existingClaim: uptime-kuma-config-pvc
         globalMounts:
-          - path: /app
+          - path: /app/data
