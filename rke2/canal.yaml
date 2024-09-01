@@ -7,8 +7,6 @@ metadata:
 spec:
   # language=yaml
   valuesContent: |-
-    flannel:
-      backend: "host-gw"
     tolerations:
       - effect: NoSchedule
         key: cloud
