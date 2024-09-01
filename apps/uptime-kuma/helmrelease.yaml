@@ -27,6 +27,7 @@ spec:
           operator: Exists
     controllers:
       main:
+        strategy: "RollingUpdate"
         containers:
           uptime-kuma:
             image:

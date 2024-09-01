@@ -35,6 +35,7 @@ spec:
                       - "true"
     controllers:
       homepage:
+        strategy: "RollingUpdate"
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
