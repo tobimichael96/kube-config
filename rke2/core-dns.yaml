@@ -7,7 +7,5 @@ metadata:
 spec:
   # language=yaml
   valuesContent: |-
-    tolerations:
-      - effect: NoSchedule
-        key: cloud
-        operator: Exists
+    autoscaler:
+      enabled: false
