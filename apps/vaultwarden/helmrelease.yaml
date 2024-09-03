@@ -23,6 +23,8 @@ spec:
       repository: vaultwarden/server
       tag: "1.32.0"
     vaultwarden:
+      extraEnv:
+        DOMAIN: "https://vault.internal.tmem.de"
       admin:
         enabled: false
         disableAdminToken: true
