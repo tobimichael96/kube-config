@@ -8,7 +8,7 @@ data:
   filebrowser.json: |-
     {
       "port": 80,
-      "baseURL": "",
+      "baseURL": "https://files.tmem.de",
       "address": "",
       "log": "stdout",
       "database": "/data/database/filebrowser.db",
