@@ -19,7 +19,7 @@ spec:
   targetNamespace: *app
   values:
     controllers:
-      homepage:
+      main:
         strategy: "RollingUpdate"
         annotations:
           reloader.stakater.com/auto: "true"
@@ -58,7 +58,7 @@ spec:
     persistence:
       config:
         type: configMap
-        name: homepage-files
+        name: filebrowser-configs
         globalMounts:
           - path: /.filebrowser.json
             subPath: filebrowser.json
