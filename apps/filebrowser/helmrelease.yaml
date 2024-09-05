@@ -39,15 +39,18 @@ spec:
     ingress:
       app:
         annotations:
-          kubernetes.io/ingress.class: "nginx-internal"
-          kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/rewrite-target: "/"
           cert-manager.io/cluster-issuer: "letsencrypt"
+          nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         hosts:
-          - host: &host files.internal.tmem.de
+          - host: &host files.tmem.de
             paths:
-              - path: /
+              - path: /files
                 service:
                   identifier: app
                   port: http
