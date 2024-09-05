@@ -66,4 +66,4 @@ spec:
       data:
         existingClaim: filebrowser-pvc
         globalMounts:
-          - path: /data/files
+          - path: /data
