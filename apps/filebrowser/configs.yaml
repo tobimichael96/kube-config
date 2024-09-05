@@ -13,7 +13,7 @@ data:
         "log": "stdout",
         "database": "/data/database/filebrowser.db",
         "root": "/data/files",
-        "noauth": true,
+        "noauth": false,
         "auth": {
             "method": "proxy",
             "header": "X-User"
