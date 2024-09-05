@@ -32,7 +32,7 @@ spec:
               TZ: Europe/Berlin
     service:
       app:
-        controller: *app
+        controller: main
         ports:
           http:
             port: 80
