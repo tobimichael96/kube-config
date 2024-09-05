@@ -7,11 +7,15 @@ data:
   # language=json
   filebrowser.json: |-
     {
-      "port": 80,
-      "baseURL": "",
-      "address": "",
-      "log": "stdout",
-      "database": "/data/database/filebrowser.db",
-      "root": "/data/files",
-      "noauth": true
+        "port": 80,
+        "baseURL": "",
+        "address": "",
+        "log": "stdout",
+        "database": "/data/database/filebrowser.db",
+        "root": "/data/files",
+        "noauth": true,
+        "auth": {
+            "method": "proxy",
+            "header": "X-Forwarded-User"
+        }
     }
