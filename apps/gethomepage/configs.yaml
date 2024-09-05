@@ -124,8 +124,13 @@ data:
         - Quick-Share:
             icon: https://share.tmem.de/static/favicon.png
             href: https://share.tmem.de/
-            description: Share something
+            description: Share something between devices
             siteMonitor: https://share.tmem.de/
+        - Filebrowser:
+            icon: filebrowser.png
+            href: https://files.tmem.de/files
+            description: Share something with others
+            siteMonitor: https://files.tmem.de/files
     - Other:
         - Airflow:
             icon: apache-airflow.png
