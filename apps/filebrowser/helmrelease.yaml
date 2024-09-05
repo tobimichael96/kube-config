@@ -51,6 +51,7 @@ spec:
           - host: &host files.tmem.de
             paths:
               - path: /files
+                pathType: Prefix
                 service:
                   identifier: app
                   port: http
