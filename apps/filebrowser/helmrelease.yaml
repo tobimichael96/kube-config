@@ -1,0 +1,69 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app filebrowser
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    controllers:
+      homepage:
+        strategy: "RollingUpdate"
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: filebrowser/filebrowser
+              tag: v2.31.1
+            env:
+              TZ: Europe/Berlin
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 80
+    ingress:
+      app:
+        annotations:
+          kubernetes.io/ingress.class: "nginx-internal"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host files.internal.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: filebrowser-tls
+    persistence:
+      config:
+        type: configMap
+        name: homepage-files
+        globalMounts:
+          - path: /.filebrowser.json
+            subPath: filebrowser.json
+            readOnly: true
+      data:
+        existingClaim: filebrowser-pvc
+        globalMounts:
+          - path: /data/files

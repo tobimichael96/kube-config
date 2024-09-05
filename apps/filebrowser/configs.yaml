@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: homepage-files
+    namespace: homepage
+data:
+  # language=json
+  filebrowser.json: |-
+    {
+      "port": 80,
+      "baseURL": "",
+      "address": "",
+      "log": "stdout",
+      "database": "/data/database/filebrowser.db",
+      "root": "/data/files",
+      "noauth": true
+    }
