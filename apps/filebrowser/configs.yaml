@@ -16,6 +16,6 @@ data:
         "noauth": true,
         "auth": {
             "method": "proxy",
-            "header": "X-Forwarded-User"
+            "header": "X-User"
         }
     }
