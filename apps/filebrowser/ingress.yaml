@@ -26,3 +26,10 @@ spec:
                 name: filebrowser
                 port:
                   number: 80
+          - path: /static
+            pathType: Prefix
+            backend:
+              service:
+                name: filebrowser
+                port:
+                  number: 80
