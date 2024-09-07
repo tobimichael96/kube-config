@@ -89,7 +89,7 @@ spec:
       whitelist: "true"
       # A comma-separated list of player names to whitelist with no whitespace.
       # ex: whitelistUsers: player1,player2,player3
-      whitelistUsers: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421"
+      whitelistUsers: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421,EinsEntlein7260"
       # A comma-seperated list of xuid's for operators on server with no
       # whitespaces.
       # The server logs will print xuids as players connect.
@@ -104,7 +104,7 @@ spec:
       # ex: ops: "12345678,0987654"
       visitors:
       # Max connected players.
-      maxPlayers: 10
+      maxPlayers: 20
       # The world is ticked this many chunks away from any player.
       tickDistance: 16
       # Max view distance (in chunks).
