@@ -154,9 +154,9 @@ data:
             siteMonitor: https://grafana.tmem.de/
         - Prometheus:
             icon: prometheus.png
-            href: https://prometheus.tmem.de/
+            href: https://prometheus.internal.tmem.de/
             description: Prometheus
-            siteMonitor: https://prometheus.tmem.de/
+            siteMonitor: https://prometheus.internal.tmem.de/
   # language=yaml
   bookmarks.yaml: |-
     ---
