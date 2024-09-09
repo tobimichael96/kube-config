@@ -147,6 +147,16 @@ data:
             href: https://status.tmem.de/status/tme
             description: Status page
             siteMonitor: https://status.tmem.de/
+        - Grafana:
+            icon: grafana.png
+            href: https://grafana.tmem.de/
+            description: Grafana
+            siteMonitor: https://grafana.tmem.de/
+        - Prometheus:
+            icon: prometheus.png
+            href: https://prometheus.tmem.de/
+            description: Prometheus
+            siteMonitor: https://prometheus.tmem.de/
   # language=yaml
   bookmarks.yaml: |-
     ---
