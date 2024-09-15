@@ -161,7 +161,7 @@ data:
                       "type": "loki",
                       "uid": "loki"},
                     "editorMode": "code",
-                    "expr": "sum by(app) (rate({namespace=\"flux-system\"} |= `\"level\":\"error\"` [$__interval]))",
+                    "expr": "sum by(app) (rate({namespace=\"flux-system\", app!=\"source-controller\"} |= `\"level\":\"error\"` [$__interval]))",
                     "intervalMs": 1000,
                     "maxDataPoints": 43200,
                     "queryType": "range",
