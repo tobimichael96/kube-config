@@ -99,7 +99,7 @@ spec:
 
     postgresql:
       image:
-        tag: 11.15.0-debian-10-r57
+        tag: 16.4.0-debian-12-r11
       enabled: true
       auth:
         database: 'nextcloud'
