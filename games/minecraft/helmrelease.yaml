@@ -20,7 +20,7 @@ spec:
     image:
       repository: itzg/minecraft-bedrock-server
       tag: latest
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
       pullSecret: ""
 
     ## Configure resource requests and limits
