@@ -32,7 +32,7 @@ spec:
           uptime-kuma:
             image:
               repository: louislam/uptime-kuma
-              tag: 1.23.13
+              tag: 1.23.14
             env:
               TZ: Europe/Berlin
             probes:
