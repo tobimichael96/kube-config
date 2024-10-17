@@ -30,7 +30,7 @@ spec:
       wireguard-ui:
         enabled: true
         type: deployment
-        strategy: "RollingUpdate"
+        strategy: "Recreate"
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
