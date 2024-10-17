@@ -41,6 +41,7 @@ spec:
               tag: 0.6.2
             env:
               TZ: Europe/Berlin
+              WGUI_MANAGE_START: "true"
             securityContext:
               capabilities:
                 add:
