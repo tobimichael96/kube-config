@@ -29,7 +29,7 @@ spec:
     controllers:
       wireguard-ui:
         enabled: true
-        type: deployment
+        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
