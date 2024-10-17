@@ -27,7 +27,7 @@ spec:
           key: cloud
           operator: Exists
     controllers:
-      wireguard:
+      wireguard-ui:
         type: deployment
         annotations:
           reloader.stakater.com/auto: "true"
