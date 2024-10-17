@@ -19,14 +19,14 @@ spec:
   targetNamespace: *app
   values:
     defaultPodOptions:
-      hostNetwork: true
+      # hostNetwork: true
       nodeSelector:
         cloud: "true"
       tolerations:
         - effect: NoSchedule
           key: cloud
           operator: Exists
-      terminationGracePeriodSeconds: 15
+      # terminationGracePeriodSeconds: 15
     controllers:
       wireguard-ui:
         enabled: true
