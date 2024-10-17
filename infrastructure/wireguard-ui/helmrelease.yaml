@@ -29,7 +29,8 @@ spec:
     controllers:
       wireguard-ui:
         enabled: true
-        type: statefulset
+        type: deployment
+        strategy: "RollingUpdate"
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
