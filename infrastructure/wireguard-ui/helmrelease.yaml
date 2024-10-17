@@ -26,6 +26,7 @@ spec:
         - effect: NoSchedule
           key: cloud
           operator: Exists
+      terminationGracePeriodSeconds: 15
     controllers:
       wireguard-ui:
         enabled: true
