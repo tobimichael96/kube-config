@@ -19,19 +19,17 @@ spec:
   targetNamespace: *app
   values:
     defaultPodOptions:
-      # hostNetwork: true
       nodeSelector:
         cloud: "true"
       tolerations:
         - effect: NoSchedule
           key: cloud
           operator: Exists
-      # terminationGracePeriodSeconds: 15
     controllers:
       wireguard-ui:
         enabled: true
         type: deployment
-        strategy: "Recreate"
+        strategy: "RollingUpdate"
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
