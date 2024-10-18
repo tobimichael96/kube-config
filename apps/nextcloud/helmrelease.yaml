@@ -51,6 +51,7 @@ spec:
               array (
                0 => 'localhost',
                1 => 'cloud.internal.tmem.de',
+               2 => 'cloud.tmem.de',
               )
           );
 
