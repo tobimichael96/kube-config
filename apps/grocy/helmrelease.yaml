@@ -75,4 +75,4 @@ spec:
         enabled: true
         existingClaim: grocy-config-pvc
         globalMounts:
-          - "/config"
+          - path: "/config"
