@@ -1,0 +1,78 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app grocy
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    controllers:
+      main:
+        strategy: "RollingUpdate"
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          grocy:
+            image:
+              repository: linuxserver/grocy
+              tag: 4.2.0
+            env:
+              TZ: Europe/Berlin
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9283
+                  initialDelaySeconds: 5
+                  periodSeconds: 3
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+              startup:
+                enabled: false
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 9283
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx-internal"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host grocy.internal.tmem.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: grocy-tls
+    persistence:
+      config:
+        enabled: true
+        existingClaim: grocy-config-pvc
+        globalMounts:
+          - "/config"
