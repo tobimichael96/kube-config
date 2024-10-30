@@ -1,0 +1,84 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app mealie
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 3.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    controllers:
+      main:
+        strategy: "RollingUpdate"
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          mealie:
+            image:
+              repository: ghcr.io/mealie-recipes/mealie
+              tag: v2.1.0
+            env:
+              TZ: Europe/Berlin
+              ALLOW_SIGNUP: "false"
+              PUID: 1000
+              PGID: 1000
+              MAX_WORKERS: 1
+              WEB_CONCURRENCY: 1
+              BASE_URL: https://mealie.internal.tmem.de
+            probes:
+              liveness:
+                enabled: false
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9000
+                  initialDelaySeconds: 5
+                  periodSeconds: 3
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+              startup:
+                enabled: false
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 9000
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx-internal"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host mealie.internal.tmem.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: mealie-tls
+    persistence:
+      config:
+        enabled: true
+        existingClaim: mealie-config-pvc
+        globalMounts:
+          - path: "/app/data/"
