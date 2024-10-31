@@ -90,16 +90,21 @@ data:
             href: https://vault.internal.tmem.de/
             description: Store passwords
             siteMonitor: https://vault.internal.tmem.de/
-        - AdGuard:
-            icon: adguard-home.png
-            href: https://adguard.internal.tmem.de/
-            description: DNS blocker
-            siteMonitor: https://adguard.internal.tmem.de/
+        - Mealie:
+            icon: mealie.png
+            href: https://mealie.internal.tmem.de/
+            description: Cooking and baking
+            siteMonitor: https://mealie.internal.tmem.de/
         - StirlingPDF:
             icon: https://pdf.tmem.de/apple-touch-icon.png
             href: https://pdf.tmem.de/
             description: Work with PDFs
             siteMonitor: https://pdf.tmem.de/
+        - AdGuard:
+            icon: adguard-home.png
+            href: https://adguard.internal.tmem.de/
+            description: DNS blocker
+            siteMonitor: https://adguard.internal.tmem.de/
         - DDNS:
             icon: https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg
             href: https://ddns.internal.tmem.de/
