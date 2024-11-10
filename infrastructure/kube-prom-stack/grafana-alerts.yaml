@@ -131,7 +131,7 @@ data:
                   }
                 }
               ],
-              "noDataState": "NoData",
+              "noDataState": "OK",
               "execErrState": "Error",
               "for": "1m",
               "annotations": {
@@ -340,7 +340,7 @@ data:
                   }
                 }
               ],
-              "noDataState": "NoData",
+              "noDataState": "OK",
               "execErrState": "Error",
               "for": "3m",
               "annotations": {
