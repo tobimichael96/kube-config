@@ -43,6 +43,11 @@ data:
             href: https://ha.internal.tmem.de/
             description: Control everything
             siteMonitor: https://ha.internal.tmem.de/
+        - SLZB:
+            icon: zigbee2mqtt.png
+            href: https://slzb.internal.tmem.de/
+            description: Zigbee2Mqtt - SLZB
+            siteMonitor: https://slzb.internal.tmem.de/
         - Conbee:
             icon: zigbee2mqtt.png
             href: https://conbee.internal.tmem.de/
