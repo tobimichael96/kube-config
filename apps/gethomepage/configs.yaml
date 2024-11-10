@@ -48,11 +48,6 @@ data:
             href: https://slzb.internal.tmem.de/
             description: Zigbee2Mqtt - SLZB
             siteMonitor: https://slzb.internal.tmem.de/
-        - Conbee:
-            icon: zigbee2mqtt.png
-            href: https://conbee.internal.tmem.de/
-            description: Zigbee2Mqtt - Conbee
-            siteMonitor: https://conbee.internal.tmem.de/
         - Sonoff:
             icon: zigbee2mqtt.png
             href: https://sonoff.internal.tmem.de/

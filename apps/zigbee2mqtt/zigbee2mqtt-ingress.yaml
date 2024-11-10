@@ -12,21 +12,21 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &conbee-host conbee.internal.tmem.de
+#        - &conbee-host conbee.internal.tmem.de
         - &sonoff-host sonoff.internal.tmem.de
         - &slzb-host slzb.internal.tmem.de
       secretName: zigbee2mqtt-tls
   rules:
-    - host: *conbee-host
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: zigbee2mqtt-conbee
-                port:
-                  number: 8080
+#    - host: *conbee-host
+#      http:
+#        paths:
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: zigbee2mqtt-conbee
+#                port:
+#                  number: 8080
     - host: *sonoff-host
       http:
         paths:     
