@@ -14,6 +14,7 @@ spec:
     - hosts:
         - &conbee-host conbee.internal.tmem.de
         - &sonoff-host sonoff.internal.tmem.de
+        - &slzb-host slzb.internal.tmem.de
       secretName: zigbee2mqtt-tls
   rules:
     - host: *conbee-host
@@ -25,7 +26,7 @@ spec:
               service:
                 name: zigbee2mqtt-conbee
                 port:
-                  number: 8080     
+                  number: 8080
     - host: *sonoff-host
       http:
         paths:     
@@ -34,5 +35,15 @@ spec:
             backend:
               service:
                 name: zigbee2mqtt-sonoff
+                port:
+                  number: 8080
+    - host: *slzb-host
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: zigbee2mqtt-slzb
                 port:
                   number: 8080

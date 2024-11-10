@@ -1,0 +1,92 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt-slzb
+  namespace: zigbee2mqtt
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zigbee2mqtt-slzb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt-slzb
+      namespace: zigbee2mqtt
+    spec:
+      containers:
+        - name: zigbee2mqtt-slzb
+          image: koenkk/zigbee2mqtt:1.41.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: Europe/Berlin
+            - name: "ZIGBEE2MQTT_DATA"
+              value: "/data"
+          securityContext:
+            privileged: true
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: zigbee2mqtt-data
+              mountPath: /data
+            - name: zigbee2mqtt-slzb-config
+              mountPath: /data/configuration.yaml
+              subPath: configuration.yaml
+              readOnly: true
+            - name: zigbee2mqtt-secrets
+              mountPath: /data/secrets.yaml
+              subPath: secrets.yaml
+              readOnly: true
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: zigbee2mqtt-data
+          persistentVolumeClaim:
+            claimName: zigbee2mqtt-slzb-pvc
+        - name: zigbee2mqtt-slzb-config
+          configMap:
+            name: zigbee2mqtt-slzb-config
+        - name: zigbee2mqtt-secrets
+          secret:
+            secretName: zigbee2mqtt-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zigbee2mqtt-slzb
+  namespace: zigbee2mqtt
+spec:
+  selector:
+    app: zigbee2mqtt-slzb
+  ports:
+    - name: zigbee2mqtt-slzb
+      port: 8080
+      targetPort: http
+      protocol: TCP
