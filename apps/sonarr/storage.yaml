@@ -42,14 +42,14 @@ metadata:
   name: sonarr-media-pv
 spec:
   capacity:
-    storage: 1000Gi
+    storage: 3000Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/internal/media
+    path: /mnt/internal/media/shows
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -71,4 +71,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1000Gi
+      storage: 3000Gi

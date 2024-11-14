@@ -42,7 +42,7 @@ metadata:
   name: jellyfin-media-pv
 spec:
   capacity:
-    storage: 1000Gi
+    storage: 6000Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -71,4 +71,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1000Gi
+      storage: 6000Gi

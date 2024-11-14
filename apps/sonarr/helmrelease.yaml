@@ -95,6 +95,6 @@ spec:
       media:
         existingClaim: sonarr-media-pvc
         globalMounts:
-          - path: /mnt/internal/media
+          - path: /mnt/internal/media/shows
       tmp:
         type: emptyDir
