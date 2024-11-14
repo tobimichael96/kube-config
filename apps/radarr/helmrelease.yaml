@@ -96,5 +96,9 @@ spec:
         existingClaim: radarr-media-pvc
         globalMounts:
           - path: /mnt/internal/media/films
+      downloads:
+        existingClaim: radarr-downloads-pvc
+        globalMounts:
+          - path: /mnt/internal/media/downloads
       tmp:
         type: emptyDir

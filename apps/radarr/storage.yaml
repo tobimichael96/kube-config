@@ -39,6 +39,43 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  name: radarr-downloads-pv
+spec:
+  capacity:
+    storage: 500Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/internal/media/downloads
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homeserver
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-downloads-pvc
+  namespace: radarr
+spec:
+  storageClassName: local-storage
+  volumeName: radarr-downloads-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
   name: radarr-media-pv
 spec:
   capacity:

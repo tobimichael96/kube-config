@@ -96,5 +96,9 @@ spec:
         existingClaim: sonarr-media-pvc
         globalMounts:
           - path: /mnt/internal/media/shows
+      downloads:
+        existingClaim: sonarr-downloads-pvc
+        globalMounts:
+          - path: /mnt/internal/media/downloads
       tmp:
         type: emptyDir
