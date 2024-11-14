@@ -39,11 +39,16 @@ spec:
         enabled: true
         globalMounts:
           - path: "/config"
-      media:
-        existingClaim: jellyfin-media-pvc
+      films:
+        existingClaim: jellyfin-films-pvc
         enabled: true
         globalMounts:
-          - path: /mnt/internal/media
+          - path: /mnt/internal/media/films
+      shows:
+        existingClaim: jellyfin-shows-pvc
+        enabled: true
+        globalMounts:
+          - path: /mnt/internal/media/shows
       cache:
         enabled: true
         globalMounts:
