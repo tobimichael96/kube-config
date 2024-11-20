@@ -27,6 +27,7 @@ spec:
           home-assistant:
             securityContext:
               capabilities:
+                privileged: true
                 add:
                   - NET_ADMIN
                   - NET_RAW
@@ -36,10 +37,6 @@ spec:
               tag: "2024.11.2"
             env:
               TZ: "Europe/Berlin"
-            lifecycle:
-              postStart:
-                exec:
-                  command: [ "touch", "/.dockerenv" ]
     service:
       main:
         controller: main
