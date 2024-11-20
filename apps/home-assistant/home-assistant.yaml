@@ -20,20 +20,19 @@ spec:
   values:
     controllers:
       main:
-        pod:
-          securityContext:
-            allowPrivilegeEscalation: "true"
-            capabilities:
-              add:
-                - NET_ADMIN
-                - NET_RAW
-                - NET_BROADCAST
         strategy: Recreate
         type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           home-assistant:
+            securityContext:
+              allowPrivilegeEscalation: "true"
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - NET_RAW
+                  - NET_BROADCAST
             image:
               repository: "homeassistant/home-assistant"
               tag: "2024.11.2"
