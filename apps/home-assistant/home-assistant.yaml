@@ -77,6 +77,5 @@ spec:
           - path: /config
       devices:
         enabled: true
+        type: hostPath
         hostPath: /var/run/dbus
-        globalMounts:
-          - path: /var/run/dbus
