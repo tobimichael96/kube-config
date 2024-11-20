@@ -1,63 +1,83 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app home-assistant
-  namespace: *app
+  name: home-assistant
+  namespace: home-assistant
 spec:
   chart:
     spec:
-      chart: *app
-      version: 0.27.0
+      chart: app-template
+      version: 3.5.1
       sourceRef:
         kind: HelmRepository
-        name: *app
+        name: bjw-s
         namespace: flux-system
   interval: 5m
-  releaseName: *app
-  targetNamespace: *app
+  releaseName: home-assistant
+  targetNamespace: home-assistant
   values:
-    image:
-      repository: "homeassistant/home-assistant"
-      tag: "2024.11.2"
+    controllers:
+      main:
+        pod:
+          securityContext:
+            allowPrivilegeEscalation: "true"
+            capabilities:
+              add:
+                - NET_ADMIN
+                - NET_RAW
+                - NET_BROADCAST
+        strategy: Recreate
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          home-assistant:
+            image:
+              repository: "homeassistant/home-assistant"
+              tag: "2024.11.2"
+            env:
+              TZ: "Europe/Berlin"
+              PYTHONPATH: "/usr/local/lib/python3.12:/config/deps"
+            lifecycle:
+              postStart:
+                exec:
+                  command: [ "touch", "/.dockerenv" ]
+    service:
+      main:
+        controller: main
+        ports:
+          other:
+            port: 8123
     ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: "nginx-internal"
-        kubernetes.io/tls-acme: "true"
-        nginx.ingress.kubernetes.io/ssl-redirect: "true"
-        cert-manager.io/cluster-issuer: "letsencrypt"
-      hosts:
-        - host: &host ha.internal.tmem.de
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-      tls:
-        - hosts:
-            - *host
-          secretName: home-assistant-tls
-
-    securityContext:
-      allowPrivilegeEscalation: true
-      capabilities:
-        add:
-          - NET_ADMIN
-          - NET_RAW
-          - NET_BROADCAST
-
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx-internal"
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host ha.internal.tmem.de
+            paths:
+              - path: /
+                pathType: ImplementationSpecific
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: home-assistant-tls
     persistence:
-      existingClaim: "home-assistant-pvc"
-      additionalVolumes:
-        - name: dbus
-          hostPath:
-            path: /var/run/dbus
-        - name: dockerenv
-          configMap:
-            name: dockerenv
-      additionalMounts:
-        - name: dbus
-          mountPath: /var/run/dbus
-        - name: dockerenv
-          mountPath: /.dockerenv
-          subPath: .dockerenv
-
+      config:
+        enabled: true
+        existingClaim: home-assistant-pvc
+        globalMounts:
+          - path: /config
+      devices:
+        enabled: true
+        hostPath: /var/run/dbus
+        globalMounts:
+          - path: /var/run/dbus
