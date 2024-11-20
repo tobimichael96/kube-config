@@ -32,7 +32,11 @@ spec:
               TZ: "Europe/Berlin"
             securityContext:
               allowPrivilegeEscalation: false
-              capabilities: { drop: ["ALL"] }
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - NET_RAW
+                  - NET_BROADCAST
     service:
       main:
         controller: main
