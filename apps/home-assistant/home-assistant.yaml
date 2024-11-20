@@ -32,7 +32,6 @@ spec:
               TZ: "Europe/Berlin"
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
     service:
       main:
