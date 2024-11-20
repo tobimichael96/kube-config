@@ -27,7 +27,6 @@ spec:
         containers:
           home-assistant:
             securityContext:
-              allowPrivilegeEscalation: "true"
               capabilities:
                 add:
                   - NET_ADMIN
