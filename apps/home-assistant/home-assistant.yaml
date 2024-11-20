@@ -36,7 +36,6 @@ spec:
               tag: "2024.11.2"
             env:
               TZ: "Europe/Berlin"
-              PYTHONPATH: "/usr/local/lib/python3.12:/config/deps"
             lifecycle:
               postStart:
                 exec:
