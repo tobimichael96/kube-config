@@ -20,8 +20,7 @@ spec:
   values:
     controllers:
       main:
-        strategy: Recreate
-        type: deployment
+        type: statefulset
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -46,7 +45,7 @@ spec:
       main:
         controller: main
         ports:
-          other:
+          http:
             port: 8123
     ingress:
       main:
