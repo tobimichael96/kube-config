@@ -14,3 +14,12 @@ data:
 
     listener 1883
     protocol mqtt
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: dockerenv
+    namespace: home-assistant
+data:
+  .dockerenv: |
+    this is just a dummy file

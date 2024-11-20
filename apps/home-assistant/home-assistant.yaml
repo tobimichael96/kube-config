@@ -51,6 +51,12 @@ spec:
         - name: dbus
           hostPath:
             path: /var/run/dbus
+        - name: dockerenv
+          configMap:
+            name: dockerenv
       additionalMounts:
         - name: dbus
           mountPath: /var/run/dbus
+        - name: dockerenv
+          mountPath: /
+
