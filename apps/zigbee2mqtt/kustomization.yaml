@@ -6,6 +6,6 @@ resources:
 - secrets.yaml
 - configmaps.yaml
 #- zigbee2mqtt-conbee.yaml
-- zigbee2mqtt-sonoff.yaml
+#- zigbee2mqtt-sonoff.yaml
 - zigbee2mqtt-slzb.yaml
 - zigbee2mqtt-ingress.yaml
