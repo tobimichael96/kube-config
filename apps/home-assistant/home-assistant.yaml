@@ -37,6 +37,10 @@ spec:
                   - NET_ADMIN
                   - NET_RAW
                   - NET_BROADCAST
+            lifecycle:
+              postStart:
+                exec:
+                  command: [ "touch", "/.dockerenv" ]
     service:
       main:
         controller: main
