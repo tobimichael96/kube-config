@@ -48,11 +48,6 @@ data:
             href: https://slzb.internal.tmem.de/
             description: Zigbee2Mqtt - SLZB
             siteMonitor: https://slzb.internal.tmem.de/
-        - Sonoff:
-            icon: zigbee2mqtt.png
-            href: https://sonoff.internal.tmem.de/
-            description: Zigbee2Mqtt - Sonoff
-            siteMonitor: https://sonoff.internal.tmem.de/
     - Media:
         - Jellyfin:
             icon: jellyfin.png
