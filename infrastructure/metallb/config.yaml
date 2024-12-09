@@ -5,7 +5,6 @@ metadata:
   namespace: metallb
 spec:
   addresses:
-    - 192.168.178.23/32
     - 192.168.178.120/32
 ---
 apiVersion: metallb.io/v1beta1
