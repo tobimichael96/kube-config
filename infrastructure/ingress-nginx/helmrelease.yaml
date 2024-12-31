@@ -65,6 +65,7 @@ spec:
       kind: Deployment
       allowSnippetAnnotations: "true"
       config:
+        annotations-risk-level: "Critical"
         use-forwarded-headers: "true"
         enable-real-ip: "true"
         enable-modsecurity: "false"
