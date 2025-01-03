@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: zigbee2mqtt-sonoff
-          image: koenkk/zigbee2mqtt:1.42.0
+          image: koenkk/zigbee2mqtt:2.0.0
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ
