@@ -37,10 +37,10 @@ spec:
           volumeMounts:
             - name: zigbee2mqtt-data
               mountPath: /data
-#            - name: zigbee2mqtt-slzb-config
-#              mountPath: /data/configuration.yaml
-#              subPath: configuration.yaml
-#              readOnly: true
+            - name: zigbee2mqtt-slzb-config
+              mountPath: /data/configuration.yaml
+              subPath: configuration.yaml
+              readOnly: true
             - name: zigbee2mqtt-secrets
               mountPath: /data/secrets.yaml
               subPath: secrets.yaml
