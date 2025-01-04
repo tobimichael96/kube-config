@@ -154,6 +154,14 @@ data:
       # Set output power to max 20
       transmit_power: 20
     
+      # added with v2
+      homeassistant_legacy_entity_attributes: false
+      homeassistant_legacy_triggers: false
+      legacy_api: false
+      legacy_availability_payload: false
+    device_options:
+      legacy: false
+    
     ## Map devices to persistent /data directory
     devices: /data/devices.yaml
     groups: /data/groups.yaml
