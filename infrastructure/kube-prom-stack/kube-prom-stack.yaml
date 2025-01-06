@@ -32,7 +32,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt"
           nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
+          nginx.ingress.kubernetes.io/auth-snippet: |
             auth_request_set  $user   $upstream_http_x_auth_request_user;
             auth_request_set  $email  $upstream_http_x_auth_request_email;
             proxy_set_header  X-Auth-Request-User   $user;
