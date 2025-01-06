@@ -10,7 +10,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/limit-rps: 3
     nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-    nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+    nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$escaped_request_uri"
 spec:
   tls:
     - hosts:
