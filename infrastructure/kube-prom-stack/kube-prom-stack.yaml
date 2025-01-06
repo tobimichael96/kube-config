@@ -73,7 +73,7 @@ spec:
 
         auth.proxy:
           # Defaults to false, but set to true to enable this feature
-          enabled: true
+          enabled: false
           # HTTP Header name that will contain the username or email
           header_name: X-Auth-Request-User
           # HTTP Header property, defaults to `username` but can also be `email`
