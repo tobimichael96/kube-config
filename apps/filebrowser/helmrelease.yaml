@@ -45,7 +45,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
           nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$escaped_request_uri"
+          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$request_uri"
           nginx.ingress.kubernetes.io/configuration-snippet: |
             # pass information via X-User and X-Email headers to backend,
             # requires running with --set-xauthrequest flag
