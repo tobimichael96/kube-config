@@ -24,7 +24,7 @@ spec:
 
     grafana:
       ingress:
-        enabled: false
+        enabled: true
         annotations:
           kubernetes.io/ingress.class: "nginx"
           kubernetes.io/tls-acme: "true"
@@ -73,7 +73,7 @@ spec:
 
         auth.proxy:
           # Defaults to false, but set to true to enable this feature
-          enabled: false
+          enabled: true
           # HTTP Header name that will contain the username or email
           header_name: X-Auth-Request-User
           # HTTP Header property, defaults to `username` but can also be `email`
