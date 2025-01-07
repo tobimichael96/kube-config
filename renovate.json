@@ -8,10 +8,7 @@
   },
   "kubernetes": {
     "fileMatch": ["\\.ya?ml$"],
-    "ignorePaths": [
-      "**/flux-system/**",
-      "**/games/factorio/**"
-    ]
+    "ignorePaths": ["**/flux-system/**"]
   },
   "helm-values": {
     "commitMessageTopic": "Helm values {{depName}}",
@@ -19,6 +16,12 @@
     "ignorePaths": ["**/flux-system/**"]
   },
   "packageRules": [
+    {
+      "matchPackageNames": ["factoriotools/factorio"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": false,
+      "automergeType": "pr"
+    },
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
