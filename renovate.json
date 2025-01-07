@@ -8,7 +8,10 @@
   },
   "kubernetes": {
     "fileMatch": ["\\.ya?ml$"],
-    "ignorePaths": ["**/flux-system/**"]
+    "ignorePaths": [
+      "**/flux-system/**",
+      "**/games/factorio/**"
+    ]
   },
   "helm-values": {
     "commitMessageTopic": "Helm values {{depName}}",
