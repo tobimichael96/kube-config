@@ -1,29 +1,51 @@
 {
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "flux": {
-    "fileMatch": ["\\.ya?ml$"]
+    "fileMatch": [
+      "\\.ya?ml$"
+    ]
   },
   "kubernetes": {
-    "fileMatch": ["\\.ya?ml$"],
-    "ignorePaths": ["**/flux-system/**"]
+    "fileMatch": [
+      "\\.ya?ml$"
+    ],
+    "ignorePaths": [
+      "**/flux-system/**"
+    ]
   },
   "helm-values": {
     "commitMessageTopic": "Helm values {{depName}}",
-    "fileMatch": ["\\.ya?ml$"],
-    "ignorePaths": ["**/flux-system/**"]
+    "fileMatch": [
+      "\\.ya?ml$"
+    ],
+    "ignorePaths": [
+      "**/flux-system/**"
+    ]
   },
   "packageRules": [
     {
-      "matchPackageNames": ["factoriotools/factorio"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchPackageNames": [
+        "factoriotools/factorio"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automerge": false,
       "automergeType": "pr"
     },
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automerge": true,
       "automergeType": "pr"
     }
