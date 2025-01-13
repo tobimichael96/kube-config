@@ -89,7 +89,7 @@ spec:
       whitelist: "true"
       # A comma-separated list of player names to whitelist with no whitespace.
       # ex: whitelistUsers: player1,player2,player3
-      whitelistUsers: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421,EinsEntlein7260,DavisMo1786"
+      whitelistUsers: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421,EinsEntlein7260,DavisMo1786,Greinox8015"
       # A comma-seperated list of xuid's for operators on server with no
       # whitespaces.
       # The server logs will print xuids as players connect.
