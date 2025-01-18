@@ -132,11 +132,6 @@ data:
             description: Share something with others
             siteMonitor: https://files.tmem.de/files
     - Other:
-        - Airflow:
-            icon: apache-airflow.png
-            href: https://airflow.internal.tmem.de/
-            description: Run tasks
-            siteMonitor: https://airflow.internal.tmem.de/
         - Umami:
             icon: umami.png
             href: https://analytics.tmem.de
@@ -157,6 +152,11 @@ data:
             href: https://prometheus.internal.tmem.de/
             description: Prometheus
             siteMonitor: https://prometheus.internal.tmem.de/
+        - Flightradar:
+            icon: flightradar24.png
+            href: https://flightradar.internal.tmem.de/
+            description: Track plains
+            siteMonitor: https://flightradar.internal.tmem.de/
   # language=yaml
   bookmarks.yaml: |-
     ---
