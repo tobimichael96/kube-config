@@ -5,4 +5,4 @@ resources:
 - secrets.yaml
 - configmap.yaml
 - storage.yaml
-- helmrelease.yaml
+#- helmrelease.yaml
