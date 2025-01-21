@@ -118,9 +118,9 @@ data:
             siteMonitor: https://bin.tmem.de/
         - MinIO:
             icon: minio.png
-            href: https://minio.internal.tmem.de/
+            href: https://minio.tmem.de/
             description: Website and storage
-            siteMonitor: https://minio.internal.tmem.de/
+            siteMonitor: https://minio.tmem.de/
         - Quick-Share:
             icon: https://share.tmem.de/static/favicon.png
             href: https://share.tmem.de/
