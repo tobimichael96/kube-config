@@ -49,7 +49,7 @@ data:
             description: Zigbee2Mqtt - SLZB
             siteMonitor: https://slzb.internal.tmem.de/
         - SLZB:
-            icon: http://slzb-06.fritz.box/favicon.ico
+            icon: broadcastchannel-light.png
             href: http://slzb-06.fritz.box/
             description: SLZB
     - Media:
@@ -157,7 +157,7 @@ data:
             description: Prometheus
             siteMonitor: https://prometheus.internal.tmem.de/
         - Flightradar:
-            icon: flightradar24.png
+            icon: flightradar24-light.png
             href: https://flightradar.internal.tmem.de/
             description: Track planes
             siteMonitor: https://flightradar.internal.tmem.de/
