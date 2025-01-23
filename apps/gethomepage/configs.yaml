@@ -49,7 +49,7 @@ data:
             description: Zigbee2Mqtt - SLZB
             siteMonitor: https://slzb.internal.tmem.de/
         - SLZB:
-            icon: SLZB.png
+            icon: http://slzb-06.fritz.box/favicon.ico
             href: http://slzb-06.fritz.box/
             description: SLZB
     - Media:
