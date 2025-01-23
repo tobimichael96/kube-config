@@ -43,11 +43,15 @@ data:
             href: https://ha.internal.tmem.de/
             description: Control everything
             siteMonitor: https://ha.internal.tmem.de/
-        - SLZB:
+        - Zigbee2Mqtt:
             icon: zigbee2mqtt.png
             href: https://slzb.internal.tmem.de/
             description: Zigbee2Mqtt - SLZB
             siteMonitor: https://slzb.internal.tmem.de/
+        - SLZB:
+            icon: SLZB.png
+            href: http://slzb-06.fritz.box/
+            description: SLZB
     - Media:
         - Jellyfin:
             icon: jellyfin.png
@@ -155,7 +159,7 @@ data:
         - Flightradar:
             icon: flightradar24.png
             href: https://flightradar.internal.tmem.de/
-            description: Track plains
+            description: Track planes
             siteMonitor: https://flightradar.internal.tmem.de/
   # language=yaml
   bookmarks.yaml: |-
