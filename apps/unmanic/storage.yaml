@@ -49,7 +49,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/internal/media
+    path: /mnt/internal/unmanic
   nodeAffinity:
     required:
       nodeSelectorTerms:
