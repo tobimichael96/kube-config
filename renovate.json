@@ -22,7 +22,8 @@
       "\\.ya?ml$"
     ],
     "ignorePaths": [
-      "**/flux-system/**"
+      "**/flux-system/**",
+      "apps/unmanic/helmrelease.yaml"
     ]
   },
   "packageRules": [
