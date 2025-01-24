@@ -71,6 +71,11 @@ spec:
               - *host
             secretName: unmanic-tls
     persistence:
+      cache:
+        enabled: true
+        existingClaim: unmanic-cache-pvc
+        globalMounts:
+          - path: "/tmp/unmanic"
       config:
         enabled: true
         existingClaim: unmanic-config-pvc
