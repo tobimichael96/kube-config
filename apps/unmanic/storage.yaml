@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: unmanic-library-pv
+spec:
+  capacity:
+    storage: 8000Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/internal/media
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homeserver
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: unmanic-library-pvc
+  namespace: unmanic
+spec:
+  storageClassName: local-storage
+  volumeName: unmanic-library-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8000Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: unmanic-config-pv
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/internal/media
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homeserver
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: unmanic-config-pvc
+  namespace: unmanic
+spec:
+  storageClassName: local-storage
+  volumeName: unmanic-config-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
