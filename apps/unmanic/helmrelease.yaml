@@ -81,11 +81,16 @@ spec:
         existingClaim: unmanic-config-pvc
         globalMounts:
           - path: "/config"
-      library:
+      library-films:
         enabled: true
-        existingClaim: unmanic-library-pvc
+        existingClaim: unmanic-library-films-pvc
         globalMounts:
-          - path: "/library"
+          - path: "/library/films"
+      library-shows:
+        enabled: true
+        existingClaim: unmanic-library-shows-pvc
+        globalMounts:
+          - path: "/library/shows"
       amd-device:
         enabled: true
         type: hostPath

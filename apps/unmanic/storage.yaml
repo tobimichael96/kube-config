@@ -2,17 +2,17 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: unmanic-library-pv
+  name: unmanic-library-shows-pv
 spec:
   capacity:
-    storage: 8000Gi
+    storage: 4000Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/internal/media
+    path: /mnt/internal/media/shows
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -25,16 +25,53 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: unmanic-library-pvc
+  name: unmanic-library-shows-pvc
   namespace: unmanic
 spec:
   storageClassName: local-storage
-  volumeName: unmanic-library-pv
+  volumeName: unmanic-library-shows-pv
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 8000Gi
+      storage: 4000Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: unmanic-library-films-pv
+spec:
+  capacity:
+    storage: 4000Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/internal/media/films
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homeserver
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: unmanic-library-films-pvc
+  namespace: unmanic
+spec:
+  storageClassName: local-storage
+  volumeName: unmanic-library-films-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4000Gi
 ---
 apiVersion: v1
 kind: PersistentVolume
