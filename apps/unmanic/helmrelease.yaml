@@ -27,7 +27,7 @@ spec:
           unmanic:
             image:
               repository: josh5/unmanic
-              tag: 0.2.7
+              tag: 0.2.8
             env:
               TZ: Europe/Berlin
             probes:
