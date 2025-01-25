@@ -14,6 +14,9 @@
     ],
     "ignorePaths": [
       "**/flux-system/**"
+    ],
+    "ignoreDeps": [
+      "josh5/unmanic"
     ]
   },
   "helm-values": {
@@ -22,8 +25,10 @@
       "\\.ya?ml$"
     ],
     "ignorePaths": [
-      "**/flux-system/**",
-      "apps/unmanic/helmrelease.yaml"
+      "**/flux-system/**"
+    ],
+    "ignoreDeps": [
+      "josh5/unmanic"
     ]
   },
   "packageRules": [
