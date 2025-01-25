@@ -6,6 +6,9 @@
   "flux": {
     "fileMatch": [
       "\\.ya?ml$"
+    ],
+    "ignoreDeps": [
+      "josh5/unmanic"
     ]
   },
   "kubernetes": {
@@ -14,9 +17,6 @@
     ],
     "ignorePaths": [
       "**/flux-system/**"
-    ],
-    "ignoreDeps": [
-      "josh5/unmanic"
     ]
   },
   "helm-values": {
