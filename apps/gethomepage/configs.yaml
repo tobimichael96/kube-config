@@ -1,174 +1,34 @@
-apiVersion: v1
-kind: ConfigMap
+apiVersion: ENC[AES256_GCM,data:LIA=,iv:YMCFAon2l+eJtHMsuEuvn11mpL141eQ1hxHt4uWpQCc=,tag:f9p6FaqXdsMk1W20ELq9lA==,type:str]
+kind: ENC[AES256_GCM,data:PzDAFX7mFFKg,iv:aw/ZeDnX0DKCmpnuYbBg6oVi4zFvfe3eewFMXCK0Rq4=,tag:PuxKaiLGrRsUTqvAgmVXVQ==,type:str]
 metadata:
-    name: homepage-files
-    namespace: homepage
+    name: ENC[AES256_GCM,data:XEEPVNgGQ5hnVzk72nA=,iv:bN8AkxDrCZ6ZTy27zwqpH70Yx2DFdG+/LZIYyCAuIdg=,tag:Qli/gKIrBfB6M+qkDew08A==,type:str]
+    namespace: ENC[AES256_GCM,data:W+RCN5IVGAg=,iv:xFlTRD4xzXK/UAvfNmA7MxAr51UDuqFyPIxlkn7jdlQ=,tag:mU7SaxTP9hh5NtfUbkskOg==,type:str]
 data:
-  # language=yaml
-  settings.yaml: |-
-    title: TME Overview
-    theme: dark
-    color: slate
-    showStats: false
-    headerStyle: clean
-    favicon: https://tobiasmichael.de/assets/logo.ico
-    fiveColumns: true
-    statusStyle: "dot"
-    layout:
-      Home-Automation:
-        icon: home-assistant.png
-        style: columns
-      Media:
-        icon: jellyfin.png
-        style: columns
-      Utils:
-        icon: bitwarden.png
-        style: columns
-      Storage:
-        icon: nextcloud.png
-        style: column
-      Other:
-        icon: apache-airflow.png
-        style: column
-    quicklaunch:
-      searchDescriptions: true
-      hideInternetSearch: true
-      showSearchSuggestions: true
-      hideVisitURL: true
-  # language=yaml
-  services.yaml: |-
-    - Home-Automation:
-        - HomeAssistant:
-            icon: home-assistant.png
-            href: https://ha.internal.tmem.de/
-            description: Control everything
-            siteMonitor: https://ha.internal.tmem.de/
-        - Zigbee2Mqtt:
-            icon: zigbee2mqtt.png
-            href: https://slzb.internal.tmem.de/
-            description: Zigbee2Mqtt - SLZB
-            siteMonitor: https://slzb.internal.tmem.de/
-        - SLZB:
-            icon: broadcastchannel-light.png
-            href: http://slzb-06.fritz.box/
-            description: SLZB
-    - Media:
-        - Jellyfin:
-            icon: jellyfin.png
-            href: https://jellyfin.internal.tmem.de/
-            description: Watch everything
-            siteMonitor: https://jellyfin.internal.tmem.de/
-        - Jellyseerr:
-            icon: jellyseerr.png
-            href: https://jellyseerr.internal.tmem.de/
-            description: Request everything
-            siteMonitor: https://jellyseerr.internal.tmem.de/
-        - Prowlarr:
-            icon: prowlarr.png
-            href: https://prowlarr.internal.tmem.de/
-            description: Indexer management
-            siteMonitor: https://prowlarr.internal.tmem.de/
-        - Sonarr:
-            icon: sonarr.png
-            href: https://sonarr.internal.tmem.de/
-            description: Series management
-            siteMonitor: https://sonarr.internal.tmem.de/
-        - Radarr:
-            icon: radarr.png
-            href: https://radarr.internal.tmem.de/
-            description: Movie management
-            siteMonitor: https://radarr.internal.tmem.de/
-        - SABnzbd:
-            icon: sabnzbd.png
-            href: https://sabnzbd.internal.tmem.de/
-            description: Download stuff
-            siteMonitor: https://sabnzbd.internal.tmem.de/
-    - Utils:
-        - Vaultwarden:
-            icon: bitwarden.png
-            href: https://vault.internal.tmem.de/
-            description: Store passwords
-            siteMonitor: https://vault.internal.tmem.de/
-        - Mealie:
-            icon: mealie.png
-            href: https://mealie.internal.tmem.de/
-            description: Cooking and baking
-            siteMonitor: https://mealie.internal.tmem.de/
-        - StirlingPDF:
-            icon: https://pdf.tmem.de/apple-touch-icon.png
-            href: https://pdf.tmem.de/
-            description: Work with PDFs
-            siteMonitor: https://pdf.tmem.de/
-        - AdGuard:
-            icon: adguard-home.png
-            href: https://adguard.internal.tmem.de/
-            description: DNS blocker
-            siteMonitor: https://adguard.internal.tmem.de/
-        - DDNS:
-            icon: https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg
-            href: https://ddns.internal.tmem.de/
-            description: Dynamic DNS updater
-            siteMonitor: https://ddns.internal.tmem.de/
-    - Storage:
-        - Nextcloud:
-            icon: nextcloud.png
-            href: https://cloud.internal.tmem.de/
-            description: Store everything
-            siteMonitor: https://cloud.internal.tmem.de/
-        - Privatebin:
-            icon: privatebin.png
-            href: https://bin.tmem.de/
-            description: Share texts
-            siteMonitor: https://bin.tmem.de/
-        - MinIO:
-            icon: minio.png
-            href: https://minio.tmem.de/
-            description: Website and storage
-            siteMonitor: https://minio.tmem.de/
-        - Quick-Share:
-            icon: https://share.tmem.de/static/favicon.png
-            href: https://share.tmem.de/
-            description: Share something between devices
-            siteMonitor: https://share.tmem.de/
-        - Filebrowser:
-            icon: filebrowser.png
-            href: https://files.tmem.de/files
-            description: Share something with others
-            siteMonitor: https://files.tmem.de/files
-    - Other:
-        - Umami:
-            icon: umami.png
-            href: https://analytics.tmem.de
-            description: Website analytics
-            siteMonitor: https://analytics.tmem.de/
-        - Uptime-Kuma:
-            icon: uptime-kuma.png
-            href: https://status.tmem.de/status/tme
-            description: Status page
-            siteMonitor: https://status.tmem.de/
-        - Grafana:
-            icon: grafana.png
-            href: https://grafana.tmem.de/
-            description: Grafana
-            siteMonitor: https://grafana.tmem.de/
-        - Prometheus:
-            icon: prometheus.png
-            href: https://prometheus.internal.tmem.de/
-            description: Prometheus
-            siteMonitor: https://prometheus.internal.tmem.de/
-        - Flightradar-Monitor:
-            icon: flightradar24-light.png
-            href: https://flightradar.internal.tmem.de/
-            description: Track planes
-            siteMonitor: https://flightradar.internal.tmem.de/
-        - Unmanic:
-            icon: unmanic.png
-            href: https://unmanic.internal.tmem.de
-            description: Handle media
-            siteMonitor: https://unmanic.internal.tmem.de
-  # language=yaml
-  bookmarks.yaml: |-
-    ---
-  #language=yaml
-  kubernetes.yaml: |-
-    mode: default
+    #ENC[AES256_GCM,data:MfpxHXiuyY1+uNvRnzc=,iv:5erkbz2Pg67MAXFoQOTZnN5YSzYVUCcZYfBxeU0AqJM=,tag:q62BvTkUzX03b3TrpVg4Ow==,type:comment]
+    settings.yaml: ENC[AES256_GCM,data:RXIiv2AsAb7Zo0lyO0H2I4UtapCIIOSD7werxSHWscH1MactPD6lfZUK3p/ezgTcVC4K1E8ZOAtoNWXYJg5QrvmrAgCjqWYSNri2Wf40/hWhukZpkXFEa1ZJPehqSySFOSZ3b9m861YGsDeFKllo3WcxNJDTI6rfLYLVIImel/SAALVxPTTrZx5kozggB/xvu0ayWGOXnYdq8Wnbp9glfeBOWb+cN9Imve0J3Cu5De3M9fo+B8pl9BR9Z6jbvV6Y0czLUkvrgwc0nth6Kbe6+gcdbbG1UmglMqXwmx76y7BrER9C5RZv+Z60nXXzwO/QLVDr2kg2QZ4/nqyVQhpothEjRPfBWniHuNE4ORMN/XPi3Uwq6Jd8oz8S4ESEV2sZF0fMp0MjKXOTxJHfaFmLKksL62itTER+0FgvFVUGiK1yeO4M9Cg1lCp3fFpftjBBvkFcZx+Bffwd0kSQpxtq2zgdtp1F76UnShVNnY8/QxL2bkkVCSZ0A/oODHcHZ5eeZ+jyD+3Qmk8erDsFsPuLRXR0cSitQP/GnhEJqPvkZfO+fBJkt5xwcEQuCpdvr9fy9uqYt/Gjg5kpReQBnpWOTMn+VrvYMM0fGeW7H9KwqGVjm7hDfVDIWUqbK3K3Zt1rZPUr4093h9MTi/VoQCDbxfcEyyJqBJgi9U9ukJqjA6DfTx0K+QZkd6yWjufEY2cAGMkokXP3GDxIbKySo3wKcL7t97k8BQw4zG77axAm4oG/HmRwGFOyAn2Z6Ns=,iv:tTO9Xn9dWeOVZGwPoOnmXGHEZNpDQ/QCPTdzfUcnSpY=,tag:7S2jcrGkD6TUCSVptwq8wg==,type:str]
+    #ENC[AES256_GCM,data:MfpxHXiuyY1+uNvRnzc=,iv:5erkbz2Pg67MAXFoQOTZnN5YSzYVUCcZYfBxeU0AqJM=,tag:q62BvTkUzX03b3TrpVg4Ow==,type:comment]
+    services.yaml: ENC[AES256_GCM,data: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,iv:J5CqrqM5JsZrcwZ2oj6qajTThXSQEC60rY/uhxXDmns=,tag:xFKBeAZz2d9Mhwqmuyx8+w==,type:str]
+    #ENC[AES256_GCM,data:MfpxHXiuyY1+uNvRnzc=,iv:5erkbz2Pg67MAXFoQOTZnN5YSzYVUCcZYfBxeU0AqJM=,tag:q62BvTkUzX03b3TrpVg4Ow==,type:comment]
+    bookmarks.yaml: ENC[AES256_GCM,data:voWK,iv:BjLFueYix2WRtDZGheIQ5UPgvzt1pLJeJ8fpjKvYq+I=,tag:q87bLC7OBWylh/mDdTtIqw==,type:str]
+    #ENC[AES256_GCM,data:jKBfyzL+qtSHDoFv+w==,iv:IU+jdQsraV37nu0ARk/jsOO8MoB2Pt7/Rr4liXvRvDE=,tag:h+LX+ZCa24wpEEts3Rd+Cw==,type:comment]
+    kubernetes.yaml: ENC[AES256_GCM,data:E0vS9JXy6VVRwPBFHQ==,iv:D0aeQEc7B5k7JRNM/1OQomT8QdAC0yCYRHtTy2fzD5Q=,tag:RNiiFH0HX0wQaEktlskhzw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1099kpzqp5v429mcyekxxnnyfkyuqxgq3esxvamc0kv7tf7nh9g9qymcpmx
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmUzBleGx2alQ1VDNYQ1FE
+            WmVsOE83WmN5RkpTQmszQWRoRTdYSjZWQUNFCklaSklXZHdoMzcxTE9IRzhaYS9G
+            cTgycjk0U1BaU3IyR0FRWUEvbVlhNVUKLS0tIFhmTm0xWlU4NTFsWnA5RG9VcU8y
+            dmsrQkpmOEg4NVN6UXdvMm5Pc2FhSkEKFML285kgaXzqOOSSVs5FMBqPtS/ViOM4
+            ryy9UrYz4WotRED2GDhOYuWcVPbl035ikvGMRp6V8+JLMdFcPy5ZAg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-01-27T08:35:29Z"
+    mac: ENC[AES256_GCM,data:PrLBw5xp8nkcjJgB91qUd6PacBThoB/CTJG5tQt7CM5Dpg49sMoFeIv4LhGm80PjSxrLSAK5eX9xICPaE28YZyOvaMT0dS0CQsqvr+gP4N/KXmDx6OLsHXXhOZOqURxKGPpV3rxT602z/thjHYTlK3XiiyQ00q9HR4fgjniud80=,iv:14IVGrnCA+f4X6TXR80apEYkTD3j82n0AqfkPrF15Ko=,tag:F6hGFuopog+SvaUQ4L2xoQ==,type:str]
+    pgp: []
+    unencrypted_suffix: _unencrypted
+    version: 3.9.1
