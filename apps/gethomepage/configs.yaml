@@ -13,7 +13,7 @@ data:
     #ENC[AES256_GCM,data:MfpxHXiuyY1+uNvRnzc=,iv:5erkbz2Pg67MAXFoQOTZnN5YSzYVUCcZYfBxeU0AqJM=,tag:q62BvTkUzX03b3TrpVg4Ow==,type:comment]
     bookmarks.yaml: ENC[AES256_GCM,data:voWK,iv:BjLFueYix2WRtDZGheIQ5UPgvzt1pLJeJ8fpjKvYq+I=,tag:q87bLC7OBWylh/mDdTtIqw==,type:str]
     #ENC[AES256_GCM,data:jKBfyzL+qtSHDoFv+w==,iv:IU+jdQsraV37nu0ARk/jsOO8MoB2Pt7/Rr4liXvRvDE=,tag:h+LX+ZCa24wpEEts3Rd+Cw==,type:comment]
-    kubernetes.yaml: ENC[AES256_GCM,data:E0vS9JXy6VVRwPBFHQ==,iv:D0aeQEc7B5k7JRNM/1OQomT8QdAC0yCYRHtTy2fzD5Q=,tag:RNiiFH0HX0wQaEktlskhzw==,type:str]
+    kubernetes.yaml: ENC[AES256_GCM,data:GZtKrtSKPdcO46/noh4=,iv:GFjBkd1bH6P1rMXoAZbeWHA8D1XL64BWhEOFTvs5+uc=,tag:+0uHQPrXLk1qhXtiCqLAIg==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -29,8 +29,8 @@ sops:
             dmsrQkpmOEg4NVN6UXdvMm5Pc2FhSkEKFML285kgaXzqOOSSVs5FMBqPtS/ViOM4
             ryy9UrYz4WotRED2GDhOYuWcVPbl035ikvGMRp6V8+JLMdFcPy5ZAg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-01-27T09:58:04Z"
-    mac: ENC[AES256_GCM,data:5eEZfBOFjy9LX+7aSf/ST2izdYb0tCDS9+4zzdT4+5rTBEEHVzsrtzYswOV4DMphXHk4mYjezykyFYotvCVNGXcol/jCMgAiA2VO8MIvHJNfC8/lvXfENlIfBOIo48q+WxepG9MV14FKPw0tL1lfVNlU0EMVuokS9x3vsEuO7aY=,iv:oaMuvwFySbmSlIabLKOBPN8vMHI54Yn3l6IKE7M+CNE=,tag:q+6d6cQaQHIT/99mZHOs6A==,type:str]
+    lastmodified: "2025-01-27T09:58:40Z"
+    mac: ENC[AES256_GCM,data:B1795tWt9iEDmDvjNuBzNWw5iyE9FvuU2zN+H565L4ZCTzoSXM/86NiaLpl4HsuS/GwlL+kC33w91LSn4PERQYj8s5qoSPRacF2iq0j0rjIS2PFEVdYw7R7V+pAzJVVJqP43MQeV3uQ7mbsNAARWbJKAthZtP9Lbti9j1yTTZAg=,iv:3Cv2k+zwFuRt/R42B8J8tgSDTxJZwwiJMvV8qP6e61s=,tag:gWEv1xHSn8GVPsBChCdCkQ==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.9.1
