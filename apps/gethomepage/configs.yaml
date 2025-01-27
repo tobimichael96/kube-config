@@ -156,11 +156,16 @@ data:
             href: https://prometheus.internal.tmem.de/
             description: Prometheus
             siteMonitor: https://prometheus.internal.tmem.de/
-        - Flightradar:
+        - Flightradar-Monitor:
             icon: flightradar24-light.png
             href: https://flightradar.internal.tmem.de/
             description: Track planes
             siteMonitor: https://flightradar.internal.tmem.de/
+        - Unmanic:
+            icon: unmanic.png
+            href: https://unmanic.internal.tmem.de
+            description: Handle media
+            siteMonitor: https://unmanic.internal.tmem.de
   # language=yaml
   bookmarks.yaml: |-
     ---
