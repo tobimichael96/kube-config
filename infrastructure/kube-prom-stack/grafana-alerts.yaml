@@ -267,8 +267,7 @@ data:
                 "summary": "Flux {{ index $labels \"app\" }} threw an error!"
               },
               "labels": {
-                "": "",
-                "telegram": "true"
+                "telegram": "false"
               },
               "isPaused": false
             },
