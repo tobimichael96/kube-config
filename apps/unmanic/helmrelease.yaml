@@ -25,6 +25,11 @@ spec:
           reloader.stakater.com/auto: "true"
         pod:
           securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
+            fsGroupChangePolicy: OnRootMismatch
             supplementalGroups: [44]
         containers:
           unmanic:
