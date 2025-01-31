@@ -23,6 +23,9 @@ spec:
         strategy: "RollingUpdate"
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            supplementalGroups: [44]
         containers:
           unmanic:
             image:
