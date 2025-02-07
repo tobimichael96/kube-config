@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: frooodle/s-pdf
-              tag: 0.40.2
+              tag: 0.41.0
             env:
               TZ: Europe/Berlin
             probes:
