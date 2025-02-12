@@ -140,7 +140,7 @@ data:
                 "summary": "{{ index $labels \"container\" }} is in a restart loop."
               },
               "labels": {
-                "telegram": "true"
+                "telegram": "false"
               },
               "isPaused": false
             },
