@@ -26,7 +26,7 @@ spec:
             port: 8096
             targetPort: 8096
       gluetun:
-        controller: *app
+        controller: app
         ports:
           http:
             port: 9999
@@ -115,7 +115,7 @@ spec:
             env:
               TZ: Europe/Berlin
               FIREWALL: on
-              FIREWALL_INPUT_PORTS: 9982,9981,9999
+              FIREWALL_INPUT_PORTS: 8096,9999
               VPN_TYPE: wireguard
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
@@ -124,7 +124,7 @@ spec:
               OPENVPN_PASSWORD: m
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
-              - secret: tvheadend-vpn-config
+              - secret: jellyfin-vpn-config
             # Configure the container-specific securityContext
             securityContext:
               capabilities:
