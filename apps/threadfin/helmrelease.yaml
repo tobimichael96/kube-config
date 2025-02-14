@@ -102,12 +102,17 @@ spec:
             secretName: threadfin-tls
     persistence:
       config:
-        enabled: false
+        enabled: true
         advancedMounts:
           threadfin:
             app:
-              - path: /config
+              - path: /home/threadfin/conf
         existingClaim: "threadfin-config-pvc"
+      cache:
+        enabled: true
+        globalMounts:
+          - path: "/tmp/threadfin"
+        type: "emptyDir"
       vpn-config:
         enabled: true
         type: secret
