@@ -76,7 +76,7 @@ spec:
         type: secret
         name: jellyfin-vpn-config
         advancedMounts:
-          jellyfin:
+          app:
             gluetun:
               - path: /gluetun/wireguard/
     portal:
