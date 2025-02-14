@@ -106,42 +106,42 @@ spec:
             resources:
               limits:
                 cpu: "4000m"
-      # Configure the gluetun sidecar
-      gluetun:
-        dependsOn: app
-        image:
-          repository: ghcr.io/qdm12/gluetun
-          tag: v3.40.0
-        env:
-          TZ: Europe/Berlin
-          FIREWALL: on
-          FIREWALL_INPUT_PORTS: 9982,9981,9999
-          VPN_TYPE: wireguard
-          VPN_SERVICE_PROVIDER: mullvad
-          SERVER_COUNTRIES: Germany
-          UPDATER_PERIOD: 12h
-          DNS_KEEP_NAMESERVER: on
-          OPENVPN_PASSWORD: m
-          HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
-        envFrom:
-          - secret: tvheadend-vpn-config
-        # Configure the container-specific securityContext
-        securityContext:
-          capabilities:
-            add:
-              - NET_ADMIN
-              - SYS_MODULE
-        probes:
-          liveness:
-            enabled: true
-            custom: true
-            spec:
-              httpGet:
-                path: /
-                port: 9999
-              initialDelaySeconds: 30
-              periodSeconds: 10
-              timeoutSeconds: 3
-              failureThreshold: 12
-          startup:
-            enabled: false
+          # Configure the gluetun sidecar
+          gluetun:
+            dependsOn: app
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.40.0
+            env:
+              TZ: Europe/Berlin
+              FIREWALL: on
+              FIREWALL_INPUT_PORTS: 9982,9981,9999
+              VPN_TYPE: wireguard
+              VPN_SERVICE_PROVIDER: mullvad
+              SERVER_COUNTRIES: Germany
+              UPDATER_PERIOD: 12h
+              DNS_KEEP_NAMESERVER: on
+              OPENVPN_PASSWORD: m
+              HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
+            envFrom:
+              - secret: tvheadend-vpn-config
+            # Configure the container-specific securityContext
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - SYS_MODULE
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9999
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 12
+              startup:
+                enabled: false
