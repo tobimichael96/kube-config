@@ -35,7 +35,7 @@ spec:
                   httpGet:
                     path: /
                     port: 34400
-                  initialDelaySeconds: 5
+                  initialDelaySeconds: 60
                   periodSeconds: 10
                   timeoutSeconds: 3
                   failureThreshold: 5
