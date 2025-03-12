@@ -87,11 +87,18 @@ spec:
           redis:
             container_name: redis
             image: redis:alpine
-            healthcheck:
-              test: ["CMD", "redis-cli", "ping"]
-              interval: 10s
-              timeout: 5s
-              retries: 5
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["CMD", "redis-cli", "ping"]
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 5
+              readiness: *probes
     ingress:
       app:
         annotations:
