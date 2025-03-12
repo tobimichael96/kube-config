@@ -106,6 +106,20 @@ spec:
             resources:
               limits:
                 cpu: "5000m"
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8096
+                  initialDelaySeconds: 30
+                  periodSeconds: 5
+                  timeoutSeconds: 5
+                  failureThreshold: 6
+              startup:
+                enabled: false
           # Configure the gluetun sidecar
           gluetun:
             dependsOn: app
