@@ -27,6 +27,8 @@ spec:
               tag: stable
             env:
               TZ: Europe/Berlin
+              HW_ACCEL: vaapi
+              HW_DEVICE: /dev/dri/renderD128
             probes:
               liveness: &probes
                 enabled: true
@@ -109,6 +111,13 @@ spec:
           streamdock:
             gluetun:
               - path: /gluetun/wireguard/
+      amd-device:
+        enabled: true
+        type: hostPath
+        hostPath: "/dev/dri"
+        hostPathType: "Directory"
+        globalMounts:
+          - path: "/dev/dri"
     service:
       app:
         controller: *app
