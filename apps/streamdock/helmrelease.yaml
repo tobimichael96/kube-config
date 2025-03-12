@@ -24,7 +24,7 @@ spec:
           app:
             image:
               repository: ghcr.io/limmer55/streamdock
-              tag: stable
+              tag: dev
             env:
               TZ: Europe/Berlin
               HW_ACCEL: vaapi
