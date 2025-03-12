@@ -90,7 +90,7 @@ spec:
               tag: alpine
             probes:
               liveness: &probes
-                enabled: true
+                enabled: false
                 custom: true
                 spec:
                   exec:
@@ -100,6 +100,8 @@ spec:
                   timeoutSeconds: 3
                   failureThreshold: 5
               readiness: *probes
+              startup:
+                enabled: false
     ingress:
       app:
         annotations:
