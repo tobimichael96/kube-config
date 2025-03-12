@@ -85,8 +85,9 @@ spec:
                 enabled: false
           # Configure redis
           redis:
-            container_name: redis
-            image: redis:alpine
+            image:
+              repository: redis
+              tag: alpine
             probes:
               liveness: &probes
                 enabled: true
