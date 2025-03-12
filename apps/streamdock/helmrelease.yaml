@@ -83,6 +83,15 @@ spec:
                   failureThreshold: 12
               startup:
                 enabled: false
+          # Configure redis
+          redis:
+            container_name: redis
+            image: redis:alpine
+            healthcheck:
+              test: ["CMD", "redis-cli", "ping"]
+              interval: 10s
+              timeout: 5s
+              retries: 5
     ingress:
       app:
         annotations:
