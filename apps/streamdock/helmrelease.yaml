@@ -53,7 +53,7 @@ spec:
             env:
               TZ: Europe/Berlin
               FIREWALL: on
-              FIREWALL_INPUT_PORTS: 6050,9999
+              FIREWALL_INPUT_PORTS: 6379,6050,9999
               VPN_TYPE: wireguard
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
@@ -143,6 +143,11 @@ spec:
         ports:
           http:
             port: 6050
+      redis:
+        controller: *app
+        ports:
+          http:
+            port: 6379
       gluetun:
         controller: *app
         ports:
