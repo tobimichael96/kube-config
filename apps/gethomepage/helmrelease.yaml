@@ -45,6 +45,7 @@ spec:
               tag: v1.0.4
             env:
               TZ: Europe/Berlin
+              HOMEPAGE_ALLOWED_HOSTS: "*"
     service:
       app:
         controller: *app
