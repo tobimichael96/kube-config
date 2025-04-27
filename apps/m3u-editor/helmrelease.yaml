@@ -75,7 +75,7 @@ spec:
             secretName: m3u-editor-tls
     persistence:
       config:
-        enabled: false
+        enabled: true
         existingClaim: m3u-editor-config-pvc
         globalMounts:
-          - path: "/config"
+          - path: "/var/www/config"
