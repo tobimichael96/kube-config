@@ -67,7 +67,7 @@ spec:
               DNS_KEEP_NAMESERVER: on
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
-              - secret: jellyfin-vpn-config
+              - secret: m3u-editor-vpn-config
             securityContext:
               capabilities:
                 add:
