@@ -19,7 +19,7 @@ spec:
   targetNamespace: *app
   values:
     controllers:
-      main:
+      app:
         strategy: "RollingUpdate"
         annotations:
           reloader.stakater.com/auto: "true"
@@ -50,14 +50,58 @@ spec:
                   failureThreshold: 3
               startup:
                 enabled: false
+          # Configure the gluetun sidecar
+          gluetun:
+            dependsOn: app
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.40.0
+            env:
+              TZ: Europe/Berlin
+              FIREWALL: on
+              FIREWALL_INPUT_PORTS: 1900,7359,8096,9999
+              VPN_TYPE: wireguard
+              VPN_SERVICE_PROVIDER: mullvad
+              SERVER_COUNTRIES: Germany
+              UPDATER_PERIOD: 12h
+              DNS_ADDRESS: 192.168.178.91
+              DNS_KEEP_NAMESERVER: off
+              HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
+            envFrom:
+              - secret: jellyfin-vpn-config
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - SYS_MODULE
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9999
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 12
+              startup:
+                enabled: false
     service:
       main:
-        controller: main
+        controller: app
         ports:
           http:
             port: 36400
           websocket:
+            protocol: UDP
             port: 36800
+      gluetun:
+        controller: app
+        ports:
+          http:
+            port: 9999
     ingress:
       main:
         enabled: true
@@ -84,3 +128,11 @@ spec:
         existingClaim: m3u-editor-config-pvc
         globalMounts:
           - path: "/var/www/config"
+      vpn-config:
+        enabled: true
+        type: secret
+        name: m3u-editor-vpn-config
+        advancedMounts:
+          app:
+            gluetun:
+              - path: /gluetun/wireguard/
