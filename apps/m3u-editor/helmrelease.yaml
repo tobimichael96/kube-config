@@ -59,7 +59,7 @@ spec:
             env:
               TZ: Europe/Berlin
               FIREWALL: on
-              FIREWALL_INPUT_PORTS: 1900,7359,8096,9999
+              FIREWALL_INPUT_PORTS: 36400,36800,9999
               VPN_TYPE: wireguard
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
