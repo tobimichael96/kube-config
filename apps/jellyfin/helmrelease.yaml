@@ -25,11 +25,11 @@ spec:
           app:
             port: 8096
             targetPort: 8096
-#      gluetun:
-#        controller: app
-#        ports:
-#          http:
-#            port: 9999
+      gluetun:
+        controller: app
+        ports:
+          http:
+            port: 9999
       autodiscovery:
         controller: app
         ports:
@@ -71,14 +71,14 @@ spec:
         hostPathType: "Directory"
         globalMounts:
           - path: "/dev/dri"
-#      vpn-config:
-#        enabled: true
-#        type: secret
-#        name: jellyfin-vpn-config
-#        advancedMounts:
-#          app:
-#            gluetun:
-#              - path: /gluetun/wireguard/
+      vpn-config:
+        enabled: true
+        type: secret
+        name: jellyfin-vpn-config
+        advancedMounts:
+          app:
+            gluetun:
+              - path: /gluetun/wireguard/
     portal:
       open:
         enabled: true
@@ -121,41 +121,41 @@ spec:
               startup:
                 enabled: false
           # Configure the gluetun sidecar
-#          gluetun:
-#            dependsOn: app
-#            image:
-#              repository: ghcr.io/qdm12/gluetun
-#              tag: v3.40.0
-#            env:
-#              TZ: Europe/Berlin
-#              FIREWALL: on
-#              FIREWALL_INPUT_PORTS: 1900,7359,8096,9999
-#              VPN_TYPE: wireguard
-#              VPN_SERVICE_PROVIDER: mullvad
-#              SERVER_COUNTRIES: Germany
-#              UPDATER_PERIOD: 12h
-#              DNS_ADDRESS: 192.168.178.91
-#              DNS_KEEP_NAMESERVER: off
-#              HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
-#            envFrom:
-#              - secret: jellyfin-vpn-config
-#            # Configure the container-specific securityContext
-#            securityContext:
-#              capabilities:
-#                add:
-#                  - NET_ADMIN
-#                  - SYS_MODULE
-#            probes:
-#              liveness:
-#                enabled: true
-#                custom: true
-#                spec:
-#                  httpGet:
-#                    path: /
-#                    port: 9999
-#                  initialDelaySeconds: 30
-#                  periodSeconds: 10
-#                  timeoutSeconds: 3
-#                  failureThreshold: 12
-#              startup:
-#                enabled: false
+          gluetun:
+            dependsOn: app
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.40.0
+            env:
+              TZ: Europe/Berlin
+              FIREWALL: on
+              FIREWALL_INPUT_PORTS: 1900,7359,8096,9999
+              VPN_TYPE: wireguard
+              VPN_SERVICE_PROVIDER: mullvad
+              SERVER_COUNTRIES: Germany
+              UPDATER_PERIOD: 12h
+              DNS_ADDRESS: 192.168.178.91
+              DNS_KEEP_NAMESERVER: off
+              HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
+            envFrom:
+              - secret: jellyfin-vpn-config
+            # Configure the container-specific securityContext
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - SYS_MODULE
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9999
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 12
+              startup:
+                enabled: false
