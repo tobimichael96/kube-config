@@ -88,7 +88,7 @@ spec:
               startup:
                 enabled: false
     service:
-      main:
+      app:
         controller: app
         ports:
           http:
@@ -102,7 +102,7 @@ spec:
           http:
             port: 9999
     ingress:
-      main:
+      app:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: "nginx-internal"
@@ -115,7 +115,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  identifier: main
+                  identifier: app
                   port: http
         tls:
           - hosts:
