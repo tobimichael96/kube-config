@@ -27,7 +27,7 @@ spec:
           securityContext:
             runAsNonRoot: false
         containers:
-          m3u-editor:
+          app:
             image:
               repository: sparkison/m3u-editor
               tag: latest
