@@ -134,7 +134,8 @@ spec:
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               UPDATER_PERIOD: 12h
-              DNS_KEEP_NAMESERVER: on
+              DNS_ADDRESS: 192.168.178.91
+              DNS_KEEP_NAMESERVER: off
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
               - secret: jellyfin-vpn-config
