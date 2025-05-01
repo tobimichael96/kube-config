@@ -5,7 +5,7 @@ metadata:
   name: alloy-config
   namespace: alloy
 data:
-  config.alloy:
+  config.alloy: |-
     logging {
       level = "info"
       format = "logfmt"
