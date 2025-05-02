@@ -17,4 +17,5 @@ spec:
   releaseName: nvidia-device-plugin-gpu
   targetNamespace: kube-system
   values:
-
+    devicePlugin:
+      enabled: true
