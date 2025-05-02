@@ -56,11 +56,11 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: amd-gpu
+  name: nvdp
   namespace: flux-system
 spec:
   interval: 1h0m0s
-  url: https://rocm.github.io/k8s-device-plugin/
+  url: https://nvidia.github.io/k8s-device-plugin
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository

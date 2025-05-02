@@ -7,18 +7,14 @@ metadata:
 spec:
   chart:
     spec:
-      chart: amd-gpu
-      version: 0.19.0
+      chart: nvdp
+      version: 0.17.1
       sourceRef:
         kind: HelmRepository
-        name: amd-gpu
+        name: nvdp
         namespace: flux-system
   interval: 5m
   releaseName: amd-device-plugin-gpu
   targetNamespace: kube-system
   values:
-    namespace: kube-system
-    dp:
-      image:
-        repository: docker.io/rocm/k8s-device-plugin
-        tag: "1.31.0.6"
+
