@@ -29,7 +29,7 @@ spec:
         containers:
           frontend:
             image:
-              repository: ghcr.io/tobimichael96/calendar-helper-frontend:latest
+              repository: ghcr.io/tobimichael96/calendar-helper-frontend
               tag: latest
             env:
               WEBSITE_URL: "https://calendar.internal.tmem.de"
@@ -37,7 +37,7 @@ spec:
               TZ: Europe/Berlin
           backend:
             image:
-              repository: ghcr.io/tobimichael96/calendar-helper-backend:latest
+              repository: ghcr.io/tobimichael96/calendar-helper-backend
               tag: latest
             env:
               TZ: Europe/Berlin
