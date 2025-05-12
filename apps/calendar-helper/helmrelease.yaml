@@ -82,7 +82,7 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
-          - host: &host calendar-backend.internal.tmem.de
+          - host: &host-backend calendar-backend.internal.tmem.de
             paths:
               - path: /
                 pathType: Prefix
@@ -91,5 +91,5 @@ spec:
                   port: http
         tls:
           - hosts:
-              - *host
+              - *host-backend
             secretName: calendar-backend-tls
