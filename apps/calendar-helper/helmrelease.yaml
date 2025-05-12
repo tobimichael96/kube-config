@@ -32,8 +32,8 @@ spec:
               repository: ghcr.io/tobimichael96/calendar-helper-frontend
               tag: latest
             env:
-              WEBSITE_URL: "https://calendar.internal.tmem.de"
-              BACKEND_URL: "http://calendar-helper-backend:8000"
+              REACT_APP_WEBSITE_URL: "https://calendar.internal.tmem.de"
+              REACT_APP_BACKEND_URL: "http://calendar-helper-backend:8000"
               TZ: Europe/Berlin
           backend:
             image:
