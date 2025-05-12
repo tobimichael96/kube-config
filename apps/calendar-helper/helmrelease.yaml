@@ -59,12 +59,7 @@ spec:
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
-          nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-             proxy_http_version 1.1;
-             proxy_set_header Upgrade "websocket";
-             proxy_set_header Connection "Upgrade";
+          nginx.org/websocket-services: "frontend"
 #          nginx.ingress.kubernetes.io/auth-response-headers: Authorization
 #          nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
 #          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
