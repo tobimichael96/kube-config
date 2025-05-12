@@ -33,7 +33,7 @@ spec:
               tag: latest
             env:
               WEBSITE_URL: "https://calendar.internal.tmem.de"
-              BACKEND_URL: "http://backend:8000"
+              BACKEND_URL: "http://calendar-helper-backend:8000"
               TZ: Europe/Berlin
           backend:
             image:
