@@ -33,7 +33,7 @@ spec:
               tag: latest
             env:
               REACT_APP_WEBSITE_URL: "https://calendar.internal.tmem.de"
-              REACT_APP_BACKEND_URL: "https://calendar-backend.internal.tmem.de"
+              REACT_APP_BACKEND_URL: "http://calendar-helper-backend:8000"
               TZ: Europe/Berlin
           backend:
             image:
@@ -75,21 +75,3 @@ spec:
           - hosts:
               - *host
             secretName: calendar-tls
-      backend:
-        annotations:
-          kubernetes.io/ingress.class: "nginx-internal"
-          kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
-        hosts:
-          - host: &host-backend calendar-backend.internal.tmem.de
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  identifier: backend
-                  port: http
-        tls:
-          - hosts:
-              - *host-backend
-            secretName: calendar-backend-tls
