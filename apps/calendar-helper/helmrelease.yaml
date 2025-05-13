@@ -97,5 +97,7 @@ spec:
     persistence:
       data:
         existingClaim: calendar-helper-pvc
-        globalMounts:
-          - path: /data
+        advancedMounts:
+          backend:
+            app:
+              - path: /data
