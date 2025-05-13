@@ -94,3 +94,8 @@ spec:
           - hosts:
               - *host
             secretName: calendar-backend-tls
+    persistence:
+      data:
+        existingClaim: calendar-helper-pvc
+        globalMounts:
+          - path: /data
