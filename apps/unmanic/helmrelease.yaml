@@ -38,6 +38,7 @@ spec:
               tag: 0.2.7
             env:
               TZ: Europe/Berlin
+              NVIDIA_VISIBLE_DEVICES: all
             probes:
               liveness:
                 enabled: false
