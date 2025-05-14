@@ -64,11 +64,13 @@ spec:
         hosts:
           - host: &host calendar.tmem.de
             paths:
-              - path: /api/*
+              - path: /api/
+                pathType: Prefix
                 service:
                   identifier: backend
                   port: http
-              - path: /*
+              - path: /
+                pathType: Prefix
                 service:
                   identifier: frontend
                   port: http
