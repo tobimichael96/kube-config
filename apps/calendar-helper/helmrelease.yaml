@@ -78,27 +78,6 @@ spec:
           - hosts:
               - *host
             secretName: calendar-tls
-#      backend:
-#        annotations:
-#          kubernetes.io/ingress.class: "nginx"
-#          kubernetes.io/tls-acme: "true"
-#          nginx.ingress.kubernetes.io/ssl-redirect: "true"
-#          cert-manager.io/cluster-issuer: "letsencrypt"
-##          nginx.ingress.kubernetes.io/auth-response-headers: Authorization
-##          nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-##          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
-#        hosts:
-#          - host: &host calendar-backend.tmem.de
-#            paths:
-#              - path: /
-#                pathType: Prefix
-#                service:
-#                  identifier: backend
-#                  port: http
-#        tls:
-#          - hosts:
-#              - *host
-#            secretName: calendar-backend-tls
     persistence:
       data:
         existingClaim: calendar-helper-pvc
