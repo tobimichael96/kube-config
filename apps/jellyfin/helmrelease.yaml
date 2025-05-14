@@ -18,6 +18,8 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    defaultPodOptions:
+      runtimeClassName: "nvidia"
     service:
       app:
         controller: app
@@ -101,6 +103,7 @@ spec:
               tag: 10.10.7
             env:
               JELLYFIN_PublishedServerUrl: "jellyfin.internal.tmem.de"
+              NVIDIA_VISIBLE_DEVICES: all
             securityContext:
               privileged: true
             resources:
