@@ -21,3 +21,5 @@ spec:
       env:
         - name: CONTAINERD_SOCKET
           value: /run/k3s/containerd/containerd.sock
+        - name: CONTAINERD_RUNTIME_CLASS
+          value: nvidia
