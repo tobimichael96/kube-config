@@ -93,7 +93,7 @@ spec:
             runAsGroup: 0
             fsGroup: 0
             fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [44,105]
+            supplementalGroups: [44,105,109]
             seLinuxOptions:
               type: spc_t
         containers:
