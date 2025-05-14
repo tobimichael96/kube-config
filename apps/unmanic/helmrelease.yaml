@@ -41,9 +41,9 @@ spec:
             env:
               TZ: Europe/Berlin
               NVIDIA_VISIBLE_DEVICES: all
-            resources:
-              limits:
-                nvidia.com/gpu.present: "true"
+#            resources:
+#              limits:
+#                nvidia.com/gpu.present: "true"
             probes:
               liveness:
                 enabled: false
