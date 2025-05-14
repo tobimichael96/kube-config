@@ -19,5 +19,3 @@ spec:
   values:
     devicePlugin:
       enabled: true
-    gfd:
-      enabled: true
