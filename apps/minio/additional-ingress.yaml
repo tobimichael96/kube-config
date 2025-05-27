@@ -111,7 +111,7 @@ spec:
                 name: minio
                 port:
                   number: 9000
-    - host: selinaklepic.de
+    - host: selinaeffner.de
       http:
         paths:
           - path: /
@@ -121,7 +121,7 @@ spec:
                 name: minio
                 port:
                   number: 9000
-    - host: www.selinaklepic.de
+    - host: www.selinaeffner.de
       http:
         paths:
           - path: /
