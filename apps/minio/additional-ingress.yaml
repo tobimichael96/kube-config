@@ -4,7 +4,6 @@ metadata:
   name: minio-tobiasmichael
   namespace: minio
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
@@ -16,6 +15,7 @@ metadata:
         rewrite ^/(.*/)?(.*)$ /tobiasmichael/$1$2 break;
       }
 spec:
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - tm28.de
@@ -71,7 +71,6 @@ metadata:
   name: minio-selinaklepic
   namespace: minio
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
@@ -83,6 +82,7 @@ metadata:
         rewrite ^/(.*/)?(.*)$ /selinaklepic/$1$2 break;
       }
 spec:
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - selinaklepic.com
@@ -128,7 +128,6 @@ metadata:
   name: minio-moto
   namespace: minio
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
@@ -140,6 +139,7 @@ metadata:
         rewrite ^/(.*/)?(.*)$ /moto/$1$2 break;
       }
 spec:
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - moto.tmem.de
