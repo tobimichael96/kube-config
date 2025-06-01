@@ -88,6 +88,7 @@ spec:
         - selinaklepic.com
         - www.selinaklepic.com
         - selinaeffner.de
+        - www.selinaeffner.de
       secretName: selinaklepic-tls
   rules:
     - host: selinaklepic.com
@@ -111,6 +112,16 @@ spec:
                 port:
                   number: 9000
     - host: selinaeffner.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 9000
+    - host: www.selinaeffner.de
       http:
         paths:
           - path: /
