@@ -29,7 +29,7 @@ spec:
           home-assistant:
             image:
               repository: "homeassistant/home-assistant"
-              tag: "2025.5.3"
+              tag: "2025.6.0"
             env:
               TZ: "Europe/Berlin"
             securityContext:
