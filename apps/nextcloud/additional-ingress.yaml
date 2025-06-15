@@ -42,13 +42,13 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host cloud.tmem.de
+        - *host
       secretName: nextcloud-share-tls
   rules:
     - host: *host
       http:
         paths:
-          - path: /s/
+          - path: /s
             pathType: Prefix
             backend:
               service:
