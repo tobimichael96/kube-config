@@ -55,7 +55,7 @@ spec:
               )
           );
 
-      host: cloud.internal.tmem.de
+      host: cloud.tmem.de
 
       existingSecret:
         enabled: true
