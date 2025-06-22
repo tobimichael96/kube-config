@@ -71,10 +71,10 @@ spec:
         type: configMap
         name: filebrowser-configs
         globalMounts:
-          - path: /.filebrowser.json
-            subPath: filebrowser.json
+          - path: /config/settings.json
+            subPath: settings.json
             readOnly: true
       data:
         existingClaim: filebrowser-pvc
         globalMounts:
-          - path: /data
+          - path: /database
