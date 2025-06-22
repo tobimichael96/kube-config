@@ -69,7 +69,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1h0m0s
-  url: https://bjw-s.github.io/helm-charts
+  url: https://bjw-s-labs.github.io/helm-charts
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
