@@ -5,11 +5,11 @@ metadata:
   name: adguard
   namespace: local-services
   annotations:
-    kubernetes.io/ingress.class: "internal-nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  ingressClassName: "internal-nginx"
   tls:
     - hosts:
         - &host adguard.internal.tmem.de
@@ -32,11 +32,11 @@ metadata:
   name: flightradar
   namespace: local-services
   annotations:
-    kubernetes.io/ingress.class: "internal-nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  ingressClassName: "internal-nginx"
   tls:
     - hosts:
         - &host flightradar.internal.tmem.de
