@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
-  ingressClassName: "nginx-internal"
+  ingressClassName: "internal-nginx"
   tls:
     - hosts:
         - &slzb-host slzb.internal.tmem.de
