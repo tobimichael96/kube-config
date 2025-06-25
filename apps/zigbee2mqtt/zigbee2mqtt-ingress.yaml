@@ -5,11 +5,11 @@ metadata:
   name: zigbee2mqtt
   namespace: zigbee2mqtt
   annotations:
-    kubernetes.io/ingress.class: "nginx-internal"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  ingressClassName: "nginx-internal"
   tls:
     - hosts:
 #        - &conbee-host conbee.internal.tmem.de

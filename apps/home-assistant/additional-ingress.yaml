@@ -5,11 +5,11 @@ metadata:
   name: home-assistant-public
   namespace: home-assistant
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - &host ha.tmem.de
@@ -39,7 +39,6 @@ metadata:
   name: home-assistant-oauth2
   namespace: home-assistant
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
@@ -47,6 +46,7 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$request_uri"
 spec:
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - &host ha.tmem.de

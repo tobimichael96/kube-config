@@ -4,7 +4,6 @@ metadata:
   name: nextcloud-oauth2
   namespace: nextcloud
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
@@ -13,6 +12,7 @@ metadata:
     #nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
     #nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$request_uri"
 spec:
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - &host cloud.tmem.de
