@@ -45,7 +45,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx-internal"
+        className: "nginx-internal"
         annotations:
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"

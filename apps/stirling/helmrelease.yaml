@@ -57,7 +57,7 @@ spec:
             port: *port
     ingress:
       app:
-        ingressClassName: "nginx"
+        className: "nginx"
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 100MB
           nginx.ingress.kubernetes.io/proxy_read_timeout: 3600s

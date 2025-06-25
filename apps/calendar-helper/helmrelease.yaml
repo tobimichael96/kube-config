@@ -52,7 +52,7 @@ spec:
             port: 8000
     ingress:
       frontend:
-        ingressClassName: "nginx"
+        className: "nginx"
         annotations:
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"

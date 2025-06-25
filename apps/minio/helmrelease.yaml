@@ -76,7 +76,7 @@ spec:
             scrapeTimeout: 10s
     ingress:
       app:
-        ingressClassName: "nginx"
+        className: "nginx"
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 5G
           kubernetes.io/tls-acme: "true"

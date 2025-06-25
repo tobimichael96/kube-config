@@ -83,7 +83,7 @@ spec:
                 enabled: false
     ingress:
       app:
-        ingressClassName: "nginx-internal"
+        className: "nginx-internal"
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: 5G
           kubernetes.io/tls-acme: "true"
