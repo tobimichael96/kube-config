@@ -25,8 +25,8 @@ spec:
     grafana:
       ingress:
         enabled: true
-      ingressClassName: "nginx"
-      annotations:
+        ingressClassName: "nginx"
+        annotations:
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
