@@ -35,11 +35,11 @@ metadata:
   namespace: jellyfin
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: 5G
-    kubernetes.io/ingress.class: "internal-nginx"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  ingressClassName: "internal-nginx"
   tls:
     - hosts:
         - &i-host jellyfin.internal.tmem.de
