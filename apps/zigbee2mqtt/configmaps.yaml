@@ -29,6 +29,7 @@ data:
       passive:
         timeout: 1500
     advanced:
+      pan_id: 1a62
       log_level: debug
       log_output:
         - console
