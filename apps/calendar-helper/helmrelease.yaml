@@ -42,6 +42,29 @@ spec:
             envFrom:
               - configMapRef:
                   name: default
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 3000
+                  initialDelaySeconds: 5
+                  periodSeconds: 3
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 3000
+                  initialDelaySeconds: 5
+                  periodSeconds: 3
+                  timeoutSeconds: 3
+                  failureThreshold: 3
     service:
       frontend:
         controller: main
