@@ -1,0 +1,46 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app n8n
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: n8n
+      version: 1.0.10
+      sourceRef:
+        kind: HelmRepository
+        name: n8n
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    ingress:
+      enabled: true
+      className: "internal-nginx"
+      annotations:
+        kubernetes.io/tls-acme: "true"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        cert-manager.io/cluster-issuer: "letsencrypt"
+      hosts:
+        - host: &host n8n.internal.tmem.de
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: main
+                port: http
+      tls:
+        - hosts:
+            - *host
+          secretName: n8n-tls
+    main:
+      config:
+        n8n:
+          hide_usage_page: true
+      service:
+        type: ClusterIP
+        port: 80
