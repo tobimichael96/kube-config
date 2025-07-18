@@ -26,7 +26,8 @@ spec:
         cert-manager.io/cluster-issuer: "letsencrypt"
       hosts:
         - host: &host n8n.internal.tmem.de
-          paths: [ ]
+          paths:
+            - /
       tls:
         - hosts:
             - *host
