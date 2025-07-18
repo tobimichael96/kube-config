@@ -39,6 +39,9 @@ spec:
               tag: latest
             env:
               TZ: Europe/Berlin
+            envFrom:
+              - configMapRef:
+                  name: default
     service:
       frontend:
         controller: main
