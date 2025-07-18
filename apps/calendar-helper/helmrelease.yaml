@@ -20,7 +20,7 @@ spec:
   values:
     defaultPodOptions:
       imagePullSecrets:
-        - name: ghcr-login-secret
+        - name: ghcr-pull-secret
     controllers:
       main:
         strategy: "RollingUpdate"
