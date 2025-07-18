@@ -162,12 +162,13 @@ spec:
   url: https://itzg.github.io/minecraft-server-charts/
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: GitRepository
 metadata:
   name: n8n
   namespace: flux-system
 spec:
   interval: 1h0m0s
-  url: oci://8gears.container-registry.com/library/n8n
-  type: "oci"
+  url: https://github.com/8gears/n8n-helm-chart
+  ref:
+    branch: 1.0.10
 ---
