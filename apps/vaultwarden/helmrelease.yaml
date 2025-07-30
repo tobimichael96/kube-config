@@ -21,7 +21,7 @@ spec:
       wal: true
     image:
       repository: vaultwarden/server
-      tag: "1.34.2"
+      tag: "1.34.3"
     vaultwarden:
       extraEnv:
         DOMAIN: "https://vault.internal.tmem.de"
