@@ -18,6 +18,7 @@ spec:
       http:
         paths:
           - path: /stream.html?src=p1s
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: app
