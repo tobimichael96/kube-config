@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bambu-streamer-public
+  namespace: bambu-streamer
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - &host printer.tmem.de
+      secretName: bambu-streamer-public-tls
+  rules:
+    - host: *host
+      http:
+        paths:
+          - path: /stream.html?src=p1s
+            backend:
+              service:
+                name: app
+                port: http

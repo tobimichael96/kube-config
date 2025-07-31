@@ -5,3 +5,4 @@ resources:
 - configmaps.yaml
 #- ghcr-pull-secret.yaml
 - helmrelease.yaml
+- additional-ingress.yaml

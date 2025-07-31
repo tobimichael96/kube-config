@@ -61,7 +61,7 @@ spec:
         hosts:
           - host: &host printer.tmem.de
             paths:
-              - path: /stream.html?src=p1s
+              - path: /
                 pathType: Prefix
                 service:
                   identifier: app
