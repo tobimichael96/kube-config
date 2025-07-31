@@ -29,7 +29,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/tobimichael96/bambu-streamer
+              repository: ghcr.io/tobimichael96/bambulab-streamer
               tag: latest
             env:
               TZ: Europe/Berlin
