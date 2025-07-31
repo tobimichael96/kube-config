@@ -18,7 +18,8 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-#    defaultPodOptions:
+    defaultPodOptions:
+      hostNetwork: true
 #      imagePullSecrets:
 #        - name: ghcr-pull-secret
     controllers:
