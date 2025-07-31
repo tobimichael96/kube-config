@@ -37,6 +37,13 @@ spec:
             envFrom:
               - configMapRef:
                   name: default
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - NET_RAW
+                  - NET_BROADCAST
     service:
       app:
         controller: main
