@@ -52,7 +52,7 @@ spec:
           postgres:
             image:
               repository: postgres
-              tag: 16.10-alpine
+              tag: 17.6-alpine
             env:
               TZ: Europe/Berlin
             envFrom:
