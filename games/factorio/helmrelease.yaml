@@ -24,6 +24,7 @@ spec:
       tag: "2.0.60"
 
     factorioServer:
+      enable_dlc_space_age: false
       save_name: "tme"
 
     admin_list:
