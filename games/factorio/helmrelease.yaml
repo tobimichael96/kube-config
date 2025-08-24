@@ -41,7 +41,7 @@ spec:
               LOAD_LATEST_SAVE: "true"
             probes:
               liveness:
-                enables: true
+                enabled: true
                 custom: true
                 spec:
                   exec:
