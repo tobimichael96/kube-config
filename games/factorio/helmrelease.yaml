@@ -40,7 +40,7 @@ spec:
               GENERATE_NEW_SAVE: "true"
               LOAD_LATEST_SAVE: "true"
             probes:
-              livenessProbe:
+              liveness:
                 enables: true
                 custom: true
                 type: "exec"
