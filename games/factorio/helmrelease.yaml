@@ -43,12 +43,12 @@ spec:
               liveness:
                 enables: true
                 custom: true
-                type: "exec"
                 spec:
-                  command:
-                    - /bin/bash
-                    - -ec
-                    - '/bin/ps aux | /bin/grep -v grep | /bin/grep factorio'
+                  exec:
+                    command:
+                      - /bin/bash
+                      - -ec
+                      - '/bin/ps aux | /bin/grep -v grep | /bin/grep factorio'
                   periodSeconds: 10
                   initialDelaySeconds: 5
                   failureThreshold: 3
