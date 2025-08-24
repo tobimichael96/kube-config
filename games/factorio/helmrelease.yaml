@@ -1,50 +1,68 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: factorio
-  namespace: factorio
+  name: &app factorio
+  namespace: *app
 spec:
   chart:
     spec:
-      chart: factorio
-      version: 1.3.0
+      chart: app-template
+      version: 4.2.0
       sourceRef:
         kind: HelmRepository
-        name: logan-helm-charts
+        name: bjw-s
         namespace: flux-system
   interval: 5m
-  releaseName: factorio
-  targetNamespace: factorio
+  releaseName: *app
+  targetNamespace: *app
   values:
-    image:
-      repository: "factoriotools/factorio"
-      ## Container image pull policy
-      pullPolicy: Always
-      ## Overrides the image tag whose default is the chart appVersion.
-      tag: "2.0.60"
-
-    factorioServer:
-      enable_dlc_space_age: false
-      save_name: "tme"
-
-    admin_list:
-      - Ausraster
-      - DiaEmperador
-
-    white_list:
-      - Ausraster
-      - DiaEmperador
-
-    service:
-      type: ClusterIP
-      port: 31497
+    defaultPodOptions:
       hostNetwork: true
-
+    controllers:
+      main:
+        strategy: "Recreate"
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: "factoriotools/factorio"
+              tag: "2.0.60"
+            env:
+              TZ: Europe/Berlin
+              DLC_SPACE_AGE: "false"
+              UPDATE_MODS_ON_START: "true"
+              INSTANCE_NAME: "tme"
+              INSTANCE_DESC: "tme"
+              SAVE_NAME: "tme"
+              GENERATE_NEW_SAVE: "true"
+              LOAD_LATEST_SAVE: "true"
+            probes:
+              livenessProbe:
+                enables: true
+                custom: true
+                type: "exec"
+                spec:
+                  command:
+                    - /bin/bash
+                    - -ec
+                    - '/bin/ps aux | /bin/grep -v grep | /bin/grep factorio'
+                  periodSeconds: 10
+                  initialDelaySeconds: 5
+                  failureThreshold: 3
+    service:
+      app:
+        controller: main
+        type: ClusterIP
+        ports:
+          http:
+            port: 31497
     persistence:
-      enabled: true
-      storageClass: local-storage
-      dataDir:
-        existingClaim: "factorio-pvc"
-
-    rcon:
-      external: false
+      data:
+        existingClaim: calendar-helper-pvc
+        advancedMounts:
+          main:
+            backend:
+              - path: /factorio

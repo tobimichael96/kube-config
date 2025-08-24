@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: factorio
+  namespace: factorio
+spec:
+  chart:
+    spec:
+      chart: factorio
+      version: 1.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: logan-helm-charts
+        namespace: flux-system
+  interval: 5m
+  releaseName: factorio
+  targetNamespace: factorio
+  values:
+    image:
+      repository: "factoriotools/factorio"
+      ## Overrides the image tag whose default is the chart appVersion.
+      tag: "2.0.60"
+
+    factorioServer:
+      enable_dlc_space_age: false
+      save_name: "tme"
+
+    admin_list:
+      - Ausraster
+      - DiaEmperador
+
+    white_list:
+      - Ausraster
+      - DiaEmperador
+
+    service:
+      type: ClusterIP
+      port: 31497
+      hostNetwork: true
+
+    persistence:
+      enabled: true
+      storageClass: local-storage
+      dataDir:
+        existingClaim: "factorio-pvc"
+
+    rcon:
+      external: false
