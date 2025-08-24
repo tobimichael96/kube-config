@@ -61,7 +61,7 @@ spec:
             port: 31497
     persistence:
       data:
-        existingClaim: calendar-helper-pvc
+        existingClaim: factorio-pvc
         advancedMounts:
           main:
             backend:
