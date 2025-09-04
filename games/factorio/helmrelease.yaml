@@ -37,7 +37,7 @@ spec:
               INSTANCE_NAME: "tme"
               INSTANCE_DESC: "tme"
               SAVE_NAME: "tme"
-              GENERATE_NEW_SAVE: "false"
+              GENERATE_NEW_SAVE: "true"
               LOAD_LATEST_SAVE: "true"
             probes:
               liveness:
