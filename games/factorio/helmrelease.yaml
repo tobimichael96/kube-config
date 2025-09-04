@@ -61,9 +61,6 @@ spec:
             port: 31497
     persistence:
       data:
-        enabled: true
         existingClaim: factorio-pvc
-        advancedMounts:
-          main:
-            backend:
-              - path: /factorio
+        globalMounts:
+          - path: /factorio
