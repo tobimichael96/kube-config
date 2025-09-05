@@ -8,7 +8,8 @@
       "\\.ya?ml$"
     ],
     "ignoreDeps": [
-      "josh5/unmanic"
+      "josh5/unmanic",
+      "factoriotools/factorio"
     ]
   },
   "kubernetes": {
@@ -28,7 +29,8 @@
       "**/flux-system/**"
     ],
     "ignoreDeps": [
-      "josh5/unmanic"
+      "josh5/unmanic",
+      "factoriotools/factorio"
     ]
   },
   "packageRules": [
