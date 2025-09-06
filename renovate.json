@@ -10,16 +10,16 @@
     "github-actions"
   ],
   "flux": {
-    "fileMatch": [
-      "\\.ya?ml$"
+    "managerFilePatterns": [
+      "/\\.ya?ml$/"
     ],
     "ignoreDeps": [
       "josh5/unmanic"
     ]
   },
   "kubernetes": {
-    "fileMatch": [
-      "\\.ya?ml$"
+    "managerFilePatterns": [
+      "/\\.ya?ml$/"
     ],
     "ignorePaths": [
       "**/flux-system/**"
@@ -27,8 +27,8 @@
   },
   "helm-values": {
     "commitMessageTopic": "Helm values {{depName}}",
-    "fileMatch": [
-      "\\.ya?ml$"
+    "managerFilePatterns": [
+      "/\\.ya?ml$/"
     ],
     "ignorePaths": [
       "**/flux-system/**"
