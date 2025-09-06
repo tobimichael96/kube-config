@@ -3,13 +3,18 @@
     "config:recommended"
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": [
+    "flux",
+    "kubernetes",
+    "helm-values",
+    "github-actions"
+  ],
   "flux": {
     "fileMatch": [
       "\\.ya?ml$"
     ],
     "ignoreDeps": [
-      "josh5/unmanic",
-      "factoriotools/factorio"
+      "josh5/unmanic"
     ]
   },
   "kubernetes": {
@@ -29,20 +34,13 @@
       "**/flux-system/**"
     ],
     "ignoreDeps": [
-      "josh5/unmanic",
-      "factoriotools/factorio"
+      "josh5/unmanic"
     ]
   },
   "packageRules": [
     {
       "matchPackageNames": [
         "factoriotools/factorio"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
       ],
       "automerge": false,
       "automergeType": "pr"
