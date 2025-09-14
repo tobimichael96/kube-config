@@ -27,7 +27,7 @@ spec:
           mealie:
             image:
               repository: ghcr.io/mealie-recipes/mealie
-              tag: v3.1.2
+              tag: v3.2.0
             env:
               TZ: Europe/Berlin
               ALLOW_SIGNUP: "false"
