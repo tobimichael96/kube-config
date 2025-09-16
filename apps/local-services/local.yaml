@@ -29,6 +29,33 @@ subsets:
 apiVersion: v1
 kind: Service
 metadata:
+  name: ddns
+  namespace: local-services
+spec:
+  ports:
+  - name: app
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  clusterIP: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: ddns
+  namespace: local-services
+subsets:
+- addresses:
+  - ip: 192.168.178.91
+  ports:
+  - name: app
+    port: 8000
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: flightradar
   namespace: local-services
 spec:

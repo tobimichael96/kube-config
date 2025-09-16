@@ -29,6 +29,33 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: ddns
+  namespace: local-services
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  ingressClassName: "internal-nginx"
+  tls:
+    - hosts:
+        - &host ddns.internal.tmem.de
+      secretName: ddns-tls
+  rules:
+    - host: *host
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ddns
+                port:
+                  number: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: flightradar
   namespace: local-services
   annotations:
