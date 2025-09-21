@@ -18,6 +18,11 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    defaultPodOptions:
+      tolerations:
+        - effect: NoSchedule
+          key: cloud
+          operator: Exists
     controllers:
       main:
         pod:
