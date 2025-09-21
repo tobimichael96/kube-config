@@ -19,3 +19,8 @@ spec:
     fullnameOverride: *app
     reloader:
       readOnlyRootFileSystem: true
+      deployment:
+        tolerations:
+          - effect: NoSchedule
+            key: cloud
+            operator: Exists
