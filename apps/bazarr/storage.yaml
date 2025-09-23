@@ -63,7 +63,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: bazarr-media-pvc
-  namespace: sabnzbd
+  namespace: bazarr
 spec:
   storageClassName: local-storage
   volumeName: bazarr-media-pv
