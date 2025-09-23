@@ -63,7 +63,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: bazarr-films-pvc
-  namespace: sonarr
+  namespace: bazarr
 spec:
   storageClassName: local-storage
   volumeName: bazarr-films-pv
@@ -100,7 +100,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: bazarr-shows-pvc
-  namespace: sonarr
+  namespace: bazarr
 spec:
   storageClassName: local-storage
   volumeName: bazarr-shows-pv
