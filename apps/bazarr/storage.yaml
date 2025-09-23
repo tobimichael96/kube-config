@@ -39,43 +39,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: bazarr-downloads-pv
-spec:
-  capacity:
-    storage: 500Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  local:
-    path: /mnt/internal/media/downloads
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - homeserver
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: bazarr-downloads-pvc
-  namespace: bazarr
-spec:
-  storageClassName: local-storage
-  volumeName: bazarr-downloads-pv
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 500Gi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: bazarr-media-pv
 spec:
   capacity:

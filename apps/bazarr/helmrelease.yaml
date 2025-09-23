@@ -78,9 +78,5 @@ spec:
         existingClaim: bazarr-media-pvc
         globalMounts:
           - path: /mnt/internal/media
-      downloads:
-        existingClaim: bazarr-downloads-pvc
-        globalMounts:
-          - path: /mnt/internal/media/downloads
       tmp:
         type: emptyDir
