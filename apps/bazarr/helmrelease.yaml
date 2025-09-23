@@ -1,0 +1,95 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app bazarr
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 4.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    controllers:
+      bazarr:
+        type: statefulset
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 0
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: linuxserver/bazarr
+              tag: 1.5.3
+            env:
+              TZ: "Europe/Berlin"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: &port 6767
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: [ "ALL" ] }
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        className: "internal-nginx"
+        annotations:
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+        hosts:
+          - host: &host bazarr.internal.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: bazarr-tls
+    persistence:
+      config:
+        existingClaim: bazarr-config-pvc
+      logs:
+        type: emptyDir
+      media:
+        existingClaim: bazarr-media-pvc
+        globalMounts:
+          - path: /mnt/internal/media/films
+      downloads:
+        existingClaim: bazarr-downloads-pvc
+        globalMounts:
+          - path: /mnt/internal/media/downloads
+      tmp:
+        type: emptyDir
