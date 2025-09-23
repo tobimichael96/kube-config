@@ -81,7 +81,7 @@ spec:
       shows:
         existingClaim: bazarr-shows-pvc
         globalMounts:
-          - path: /mnt/internal/shows/films
+          - path: /mnt/internal/shows/shows
       downloads:
         existingClaim: bazarr-downloads-pvc
         globalMounts:
