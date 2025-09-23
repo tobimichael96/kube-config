@@ -109,3 +109,40 @@ spec:
   resources:
     requests:
       storage: 3000Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bazarr-shows-pv
+spec:
+  capacity:
+    storage: 3000Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/internal/media/shows
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homeserver
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bazarr-shows-pvc
+  namespace: bazarr
+spec:
+  storageClassName: local-storage
+  volumeName: bazarr-shows-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3000Gi
