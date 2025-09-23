@@ -39,17 +39,17 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: bazarr-media-pv
+  name: bazarr-films-pv
 spec:
   capacity:
-    storage: 6000Gi
+    storage: 3000Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/internal/media
+    path: /mnt/internal/media/films
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -62,13 +62,50 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: bazarr-media-pvc
-  namespace: bazarr
+  name: bazarr-films-pvc
+  namespace: sonarr
 spec:
   storageClassName: local-storage
-  volumeName: bazarr-media-pv
+  volumeName: bazarr-films-pv
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 6000Gi
+      storage: 3000Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bazarr-shows-pv
+spec:
+  capacity:
+    storage: 3000Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/internal/media/shows
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homeserver
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bazarr-shows-pvc
+  namespace: sonarr
+spec:
+  storageClassName: local-storage
+  volumeName: bazarr-shows-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3000Gi

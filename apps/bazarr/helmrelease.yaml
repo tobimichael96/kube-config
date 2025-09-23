@@ -74,9 +74,13 @@ spec:
         existingClaim: bazarr-config-pvc
       logs:
         type: emptyDir
-      media:
-        existingClaim: bazarr-media-pvc
+      shows:
+        existingClaim: bazarr-shows-pvc
         globalMounts:
-          - path: /mnt/internal/media
+          - path: /mnt/internal/media/shows
+      films:
+        existingClaim: bazarr-films-pvc
+        globalMounts:
+          - path: /mnt/internal/media/films
       tmp:
         type: emptyDir
