@@ -45,7 +45,6 @@ spec:
                 enabled: false
             securityContext:
               allowPrivilegeEscalation: false
-              capabilities: { drop: [ "ALL" ] }
     service:
       app:
         controller: *app
