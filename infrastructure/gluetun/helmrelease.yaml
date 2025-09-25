@@ -33,9 +33,9 @@ spec:
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               UPDATER_PERIOD: 12h
-              DNS_KEEP_NAMESERVER: on
               OPENVPN_PASSWORD: m
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
+              DNS_KEEP_NAMESERVER: "off"
               ALLOW_PRIVATE_SUBNETS: "on"
               HTTPPROXY: "on"
               HTTPPROXY_LOG: "on"
