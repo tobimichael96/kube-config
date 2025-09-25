@@ -35,7 +35,7 @@ spec:
               UPDATER_PERIOD: 12h
               OPENVPN_PASSWORD: m
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
-              DNS_KEEP_NAMESERVER: "off"
+              DNS_KEEP_NAMESERVER: "on"
               ALLOW_PRIVATE_SUBNETS: "on"
               HTTPPROXY: "on"
               HTTPPROXY_LOG: "on"
