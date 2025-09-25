@@ -68,32 +68,32 @@ spec:
                   failureThreshold: 12
               startup:
                 enabled: false
-    ingress:
-      gluetun:
-        className: "internal-nginx"
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: 5G
-          kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
-        hosts:
-          - host: &host http.proxy.internal.tmem.de
-            paths:
-              - path: /
-                service:
-                  identifier: gluetun
-                  port: 8888
-          - host: &host-socks socks.proxy.internal.tmem.de
-            paths:
-              - path: /
-                service:
-                  identifier: gluetun
-                  port: 8388
-        tls:
-          - hosts:
-              - *host
-              - *host-socks
-            secretName: gluetun-tls
+#    ingress:
+#      gluetun:
+#        className: "internal-nginx"
+#        annotations:
+#          nginx.ingress.kubernetes.io/proxy-body-size: 5G
+#          kubernetes.io/tls-acme: "true"
+#          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+#          cert-manager.io/cluster-issuer: "letsencrypt"
+#        hosts:
+#          - host: &host http.proxy.internal.tmem.de
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: gluetun
+#                  port: 8888
+#          - host: &host-socks socks.proxy.internal.tmem.de
+#            paths:
+#              - path: /
+#                service:
+#                  identifier: gluetun
+#                  port: 8388
+#        tls:
+#          - hosts:
+#              - *host
+#              - *host-socks
+#            secretName: gluetun-tls
     service:
       gluetun:
         controller: *app
