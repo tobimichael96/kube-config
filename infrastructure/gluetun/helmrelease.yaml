@@ -80,5 +80,7 @@ spec:
         ports:
           http-proxy:
             port: 8888
+            nodePort: 8888
           socks:
             port: 8388
+            nodePort: 8388
