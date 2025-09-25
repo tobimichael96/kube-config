@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: ingress-nginx
+data:
+  8888: "gluetun/gluetun:8888"
+  8388: "gluetun/gluetun:8388"
