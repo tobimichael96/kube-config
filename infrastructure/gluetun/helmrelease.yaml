@@ -18,6 +18,8 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    defaultPodOptions:
+      hostNetwork: true
     controllers:
       gluetun:
         containers:
@@ -69,18 +71,8 @@ spec:
               startup:
                 enabled: false
     service:
-      gluetun-health:
+      gluetun:
         controller: *app
         ports:
           http:
             port: 9999
-      gluetun:
-        controller: *app
-        type: NodePort
-        ports:
-          http-proxy:
-            port: 8888
-            nodePort: 38888
-          socks:
-            port: 8388
-            nodePort: 38388
