@@ -77,15 +77,22 @@ spec:
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
-          - host: &host gluetun.internal.tmem.de
+          - host: &host http.proxy.internal.tmem.de
             paths:
               - path: /
                 service:
                   identifier: gluetun
                   port: 8888
+          - host: &host-socks socks.proxy.internal.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: gluetun
+                  port: 8388
         tls:
           - hosts:
               - *host
+              - *host-socks
             secretName: gluetun-tls
     service:
       gluetun:
