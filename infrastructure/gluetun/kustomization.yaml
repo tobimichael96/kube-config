@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - secrets.yaml
-- tcp-services.yaml
+- nginx-services.yaml
 - helmrelease.yaml
