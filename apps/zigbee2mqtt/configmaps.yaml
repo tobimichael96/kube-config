@@ -17,7 +17,7 @@ data:
       port: tcp://192.168.178.69:6638
       baudrate: 115200
       adapter: zstack
-      disable_led: true
+      disable_led: false
     frontend:
       enabled: true
       port: 8080
