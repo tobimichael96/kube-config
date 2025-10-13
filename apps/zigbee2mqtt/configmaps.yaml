@@ -35,7 +35,6 @@ data:
         - file
       last_seen: ISO_8601
       channel: 20
-      adapter_delay: 200
       transmit_power: 20
     device_options: {}
     devices: /data/devices.yaml
