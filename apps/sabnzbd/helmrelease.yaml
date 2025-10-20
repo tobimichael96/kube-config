@@ -57,6 +57,7 @@ spec:
               SERVER_COUNTRIES: Germany
               UPDATER_PERIOD: 12h
               DNS_KEEP_NAMESERVER: off
+              DOT: off
               DOT_PROVIDERS: quad9
               BLOCK_MALICIOUS: off
               OPENVPN_PASSWORD: m
