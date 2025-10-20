@@ -56,7 +56,7 @@ spec:
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               UPDATER_PERIOD: 12h
-              DNS_KEEP_NAMESERVER: on
+              DNS_KEEP_NAMESERVER: off
               OPENVPN_PASSWORD: m
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
