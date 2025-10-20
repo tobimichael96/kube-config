@@ -58,7 +58,6 @@ spec:
               UPDATER_PERIOD: 12h
               DNS_KEEP_NAMESERVER: off
               BLOCK_MALICIOUS: off
-              DNS_ADDRESS: 192.168.178.91
               OPENVPN_PASSWORD: m
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
