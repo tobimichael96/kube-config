@@ -108,7 +108,7 @@ spec:
               privileged: true
             resources:
               limits:
-                cpu: "5000m"
+                cpu: "7000m"
             probes:
               liveness:
                 enabled: true
