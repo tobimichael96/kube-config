@@ -24,7 +24,7 @@ spec:
           app:
             image:
               repository: linuxserver/sabnzbd
-              tag: 4.5.4
+              tag: 4.5.5
             env:
               TZ: Europe/Berlin
             probes:
