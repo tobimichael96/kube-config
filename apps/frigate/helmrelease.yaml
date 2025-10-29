@@ -75,6 +75,7 @@ spec:
       config:
         enabled: true
         type: configMap
+        name: frigate
         globalMounts:
           - path: /config/config.yml
             subPath: config.yml
