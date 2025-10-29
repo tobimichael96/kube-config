@@ -39,11 +39,9 @@ spec:
               requests:
                 cpu: 500m
                 memory: 2Gi
-                nvidia.com/gpu: 1
               limits:
                 cpu: 2000m
                 memory: 2Gi
-                nvidia.com/gpu: 1
     service:
       main:
         controller: main
