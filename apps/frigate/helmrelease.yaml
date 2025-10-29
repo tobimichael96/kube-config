@@ -55,7 +55,7 @@ controllers:
             port: 8555
             protocol: TCP
     ingress:
-      app:
+      main:
         className: "internal-nginx"
         annotations:
           kubernetes.io/tls-acme: "true"
