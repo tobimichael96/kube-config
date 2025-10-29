@@ -42,7 +42,6 @@ controllers:
           limits:
             cpu: 2000m
             memory: 2Gi
-
     service:
       main:
         controller: main
@@ -72,7 +71,6 @@ controllers:
           - hosts:
               - *host
             secretName: frigate-tls
-
     persistence:
       config:
         enabled: true
@@ -101,7 +99,6 @@ controllers:
         medium: Memory
         globalMounts:
           - path: /tmp/cache
-
     configMaps:
       config:
         enabled: true
