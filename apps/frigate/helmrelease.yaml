@@ -73,40 +73,12 @@ spec:
             secretName: frigate-tls
     persistence:
       config:
-        enabled: true
-        type: configMap
-        name: frigate
+        existingClaim: frigate-config-pvc
         globalMounts:
-          - path: /config/config.yml
-            subPath: config.yml
-#      data:
-#        enabled: true
-#        type: persistentVolumeClaim
-#        accessMode: ReadWriteOnce
-#        size: 1Gi
-#        globalMounts:
-#          - path: /config
-#      media:
-#        enabled: true
-#        type: persistentVolumeClaim
-#        accessMode: ReadWriteOnce
-#        size: 50Gi  # Adjust based on how much recording you want
-#        globalMounts:
-#          - path: /media/frigate
+          - path: /config
       cache:
         enabled: true
         type: emptyDir
         medium: Memory
         globalMounts:
           - path: /tmp/cache
-    configMaps:
-      config:
-        enabled: true
-        data:
-          config.yml: |
-            mqtt:
-              enabled: true
-              host: mosquitto.home-assistant.svc.cluster.local
-              port: 1883
-              # user: mqtt_user
-              # password: mqtt_password
