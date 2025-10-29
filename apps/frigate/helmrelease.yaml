@@ -82,3 +82,10 @@ spec:
         medium: Memory
         globalMounts:
           - path: /tmp/cache
+      nvidia-device:
+        enabled: true
+        type: hostPath
+        hostPath: "/dev/dri"
+        hostPathType: "Directory"
+        globalMounts:
+          - path: "/dev/dri"
