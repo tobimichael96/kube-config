@@ -49,12 +49,55 @@ spec:
                 enabled: false
             securityContext:
               allowPrivilegeEscalation: false
+          gluetun:
+            dependsOn: app
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.40.0
+            env:
+              TZ: Europe/Berlin
+              FIREWALL: on
+              FIREWALL_INPUT_PORTS: 9191,9999
+              VPN_TYPE: wireguard
+              VPN_SERVICE_PROVIDER: mullvad
+              SERVER_COUNTRIES: Germany
+              UPDATER_PERIOD: 12h
+              DOT: off
+              DNS_ADDRESS: 192.168.178.91
+              HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
+            envFrom:
+              - secret: dispatcharr-vpn-config
+            # Configure the container-specific securityContext
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - SYS_MODULE
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: 9999
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 12
+              startup:
+                enabled: false
     service:
       app:
         controller: *app
         ports:
           http:
             port: *port
+      gluetun:
+        controller: *app
+        ports:
+          http:
+            port: 9999
     ingress:
       app:
         className: "internal-nginx"
@@ -80,3 +123,11 @@ spec:
         type: emptyDir
       tmp:
         type: emptyDir
+      vpn-config:
+        enabled: true
+        type: secret
+        name: dispatcharr-vpn-config
+        advancedMounts:
+          dispatcharr:
+            gluetun:
+              - path: /gluetun/wireguard/
