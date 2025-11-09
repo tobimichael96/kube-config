@@ -104,6 +104,8 @@ spec:
             env:
               JELLYFIN_PublishedServerUrl: "jellyfin.internal.tmem.de"
               NVIDIA_VISIBLE_DEVICES: all
+              HTTP_PROXY: "http.proxy.internal.tmem.de:8888"
+              HTTPS_PROXY: "http.proxy.internal.tmem.de:8888"
             securityContext:
               privileged: true
             resources:
@@ -124,35 +126,6 @@ spec:
               startup:
                 enabled: false
           # Configure the gluetun sidecar
-        initContainers:
-          vpn:
-            image:
-              repository: alpine
-              tag: latest
-            command:
-              - sh
-              - -c
-              - |
-                apk add --no-cache iproute2
-                
-                echo "=== Old routes ==="
-                ip route
-                
-                # Add local network route
-                ip route add 192.168.178.0/24 via 169.254.1.1 dev eth0 || true
-                
-                # Delete old default
-                ip route del default via 169.254.1.1 dev eth0
-                
-                # Add new default with onlink flag (tells kernel gateway is reachable)
-                ip route add default via 192.168.178.83 dev eth0 onlink
-                
-                echo "=== New routes ==="
-                ip route
-            securityContext:
-              capabilities:
-                add:
-                  - NET_ADMIN
 #          gluetun:
 #            dependsOn: app
 #            image:
