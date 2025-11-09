@@ -33,6 +33,7 @@ spec:
               CELERY_BROKER_URL: redis://localhost:6379/0
               DISPATCHARR_LOG_LEVEL: info
               NVIDIA_VISIBLE_DEVICES: all
+              NVIDIA_DRIVER_CAPABILITIES: all
             probes:
               liveness: &probes
                 enabled: true
