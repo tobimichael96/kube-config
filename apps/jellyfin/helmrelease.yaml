@@ -138,14 +138,14 @@ spec:
                 echo "Old routes:"
                 ip route
                 
-                # Add route for local network through Calico's gateway
+                # Ensure local network is reachable  
                 ip route add 192.168.178.0/24 via 169.254.1.1 dev eth0 || true
                 
-                # Now the Pi should be reachable, delete default route
-                ip route del default || true
+                # Delete old default
+                ip route del default via 169.254.1.1 dev eth0
                 
-                # Add default route through Pi (Pi is now reachable via previous route)
-                ip route add default via 192.168.178.83 dev eth0
+                # Add new default (Pi should now be reachable via the /24 route)
+                ip route add default via 192.168.178.83
                 
                 echo "New routes:"
                 ip route
