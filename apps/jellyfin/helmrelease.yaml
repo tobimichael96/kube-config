@@ -104,8 +104,8 @@ spec:
             env:
               JELLYFIN_PublishedServerUrl: "jellyfin.internal.tmem.de"
               NVIDIA_VISIBLE_DEVICES: all
-              HTTP_PROXY: "http.proxy.internal.tmem.de:8888"
-              HTTPS_PROXY: "http.proxy.internal.tmem.de:8888"
+              HTTP_PROXY: "socks.proxy.internal.tmem.de:8388"
+              HTTPS_PROXY: "socks.proxy.internal.tmem.de:8388"
             securityContext:
               privileged: true
             resources:
