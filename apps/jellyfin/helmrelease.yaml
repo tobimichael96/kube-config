@@ -104,9 +104,6 @@ spec:
             env:
               JELLYFIN_PublishedServerUrl: "jellyfin.internal.tmem.de"
               NVIDIA_VISIBLE_DEVICES: all
-              HTTP_PROXY: "http://http.proxy.internal.tmem.de:8888"
-              HTTPS_PROXY: "http://http.proxy.internal.tmem.de:8888"
-              ALL_PROXY: "http://http.proxy.internal.tmem.de:8888"
             securityContext:
               privileged: true
             resources:
@@ -140,8 +137,8 @@ spec:
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               UPDATER_PERIOD: 12h
+              DOT: off
               DNS_ADDRESS: 192.168.178.91
-              DNS_KEEP_NAMESERVER: off
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
               - secret: jellyfin-vpn-config
