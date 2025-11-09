@@ -133,21 +133,22 @@ spec:
               - sh
               - -c
               - |
-                apk add --no-cache iproute2
+                apk add --no-cache iproute2 iputils
                 
-                echo "Old routes:"
+                echo "=== Old routes ==="
                 ip route
                 
-                # Ensure local network is reachable  
+                echo "=== Adding local network route ==="
                 ip route add 192.168.178.0/24 via 169.254.1.1 dev eth0 || true
                 
-                # Delete old default
-                ip route del default via 169.254.1.1 dev eth0
+                echo "=== Testing connectivity to Pi ==="
+                ping -c 2 192.168.178.83 || echo "Cannot reach Pi!"
                 
-                # Add new default (Pi should now be reachable via the /24 route)
+                echo "=== Attempting to add default route ==="
+                ip route del default via 169.254.1.1 dev eth0
                 ip route add default via 192.168.178.83
                 
-                echo "New routes:"
+                echo "=== New routes ==="
                 ip route
             securityContext:
               capabilities:
