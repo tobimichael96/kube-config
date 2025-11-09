@@ -126,7 +126,6 @@ spec:
           # Configure the gluetun sidecar
         initContainers:
           vpn:
-            name: vpn-route
             image:
               repository: alpine
               tag: latest
