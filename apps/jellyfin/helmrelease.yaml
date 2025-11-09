@@ -135,16 +135,13 @@ spec:
               - |
                 apk add --no-cache iproute2
                 
-                # Add specific route for DNS server through Calico's gateway
-                ip route add 192.168.178.91/32 via 169.254.1.1 dev eth0 || true
-                
                 # Add route for local network through Calico's gateway
                 ip route add 192.168.178.0/24 via 169.254.1.1 dev eth0 || true
                 
-                # Delete default route
+                # Now the Pi should be reachable, delete default route
                 ip route del default || true
                 
-                # Add default route through Pi VPN gateway  
+                # Add default route through Pi (Pi is now reachable via previous route)
                 ip route add default via 192.168.178.83 dev eth0
                 
                 echo "New routes:"
