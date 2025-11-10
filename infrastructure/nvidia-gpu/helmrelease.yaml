@@ -34,7 +34,6 @@ spec:
 
     devicePlugin:
       enabled: true
-      initContainers: []
       config:
         name: time-slicing-config
         create: true
