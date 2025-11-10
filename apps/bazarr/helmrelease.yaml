@@ -30,7 +30,7 @@ spec:
               TZ: "Europe/Berlin"
             resources:
               limits:
-                nvidia.com/gpu: 1
+                cpu: 2000m
             probes:
               liveness: &probes
                 enabled: true

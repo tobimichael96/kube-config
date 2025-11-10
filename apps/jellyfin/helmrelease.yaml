@@ -108,7 +108,6 @@ spec:
               privileged: true
             resources:
               limits:
-                nvidia.com/gpu: 1
                 cpu: 6000m
             probes:
               liveness:

@@ -43,7 +43,7 @@ spec:
               NVIDIA_VISIBLE_DEVICES: all
             resources:
               limits:
-                nvidia.com/gpu: 1
+                cpu: 2000m
             probes:
               liveness:
                 enabled: false
