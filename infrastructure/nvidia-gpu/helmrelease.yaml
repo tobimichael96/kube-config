@@ -18,7 +18,6 @@ spec:
   targetNamespace: kube-system
   values:
     toolkit:
-      enabled: false
       env:
         - name: CONTAINERD_CONFIG
           value: "/var/lib/rancher/rke2/agent/etc/containerd/config.toml"
@@ -28,10 +27,10 @@ spec:
           value: "nvidia"
         - name: CONTAINERD_SET_AS_DEFAULT
           value: "true"
+
     driver:
       enabled: false
 
-    # Tell the operator where the driver is on the host
     daemonsets:
       updateStrategy: RollingUpdate
       priorityClassName: system-node-critical
@@ -39,6 +38,15 @@ spec:
       - key: nvidia.com/gpu
         operator: Exists
         effect: NoSchedule
+
+    validator:
+      env:
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: "all"
+        - name: NVIDIA_DRIVER_CAPABILITIES
+          value: "utility"
+        - name: PATH
+          value: "/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
     devicePlugin:
       enabled: true
