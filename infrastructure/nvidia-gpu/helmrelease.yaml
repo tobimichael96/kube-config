@@ -27,3 +27,9 @@ spec:
           value: "nvidia"
         - name: CONTAINERD_SET_AS_DEFAULT
           value: "true"
+    devicePlugin:
+      config:
+        flags:
+          device-list-strategy: envvar
+          pass-device-specs: true
+          fail-on-init-error: false
