@@ -107,6 +107,8 @@ spec:
             securityContext:
               privileged: true
             resources:
+              requests:
+                cpu: 1000m
               limits:
                 cpu: 6000m
             probes:

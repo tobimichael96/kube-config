@@ -41,6 +41,11 @@ spec:
             env:
               TZ: Europe/Berlin
               NVIDIA_VISIBLE_DEVICES: all
+            resources:
+              requests:
+                cpu: 500m
+              limits:
+                cpu: 3000m
             probes:
               liveness:
                 enabled: false
