@@ -59,10 +59,16 @@ spec:
     operator:
       defaultRuntime: containerd
 
+    # Disable ALL validators
     validator:
       driver:
         enabled: false
+      toolkit:
+        enabled: false
+      cuda:
+        enabled: false
+      plugin:
+        enabled: false
 
-    # Optional: disable other components
     gfd:
       enabled: false
