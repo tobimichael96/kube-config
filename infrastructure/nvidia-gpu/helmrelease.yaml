@@ -21,7 +21,6 @@ spec:
       enabled: false  # Driver on host
 
     toolkit:
-      enabled: true  # Keep this enabled, it just configures containerd
       env:
         - name: CONTAINERD_CONFIG
           value: "/var/lib/rancher/rke2/agent/etc/containerd/config.toml"
@@ -51,12 +50,6 @@ spec:
 
     operator:
       defaultRuntime: containerd
-      initContainer:
-        version: 12.2.2-base-ubi9
-
-    vfioManager:
-      image: cuda
-      version: 12.2.2-base-ubi9
 
     gfd:
       enabled: false
