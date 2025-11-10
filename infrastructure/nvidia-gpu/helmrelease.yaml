@@ -54,9 +54,6 @@ spec:
       initContainer:
         version: 12.2.2-base-ubi9
 
-    gfd:
-      enabled: false
-    migManager:
-      enabled: false
-    gds:
-      enabled: false
+    vfioManager:
+      image: cuda
+      version: 12.2.2-base-ubi9
