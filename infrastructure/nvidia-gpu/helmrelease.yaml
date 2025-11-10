@@ -17,7 +17,11 @@ spec:
   releaseName: nvidia-plugin-gpu
   targetNamespace: kube-system
   values:
+    driver:
+      enabled: false  # Driver on host
+
     toolkit:
+      enabled: true  # Keep this enabled, it just configures containerd
       env:
         - name: CONTAINERD_CONFIG
           value: "/var/lib/rancher/rke2/agent/etc/containerd/config.toml"
@@ -28,28 +32,7 @@ spec:
         - name: CONTAINERD_SET_AS_DEFAULT
           value: "true"
 
-    driver:
-      enabled: false
-
-    daemonsets:
-      updateStrategy: RollingUpdate
-      priorityClassName: system-node-critical
-      tolerations:
-      - key: nvidia.com/gpu
-        operator: Exists
-        effect: NoSchedule
-
-    validator:
-      env:
-        - name: NVIDIA_VISIBLE_DEVICES
-          value: "all"
-        - name: NVIDIA_DRIVER_CAPABILITIES
-          value: "utility"
-        - name: PATH
-          value: "/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
     devicePlugin:
-      enabled: true
       config:
         name: time-slicing-config
         create: true
@@ -69,4 +52,8 @@ spec:
       defaultRuntime: containerd
 
     gfd:
+      enabled: false
+    migManager:
+      enabled: false
+    gds:
       enabled: false
