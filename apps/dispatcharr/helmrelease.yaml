@@ -34,9 +34,6 @@ spec:
               DISPATCHARR_LOG_LEVEL: info
               NVIDIA_VISIBLE_DEVICES: all
               NVIDIA_DRIVER_CAPABILITIES: all
-            resources:
-              limits:
-                cpu: 4000m
             probes:
               liveness: &probes
                 enabled: true
