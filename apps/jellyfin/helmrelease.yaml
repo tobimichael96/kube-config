@@ -107,9 +107,8 @@ spec:
             securityContext:
               privileged: true
             resources:
-              requests:
-                nvidia.com/gpu: 1
               limits:
+                nvidia.com/gpu: 1
                 cpu: 6000m
             probes:
               liveness:
