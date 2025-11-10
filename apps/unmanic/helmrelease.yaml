@@ -45,7 +45,6 @@ spec:
               requests:
                 cpu: 500m
               limits:
-                nvidia.com/gpu: 1
                 cpu: 3000m
             probes:
               liveness:

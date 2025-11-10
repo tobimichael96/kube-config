@@ -28,11 +28,11 @@ spec:
               tag: 1.5.3
             env:
               TZ: "Europe/Berlin"
+              NVIDIA_VISIBLE_DEVICES: all
             resources:
               requests:
                 cpu: 500m
               limits:
-                nvidia.com/gpu: 1
                 cpu: 2000m
             probes:
               liveness: &probes

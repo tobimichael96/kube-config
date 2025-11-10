@@ -33,12 +33,10 @@ spec:
               CELERY_BROKER_URL: redis://localhost:6379/0
               DISPATCHARR_LOG_LEVEL: info
               NVIDIA_VISIBLE_DEVICES: all
-              NVIDIA_DRIVER_CAPABILITIES: all
             resources:
               requests:
                 cpu: 1000m
               limits:
-                nvidia.com/gpu: 1
                 cpu: 4000m
             probes:
               liveness: &probes
