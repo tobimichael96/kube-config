@@ -40,9 +40,9 @@
   "packageRules": [
     {
       "matchPackageNames": [
-        "*factorio*",
-        "*nvidia*",
-        "*gpu*"
+        "factorio**",
+        "nvidia**",
+        "gpu**"
       ],
       "automerge": false,
       "automergeType": "pr"
