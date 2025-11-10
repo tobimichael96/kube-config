@@ -37,7 +37,7 @@ spec:
               NVIDIA_VISIBLE_DEVICES: all
             resources:
               requests:
-                cpu: 1000m
+                cpu: 500m
               limits:
                 cpu: 4000m
             probes:
