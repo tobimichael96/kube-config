@@ -51,6 +51,8 @@ spec:
 
     operator:
       defaultRuntime: containerd
+      initContainer:
+        version: 12.2.2-base-ubi9
 
     gfd:
       enabled: false
