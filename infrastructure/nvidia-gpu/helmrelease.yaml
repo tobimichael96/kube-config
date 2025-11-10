@@ -28,7 +28,19 @@ spec:
         - name: CONTAINERD_SET_AS_DEFAULT
           value: "true"
     driver:
-      enabled: false  # Driver already installed on host
+      enabled: false
+
+    # Tell the operator where the driver is on the host
+    daemonsets:
+      updateStrategy: RollingUpdate
+      priorityClassName: system-node-critical
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Exists
+        effect: NoSchedule
+
+    operator:
+      defaultRuntime: containerd
 
     devicePlugin:
       enabled: true
@@ -39,7 +51,7 @@ spec:
         deviceListStrategy: envvar
         failOnInitError: false
 
-    # Disable components you don't need
+    # Disable other components
     dcgm:
       enabled: false
     dcgmExporter:
@@ -50,3 +62,6 @@ spec:
       enabled: false
     nodeStatusExporter:
       enabled: false
+    validator:
+      driver:
+        enabled: false  # Skip driver validation since it's pre-installed
