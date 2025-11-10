@@ -39,6 +39,11 @@ spec:
         operator: Exists
         effect: NoSchedule
 
+    validator:
+      env:
+        - name: PATH
+          value: "/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
     devicePlugin:
       enabled: true
       config:
@@ -58,17 +63,6 @@ spec:
 
     operator:
       defaultRuntime: containerd
-
-    # Disable ALL validators
-    validator:
-      driver:
-        enabled: false
-      toolkit:
-        enabled: false
-      cuda:
-        enabled: false
-      plugin:
-        enabled: false
 
     gfd:
       enabled: false
