@@ -27,9 +27,26 @@ spec:
           value: "nvidia"
         - name: CONTAINERD_SET_AS_DEFAULT
           value: "true"
+    driver:
+      enabled: false  # Driver already installed on host
+
     devicePlugin:
+      enabled: true
       config:
-        flags:
-          device-list-strategy: envvar
-          pass-device-specs: true
-          fail-on-init-error: false
+        name: device-plugin-config
+        default: "default"
+      default:
+        deviceListStrategy: envvar
+        failOnInitError: false
+
+    # Disable components you don't need
+    dcgm:
+      enabled: false
+    dcgmExporter:
+      enabled: false
+    gfd:
+      enabled: false
+    migManager:
+      enabled: false
+    nodeStatusExporter:
+      enabled: false
