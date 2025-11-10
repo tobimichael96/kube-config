@@ -17,9 +17,6 @@ spec:
   releaseName: nvidia-plugin-gpu
   targetNamespace: kube-system
   values:
-    driver:
-      enabled: false  # Driver on host
-
     toolkit:
       env:
         - name: CONTAINERD_CONFIG
@@ -40,27 +37,6 @@ spec:
       env:
       - name: DEVICE_LIST_STRATEGY
         value: volume-mounts
-      config:
-        name: time-slicing-config
-        create: true
-        default: "any"
-        data:
-          any: |-
-            version: v1
-            flags:
-              migStrategy: none
-              failOnInitError: false
-              nvidiaDriverRoot: /
-              plugin:
-                passDeviceSpecs: true
-                deviceListStrategy: envvar
 
     operator:
       defaultRuntime: containerd
-
-    gfd:
-      enabled: false
-    migManager:
-      enabled: false
-    gds:
-      enabled: false
