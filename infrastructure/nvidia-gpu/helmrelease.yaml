@@ -52,12 +52,6 @@ spec:
     operator:
       defaultRuntime: containerd
 
-    validator:
-      version: "v1.9.1"
-      env:
-        - name: WITH_WORKLOAD
-          value: "false"  # Skip CUDA workload validation
-
     gfd:
       enabled: false
     migManager:
