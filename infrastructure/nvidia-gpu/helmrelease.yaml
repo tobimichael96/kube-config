@@ -18,6 +18,7 @@ spec:
   targetNamespace: kube-system
   values:
     toolkit:
+      enabled: false
       env:
         - name: CONTAINERD_CONFIG
           value: "/var/lib/rancher/rke2/agent/etc/containerd/config.toml"
@@ -38,11 +39,6 @@ spec:
       - key: nvidia.com/gpu
         operator: Exists
         effect: NoSchedule
-
-    validator:
-      env:
-        - name: PATH
-          value: "/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
     devicePlugin:
       enabled: true
