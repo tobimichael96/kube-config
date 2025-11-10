@@ -30,9 +30,16 @@ spec:
           value: "nvidia"
         - name: CONTAINERD_SET_AS_DEFAULT
           value: "true"
+        - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_ENVVAR_WHEN_UNPRIVILEGED
+          value: "false"
+        - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_AS_VOLUME_MOUNTS
+          value: "true"
 
     devicePlugin:
       enabled: true
+      env:
+      - name: DEVICE_LIST_STRATEGY
+        value: volume-mounts
       config:
         name: time-slicing-config
         create: true
