@@ -82,7 +82,7 @@ spec:
                   - NET_ADMIN
                   - SYS_MODULE
             probes:
-              readyness:
+              readiness:
                 enabled: true
                 custom: true
                 spec:
