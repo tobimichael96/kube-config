@@ -83,25 +83,16 @@ spec:
                   - SYS_MODULE
             probes:
               readiness:
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /
-                    port: 9999
-                  initialDelaySeconds: 30
-                  periodSeconds: 10
-                  timeoutSeconds: 3
-                  failureThreshold: 12
+                enabled: false
               liveness:
                 enabled: true
                 custom: true
                 spec:
                   exec:
                     command: [ "sh" ,"-c" ,"apk add curl jq && [ $(curl -s https://am.i.mullvad.net/json | jq -r .mullvad_exit_ip) = true ] || exit 1" ]
-                  initialDelaySeconds: 30
-                  periodSeconds: 60
-                  timeoutSeconds: 15
+                  initialDelaySeconds: 15
+                  periodSeconds: 180
+                  timeoutSeconds: 10
                   failureThreshold: 2
               startup:
                 enabled: false
