@@ -21,6 +21,8 @@ spec:
       env:
         - name: CONTAINERD_CONFIG
           value: "/var/lib/rancher/rke2/agent/etc/containerd/config.toml"
+    driver:
+      enabled: false
 #    devicePlugin:
 #      enabled: true
 #      env:
