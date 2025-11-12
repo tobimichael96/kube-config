@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: gpu-operator
-      version: v25.3.4
+      version: v25.10.0
       sourceRef:
         kind: HelmRepository
         name: nvidia
@@ -21,32 +21,21 @@ spec:
       env:
         - name: CONTAINERD_CONFIG
           value: "/var/lib/rancher/rke2/agent/etc/containerd/config.toml"
-        - name: CONTAINERD_SOCKET
-          value: "/run/k3s/containerd/containerd.sock"
-        - name: CONTAINERD_RUNTIME_CLASS
-          value: "nvidia"
-        - name: CONTAINERD_SET_AS_DEFAULT
-          value: "true"
-        - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_ENVVAR_WHEN_UNPRIVILEGED
-          value: "false"
-        - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_AS_VOLUME_MOUNTS
-          value: "true"
-
-    devicePlugin:
-      enabled: true
-      env:
-      - name: PASS_DEVICE_SPECS
-        value: "true"
-      - name: FAIL_ON_INIT_ERROR
-        value: "true"
-      - name: DEVICE_LIST_STRATEGY
-        value: volume-mounts
-      - name: DEVICE_ID_STRATEGY
-        value: uuid
-      - name: NVIDIA_VISIBLE_DEVICES
-        value: all
-      - name: NVIDIA_DRIVER_CAPABILITIES
-        value: all
-
-    operator:
-      defaultRuntime: containerd
+#    devicePlugin:
+#      enabled: true
+#      env:
+#      - name: PASS_DEVICE_SPECS
+#        value: "true"
+#      - name: FAIL_ON_INIT_ERROR
+#        value: "true"
+#      - name: DEVICE_LIST_STRATEGY
+#        value: volume-mounts
+#      - name: DEVICE_ID_STRATEGY
+#        value: uuid
+#      - name: NVIDIA_VISIBLE_DEVICES
+#        value: all
+#      - name: NVIDIA_DRIVER_CAPABILITIES
+#        value: all
+#
+#    operator:
+#      defaultRuntime: containerd
