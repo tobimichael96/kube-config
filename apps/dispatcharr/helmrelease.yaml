@@ -48,10 +48,10 @@ spec:
                   httpGet:
                     path: /
                     port: &port 9191
-                  initialDelaySeconds: 30
+                  initialDelaySeconds: 60
                   periodSeconds: 10
                   timeoutSeconds: 2
-                  failureThreshold: 5
+                  failureThreshold: 3
               readiness: *probes
               startup:
                 enabled: false
