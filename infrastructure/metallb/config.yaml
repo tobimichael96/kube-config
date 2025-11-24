@@ -33,7 +33,7 @@ metadata:
 spec:
   addresses:
     - 192.168.178.92/32
-  autoAssign: false
+  autoAssign: true
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
