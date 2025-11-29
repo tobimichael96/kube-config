@@ -28,7 +28,7 @@ spec:
         - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_AS_VOLUME_MOUNTS
           value: "true"
     driver:
-      enabled: false
+      version: "570.86.16"
     devicePlugin:
       enabled: true
       env:
