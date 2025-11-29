@@ -84,7 +84,7 @@ spec:
             probes:
               readiness:
                 enabled: false
-              liveness:
+              liveness: &probes
                 enabled: true
                 custom: true
                 spec:
@@ -96,8 +96,7 @@ spec:
                   periodSeconds: 180
                   timeoutSeconds: 10
                   failureThreshold: 2
-              startup:
-                enabled: false
+              startup: *probes
     service:
       app:
         controller: *app
