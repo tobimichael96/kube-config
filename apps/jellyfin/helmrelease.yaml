@@ -103,7 +103,8 @@ spec:
               tag: 10.11.3
             env:
               JELLYFIN_PublishedServerUrl: "jellyfin.internal.tmem.de"
-              NVIDIA_VISIBLE_DEVICES: all
+              NVIDIA_VISIBLE_DEVICES: "all"
+              NVIDIA_DRIVER_CAPABILITIES: "compute,video,utility"
             securityContext:
               privileged: true
             resources:
