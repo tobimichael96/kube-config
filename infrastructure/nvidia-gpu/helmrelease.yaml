@@ -32,18 +32,30 @@ spec:
     devicePlugin:
       enabled: true
       env:
-      - name: PASS_DEVICE_SPECS
-        value: "true"
-      - name: FAIL_ON_INIT_ERROR
-        value: "true"
-      - name: DEVICE_LIST_STRATEGY
-        value: volume-mounts
-      - name: DEVICE_ID_STRATEGY
-        value: uuid
-      - name: NVIDIA_VISIBLE_DEVICES
-        value: all
-      - name: NVIDIA_DRIVER_CAPABILITIES
-        value: all
+        - name: PASS_DEVICE_SPECS
+          value: "true"
+        - name: FAIL_ON_INIT_ERROR
+          value: "true"
+        - name: DEVICE_LIST_STRATEGY
+          value: volume-mounts
+        - name: DEVICE_ID_STRATEGY
+          value: uuid
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: all
+        - name: NVIDIA_DRIVER_CAPABILITIES
+          value: all
+      config:
+        name: time-slicing-config
+        create: true
+        default: rtx-3050
+        data:
+          rtx-3050: |
+            version: v1
+            sharing:
+              timeSlicing:
+                resources:
+                - name: nvidia.com/gpu
+                  replicas: 4
 
     operator:
       defaultRuntime: containerd
