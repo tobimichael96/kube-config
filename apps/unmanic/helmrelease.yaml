@@ -46,6 +46,7 @@ spec:
                 cpu: 250m
               limits:
                 cpu: 3000m
+                nvidia.com/gpu: 1
             probes:
               liveness:
                 enabled: false

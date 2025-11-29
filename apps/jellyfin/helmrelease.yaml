@@ -110,7 +110,8 @@ spec:
               requests:
                 cpu: 500m
               limits:
-                cpu: 6000m
+                cpu: 4000m
+                nvidia.com/gpu: 1
             probes:
               liveness:
                 enabled: true
