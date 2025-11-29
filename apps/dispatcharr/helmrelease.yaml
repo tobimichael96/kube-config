@@ -89,7 +89,9 @@ spec:
                 custom: true
                 spec:
                   exec:
-                    command: [ "sh" ,"-c" ,"apk add curl jq && [ $(curl -s https://am.i.mullvad.net/json | jq -r .mullvad_exit_ip) = true ] || exit 1" ]
+                    command:
+                      - /gluetun-entrypoint
+                      - healthcheck
                   initialDelaySeconds: 15
                   periodSeconds: 180
                   timeoutSeconds: 10
