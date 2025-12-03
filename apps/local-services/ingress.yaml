@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
-  ingressClassName: "internal-nginx"
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - &host adguard.internal.tmem.de
@@ -36,7 +36,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
-  ingressClassName: "internal-nginx"
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - &host ddns.internal.tmem.de
@@ -63,7 +63,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
-  ingressClassName: "internal-nginx"
+  ingressClassName: "nginx"
   tls:
     - hosts:
         - &host flightradar.internal.tmem.de

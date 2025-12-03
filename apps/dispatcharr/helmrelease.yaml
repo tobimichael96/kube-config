@@ -112,7 +112,7 @@ spec:
             port: 9999
     ingress:
       app:
-        className: "internal-nginx"
+        className: "nginx"
         annotations:
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
