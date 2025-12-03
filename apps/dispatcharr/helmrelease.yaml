@@ -123,6 +123,7 @@ spec:
           nginx.ingress.kubernetes.io/websocket-services: "dispatcharr-app"
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
           nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+          nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
         hosts:
           - host: &host dispatcharr.internal.tmem.de
             paths:

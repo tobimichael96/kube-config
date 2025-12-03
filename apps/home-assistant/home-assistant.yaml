@@ -70,6 +70,7 @@ spec:
               proxy_set_header Connection "upgrade";
               proxy_cache_bypass $http_upgrade;
             }
+          nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
         hosts:
           - host: &host ha.internal.tmem.de
             paths:
