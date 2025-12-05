@@ -61,7 +61,6 @@ spec:
             flags:
               plugin:
                 deviceListStrategy:
-                - cdi-cri
-                - cdi-annotations
+                - envvar
     operator:
       defaultRuntime: containerd
