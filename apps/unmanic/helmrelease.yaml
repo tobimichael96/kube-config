@@ -18,6 +18,8 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    defaultPodOptions:
+      runtimeClassName: "nvidia"
     controllers:
       main:
         strategy: "RollingUpdate"

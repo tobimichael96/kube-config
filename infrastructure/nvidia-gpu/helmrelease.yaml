@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: gpu-operator
-      version: v25.10.1
+      version: v25.3.4
       sourceRef:
         kind: HelmRepository
         name: nvidia
@@ -27,8 +27,8 @@ spec:
           value: "false"
         - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_AS_VOLUME_MOUNTS
           value: "true"
-        - name: RUNTIME_CONFIG_SOURCE
-          value: "file"
+#        - name: RUNTIME_CONFIG_SOURCE
+#          value: "file"
     driver:
       enabled: false
     devicePlugin:
