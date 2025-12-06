@@ -1,0 +1,88 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: botkube
+  namespace: botkube
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: botkube
+      version: 'v1.14.0'
+      sourceRef:
+        kind: HelmRepository
+        name: botkube
+        namespace: flux-system
+      interval: 12h
+  valuesFrom:
+    - kind: Secret
+      name: botkube-telegram-secrets
+      valuesKey: token
+      targetPath: communications.default-group.telegram.token
+    - kind: Secret
+      name: botkube-telegram-secrets
+      valuesKey: chatId
+      targetPath: communications.default-group.telegram.chatId
+  values:
+    settings:
+      clusterName: "homeserver"
+    communications:
+      default-group:
+        telegram:
+          enabled: true
+          bindings:
+            executors:
+              - k8s-default-tools
+            sources:
+              - k8s-err-events
+              - k8s-recommendation-events
+    sources:
+      k8s-err-events:
+        botkube/kubernetes:
+          enabled: true
+          config:
+            namespaces:
+              include:
+                - ".*"  # All namespaces
+            event:
+              types:
+                - error
+            resources:
+              - type: v1/pods
+              - type: v1/services
+              - type: apps/v1/deployments
+              - type: apps/v1/statefulsets
+              - type: apps/v1/daemonsets
+      k8s-recommendation-events:
+        botkube/kubernetes:
+          enabled: true
+          config:
+            recommendations:
+              pod:
+                noLatestImageTag: true
+                labelsSet: true
+              ingress:
+                backendServiceValid: true
+                tlsSecretValid: true
+    executors:
+      k8s-default-tools:
+        botkube/kubectl:
+          enabled: true
+          config:
+            namespaces:
+              include:
+                - ".*"
+            # Allowed kubectl commands
+            commands:
+              verbs: [ "get", "describe", "logs", "delete", "top", "exec" ]
+              resources: [ "pods", "deployments", "services", "statefulsets", "daemonsets", "nodes" ]
+    # RBAC settings
+    rbac:
+      create: true
+      groups:
+        botkube-plugins-default:
+          create: true
+          rules:
+            - apiGroups: [ "*" ]
+              resources: [ "*" ]
+              verbs: [ "get", "watch", "list" ]
