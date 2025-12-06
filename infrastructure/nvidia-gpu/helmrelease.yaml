@@ -24,9 +24,9 @@ spec:
         - name: CONTAINERD_SOCKET
           value: /run/k3s/containerd/containerd.sock
         - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_ENVVAR_WHEN_UNPRIVILEGED
-          value: "false"
-        - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_AS_VOLUME_MOUNTS
           value: "true"
+        - name: ACCEPT_NVIDIA_VISIBLE_DEVICES_AS_VOLUME_MOUNTS
+          value: "false"
         - name: RUNTIME_CONFIG_SOURCE
           value: "file"
     driver:
@@ -39,13 +39,15 @@ spec:
         - name: FAIL_ON_INIT_ERROR
           value: "true"
         - name: DEVICE_LIST_STRATEGY
-          value: volume-mounts
+          value: envvar
         - name: DEVICE_ID_STRATEGY
           value: uuid
         - name: NVIDIA_VISIBLE_DEVICES
           value: all
         - name: NVIDIA_DRIVER_CAPABILITIES
           value: all
+        - name: CDI_ENABLED
+          value: "false"
       config:
         name: time-slicing-config
         create: true
