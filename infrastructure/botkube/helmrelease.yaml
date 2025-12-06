@@ -16,11 +16,11 @@ spec:
       interval: 12h
   valuesFrom:
     - kind: Secret
-      name: botkube-telegram-secrets
+      name: botkube-telegram
       valuesKey: token
       targetPath: communications.default-group.telegram.token
     - kind: Secret
-      name: botkube-telegram-secrets
+      name: botkube-telegram
       valuesKey: chatId
       targetPath: communications.default-group.telegram.chatId
   values:
