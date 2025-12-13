@@ -74,6 +74,7 @@ spec:
               UPDATER_PERIOD: 12h
               DOT: off
               DNS_ADDRESS: 192.168.178.91
+              FIREWALL_OUTBOUND_SUBNETS: 192.168.178.91/32
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
               - secret: dispatcharr-vpn-config
@@ -94,10 +95,10 @@ spec:
                     command:
                       - /gluetun-entrypoint
                       - healthcheck
-                  initialDelaySeconds: 20
+                  initialDelaySeconds: 30
                   periodSeconds: 10
                   timeoutSeconds: 5
-                  failureThreshold: 2
+                  failureThreshold: 5
               startup: *probes
     service:
       app:
