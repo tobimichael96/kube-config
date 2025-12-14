@@ -56,8 +56,9 @@ spec:
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               UPDATER_PERIOD: 12h
-              DNS_KEEP_NAMESERVER: on
-              BLOCK_MALICIOUS: off
+              DOT: off
+              DNS_ADDRESS: 192.168.178.91
+              FIREWALL_OUTBOUND_SUBNETS: 192.168.178.91/32
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
               - secret: sabnzbd-vpn-config
@@ -68,19 +69,21 @@ spec:
                   - NET_ADMIN
                   - SYS_MODULE
             probes:
-              liveness:
+              readiness:
+                enabled: false
+              liveness: &probes
                 enabled: true
                 custom: true
                 spec:
-                  httpGet:
-                    path: /
-                    port: 9999
+                  exec:
+                    command:
+                      - /gluetun-entrypoint
+                      - healthcheck
                   initialDelaySeconds: 30
                   periodSeconds: 10
-                  timeoutSeconds: 3
-                  failureThreshold: 12
-              startup:
-                enabled: false
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              startup: *probes
     ingress:
       app:
         className: "nginx"
