@@ -170,7 +170,7 @@ spec:
   interval: 1h0m0s
   url: https://github.com/8gears/n8n-helm-chart
   ref:
-    tag: 1.1.0
+    tag: 2.0.1
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
