@@ -40,7 +40,7 @@ spec:
               requests:
                 cpu: 500m
               limits:
-                cpu: 5000m
+                cpu: 4000m
                 nvidia.com/gpu: 1
             probes:
               liveness: &probes
@@ -127,7 +127,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
           nginx.ingress.kubernetes.io/websocket-services: "dispatcharr-app"
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
-          nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+          nginx.ingress.kubernetes.io/proxy-buffer-size: "32k"
           nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
         hosts:
           - host: &host dispatcharr.internal.tmem.de
