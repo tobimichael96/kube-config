@@ -34,8 +34,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/sonarr
-              tag: 4.0.14.2938
+              repository: ghcr.io/home-operations/sonarr
+              tag: 4.0.16
             env:
               SONARR__APP__INSTANCENAME: *app
               SONARR__APP__THEME: "dark"
