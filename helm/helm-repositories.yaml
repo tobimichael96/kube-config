@@ -162,17 +162,6 @@ spec:
   url: https://itzg.github.io/minecraft-server-charts/
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
-metadata:
-  name: n8n
-  namespace: flux-system
-spec:
-  interval: 1h0m0s
-  url: https://github.com/8gears/n8n-helm-chart
-  ref:
-    tag: 1.1.0
----
-apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: botkube
