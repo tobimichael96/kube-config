@@ -74,9 +74,6 @@ spec:
               POSTGRES_PASSWORD: "dispatch"
               REDIS_HOST: "dispatcharr-redis.dispatcharr.svc.cluster.local"
               CELERY_BROKER_URL: redis://dispatcharr-redis.dispatcharr.svc.cluster.local:6379/0
-              DISPATCHARR_LOG_LEVEL: info
-              NVIDIA_VISIBLE_DEVICES: "all"
-              NVIDIA_DRIVER_CAPABILITIES: "all"
             command: >
                 bash -c "
                 cd /app &&
