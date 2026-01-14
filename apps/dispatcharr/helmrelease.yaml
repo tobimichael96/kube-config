@@ -31,7 +31,7 @@ spec:
             env:
               TZ: "Europe/Berlin"
               DISPATCHARR_ENV: aio
-              REDIS_HOST: localhost
+              REDIS_HOST: "dispatcharr-redis"
               CELERY_BROKER_URL: redis://localhost:6379/0
               DISPATCHARR_LOG_LEVEL: info
               NVIDIA_VISIBLE_DEVICES: "all"
