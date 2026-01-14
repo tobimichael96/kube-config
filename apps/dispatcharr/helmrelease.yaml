@@ -108,7 +108,7 @@ spec:
               UPDATER_PERIOD: 12h
               DOT: off
               DNS_ADDRESS: 192.168.178.91
-              FIREWALL_OUTBOUND_SUBNETS: 192.168.178.91/32
+              FIREWALL_OUTBOUND_SUBNETS: "192.168.178.91/32,10.43.0.0/16,10.42.0.0/16"
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
               - secret: dispatcharr-vpn-config
