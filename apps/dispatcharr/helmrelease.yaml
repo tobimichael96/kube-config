@@ -109,6 +109,7 @@ spec:
               startup: *probes
       redis:
         type: deployment
+        strategy: "RollingUpdate"
         containers:
           redis:
             image:
@@ -127,6 +128,7 @@ spec:
               startup: *probes
       postgres:
         type: deployment
+        strategy: "RollingUpdate"
         containers:
           postgres:
             image:
