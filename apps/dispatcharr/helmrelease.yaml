@@ -62,6 +62,44 @@ spec:
                 add:
                   - SYS_NICE
               allowPrivilegeEscalation: false
+          celery:
+            image:
+              repository: ghcr.io/dispatcharr/dispatcharr
+              tag: 0.17.0
+            env:
+              TZ: "Europe/Berlin"
+              POSTGRES_HOST: "dispatcharr-postgres.dispatcharr.svc.cluster.local"
+              POSTGRES_DB: "dispatcharr"
+              POSTGRES_USER: "dispatch"
+              POSTGRES_PASSWORD: "dispatch"
+              REDIS_HOST: "dispatcharr-redis.dispatcharr.svc.cluster.local"
+              CELERY_BROKER_URL: redis://dispatcharr-redis.dispatcharr.svc.cluster.local:6379/0
+              DISPATCHARR_LOG_LEVEL: info
+              NVIDIA_VISIBLE_DEVICES: "all"
+              NVIDIA_DRIVER_CAPABILITIES: "all"
+            command: >
+                bash -c "
+                cd /app &&
+                nice -n 5 celery -A dispatcharr worker -l info
+                "
+            resources:
+              requests:
+                cpu: 500m
+              limits:
+                cpu: 5000m
+                nvidia.com/gpu: 1
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            securityContext:
+              capabilities:
+                add:
+                  - SYS_NICE
+              allowPrivilegeEscalation: false
           gluetun:
             dependsOn: app
             image:
