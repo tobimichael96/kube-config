@@ -190,7 +190,7 @@ spec:
         existingClaim: dispatcharr-config-pvc
         advancedMounts:
           dispatcharr:
-            gluetun:
+            app:
               - path: /data
       postgres:
         existingClaim: dispatcharr-db-pvc
