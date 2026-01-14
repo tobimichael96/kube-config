@@ -107,6 +107,36 @@ spec:
                   timeoutSeconds: 5
                   failureThreshold: 5
               startup: *probes
+      redis:
+        type: deployment
+        containers:
+          redis:
+            image:
+              repository: redis
+              tag: latest
+            env:
+              TZ: "Europe/Berlin"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: [ "redis-cli", "info", "|", "grep loading:", "|", "grep 0" ]
+              readiness: *probes
+              startup: *probes
+      postgres:
+        type: deployment
+        containers:
+          postgres:
+            image:
+              repository: postgres
+              tag: 17
+            env:
+              TZ: "Europe/Berlin"
+              POSTGRES_DB: "dispatcharr"
+              POSTGRES_USER: "dispatch"
+              POSTGRES_PASSWORD: "dispatch"
     service:
       app:
         controller: *app
@@ -118,6 +148,16 @@ spec:
         ports:
           http:
             port: 9999
+      postgres:
+        controller: postgres
+        ports:
+          http:
+            port: 5432
+      redis:
+        controller: redis
+        ports:
+          http:
+            port: 6379
     ingress:
       app:
         className: "nginx"
@@ -146,6 +186,16 @@ spec:
     persistence:
       data:
         existingClaim: dispatcharr-config-pvc
+        advancedMounts:
+          dispatcharr:
+            gluetun:
+              - path: /data
+      postgres:
+        existingClaim: dispatcharr-db-pvc
+        advancedMounts:
+          postgres:
+            postgres:
+              - path: /var/lib/postgresql/data
       logs:
         type: emptyDir
       tmp:
