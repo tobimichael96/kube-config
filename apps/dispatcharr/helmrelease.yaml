@@ -58,6 +58,9 @@ spec:
               startup:
                 enabled: false
             securityContext:
+              capabilities:
+                add:
+                  - SYS_NICE
               allowPrivilegeEscalation: false
           gluetun:
             dependsOn: app
