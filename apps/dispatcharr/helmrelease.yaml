@@ -107,7 +107,7 @@ spec:
               SERVER_COUNTRIES: Germany
               UPDATER_PERIOD: 12h
               DOT: off
-              DNS_ADDRESS: 10.43.0.10 # 192.168.178.91
+              DNS_ADDRESS: 192.168.178.91
               FIREWALL_OUTBOUND_SUBNETS: 192.168.178.91/32
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
