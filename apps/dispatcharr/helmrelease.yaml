@@ -218,7 +218,7 @@ spec:
       postgres:
         existingClaim: dispatcharr-db-pvc
         advancedMounts:
-          postgres:
+          dispatcharr:
             postgres:
               - path: /var/lib/postgresql/
       logs:
