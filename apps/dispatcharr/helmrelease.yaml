@@ -31,8 +31,8 @@ spec:
             env:
               TZ: "Europe/Berlin"
               # DISPATCHARR_ENV: aio
-              REDIS_HOST: "dispatcharr-redis.dispatcharr.svc.cluster.local"
-              CELERY_BROKER_URL: "redis://dispatcharr-redis.dispatcharr.svc.cluster.local:6379/0"
+              REDIS_HOST: "localhost"
+              CELERY_BROKER_URL: "redis://localhost:6379/0"
               DISPATCHARR_LOG_LEVEL: info
               NVIDIA_VISIBLE_DEVICES: "all"
               NVIDIA_DRIVER_CAPABILITIES: "all"
@@ -72,8 +72,8 @@ spec:
               POSTGRES_DB: "dispatcharr"
               POSTGRES_USER: "dispatch"
               POSTGRES_PASSWORD: "dispatch"
-              REDIS_HOST: "dispatcharr-redis.dispatcharr.svc.cluster.local"
-              CELERY_BROKER_URL: "redis://dispatcharr-redis.dispatcharr.svc.cluster.local:6379/0"
+              REDIS_HOST: "localhost"
+              CELERY_BROKER_URL: "redis://localhost:6379/0"
             command: [ "/bin/bash", "-c" ]
             args: [ "cd /app && nice -n 5 celery -A dispatcharr worker -l info" ]
             resources:
@@ -108,7 +108,7 @@ spec:
               UPDATER_PERIOD: 12h
               DOT: off
               DNS_ADDRESS: 192.168.178.91
-              FIREWALL_OUTBOUND_SUBNETS: "192.168.178.91/32,10.43.0.0/16,10.42.0.0/16"
+              FIREWALL_OUTBOUND_SUBNETS: "192.168.178.91/32"
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
             envFrom:
               - secret: dispatcharr-vpn-config
@@ -138,10 +138,6 @@ spec:
                   timeoutSeconds: 5
                   failureThreshold: 5
               startup: *probes
-      redis:
-        type: deployment
-        strategy: "RollingUpdate"
-        containers:
           redis:
             image:
               repository: redis
@@ -157,10 +153,6 @@ spec:
                     command: [ "redis-cli", "info", "|", "grep loading:", "|", "grep 0" ]
               readiness: *probes
               startup: *probes
-      postgres:
-        type: deployment
-        strategy: "RollingUpdate"
-        containers:
           postgres:
             image:
               repository: postgres
@@ -182,12 +174,12 @@ spec:
           http:
             port: 9999
       postgres:
-        controller: postgres
+        controller: *app
         ports:
           http:
             port: 5432
       redis:
-        controller: redis
+        controller: *app
         ports:
           http:
             port: 6379
