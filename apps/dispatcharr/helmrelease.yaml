@@ -31,6 +31,10 @@ spec:
             env:
               TZ: "Europe/Berlin"
               # DISPATCHARR_ENV: aio
+              POSTGRES_HOST: "localhost"
+              POSTGRES_DB: "dispatcharr"
+              POSTGRES_USER: "dispatch"
+              POSTGRES_PASSWORD: "dispatch"
               REDIS_HOST: "localhost"
               CELERY_BROKER_URL: "redis://localhost:6379/0"
               DISPATCHARR_LOG_LEVEL: info
@@ -68,7 +72,7 @@ spec:
               tag: 0.17.0
             env:
               TZ: "Europe/Berlin"
-              POSTGRES_HOST: "dispatcharr-postgres.dispatcharr.svc.cluster.local"
+              POSTGRES_HOST: "localhost"
               POSTGRES_DB: "dispatcharr"
               POSTGRES_USER: "dispatch"
               POSTGRES_PASSWORD: "dispatch"
