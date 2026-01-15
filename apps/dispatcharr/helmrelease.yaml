@@ -66,37 +66,6 @@ spec:
                 add:
                   - SYS_NICE
               allowPrivilegeEscalation: false
-#          celery:
-#            image:
-#              repository: ghcr.io/dispatcharr/dispatcharr
-#              tag: 0.17.0
-#            env:
-#              TZ: "Europe/Berlin"
-#              POSTGRES_HOST: "localhost"
-#              POSTGRES_DB: "dispatcharr"
-#              POSTGRES_USER: "dispatch"
-#              POSTGRES_PASSWORD: "dispatch"
-#              REDIS_HOST: "localhost"
-#              CELERY_BROKER_URL: "redis://localhost:6379/0"
-#            command: [ "/bin/bash", "-c" ]
-#            args: [ "cd /app && nice -n 5 celery -A dispatcharr worker -l info" ]
-#            resources:
-#              requests:
-#                cpu: 500m
-#              limits:
-#                cpu: 2000m
-#            probes:
-#              liveness:
-#                enabled: false
-#              readiness:
-#                enabled: false
-#              startup:
-#                enabled: false
-#            securityContext:
-#              capabilities:
-#                add:
-#                  - SYS_NICE
-#              allowPrivilegeEscalation: false
           gluetun:
             dependsOn: app
             image:
@@ -142,30 +111,6 @@ spec:
                   timeoutSeconds: 5
                   failureThreshold: 5
               startup: *probes
-#          redis:
-#            image:
-#              repository: redis
-#              tag: latest
-#            env:
-#              TZ: "Europe/Berlin"
-#            probes:
-#              liveness: &probes
-#                enabled: true
-#                custom: true
-#                spec:
-#                  exec:
-#                    command: [ "redis-cli", "info", "|", "grep loading:", "|", "grep 0" ]
-#              readiness: *probes
-#              startup: *probes
-#          postgres:
-#            image:
-#              repository: postgres
-#              tag: 17
-#            env:
-#              TZ: "Europe/Berlin"
-#              POSTGRES_DB: "dispatcharr"
-#              POSTGRES_USER: "dispatch"
-#              POSTGRES_PASSWORD: "dispatch"
     service:
       app:
         controller: *app
@@ -177,16 +122,6 @@ spec:
         ports:
           http:
             port: 9999
-#      postgres:
-#        controller: *app
-#        ports:
-#          http:
-#            port: 5432
-#      redis:
-#        controller: *app
-#        ports:
-#          http:
-#            port: 6379
     ingress:
       app:
         className: "nginx"
@@ -219,12 +154,6 @@ spec:
           dispatcharr:
             app:
               - path: /data
-#      postgres:
-#        existingClaim: dispatcharr-db-pvc
-#        advancedMounts:
-#          dispatcharr:
-#            postgres:
-#              - path: /var/lib/postgresql/
       logs:
         type: emptyDir
       tmp:

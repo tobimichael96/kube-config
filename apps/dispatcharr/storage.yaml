@@ -5,7 +5,7 @@ metadata:
   name: dispatcharr-config-pv
 spec:
   capacity:
-    storage: 15Gi
+    storage: 25Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -34,41 +34,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 15Gi
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: dispatcharr-db-pv
-spec:
-  capacity:
-    storage: 15Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  local:
-    path: /mnt/internal/dispatcharr/database
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - homeserver
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: dispatcharr-db-pvc
-  namespace: dispatcharr
-spec:
-  storageClassName: local-storage
-  volumeName: dispatcharr-db-pv
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 15Gi
+      storage: 25Gi
