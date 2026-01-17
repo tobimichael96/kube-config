@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 4.6.0
+      version: 4.6.2
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -55,9 +55,9 @@ spec:
                     path: /
                     port: &port 9191
                   initialDelaySeconds: 30
-                  periodSeconds: 30
-                  timeoutSeconds: 10
-                  failureThreshold: 3
+                  periodSeconds: 60
+                  timeoutSeconds: 30
+                  failureThreshold: 5
               readiness: *probes
               startup:
                 enabled: false
@@ -129,12 +129,16 @@ spec:
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
+          nginx.ingress.kubernetes.io/enable-compression: "true"
+          nginx.ingress.kubernetes.io/upstream-keepalive-connections: "32"
+          nginx.ingress.kubernetes.io/upstream-keepalive-timeout: "60"
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
           nginx.ingress.kubernetes.io/proxy-buffering: "off"
           nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
           nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-          nginx.ingress.kubernetes.io/websocket-services: "dispatcharr-app"
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
           nginx.ingress.kubernetes.io/proxy-buffer-size: "32k"
+          nginx.ingress.kubernetes.io/websocket-services: "dispatcharr-app"
           nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
         hosts:
           - host: &host dispatcharr.internal.tmem.de
