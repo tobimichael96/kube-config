@@ -37,10 +37,6 @@ spec:
           volumeMounts:
             - name: zigbee2mqtt-data
               mountPath: /data
-            - name: zigbee2mqtt-slzb-config
-              mountPath: /data/configuration.yaml
-              subPath: configuration.yaml
-              readOnly: false
             - name: zigbee2mqtt-secrets
               mountPath: /data/secrets.yaml
               subPath: secrets.yaml
@@ -70,9 +66,6 @@ spec:
         - name: zigbee2mqtt-data
           persistentVolumeClaim:
             claimName: zigbee2mqtt-slzb-pvc
-        - name: zigbee2mqtt-slzb-config
-          configMap:
-            name: zigbee2mqtt-slzb-config
         - name: zigbee2mqtt-secrets
           secret:
             secretName: zigbee2mqtt-credentials
