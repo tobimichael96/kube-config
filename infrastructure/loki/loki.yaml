@@ -24,6 +24,8 @@ spec:
       limits_config:
         max_query_lookback: 672h
         retention_period: 672h
+        max_query_series: 500
+        max_entries_limit_per_query: 5000
       commonConfig:
         replication_factor: 1
       auth_enabled: false
@@ -52,14 +54,28 @@ spec:
           active_index_directory: var/loki/index
           cache_location: var/loki/index_cache
           cache_ttl: 24h
-
+    chunksCache:
+      enabled: false
+    resultsCache:
+      enabled: false
     gateway:
       affinity: null
-
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 50m
+          memory: 64Mi
     singleBinary:
+      resources:
+        limits:
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 512Mi
       extraVolumes:
         - name: data
-          emptyDir: { }
+          emptyDir: {}
       extraVolumeMounts:
         - name: data
           mountPath: /var/loki
@@ -77,3 +93,8 @@ spec:
       replicas: 0
     write:
       replicas: 0
+    monitoring:
+      selfMonitoring:
+        enabled: false
+      lokiCanary:
+        enabled: false
