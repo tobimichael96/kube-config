@@ -66,13 +66,6 @@ spec:
         globalMounts:
           - path: "/transcodes"
         type: "emptyDir"
-      amd-device:
-        enabled: true
-        type: hostPath
-        hostPath: "/dev/dri"
-        hostPathType: "Directory"
-        globalMounts:
-          - path: "/dev/dri"
 #      vpn-config:
 #        enabled: true
 #        type: secret

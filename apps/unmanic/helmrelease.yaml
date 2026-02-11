@@ -111,10 +111,3 @@ spec:
         existingClaim: unmanic-library-shows-pvc
         globalMounts:
           - path: "/library/shows"
-      amd-device:
-        enabled: true
-        type: hostPath
-        hostPath: "/dev/dri"
-        hostPathType: "Directory"
-        globalMounts:
-          - path: "/dev/dri"
