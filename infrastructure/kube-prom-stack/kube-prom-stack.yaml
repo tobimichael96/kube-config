@@ -30,14 +30,7 @@ spec:
           kubernetes.io/tls-acme: "true"
           traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          traefik.ingress.kubernetes.io/auth-response-headers: Authorization
-          traefik.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-          traefik.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
-          traefik.ingress.kubernetes.io/configuration-snippet: |
-            auth_request_set  $user   $upstream_http_x_auth_request_user;
-            auth_request_set  $email  $upstream_http_x_auth_request_email;
-            proxy_set_header  X-Auth-Request-User   $user;
-            proxy_set_header  X-Auth-Request-Email  $email;
+          traefik.ingress.kubernetes.io/router.middlewares: "kube-system-oauth2-proxy@kubernetescrd"
         hosts:
           - &host grafana.tmem.de
         tls:

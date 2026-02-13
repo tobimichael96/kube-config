@@ -8,3 +8,17 @@ spec:
     sourceRange:
       - 192.168.0.0/16
       - 10.0.0.0/8
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: oauth2-proxy
+  namespace: kube-system
+spec:
+  forwardAuth:
+    address: https://oauth2.tmem.de/oauth2/auth
+    trustForwardHeader: true
+    authResponseHeaders:
+      - Authorization
+      - X-Auth-Request-User
+      - X-Auth-Request-Email
