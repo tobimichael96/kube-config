@@ -73,7 +73,7 @@ spec:
           kubernetes.io/tls-acme: "true"
           traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          traefik.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
+          traefik.ingress.kubernetes.io/router.middlewares: "default-internal-only@kubernetescrd"
         hosts:
           - host: &host prowlarr.internal.tmem.de
             paths:
