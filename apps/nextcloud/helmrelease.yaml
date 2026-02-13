@@ -99,8 +99,6 @@ spec:
         passwordKey: password
 
     postgresql:
-      global:
-        imageRegistry: bitnamilegacy/postgresql
       image:
         tag: 16.4.0-debian-12-r11
       enabled: true
@@ -110,6 +108,8 @@ spec:
         existingSecret: nextcloud-custom
       volumePermissions:
         enabled: true
+        image:
+          repository: bitnamilegacy/os-shell
       primary:
         persistence:
           enabled: true
