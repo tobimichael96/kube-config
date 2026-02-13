@@ -5,9 +5,9 @@ metadata:
   namespace: minio
   annotations:
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
+    traefik.ingress.kubernetes.io/configuration-snippet: |
       if ($request_uri ~ ^/(.*/)?$) {
         rewrite ^/(.*/)?$ /tobiasmichael/$1index.html break;
       }
@@ -15,7 +15,7 @@ metadata:
         rewrite ^/(.*/)?(.*)$ /tobiasmichael/$1$2 break;
       }
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - tm28.de
@@ -72,9 +72,9 @@ metadata:
   namespace: minio
   annotations:
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
+    traefik.ingress.kubernetes.io/configuration-snippet: |
       if ($request_uri ~ ^/(.*/)?$) {
         rewrite ^/(.*/)?$ /selinaklepic/$1index.html break;
       }
@@ -82,7 +82,7 @@ metadata:
         rewrite ^/(.*/)?(.*)$ /selinaklepic/$1$2 break;
       }
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - selinaklepic.com
@@ -139,9 +139,9 @@ metadata:
   namespace: minio
   annotations:
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
+    traefik.ingress.kubernetes.io/configuration-snippet: |
       if ($request_uri ~ ^/(.*/)?$) {
         rewrite ^/(.*/)?$ /moto/$1index.html break;
       }
@@ -149,7 +149,7 @@ metadata:
         rewrite ^/(.*/)?(.*)$ /moto/$1$2 break;
       }
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - moto.tmem.de

@@ -4,12 +4,12 @@ metadata:
   name: privatebin
   namespace: privatebin
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: 10G
+    traefik.ingress.kubernetes.io/proxy-body-size: 10G
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - bin.tmem.de

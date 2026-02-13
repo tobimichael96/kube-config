@@ -54,10 +54,10 @@ spec:
             port: 3000
     ingress:
       app:
-        className: "nginx"
+        className: "traefik"
         annotations:
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
           - host: &host internal.tmem.de

@@ -4,14 +4,14 @@ metadata:
   name: jellyfin
   namespace: jellyfin
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: 5G
+    traefik.ingress.kubernetes.io/proxy-body-size: 5G
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-    nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
+    traefik.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
+    traefik.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - &p-host jellyfin.tmem.de
@@ -34,13 +34,13 @@ metadata:
   name: jellyfin-internal
   namespace: jellyfin
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: 5G
+    traefik.ingress.kubernetes.io/proxy-body-size: 5G
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
+    traefik.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - &i-host jellyfin.internal.tmem.de

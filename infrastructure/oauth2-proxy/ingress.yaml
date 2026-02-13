@@ -5,11 +5,11 @@ metadata:
   namespace: oauth2-proxy
   annotations:
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    #nginx.ingress.kubernetes.io/rewrite-target: "/"
+    traefik.ingress.kubernetes.io/ssl-redirect: "true"
+    #traefik.ingress.kubernetes.io/rewrite-target: "/"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - oauth2.tmem.de

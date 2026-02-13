@@ -50,12 +50,12 @@ spec:
     ingress:
       main:
         enabled: true
-        className: "nginx"
+        className: "traefik"
         annotations:
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
+          traefik.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
         hosts:
           - host: &host jellyseerr.internal.tmem.de
             paths:

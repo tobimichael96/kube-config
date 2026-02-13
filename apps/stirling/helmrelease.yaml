@@ -62,12 +62,12 @@ spec:
             port: *port
     ingress:
       app:
-        className: "nginx"
+        className: "traefik"
         annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: 100MB
-          nginx.ingress.kubernetes.io/proxy_read_timeout: 3600s
+          traefik.ingress.kubernetes.io/proxy-body-size: 100MB
+          traefik.ingress.kubernetes.io/proxy_read_timeout: 3600s
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
           - host: &host pdf.tmem.de

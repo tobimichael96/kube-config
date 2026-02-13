@@ -76,11 +76,11 @@ spec:
             scrapeTimeout: 10s
     ingress:
       app:
-        className: "nginx"
+        className: "traefik"
         annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: 5G
+          traefik.ingress.kubernetes.io/proxy-body-size: 5G
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
           - host: &host api.minio.tmem.de

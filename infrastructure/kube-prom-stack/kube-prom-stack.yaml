@@ -25,15 +25,15 @@ spec:
     grafana:
       ingress:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: "traefik"
         annotations:
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          nginx.ingress.kubernetes.io/auth-response-headers: Authorization
-          nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
+          traefik.ingress.kubernetes.io/auth-response-headers: Authorization
+          traefik.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
+          traefik.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
+          traefik.ingress.kubernetes.io/configuration-snippet: |
             auth_request_set  $user   $upstream_http_x_auth_request_user;
             auth_request_set  $email  $upstream_http_x_auth_request_email;
             proxy_set_header  X-Auth-Request-User   $user;
@@ -100,9 +100,9 @@ spec:
       ingress:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: "nginx"
+          kubernetes.io/ingress.class: "traefik"
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
           - &host prometheus.internal.tmem.de

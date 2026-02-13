@@ -52,14 +52,14 @@ spec:
     ingress:
       main:
         enabled: true
-        className: "nginx"
+        className: "traefik"
         annotations:
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-          nginx.ingress.kubernetes.io/server-snippets: |
+          traefik.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          traefik.ingress.kubernetes.io/proxy-send-timeout: "3600"
+          traefik.ingress.kubernetes.io/server-snippets: |
             location / {
               proxy_set_header Upgrade $http_upgrade;
               proxy_http_version 1.1;
@@ -70,7 +70,7 @@ spec:
               proxy_set_header Connection "upgrade";
               proxy_cache_bypass $http_upgrade;
             }
-          nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
+          traefik.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
         hosts:
           - host: &host ha.internal.tmem.de
             paths:

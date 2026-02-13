@@ -123,22 +123,22 @@ spec:
             port: 9999
     ingress:
       app:
-        className: "nginx"
+        className: "traefik"
         annotations:
           kubernetes.io/tls-acme: "true"
-          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          nginx.ingress.kubernetes.io/enable-compression: "true"
-          nginx.ingress.kubernetes.io/upstream-keepalive-connections: "32"
-          nginx.ingress.kubernetes.io/upstream-keepalive-timeout: "60"
-          nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
-          nginx.ingress.kubernetes.io/proxy-buffering: "off"
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-          nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-          nginx.ingress.kubernetes.io/proxy-body-size: "0"
-          nginx.ingress.kubernetes.io/proxy-buffer-size: "32k"
-          nginx.ingress.kubernetes.io/websocket-services: "dispatcharr-app"
-          nginx.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
+          traefik.ingress.kubernetes.io/enable-compression: "true"
+          traefik.ingress.kubernetes.io/upstream-keepalive-connections: "32"
+          traefik.ingress.kubernetes.io/upstream-keepalive-timeout: "60"
+          traefik.ingress.kubernetes.io/proxy-connect-timeout: "10"
+          traefik.ingress.kubernetes.io/proxy-buffering: "off"
+          traefik.ingress.kubernetes.io/proxy-read-timeout: "3600"
+          traefik.ingress.kubernetes.io/proxy-send-timeout: "3600"
+          traefik.ingress.kubernetes.io/proxy-body-size: "0"
+          traefik.ingress.kubernetes.io/proxy-buffer-size: "32k"
+          traefik.ingress.kubernetes.io/websocket-services: "dispatcharr-app"
+          traefik.ingress.kubernetes.io/whitelist-source-range: "192.168.0.0/16,10.0.0.0/8"
         hosts:
           - host: &host dispatcharr.internal.tmem.de
             paths:

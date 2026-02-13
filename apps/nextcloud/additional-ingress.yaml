@@ -5,14 +5,14 @@ metadata:
   namespace: nextcloud
   annotations:
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/proxy-body-size: 10G
-    nginx.ingress.kubernetes.io/limit-rps: 12
-    #nginx.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-    #nginx.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$request_uri"
+    traefik.ingress.kubernetes.io/proxy-body-size: 10G
+    traefik.ingress.kubernetes.io/limit-rps: 12
+    #traefik.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
+    #traefik.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$request_uri"
 spec:
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   tls:
     - hosts:
         - &host cloud.tmem.de
