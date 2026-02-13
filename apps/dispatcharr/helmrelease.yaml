@@ -138,7 +138,7 @@ spec:
           traefik.ingress.kubernetes.io/proxy-body-size: "0"
           traefik.ingress.kubernetes.io/proxy-buffer-size: "32k"
           traefik.ingress.kubernetes.io/websocket-services: "dispatcharr-app"
-          traefik.ingress.kubernetes.io/router.middlewares: "default-internal-only@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
         hosts:
           - host: &host dispatcharr.internal.tmem.de
             paths:
