@@ -44,7 +44,7 @@ spec:
           kubernetes.io/tls-acme: "true"
           traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          traefik.ingress.kubernetes.io/router.middlewares: "kube-system-oauth@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: oauth2-oauth@kubernetescrd
         hosts:
           - host: &host files.tmem.de
             paths:

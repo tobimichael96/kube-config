@@ -7,7 +7,7 @@ metadata:
   annotations:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    traefik.ingress.kubernetes.io/router.middlewares: "kube-system-oauth@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: oauth2-oauth@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
