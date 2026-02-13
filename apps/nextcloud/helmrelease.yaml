@@ -107,7 +107,7 @@ spec:
         username: 'nextcloud'
         existingSecret: nextcloud-custom
       volumePermissions:
-        enabled: true
+        enabled: false
       primary:
         persistence:
           enabled: true
