@@ -59,17 +59,6 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt"
           traefik.ingress.kubernetes.io/proxy-read-timeout: "3600"
           traefik.ingress.kubernetes.io/proxy-send-timeout: "3600"
-          traefik.ingress.kubernetes.io/server-snippets: |
-            location / {
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_http_version 1.1;
-              proxy_set_header X-Forwarded-Host $http_host;
-              proxy_set_header X-Forwarded-Proto $scheme;
-              proxy_set_header X-Forwarded-For $remote_addr;
-              proxy_set_header Host $host;
-              proxy_set_header Connection "upgrade";
-              proxy_cache_bypass $http_upgrade;
-            }
           traefik.ingress.kubernetes.io/router.middlewares: "default-internal-only@kubernetescrd"
         hosts:
           - host: &host ha.internal.tmem.de
