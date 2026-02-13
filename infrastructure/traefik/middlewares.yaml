@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: internal-only
+spec:
+  ipWhiteList:
+    sourceRange:
+      - 192.168.0.0/16
+      - 10.0.0.0/8
