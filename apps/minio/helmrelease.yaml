@@ -83,13 +83,13 @@ spec:
           traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
         hosts:
-          - host: &host api.minio.tmem.de
+          - host: &host minio.tmem.de
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
-          - host: &s3Host minio.tmem.de
+          - host: &s3Host api.minio.tmem.de
             paths:
               - path: /
                 service:
