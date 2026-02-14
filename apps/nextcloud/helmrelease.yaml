@@ -26,10 +26,10 @@ spec:
         traefik.ingress.kubernetes.io/ssl-redirect: "true"
         cert-manager.io/cluster-issuer: "letsencrypt"
       hosts:
-        - cloud.internal.tmem.de
+        - cloud.tmem.de
       tls:
         - hosts:
-            - cloud.internal.tmem.de
+            - cloud.tmem.de
           secretName: nextcloud-tls
 
     nextcloud:
