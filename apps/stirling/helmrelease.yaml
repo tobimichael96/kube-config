@@ -69,8 +69,9 @@ spec:
           kubernetes.io/tls-acme: "true"
           traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
+          traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
         hosts:
-          - host: &host pdf.tmem.de
+          - host: &host pdf.internal.tmem.de
             paths:
               - path: /
                 service:
