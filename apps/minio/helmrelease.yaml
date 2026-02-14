@@ -33,8 +33,8 @@ spec:
               - :9001
             env:
               MINIO_API_CORS_ALLOW_ORIGIN: https://api.minio.tmem.de,https://minio.tmem.de
-              MINIO_BROWSER_REDIRECT_URL: https://api.minio.tmem.de
-              MINIO_SERVER_URL: https://minio.tmem.de
+              MINIO_BROWSER_REDIRECT_URL: https://minio.tmem.de      # Console (9001)
+              MINIO_SERVER_URL: https://api.minio.tmem.de            # S3 API (9000)
             envFrom:
               - secretRef:
                   name: minio-custom
