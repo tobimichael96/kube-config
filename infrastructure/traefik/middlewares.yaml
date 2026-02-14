@@ -48,3 +48,28 @@ spec:
     sourceRange:
       - 192.168.0.0/16
       - 10.0.0.0/8
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: security-headers
+  namespace: kube-system
+spec:
+  headers:
+    stsSeconds: 31536000
+    stsIncludeSubdomains: true
+    stsPreload: true
+    forceSTSHeader: true
+    contentTypeNosniff: true
+    browserXssFilter: true
+    referrerPolicy: "strict-origin-when-cross-origin"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: default-chain
+  namespace: kube-system
+spec:
+  chain:
+    middlewares:
+      - name: security-headers

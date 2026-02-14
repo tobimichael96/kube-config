@@ -38,3 +38,6 @@ spec:
       # Access logs
       - "--accesslog=true"
       - "--accesslog.bufferingsize=100"
+      
+      # Default chain
+      - "--entryPoints.websecure.http.middlewares=kube-system-default-chain@kubernetescrd"
