@@ -1,0 +1,129 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: static-sites
+  namespace: websites
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 4.6.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: static-sites
+  targetNamespace: websites
+  values:
+    controllers:
+      static-sites:
+        containers:
+          app:
+            image:
+              repository: nginx
+              tag: alpine3.23
+            resources:
+              limits:
+                cpu: 10m
+                memory: 128Mi
+    service:
+      app:
+        controller: static-sites
+        ports:
+          http:
+            port: 80
+    ingress:
+      app:
+        className: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-http
+        hosts:
+          - host: tobiasmichael.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+          - host: www.tobiasmichael.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+          - host: tm28.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+          - host: tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+          - host: selinaeffner.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+          - host: www.selinaeffner.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+          - host: moto.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - tobiasmichael.de
+              - www.tobiasmichael.de
+              - tm28.de
+              - tmem.de
+            secretName: tobiasmichael-tls
+          - hosts:
+              - selinaeffner.de
+              - www.selinaeffner.de
+            secretName: selina-tls
+          - hosts:
+              - moto.tmem.de
+            secretName: moto-tls
+    configMaps:
+      nginx-config:
+        data:
+          default.conf: |
+            server {
+                listen 80;
+                server_name tobiasmichael.de www.tobiasmichael.de tm28.de tmem.de;
+                root /usr/share/nginx/html/tobiasmichael;
+                index index.html;
+            }
+            server {
+                listen 80;
+                server_name selinaeffner.de www.selinaeffner.de;
+                root /usr/share/nginx/html/selina;
+                index index.html;
+            }
+            server {
+                listen 80;
+                server_name moto.tmem.de;
+                root /usr/share/nginx/html/moto;
+                index index.html;
+            }
+    persistence:
+      nginx-config:
+        type: configMap
+        name: static-sites-nginx-config
+        globalMounts:
+          - path: /etc/nginx/conf.d
+      data:
+        existingClaim: static-sites-pvc
+        globalMounts:
+          - path: /usr/share/nginx/html
