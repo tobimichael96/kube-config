@@ -4,7 +4,37 @@ metadata:
   name: traefik
   namespace: kube-system
 spec:
+  # language=yaml
   valuesContent: |
     service:
       spec:
         externalTrafficPolicy: Local
+    
+    # Resource limits
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: 256Mi
+    
+    # Performance tuning
+    additionalArguments:
+      # Trust forwarded headers from local network only
+      - "--entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,192.168.178.0/24,10.0.0.0/8"
+      
+      # Connection pooling
+      - "--serversTransport.maxIdleConnsPerHost=200"
+      
+      # Timeouts
+      - "--entryPoints.websecure.transport.respondingTimeouts.readTimeout=300s"
+      - "--entryPoints.websecure.transport.respondingTimeouts.writeTimeout=300s"
+      - "--entryPoints.websecure.transport.respondingTimeouts.idleTimeout=180s"
+      
+      # Disable unnecessary features
+      - "--global.checkNewVersion=false"
+      - "--global.sendAnonymousUsage=false"
+      
+      # Access logs
+      - "--accesslog=true"
+      - "--accesslog.bufferingsize=100"
