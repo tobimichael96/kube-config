@@ -124,6 +124,6 @@ spec:
         globalMounts:
           - path: /etc/nginx/conf.d
       data:
-        existingClaim: static-sites-pvc
+        existingClaim: websites-pvc
         globalMounts:
           - path: /usr/share/nginx/html
