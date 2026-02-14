@@ -30,6 +30,13 @@ spec:
               tag: v2.58.0
             env:
               TZ: Europe/Berlin
+            resources:
+              requests:
+                cpu: 5m
+                memory: 16Mi
+              limits:
+                cpu: 50m
+                memory: 64Mi
     service:
       app:
         controller: main

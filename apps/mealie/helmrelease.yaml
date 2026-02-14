@@ -36,6 +36,13 @@ spec:
               MAX_WORKERS: 1
               WEB_CONCURRENCY: 1
               BASE_URL: https://mealie.internal.tmem.de
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256Mi
+              limits:
+                cpu: 200m
+                memory: 512Mi
             probes:
               liveness:
                 enabled: false

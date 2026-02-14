@@ -33,6 +33,13 @@ spec:
               DATABASE_TYPE: postgresql
             envFrom:
               - secret: umami-app-config
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                cpu: 100m
+                memory: 256Mi
             probes:
               liveness:
                 enabled: true
@@ -68,6 +75,13 @@ spec:
               TZ: Europe/Berlin
             envFrom:
               - secret: umami-db-config
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                cpu: 100m
+                memory: 128Mi
             probes:
               liveness:
                 enabled: true

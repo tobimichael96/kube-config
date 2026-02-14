@@ -33,6 +33,13 @@ spec:
               tag: latest
             env:
               TZ: Europe/Berlin
+            resources:
+              requests:
+                cpu: 5m
+                memory: 64Mi
+              limits:
+                cpu: 50m
+                memory: 128Mi
             probes:
               liveness:
                 enabled: true
@@ -65,6 +72,13 @@ spec:
             envFrom:
               - configMapRef:
                   name: default
+            resources:
+              requests:
+                cpu: 5m
+                memory: 128Mi
+              limits:
+                cpu: 100m
+                memory: 256Mi
             probes:
               liveness:
                 enabled: true

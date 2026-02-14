@@ -17,6 +17,13 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    resources:
+      requests:
+        cpu: 5m
+        memory: 32Mi
+      limits:
+        cpu: 50m
+        memory: 64Mi
     tolerations:
       - effect: NoSchedule
         key: cloud

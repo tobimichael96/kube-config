@@ -22,6 +22,13 @@ spec:
           image: quay.io/oauth2-proxy/oauth2-proxy:v7.14.2
           args:
             - --config=/etc/oauth2-proxy.cfg
+          resources:
+            requests:
+              cpu: 5m
+              memory: 32Mi
+            limits:
+              cpu: 50m
+              memory: 64Mi
           volumeMounts:
             - name: oauth2-proxy-config
               mountPath: /etc/oauth2-proxy.cfg
