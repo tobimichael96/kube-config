@@ -120,7 +120,7 @@ spec:
     persistence:
       nginx-config:
         type: configMap
-        name: static-sites-nginx-config
+        name: static-sites
         globalMounts:
           - path: /etc/nginx/conf.d
       data:
