@@ -1,3 +1,33 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: minio-tobiasmichael
+  namespace: minio
+spec:
+  replacePathRegex:
+    regex: "^/(.*)"
+    replacement: "/tobiasmichael/$1"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: minio-selinaklepic
+  namespace: minio
+spec:
+  replacePathRegex:
+    regex: "^/(.*)"
+    replacement: "/selinaklepic/$1"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: minio-moto
+  namespace: minio
+spec:
+  replacePathRegex:
+    regex: "^/(.*)"
+    replacement: "/moto/$1"
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -5,15 +35,8 @@ metadata:
   namespace: minio
   annotations:
     kubernetes.io/tls-acme: "true"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
-    traefik.ingress.kubernetes.io/configuration-snippet: |
-      if ($request_uri ~ ^/(.*/)?$) {
-        rewrite ^/(.*/)?$ /tobiasmichael/$1index.html break;
-      }
-      if ($request_uri ~ ^/(.*/)?(.*)$) {
-        rewrite ^/(.*/)?(.*)$ /tobiasmichael/$1$2 break;
-      }
+    traefik.ingress.kubernetes.io/router.middlewares: minio-minio-tobiasmichael@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
@@ -72,15 +95,8 @@ metadata:
   namespace: minio
   annotations:
     kubernetes.io/tls-acme: "true"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
-    traefik.ingress.kubernetes.io/configuration-snippet: |
-      if ($request_uri ~ ^/(.*/)?$) {
-        rewrite ^/(.*/)?$ /selinaklepic/$1index.html break;
-      }
-      if ($request_uri ~ ^/(.*/)?(.*)$) {
-        rewrite ^/(.*/)?(.*)$ /selinaklepic/$1$2 break;
-      }
+    traefik.ingress.kubernetes.io/router.middlewares: minio-minio-selinaklepic@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
@@ -139,15 +155,8 @@ metadata:
   namespace: minio
   annotations:
     kubernetes.io/tls-acme: "true"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-http"
-    traefik.ingress.kubernetes.io/configuration-snippet: |
-      if ($request_uri ~ ^/(.*/)?$) {
-        rewrite ^/(.*/)?$ /moto/$1index.html break;
-      }
-      if ($request_uri ~ ^/(.*/)?(.*)$) {
-        rewrite ^/(.*/)?(.*)$ /moto/$1$2 break;
-      }
+    traefik.ingress.kubernetes.io/router.middlewares: minio-minio-moto@kubernetescrd
 spec:
   ingressClassName: "traefik"
   tls:
