@@ -1,25 +1,111 @@
 ---
+# Public ingress for Nextcloud share links
+# These paths are accessible without the internal-only middleware
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nextcloud-oauth2
+  name: nextcloud-public-shares
   namespace: nextcloud
   annotations:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    traefik.ingress.kubernetes.io/router.middlewares: oauth2-proxy-oauth@kubernetescrd
+    traefik.ingress.kubernetes.io/proxy-body-size: 10G
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
         - &host cloud.tmem.de
-      secretName: nextcloud-oauth2-tls
+      secretName: nextcloud-public-tls
   rules:
     - host: *host
       http:
         paths:
-          - path: /
+          # Share link pages
+          - path: /s
             pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Alternative share link path
+          - path: /index.php/s
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # WebDAV public file access (for public uploads/downloads)
+          - path: /remote.php/dav/public-files
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Share preview thumbnails
+          - path: /apps/files_sharing/publicpreview
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Core preview images
+          - path: /core/preview
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Public share API endpoints
+          - path: /ocs/v2.php/apps/files_sharing/api/v1/shares
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Static assets needed for share pages
+          - path: /core/js
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          - path: /core/css
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          - path: /core/fonts
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          - path: /core/img
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          - path: /apps/theming
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          - path: /cron.php
+            pathType: Exact
             backend:
               service:
                 name: nextcloud
