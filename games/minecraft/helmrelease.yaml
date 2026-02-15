@@ -6,8 +6,8 @@ metadata:
 spec:
   chart:
     spec:
-      chart: minecraft-bedrock
-      version: 3.0.3
+      chart: *app
+      version: 5.1.1
       sourceRef:
         kind: HelmRepository
         name: *app
@@ -16,15 +16,14 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-    # ref: https://hub.docker.com/r/itzg/minecraft-bedrock-server/
+    # ref: https://hub.docker.com/r/itzg/minecraft-server/
     image:
-      repository: itzg/minecraft-bedrock-server
+      repository: itzg/minecraft-server
       tag: latest
       pullPolicy: Always
 
     ## Configure resource requests and limits
     ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-    ##
     resources:
       requests:
         memory: 512Mi
@@ -33,16 +32,7 @@ spec:
         memory: 5108Mi
         cpu: 4500m
 
-    # If true the workload is defined as a StatefulSet instead of a Deployment.
-    # Make sure to also update the strategyType!
-    # All configuration options for the Deployment (e.g. annotations) are used for the StatefulSet.
-    # Regarding persistence: When an existing PVC is provided it will be shared between all Pods.
-    # Otherwise the PVC configuration is used as a template to create PVCs for each replica.
     workloadAsStatefulSet: false
-
-    # upgrade strategy type, depending on workload type:
-    # - for Deployment sets strategy: Recreate or RollingUpdate
-    # - for StatefulSet sets updateStrategy: OnDelete or RollingUpdate
     strategyType: Recreate
 
     podSecurityContext:
@@ -60,99 +50,67 @@ spec:
       readOnlyRootFilesystem: true
       allowPrivilegeEscalation: false
 
-    # Most of these map to environment variables. See Minecraft Bedrock for details:
-    # https://hub.docker.com/r/itzg/minecraft-bedrock-server/
     livenessProbe:
       initialDelaySeconds: 30
     readinessProbe:
       initialDelaySeconds: 30
 
-    # https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
-    shareProcessNamespace: false
-
-    # The value of the field will be interpreted as a template.
     extraPodSpec:
       hostNetwork: true
 
     minecraftServer:
-      # This must be overridden, since we can't accept this for the user.
       eula: "TRUE"
-      # One of: LATEST, SNAPSHOT, or a specific version (ie: "1.7.9").
+      # Server type: VANILLA, FORGE, FABRIC, PAPER, SPIGOT, etc.
+      type: "VANILLA"
+      # One of: LATEST, SNAPSHOT, or a specific version (ie: "1.21.1")
       version: "LATEST"
-      # One of: peaceful, easy, normal, and hard
+      # One of: peaceful, easy, normal, hard
       difficulty: normal
-      whitelist: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421,EinsEntlein7260,DavisMo1786,Greinox8057,StamiinUp"
-      ops: "Ausraster8"
-      members:
-      # A comma-seperated list of xuid's for visitors on server with no
-      # whitespaces.
-      # ex: ops: "12345678,0987654"
-      visitors:
-      # Max connected players.
-      maxPlayers: 20
-      # The world is ticked this many chunks away from any player.
-      tickDistance: 16
-      # Max view distance (in chunks).
-      viewDistance: 32
-      # The "level-name" value is used as the world name and its folder name. The player may also copy their saved game folder here, and change the name to the same as that folder's to load it instead.
-      levelName: level
-      # Define this if you want a specific map generation seed.
-      levelSeed:
       # One of: creative, survival, adventure, spectator
       gameMode: survival
-      # Permission level for new players joining for the first time (visitor, member, operator)
-      defaultPermission: member
-      # After a player has idled for this many minutes they get kicked.
-      playerIdleTimeout: 5
-      # One of: DEFAULT, FLAT, LEGACY
+      # Message of the day
+      motd: "TME Server"
+      # Max connected players
+      maxPlayers: 20
+      # Max view distance (in chunks)
+      viewDistance: 32
+      # World save name
+      worldSaveName: world
+      # Define this if you want a specific map generation seed
+      levelSeed: ""
+      # One of: DEFAULT, FLAT, LARGEBIOMES, AMPLIFIED, CUSTOMIZED
       levelType: DEFAULT
-      # Force clients to use texture packs in the current world
-      texturepackRequired: false
-      # This is the server name shown in the in-game server list.
-      serverName: "TME Server"
-      # Check accounts against Minecraft account service.
+      # After a player has idled for this many minutes they get kicked (0 = disabled)
+      playerIdleTimeout: 5
+      # Check accounts against Minecraft account service
       onlineMode: true
-      # Maximum number of threads the server tries to use. If set to 0 or removed then it uses as many as possible.
-      maxThreads: 8
-      # Cheat like commands can be used.
-      cheats: true
-      # Enable emit server telemetry.
-      emitServerTelemetry: true
-      # Enable lan visibility.
-      enableLanVisibility: true
-      # IPv4 UDP port of server. If using a nodePort, set serverPort and nodePort to the same value (e.g. 30000) so ping time displays.
-      serverPort: 19132
-      # type of kubernetes service to use
+      # Enable PvP
+      pvp: true
+      # Enable command blocks
+      enableCommandBlock: true
+      # Whitelist players (comma-separated usernames)
+      whitelist: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421,EinsEntlein7260,DavisMo1786,Greinox8057,StamiinUp"
+      # Ops (comma-separated usernames)
+      ops: "Ausraster8"
+      # Memory allocation
+      memory: 4G
+      # JVM options
+      jvmOpts: ""
+      # Service port (default 25565)
+      servicePort: 25565
+      # Service type
       serviceType: ClusterIP
-      ## Set the port used if the serviceType is NodePort
-      # nodePort: 19132
-      loadBalancerIP:
-      # loadBalancerSourceRanges: []
-      ## Set the externalTrafficPolicy in the Service to either Cluster or Local
-      # externalTrafficPolicy: Cluster
-      ## Enable SSH for console access (eg. needed for backup containers like https://github.com/Kaiede/Bedrockifier)
-      # Please note: if you use this together with serviceType LoadBAlancer, make sure you have at least Kubernetes v1.26
-      enableSSH: false
-      ## Set the port used for SSH if the serviceType is NodePort
-      # nodePortSSH:
-      ## Set the port used for SSH by the service (defaults to 2222)
-      # exposedPortSSH:
-      ## Set password for SSH access (optional, if not set password will be autogenerated)
-      # passwordSSH:
-
-    # turn off the minecraft bedrock server and just run sleep in a loop, this way you can get to the server files to restore a server without the server already have loaded
-    # them into memory or something
-    # kubectl cp -n minecraft survival-server-minecraft-bedrock-b868f4464-nq22m:/data/worlds/. ./
-    restoreMode: false
+      # RCON configuration
+      rcon:
+        enabled: false
+        port: 25575
+        password: ""
 
     persistence:
       storageClass: "local-storage"
       dataDir:
-        # Set this to false if you don't care to persist state between restarts.
         enabled: true
         existingClaim: minecraft-pvc
         Size: 100Gi
-        # access modes used by the volume, RWO by default,
-        # ensure your storage class supports other modes if chosen
         accessModes:
           - ReadWriteOnce
