@@ -105,9 +105,10 @@ spec:
       serviceType: ClusterIP
       # RCON configuration
       rcon:
-        enabled: false
+        enabled: true
         port: 25575
-        password: ""
+        password: "minecraft"
+        serviceType: ClusterIP
 
     persistence:
       storageClass: "local-storage"
