@@ -68,6 +68,22 @@ spec:
                 name: nextcloud
                 port:
                   number: 8080
+          # Compiled assets (JS bundles)
+          - path: /dist
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Text app assets for public text file viewing
+          - path: /apps/text
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
           # Static assets needed for share pages
           - path: /core/js
             pathType: Prefix
