@@ -76,6 +76,38 @@ spec:
                 name: nextcloud
                 port:
                   number: 8080
+          # MIME type icons
+          - path: /core/mimeicon
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Viewer app (image/video/pdf previews)
+          - path: /apps/viewer
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # PDF viewer app
+          - path: /apps/files_pdfviewer
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Core JS files
+          - path: /js
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
           # Public share API endpoints
           - path: /ocs/v2.php/apps/files_sharing/api/v1/shares
             pathType: Prefix
