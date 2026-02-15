@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app minecraft-bedrock
+  name: &app minecraft
   namespace: *app
 spec:
   chart:
@@ -18,9 +18,8 @@ spec:
   values:
     # ref: https://hub.docker.com/r/itzg/minecraft-server/
     image:
-      repository: itzg/minecraft-bedrock-server
-      tag: latest
-      pullPolicy: Always
+      repository: itzg/minecraft-server
+      tag: stable-java25
       pullSecret: ""
 
     ## Configure resource requests and limits
