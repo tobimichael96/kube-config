@@ -99,7 +99,7 @@ spec:
               NVIDIA_VISIBLE_DEVICES: "all"
               NVIDIA_DRIVER_CAPABILITIES: "all"
             securityContext:
-              privileged: true
+              privileged: false
             resources:
               requests:
                 cpu: 500m
