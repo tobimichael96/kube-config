@@ -44,6 +44,22 @@ spec:
                 name: nextcloud
                 port:
                   number: 8080
+          # Public.php WebDAV access
+          - path: /public.php
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          # Guest avatars
+          - path: /avatar
+            pathType: Prefix
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
           # Share preview thumbnails
           - path: /apps/files_sharing/publicpreview
             pathType: Prefix
