@@ -88,10 +88,13 @@ spec:
       pvp: true
       # Enable command blocks
       enableCommandBlock: true
-      # Whitelist players (comma-separated usernames)
-      whitelist: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421,EinsEntlein7260,DavisMo1786,Greinox8057,StamiinUp"
-      # Ops (comma-separated usernames)
-      ops: "Ausraster8"
+      # Whitelist - disabled, manage in-game with /whitelist add <player>
+      whitelist: ""
+      # Skip whitelist file management
+      existingWhitelistFile: "SKIP"
+      # Ops - disabled, manage in-game with /op <player>
+      ops: ""
+      existingOpsFile: "SKIP"
       # Memory allocation
       memory: 4G
       # JVM options
