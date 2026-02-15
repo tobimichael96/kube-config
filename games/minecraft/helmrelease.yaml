@@ -6,8 +6,8 @@ metadata:
 spec:
   chart:
     spec:
-      chart: *app
-      version: 5.1.1
+      chart: minecraft-bedrock
+      version: 3.0.3
       sourceRef:
         kind: HelmRepository
         name: *app
@@ -16,11 +16,11 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-    # ref: https://hub.docker.com/r/itzg/minecraft-server/
+    # ref: https://hub.docker.com/r/itzg/minecraft-bedrock-server/
     image:
-      repository: itzg/minecraft-server
-      tag: stable-java25
-      pullSecret: ""
+      repository: itzg/minecraft-bedrock-server
+      tag: latest
+      pullPolicy: Always
 
     ## Configure resource requests and limits
     ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -60,8 +60,8 @@ spec:
       readOnlyRootFilesystem: true
       allowPrivilegeEscalation: false
 
-    # Most of these map to environment variables. See Minecraft for details:
-    # https://hub.docker.com/r/itzg/minecraft-server/
+    # Most of these map to environment variables. See Minecraft Bedrock for details:
+    # https://hub.docker.com/r/itzg/minecraft-bedrock-server/
     livenessProbe:
       initialDelaySeconds: 30
     readinessProbe:
@@ -72,7 +72,7 @@ spec:
 
     # The value of the field will be interpreted as a template.
     extraPodSpec:
-      hostNetwork: "true"
+      hostNetwork: true
 
     minecraftServer:
       # This must be overridden, since we can't accept this for the user.
@@ -81,22 +81,8 @@ spec:
       version: "LATEST"
       # One of: peaceful, easy, normal, and hard
       difficulty: normal
-      # A boolean to indicate if whitelist is enabled or not. If this is enabled
-      # and whitelistUsers is left blank, you will need to provide the whitelist.json
-      # file via the volume mounted in to the container. Setting whitelistUsers implies
-      # whitelist is true, so it is not necessary to set it.
-      whitelist: "true"
-      # A comma-separated list of player names to whitelist with no whitespace.
-      # ex: whitelistUsers: player1,player2,player3
-      whitelistUsers: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421,EinsEntlein7260,DavisMo1786,Greinox8057,StamiinUp"
-      # A comma-seperated list of xuid's for operators on server with no
-      # whitespaces.
-      # The server logs will print xuids as players connect.
-      # ex: ops: "12345678,0987654"
-      ops: "2535431102966425"
-      # A comma-seperated list of xuid's for members on server with no
-      # whitespaces.
-      # ex: ops: "12345678,0987654"
+      whitelist: "Ausraster8,DiaEmperador,OneAndOnlyMEK,Hansomili,Yasuo421,EinsEntlein7260,DavisMo1786,Greinox8057,StamiinUp"
+      ops: "Ausraster8"
       members:
       # A comma-seperated list of xuid's for visitors on server with no
       # whitespaces.
