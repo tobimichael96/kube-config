@@ -25,12 +25,9 @@ spec:
     ## Configure resource requests and limits
     ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
     resources:
-      requests:
-        memory: 512Mi
-        cpu: 500m
       limits:
-        memory: 5108Mi
-        cpu: 4500m
+        memory: 5722Mi
+        cpu: 3500m
 
     workloadAsStatefulSet: false
     strategyType: Recreate
@@ -96,7 +93,7 @@ spec:
       ops: ""
       existingOpsFile: "SKIP"
       # Memory allocation
-      memory: 4G
+      memory: 5G
       # JVM options
       jvmOpts: ""
       # Service port (default 25565)
