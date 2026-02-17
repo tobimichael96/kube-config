@@ -26,7 +26,7 @@ spec:
     ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
     resources:
       limits:
-        memory: 5722Mi
+        memory: 10G
         cpu: 3500m
 
     workloadAsStatefulSet: false
@@ -93,7 +93,7 @@ spec:
       ops: ""
       existingOpsFile: "SKIP"
       # Memory allocation
-      memory: 5G
+      memory: 9G
       # JVM options
       jvmOpts: ""
       # Service port (default 25565)
