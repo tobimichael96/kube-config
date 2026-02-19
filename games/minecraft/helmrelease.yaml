@@ -70,7 +70,7 @@ spec:
       # Max connected players
       maxPlayers: 20
       # Max view distance (in chunks)
-      viewDistance: 24
+      viewDistance: 18
       # World save name
       worldSaveName: world
       # Define this if you want a specific map generation seed
