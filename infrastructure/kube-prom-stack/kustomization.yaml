@@ -5,4 +5,4 @@ resources:
 - grafana-dashboards.yaml
 - grafana-alerts.yaml
 - grafana-alerts-contacts.yaml
-- kube-prom-stack.yaml
+# - kube-prom-stack.yaml
