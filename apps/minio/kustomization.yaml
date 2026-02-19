@@ -5,4 +5,4 @@ resources:
 - storage.yaml
 - secrets.yaml
 - helmrelease.yaml
-- additional-ingress.yaml
+# - additional-ingress.yaml
