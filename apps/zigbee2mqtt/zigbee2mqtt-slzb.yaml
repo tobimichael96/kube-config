@@ -29,7 +29,7 @@ spec:
             - name: "ZIGBEE2MQTT_DATA"
               value: "/data"
           securityContext:
-            privileged: true
+            privileged: false
           ports:
             - name: http
               containerPort: 8080
