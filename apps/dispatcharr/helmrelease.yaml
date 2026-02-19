@@ -42,7 +42,7 @@ spec:
               STREAMLINK_NICE_LEVEL: "0"  # Stream fetching
             resources:
               requests:
-                cpu: 500m
+                cpu: 1500m
               limits:
                 nvidia.com/gpu: 1
             probes:
