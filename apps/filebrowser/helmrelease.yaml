@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: filebrowser/filebrowser
-              tag: v2.59.0
+              tag: v2.60.0
             env:
               TZ: Europe/Berlin
             resources:
