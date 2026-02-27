@@ -41,9 +41,8 @@ spec:
               FFMPEG_NICE_LEVEL: "0"      # Transcoding (keep responsive)
               STREAMLINK_NICE_LEVEL: "0"  # Stream fetching
             resources:
-              requests:
-                cpu: 1500m
               limits:
+                cpu: 4000m
                 nvidia.com/gpu: 1
             probes:
               liveness: &probes
