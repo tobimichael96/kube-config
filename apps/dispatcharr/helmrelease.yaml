@@ -37,12 +37,12 @@ spec:
               DISPATCHARR_LOG_LEVEL: info
               NVIDIA_VISIBLE_DEVICES: "all"
               NVIDIA_DRIVER_CAPABILITIES: "all"
-              CELERY_NICE_LEVEL: "5"      # Background tasks (higher = lower priority)
-              FFMPEG_NICE_LEVEL: "0"      # Transcoding (keep responsive)
-              STREAMLINK_NICE_LEVEL: "0"  # Stream fetching
+              # CELERY_NICE_LEVEL: "5"      # Background tasks (higher = lower priority)
+              # FFMPEG_NICE_LEVEL: "0"      # Transcoding (keep responsive)
+              # STREAMLINK_NICE_LEVEL: "0"  # Stream fetching
             resources:
               limits:
-                cpu: 4000m
+                cpu: 3000m
                 nvidia.com/gpu: 1
             probes:
               liveness: &probes
