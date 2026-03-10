@@ -81,7 +81,7 @@ spec:
               DNS_ADDRESS: 192.168.178.91
               FIREWALL_OUTBOUND_SUBNETS: "192.168.178.91/32"
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
-              WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL: 15
+              WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL: "15s"
             envFrom:
               - secret: dispatcharr-vpn-config
             # Configure the container-specific securityContext
