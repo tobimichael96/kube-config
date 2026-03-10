@@ -103,12 +103,13 @@ spec:
                 spec:
                   exec:
                     command:
-                      - /gluetun-entrypoint
-                      - healthcheck
+                      - sh
+                      - -c
+                      - wget -qO- https://am.i.mullvad.net/connected | grep -q "You are connected to Mullvad"
                   initialDelaySeconds: 30
-                  periodSeconds: 10
-                  timeoutSeconds: 5
-                  failureThreshold: 5
+                  periodSeconds: 60
+                  timeoutSeconds: 10
+                  failureThreshold: 3
               startup: *probes
     service:
       app:
