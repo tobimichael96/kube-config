@@ -26,7 +26,7 @@ spec:
     ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
     resources:
       limits:
-        memory: 10G
+        memory: 7G
         cpu: 3500m
 
     workloadAsStatefulSet: false
@@ -70,7 +70,7 @@ spec:
       # Max connected players
       maxPlayers: 20
       # Max view distance (in chunks)
-      viewDistance: 18
+      viewDistance: 14
       # World save name
       worldSaveName: world
       # Define this if you want a specific map generation seed
@@ -93,7 +93,7 @@ spec:
       ops: ""
       existingOpsFile: "SKIP"
       # Memory allocation
-      memory: 9G
+      memory: 6G
       # JVM options
       jvmOpts: ""
       # Service port (default 25565)
