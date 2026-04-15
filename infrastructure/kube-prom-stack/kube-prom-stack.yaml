@@ -47,13 +47,13 @@ spec:
           labelValue: "1"
           skipReload: false
 
-      additionalDataSources:
-        - name: Loki
-          type: loki
-          access: proxy
-          uid: loki
-          version: 1
-          url: http://loki-gateway.loki
+#      additionalDataSources:
+#        - name: Loki
+#          type: loki
+#          access: proxy
+#          uid: loki
+#          version: 1
+#          url: http://loki-gateway.loki
 
       grafana.ini:
         root_url: "https://grafana.tmem.de"
