@@ -42,52 +42,6 @@ spec:
               readiness: *probes
               startup:
                 enabled: false
-          # Configure the gluetun sidecar
-          gluetun:
-            dependsOn: app
-            image:
-              repository: ghcr.io/qdm12/gluetun
-              tag: v3.41.1
-            env:
-              TZ: Europe/Berlin
-              FIREWALL: on
-              FIREWALL_INPUT_PORTS: 8080,9999
-              VPN_TYPE: wireguard
-              VPN_SERVICE_PROVIDER: mullvad
-              SERVER_COUNTRIES: Germany
-              UPDATER_PERIOD: 12h
-              DOT: off
-              DNS_ADDRESS: 192.168.178.91
-              FIREWALL_OUTBOUND_SUBNETS: 192.168.178.91/32
-              HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
-            envFrom:
-              - secret: sabnzbd-vpn-config
-            # Configure the container-specific securityContext
-            securityContext:
-              capabilities:
-                add:
-                  - NET_ADMIN
-                  - SYS_MODULE
-            lifecycle:
-              postStart:
-                exec:
-                  command: [ "/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true" ]
-            probes:
-              readiness:
-                enabled: false
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  exec:
-                    command:
-                      - /gluetun-entrypoint
-                      - healthcheck
-                  initialDelaySeconds: 30
-                  periodSeconds: 10
-                  timeoutSeconds: 5
-                  failureThreshold: 5
-              startup: *probes
     ingress:
       app:
         className: "traefik"
@@ -129,22 +83,9 @@ spec:
           sabnzbd:
             app:
               - path: /config/logs
-      vpn-config:
-        enabled: true
-        type: secret
-        name: sabnzbd-vpn-config
-        advancedMounts:
-          sabnzbd:
-            gluetun:
-              - path: /gluetun/wireguard/
     service:
       app:
         controller: *app
         ports:
           http:
             port: 8080
-      gluetun:
-        controller: *app
-        ports:
-          http:
-            port: 9999
