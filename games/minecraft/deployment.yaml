@@ -1,0 +1,151 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft
+  namespace: minecraft
+  labels:
+    app: minecraft
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: minecraft
+  template:
+    metadata:
+      labels:
+        app: minecraft
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        runAsNonRoot: true
+        fsGroup: 2000
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: fetch-lazymc
+          image: curlimages/curl:8.11.1
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              VERSION="0.2.11"
+              cd /lazymc
+              if [ ! -x ./lazymc ]; then
+                curl -fsSL -o lazymc \
+                  "https://github.com/timvisee/lazymc/releases/download/v${VERSION}/lazymc-v${VERSION}-linux-x64"
+                chmod +x lazymc
+              fi
+          volumeMounts:
+            - name: lazymc-bin
+              mountPath: /lazymc
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+      containers:
+        - name: minecraft
+          image: itzg/minecraft-server:latest
+          imagePullPolicy: Always
+          workingDir: /data
+          command: ["/lazymc/lazymc"]
+          args: ["--config", "/etc/lazymc/lazymc.toml", "start"]
+          env:
+            - name: EULA
+              value: "TRUE"
+            - name: TYPE
+              value: "VANILLA"
+            - name: VERSION
+              value: "LATEST"
+            - name: DIFFICULTY
+              value: "normal"
+            - name: MODE
+              value: "survival"
+            - name: MOTD
+              value: "TME Server"
+            - name: MAX_PLAYERS
+              value: "20"
+            - name: VIEW_DISTANCE
+              value: "14"
+            - name: LEVEL
+              value: "world"
+            - name: LEVEL_TYPE
+              value: "DEFAULT"
+            - name: PLAYER_IDLE_TIMEOUT
+              value: "5"
+            - name: ONLINE_MODE
+              value: "TRUE"
+            - name: PVP
+              value: "TRUE"
+            - name: ENABLE_COMMAND_BLOCK
+              value: "TRUE"
+            # Preserve in-game-managed whitelist.json / ops.json on the PVC
+            # (matches the prior chart's existingWhitelistFile/existingOpsFile: SKIP).
+            - name: EXISTING_WHITELIST_FILE
+              value: "SKIP"
+            - name: EXISTING_OPS_FILE
+              value: "SKIP"
+            - name: MEMORY
+              value: "6G"
+            # lazymc proxies on 25565; the JVM must listen elsewhere, bound to localhost.
+            - name: SERVER_PORT
+              value: "25566"
+            - name: SERVER_HOST
+              value: "127.0.0.1"
+            - name: ENABLE_RCON
+              value: "TRUE"
+            - name: RCON_PASSWORD
+              value: "minecraft"
+            - name: RCON_PORT
+              value: "25575"
+          ports:
+            - name: minecraft
+              containerPort: 25565
+              hostPort: 25565
+              protocol: TCP
+            - name: rcon
+              containerPort: 25575
+              hostPort: 25575
+              protocol: TCP
+          resources:
+            requests:
+              # Low requests so the cluster scheduler reclaims headroom while idle.
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 7Gi
+              cpu: 3500m
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: lazymc-bin
+              mountPath: /lazymc
+              readOnly: true
+            - name: lazymc-config
+              mountPath: /etc/lazymc
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: minecraft-pvc
+        - name: lazymc-bin
+          emptyDir: {}
+        - name: lazymc-config
+          configMap:
+            name: lazymc-config
+        - name: tmp
+          emptyDir: {}

@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lazymc-config
+  namespace: minecraft
+data:
+  lazymc.toml: |
+    # ref: https://github.com/timvisee/lazymc/blob/master/res/lazymc.toml
+
+    [public]
+    address = "0.0.0.0:25565"
+    # Bump these to match the version itzg pulls; update when the server upgrades.
+    version = "1.21.4"
+    protocol = 769
+
+    [server]
+    address = "127.0.0.1:25566"
+    directory = "/data"
+    command = "/start"
+    freeze_process = false
+    wake_on_crash = true
+    wake_on_start = false
+    block_banned_ips = false
+    drop_banned_ips = false
+    forge = false
+
+    [time]
+    # Stop the server after this many seconds with no players online.
+    sleep_after = 600
+    # Give the JVM up to this long to come up before reporting a failed start.
+    minimum_online_time = 60
+
+    [motd]
+    sleeping = "💤 Server sleeping — join to wake it!"
+    starting = "🚀 Server is starting..."
+    stopping = "Server is stopping..."
+    from_server = false
+
+    [join]
+    methods = ["hold", "kick"]
+
+    [join.kick]
+    starting = "Server is starting... give it a minute and reconnect."
+    stopping = "Server is stopping. Try again shortly."
+
+    [join.hold]
+    timeout = 30
+
+    [advanced]
+    rewrite_server_properties = true
+
+    [config]
+    version = "0.2.11"
