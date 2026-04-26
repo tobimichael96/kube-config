@@ -34,6 +34,12 @@ spec:
     service:
       main:
         controller: main
+        type: LoadBalancer
+        # Share Traefik's MetalLB IP — port 1883 doesn't collide with 80/443.
+        # externalTrafficPolicy must match Traefik's (Local) for MetalLB to allow sharing.
+        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/allow-shared-ip: shared-lb
         ports:
           other:
             port: 1883
