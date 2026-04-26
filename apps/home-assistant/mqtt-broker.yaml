@@ -36,8 +36,10 @@ spec:
         controller: main
         type: LoadBalancer
         # Share Traefik's MetalLB IP — port 1883 doesn't collide with 80/443.
-        # externalTrafficPolicy must match Traefik's (Local) for MetalLB to allow sharing.
-        externalTrafficPolicy: Local
+        # ETP=Cluster (not Local) because shared-IP services with Local ETP
+        # must have identical pod selectors, which we don't share with Traefik.
+        # Trade-off: broker sees the node IP instead of the real client IP.
+        externalTrafficPolicy: Cluster
         annotations:
           metallb.io/allow-shared-ip: shared-lb
         ports:
