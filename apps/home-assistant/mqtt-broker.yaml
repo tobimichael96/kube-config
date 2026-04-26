@@ -18,6 +18,9 @@ spec:
   releaseName: mosquitto
   targetNamespace: home-assistant
   values:
+    defaultPodOptions:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
     controllers:
       main:
         strategy: Recreate
@@ -34,14 +37,6 @@ spec:
     service:
       main:
         controller: main
-        type: LoadBalancer
-        # Share Traefik's MetalLB IP — port 1883 doesn't collide with 80/443.
-        # ETP=Cluster (not Local) because shared-IP services with Local ETP
-        # must have identical pod selectors, which we don't share with Traefik.
-        # Trade-off: broker sees the node IP instead of the real client IP.
-        externalTrafficPolicy: Cluster
-        annotations:
-          metallb.io/allow-shared-ip: shared-lb
         ports:
           other:
             port: 1883
