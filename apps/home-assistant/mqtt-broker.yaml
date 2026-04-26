@@ -39,7 +39,7 @@ spec:
         # externalTrafficPolicy must match Traefik's (Local) for MetalLB to allow sharing.
         externalTrafficPolicy: Local
         annotations:
-          metallb.universe.tf/allow-shared-ip: shared-lb
+          metallb.io/allow-shared-ip: shared-lb
         ports:
           other:
             port: 1883

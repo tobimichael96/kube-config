@@ -10,7 +10,7 @@ spec:
       annotations:
         # Allow MetalLB to share this IP with other services that opt in
         # using the same key (currently: mosquitto on 1883).
-        metallb.universe.tf/allow-shared-ip: shared-lb
+        metallb.io/allow-shared-ip: shared-lb
       spec:
         externalTrafficPolicy: Local
     
