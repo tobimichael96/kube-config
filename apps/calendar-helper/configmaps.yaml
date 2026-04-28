@@ -17,7 +17,7 @@ data:
     API_PREFIX: ENC[AES256_GCM,data:GC+I9Q==,iv:YbNfHxuU2gwx+GzaFvIJiadFWlJX5BN4Edm/1x9gdkY=,tag:tGNzT5aS0OXcj0uOKtWabw==,type:str]
     #ENC[AES256_GCM,data:lTzMcF+TrbnB+ozme+sJhS8=,iv:zxZuvgO6y6d4nwo8jYQGJGjBW3ZV9eWjLrgc/4baisI=,tag:rMZ5uCx3lx4RKWEf6jWApw==,type:comment]
     RESEND_API_KEY: ENC[AES256_GCM,data:dTga42lKwL+r82LixRhr5VZowd8CUqpjkOjFMAdIE3OL21zy,iv:pYA0nCAwonpeTmbU+EJBZ1jSMVmJiOi7YrdeHsqVoB8=,tag:ZAcS1Qzl+cdU7wxH0r1dIw==,type:str]
-    EMAIL_FROM: ENC[AES256_GCM,data:BnSuS0iBmmMUGGPgaubMHXpL8pHbYL8FF96AETTz,iv:7lTtYFC91GOh8SsxD7DJ9OXYjNw4j6clfqib6/w0/Co=,tag:DYUrFOK+mzIIjgNY0P9uUg==,type:str]
+    EMAIL_FROM: ENC[AES256_GCM,data:TXyDOSX8HPaFJy/fbjqQHcZV1MyT57cnAg==,iv:5CYNgwLcXugKy8SxZhbjRV+Kl8BWHgRzUoUztKaY5sU=,tag:SPd/Oo8/9n6GLfeR/Nvk2A==,type:str]
 sops:
     age:
         - recipient: age1099kpzqp5v429mcyekxxnnyfkyuqxgq3esxvamc0kv7tf7nh9g9qymcpmx
@@ -29,7 +29,7 @@ sops:
             NG1ubWJmTThTaHUzNENlYU1VazNMQmsKq7577x6259MKs7oraOIcld1P9ZRICkUz
             h3tlFlC5ILsPlxP/ZcNW3Y9pPF9avs5E4L8Dx8ZO0OO6D04WAPh3+A==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-04-28T20:47:42Z"
-    mac: ENC[AES256_GCM,data:7jE7kPrGI6zpxiS79ERGBH//+C1I/BndtiXiJ1iR7riQDDai7gjF/5720v/hgIus16GTv4qmsubXobF5EKZFh3p2V0I0Q5T6g4JBsQ4lol3yDZn5dZyxTh/srXOEbOmFOX36SZXnPZKjKfPt0Aor/hGHVt43QgJbMnwCqNY6J5c=,iv:HeJL91FXMbdtQ/wqzC7VlZz9ZcmjfD86q3aUhZGP+mE=,tag:ppKYOublLCghtZl9kDeCQg==,type:str]
+    lastmodified: "2026-04-28T21:15:38Z"
+    mac: ENC[AES256_GCM,data:bkPvBAhMA0BYouau4m48GU4KAa+a0Z6cXcGFk4rW0w819hiEmvzhD6Ffkcb/K54uEucqDl0N+fKpIBeq2c1I4e4or3arz79gyLSzo/qkD4GfDpeV6TU1x6gxgngaKW0eKsLhYE0Dd8A6cIymXTLKexGkbuWKKmk5NXTopMs3ggM=,iv:CvbhZKjdMKcD5j/TZ2wQljAUfmYSezo9vTERxWX7qu0=,tag:C+74b+q4xBR1E6JjPAEN9w==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.12.2
