@@ -69,6 +69,7 @@ spec:
               tag: latest
             env:
               TZ: Europe/Berlin
+              PUBLIC_BASE_URL: https://calendar.tmem.de
             envFrom:
               - configMapRef:
                   name: default
