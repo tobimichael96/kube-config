@@ -120,7 +120,7 @@ spec:
           redis:
             image:
               repository: redis
-              tag: 7-alpine
+              tag: 8-alpine
             args: ["--save", "", "--appendonly", "no"]
             resources:
               requests:
