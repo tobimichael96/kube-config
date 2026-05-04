@@ -70,6 +70,7 @@ spec:
             env:
               TZ: Europe/Berlin
               PUBLIC_BASE_URL: https://calendar.tmem.de
+              REDIS_URL: redis://calendar-helper-redis:6379/0
             envFrom:
               - configMapRef:
                   name: default
@@ -114,6 +115,29 @@ spec:
                   periodSeconds: 5
                   timeoutSeconds: 5
                   failureThreshold: 10
+      redis:
+        containers:
+          redis:
+            image:
+              repository: redis
+              tag: 7-alpine
+            args: ["--save", "", "--appendonly", "no"]
+            resources:
+              requests:
+                cpu: 5m
+                memory: 32Mi
+              limits:
+                cpu: 50m
+                memory: 64Mi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["redis-cli", "ping"]
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
     service:
       frontend:
         controller: main
@@ -125,6 +149,11 @@ spec:
         ports:
           http:
             port: 8000
+      redis:
+        controller: redis
+        ports:
+          redis:
+            port: 6379
     ingress:
       frontend:
         className: "traefik"
