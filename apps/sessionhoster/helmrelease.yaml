@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app calendar-helper
+  name: &app sessionhoster
   namespace: *app
 spec:
   chart:
@@ -70,7 +70,7 @@ spec:
             env:
               TZ: Europe/Berlin
               PUBLIC_BASE_URL: https://sessionhoster.com
-              REDIS_URL: redis://calendar-helper-redis:6379/0
+              REDIS_URL: redis://sessionhoster-redis:6379/0
             envFrom:
               - configMapRef:
                   name: default
@@ -178,10 +178,10 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: calendar-tls
+            secretName: sessionhoster-tls
     persistence:
       data:
-        existingClaim: calendar-helper-pvc
+        existingClaim: sessionhoster-pvc
         advancedMounts:
           main:
             backend:
