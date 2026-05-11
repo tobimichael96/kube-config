@@ -74,6 +74,8 @@ spec:
             envFrom:
               - configMapRef:
                   name: default
+              - secretRef:
+                  name: default
             resources:
               requests:
                 cpu: 5m

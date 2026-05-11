@@ -4,5 +4,6 @@ resources:
 - namespace.yaml
 - storage.yaml
 - configmaps.yaml
+- secrets.yaml
 - ghcr-pull-secret.yaml
 - helmrelease.yaml
