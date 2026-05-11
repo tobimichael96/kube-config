@@ -69,7 +69,7 @@ spec:
               tag: latest
             env:
               TZ: Europe/Berlin
-              PUBLIC_BASE_URL: https://calendar.tmem.de
+              PUBLIC_BASE_URL: https://sessionhoster.com
               REDIS_URL: redis://calendar-helper-redis:6379/0
             envFrom:
               - configMapRef:
@@ -160,11 +160,8 @@ spec:
           traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
           nginx.org/websocket-services: "frontend"
-#          traefik.ingress.kubernetes.io/auth-response-headers: Authorization
-#          traefik.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-#          traefik.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
         hosts:
-          - host: &host calendar.tmem.de
+          - host: &host sessionhoster.com
             paths:
               - path: /api/
                 pathType: Prefix
