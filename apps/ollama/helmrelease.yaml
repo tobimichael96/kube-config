@@ -46,7 +46,7 @@ spec:
                 memory: 8Gi
               limits:
                 cpu: 4000m
-                memory: 14Gi
+                memory: 18Gi
                 nvidia.com/gpu: 1
             probes:
               liveness:
