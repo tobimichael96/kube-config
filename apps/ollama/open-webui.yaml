@@ -1,0 +1,97 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: open-webui
+  namespace: ollama
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 4.6.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: open-webui
+  targetNamespace: ollama
+  values:
+    controllers:
+      open-webui:
+        strategy: "Recreate"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/open-webui/open-webui
+              tag: 0.5.20
+            env:
+              TZ: Europe/Berlin
+              OLLAMA_BASE_URL: "http://ollama:11434"
+              ENABLE_OPENAI_API: "false"
+              WEBUI_URL: "https://openwebui.internal.tmem.de"
+              ENABLE_SIGNUP: "false"
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                cpu: 1000m
+                memory: 2Gi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8080
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 6
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8080
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+              startup:
+                enabled: false
+    service:
+      app:
+        controller: open-webui
+        ports:
+          http:
+            port: 8080
+    ingress:
+      app:
+        enabled: true
+        className: "traefik"
+        annotations:
+          kubernetes.io/tls-acme: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+          traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
+        hosts:
+          - host: &host openwebui.internal.tmem.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: open-webui-tls
+    persistence:
+      data:
+        enabled: true
+        existingClaim: open-webui-data-pvc
+        globalMounts:
+          - path: /app/backend/data
