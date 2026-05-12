@@ -31,7 +31,7 @@ spec:
               OLLAMA_BASE_URL: "http://ollama:11434"
               ENABLE_OPENAI_API: "false"
               WEBUI_URL: "https://openwebui.internal.tmem.de"
-              ENABLE_SIGNUP: "true"
+              ENABLE_SIGNUP: "false"
             resources:
               requests:
                 cpu: 50m
