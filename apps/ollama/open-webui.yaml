@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: ghcr.io/open-webui/open-webui
-              tag: 0.5.20
+              tag: v0.9.5
             env:
               TZ: Europe/Berlin
               OLLAMA_BASE_URL: "http://ollama:11434"
