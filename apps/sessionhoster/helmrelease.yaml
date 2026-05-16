@@ -71,6 +71,12 @@ spec:
               TZ: Europe/Berlin
               PUBLIC_BASE_URL: https://app.sessionhoster.com
               REDIS_URL: redis://sessionhoster-redis:6379/0
+              POSTGRES_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: default
+                    key: POSTGRES_PASSWORD
+              DATABASE_URL: "postgresql://calendar:$(POSTGRES_PASSWORD)@sessionhoster-postgres:5432/calendar"
             envFrom:
               - configMapRef:
                   name: default
@@ -138,6 +144,44 @@ spec:
                     command: ["redis-cli", "ping"]
                   initialDelaySeconds: 5
                   periodSeconds: 10
+      postgres:
+        containers:
+          postgres:
+            image:
+              repository: postgres
+              tag: 18-alpine
+            env:
+              POSTGRES_DB: calendar
+              POSTGRES_USER: calendar
+              POSTGRES_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: default
+                    key: POSTGRES_PASSWORD
+            resources:
+              requests:
+                cpu: 20m
+                memory: 128Mi
+              limits:
+                cpu: 200m
+                memory: 512Mi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["pg_isready", "-U", "calendar"]
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["pg_isready", "-U", "calendar"]
+                  initialDelaySeconds: 5
+                  periodSeconds: 5
     service:
       frontend:
         controller: main
@@ -154,6 +198,11 @@ spec:
         ports:
           redis:
             port: 6379
+      postgres:
+        controller: postgres
+        ports:
+          postgres:
+            port: 5432
     ingress:
       frontend:
         className: "traefik"
@@ -180,9 +229,9 @@ spec:
               - *host
             secretName: sessionhoster-tls
     persistence:
-      data:
-        existingClaim: sessionhoster-pvc
+      postgres-data:
+        existingClaim: sessionhoster-postgres-pvc
         advancedMounts:
-          main:
-            backend:
-              - path: /data
+          postgres:
+            postgres:
+              - path: /var/lib/postgresql/data
