@@ -69,7 +69,7 @@ spec:
               tag: latest
             env:
               TZ: Europe/Berlin
-              PUBLIC_BASE_URL: https://sessionhoster.com
+              PUBLIC_BASE_URL: https://app.sessionhoster.com
               REDIS_URL: redis://sessionhoster-redis:6379/0
             envFrom:
               - configMapRef:
@@ -163,7 +163,7 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt"
           nginx.org/websocket-services: "frontend"
         hosts:
-          - host: &host sessionhoster.com
+          - host: &host app.sessionhoster.com
             paths:
               - path: /api/
                 pathType: Prefix
