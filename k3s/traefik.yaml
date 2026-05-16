@@ -20,6 +20,11 @@ spec:
     
     # Performance tuning
     additionalArguments:
+      # Redirect HTTP to HTTPS
+      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entryPoints.web.http.redirections.entryPoint.permanent=true"
+
       # Trust forwarded headers from local network only
       - "--entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,192.168.178.0/24,10.0.0.0/8"
       
