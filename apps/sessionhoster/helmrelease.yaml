@@ -22,7 +22,7 @@ spec:
       imagePullSecrets:
         - name: ghcr-pull-secret
     controllers:
-      main:
+      frontend:
         strategy: "RollingUpdate"
         annotations:
           reloader.stakater.com/auto: "true"
@@ -63,6 +63,11 @@ spec:
                   periodSeconds: 10
                   timeoutSeconds: 3
                   failureThreshold: 2
+      backend:
+        strategy: "RollingUpdate"
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
           backend:
             image:
               repository: ghcr.io/tobimichael96/calendar-helper-backend
@@ -184,12 +189,12 @@ spec:
                   periodSeconds: 5
     service:
       frontend:
-        controller: main
+        controller: frontend
         ports:
           http:
             port: 3000
       backend:
-        controller: main
+        controller: backend
         ports:
           http:
             port: 8000
