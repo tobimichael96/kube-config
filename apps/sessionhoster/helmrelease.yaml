@@ -33,6 +33,7 @@ spec:
               tag: latest
             env:
               TZ: Europe/Berlin
+              BACKEND_URL: http://sessionhoster-backend:8000
             resources:
               requests:
                 cpu: 5m
