@@ -9,7 +9,7 @@ data:
     #password_file /mosquitto/data/passwd
 
     # Persistent data store
-    persistence false
+    persistence true
     persistence_location /mosquitto/data
 
     listener 1883
