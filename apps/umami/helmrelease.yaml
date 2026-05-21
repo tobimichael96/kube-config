@@ -142,4 +142,4 @@ spec:
         advancedMounts:
           database:
             postgres:
-              - path: /var/lib/postgresql/data
+              - path: /var/lib/postgresql
