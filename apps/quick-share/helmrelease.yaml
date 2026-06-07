@@ -28,20 +28,6 @@ spec:
             limits:
               cpu: 50m
               memory: 64Mi
-      tolerations:
-        - effect: NoSchedule
-          key: cloud
-          operator: Exists
-      affinity:
-        nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
-                matchExpressions:
-                  - key: cloud
-                    operator: In
-                    values:
-                      - "true"
 ---
 apiVersion: v1
 kind: Service

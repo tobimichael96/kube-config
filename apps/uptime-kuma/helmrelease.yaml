@@ -18,13 +18,6 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-    defaultPodOptions:
-      nodeSelector:
-        cloud: "true"
-      tolerations:
-        - effect: NoSchedule
-          key: cloud
-          operator: Exists
     controllers:
       main:
         strategy: "RollingUpdate"
