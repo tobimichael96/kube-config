@@ -70,3 +70,11 @@ spec:
         existingClaim: satisfactory-pvc
         globalMounts:
           - path: /config
+      tls:
+        type: secret
+        name: satisfactory-tls
+        globalMounts:
+          - path: /config/gamefiles/FactoryGame/Certificates/cert_chain.pem
+            subPath: tls.crt
+          - path: /config/gamefiles/FactoryGame/Certificates/private_key.pem
+            subPath: tls.key
