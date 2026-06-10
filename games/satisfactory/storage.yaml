@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: satisfactory-pv
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/internal/satisfactory
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homeserver
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: satisfactory-pvc
+  namespace: satisfactory
+spec:
+  storageClassName: local-storage
+  volumeName: satisfactory-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
