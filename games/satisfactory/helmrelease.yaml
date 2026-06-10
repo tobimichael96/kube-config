@@ -26,6 +26,15 @@ spec:
         strategy: "Recreate"
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          copy-certs:
+            image:
+              repository: busybox
+              tag: latest
+            command:
+              - sh
+              - -c
+              - "cp /tls-secret/tls.crt /certs/cert_chain.pem && cp /tls-secret/tls.key /certs/private_key.pem && chown 1000:1000 /certs/cert_chain.pem /certs/private_key.pem"
         containers:
           app:
             image:
@@ -70,11 +79,18 @@ spec:
         existingClaim: satisfactory-pvc
         globalMounts:
           - path: /config
-      tls:
+      tls-secret:
         type: secret
         name: satisfactory-tls
-        globalMounts:
-          - path: /config/gamefiles/FactoryGame/Certificates/cert_chain.pem
-            subPath: tls.crt
-          - path: /config/gamefiles/FactoryGame/Certificates/private_key.pem
-            subPath: tls.key
+        advancedMounts:
+          main:
+            copy-certs:
+              - path: /tls-secret
+      certs:
+        type: emptyDir
+        advancedMounts:
+          main:
+            copy-certs:
+              - path: /certs
+            app:
+              - path: /config/gamefiles/FactoryGame/Certificates
