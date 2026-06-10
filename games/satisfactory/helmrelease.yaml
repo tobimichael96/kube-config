@@ -36,6 +36,7 @@ spec:
               PUID: 1000
               PGID: 1000
               STEAMBETA: "false"
+              AUTOPAUSE: "true"
             resources:
               requests:
                 memory: 4Gi
