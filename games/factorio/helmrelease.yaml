@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: "factoriotools/factorio"
-              tag: "2.1.8"
+              tag: "2.1.9"
             env:
               TZ: Europe/Berlin
               DLC_SPACE_AGE: "false"
