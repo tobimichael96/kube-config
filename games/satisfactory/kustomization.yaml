@@ -5,3 +5,4 @@ resources:
 - storage.yaml
 - certificate.yaml
 - helmrelease.yaml
+- restart-cronjob.yaml
