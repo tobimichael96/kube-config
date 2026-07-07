@@ -18,6 +18,10 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    global:
+      # We manage the ServiceAccount ourselves (rbac.yaml) and reference it by name
+      # below; don't let the chart mint a second one with the same (release) name.
+      createDefaultServiceAccount: false
     controllers:
       main:
         # Single writer to the SQLite file on the PVC.
@@ -25,7 +29,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         serviceAccount:
-          # Uses the ServiceAccount + ClusterRoleBinding from rbac.yaml.
+          # Attach the ServiceAccount from rbac.yaml (bound cluster-wide by its CRB).
           name: *app
         containers:
           main:
@@ -69,6 +73,8 @@ spec:
               startup:
                 enabled: false
     defaultPodOptions:
+      # The chart defaults this to false; the bot needs the SA token to reach the API.
+      automountServiceAccountToken: true
       imagePullSecrets:
         # Pull the private GHCR image (see ghcr-pull-secret.yaml).
         - name: ghcr-pull-secret
