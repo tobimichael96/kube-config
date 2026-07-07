@@ -18,10 +18,6 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-    global:
-      # We manage the ServiceAccount ourselves (rbac.yaml) and reference it by name
-      # below; don't let the chart mint a second one with the same (release) name.
-      createDefaultServiceAccount: false
     controllers:
       main:
         # Single writer to the SQLite file on the PVC.
@@ -29,7 +25,8 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         serviceAccount:
-          # Attach the ServiceAccount from rbac.yaml (bound cluster-wide by its CRB).
+          # Attach the chart-created default ServiceAccount (named after the release);
+          # rbac.yaml binds it cluster-wide.
           name: *app
         containers:
           main:
@@ -93,3 +90,10 @@ spec:
           main:
             main:
               - path: /data
+      # Writable scratch dir (root filesystem is read-only).
+      tmp:
+        type: emptyDir
+        advancedMounts:
+          main:
+            main:
+              - path: /tmp

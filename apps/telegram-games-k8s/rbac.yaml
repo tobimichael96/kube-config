@@ -1,9 +1,7 @@
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: telegram-games-k8s
-  namespace: telegram-games-k8s
+# NOTE: The ServiceAccount itself is created by the app-template chart (its default
+# ServiceAccount is named after the release, i.e. telegram-games-k8s). We only define
+# the cluster-scoped RBAC here and bind it to that SA. Do not also declare the SA here,
+# or Helm and Flux fight over ownership and Helm prunes it.
 ---
 # Cluster-wide because game servers live in their own namespaces (minecraft,
 # satisfactory, ...). The bot lists managed workloads everywhere and triggers a
