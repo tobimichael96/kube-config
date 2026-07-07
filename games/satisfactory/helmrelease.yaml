@@ -23,6 +23,10 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
     controllers:
       main:
+        labels:
+          # Discoverable by the telegram-games-k8s bot.
+          games.telegram-bot/managed: "true"
+          games.telegram-bot/name: Satisfactory
         strategy: "Recreate"
         annotations:
           reloader.stakater.com/auto: "true"
