@@ -27,6 +27,8 @@ Cluster-wide RBAC is used on purpose: each game runs in its own namespace
    ```
    Replace the placeholder bot token and the bootstrap admin user IDs (the admins who
    approve access requests). Admins must start a chat with the bot to get notifications.
+   **Keep the values quoted** (e.g. `BOT_ADMINS: "13556577"`) — an unquoted number is
+   parsed as an int and rejected by the Secret's `stringData` (Flux dry-run fails).
 
 2. **Label the game servers** you want to manage. The bot only sees workloads carrying:
    ```yaml
