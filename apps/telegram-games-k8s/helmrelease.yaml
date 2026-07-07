@@ -1,0 +1,89 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app telegram-games-k8s
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    controllers:
+      main:
+        # Single writer to the SQLite file on the PVC.
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        serviceAccount:
+          # Uses the ServiceAccount + ClusterRoleBinding from rbac.yaml.
+          name: *app
+        containers:
+          main:
+            image:
+              repository: ghcr.io/tobimichael96/telegram-games-k8s
+              tag: latest
+              pullPolicy: Always
+            env:
+              TZ: Europe/Berlin
+              # Empty namespace = discover managed workloads in ALL namespaces.
+              K8S_NAMESPACE: ""
+              MANAGED_LABEL_SELECTOR: games.telegram-bot/managed=true
+              NAME_LABEL: games.telegram-bot/name
+              DB_PATH: /data/bot.db
+              LOG_LEVEL: info
+            envFrom:
+              # Provides TELEGRAM_BOT_TOKEN and BOT_ADMINS.
+              - secretRef:
+                  name: *app
+            resources:
+              requests:
+                cpu: 5m
+                memory: 32Mi
+              limits:
+                cpu: 100m
+                memory: 128Mi
+            securityContext:
+              runAsNonRoot: true
+              runAsUser: 65532
+              runAsGroup: 65532
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: ["ALL"]
+            # Long-polling bot with no listening port: disable probes.
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+    defaultPodOptions:
+      imagePullSecrets:
+        # Pull the private GHCR image (see ghcr-pull-secret.yaml).
+        - name: ghcr-pull-secret
+      securityContext:
+        # Ensure the mounted PVC is writable by the non-root user.
+        fsGroup: 65532
+        fsGroupChangePolicy: OnRootMismatch
+    # No inbound traffic needed.
+    service:
+      main:
+        enabled: false
+    persistence:
+      data:
+        existingClaim: telegram-games-k8s-data-pvc
+        advancedMounts:
+          main:
+            main:
+              - path: /data
