@@ -60,7 +60,7 @@ spec:
       app:
         className: traefik
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-http
+          cert-manager.io/cluster-issuer: letsencrypt
         hosts:
           - host: tobiasmichael.de
             paths:

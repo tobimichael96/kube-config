@@ -15,6 +15,10 @@ spec:
     # Enable the HTTP-01 challenge provider
     solvers:
       - dns01:
+          # Follow CNAMEs so _acme-challenge records for domains not hosted on
+          # DigitalOcean (e.g. tobiasmichael.de, tm28.de, selinaeffner.de) can be
+          # delegated into the DO-hosted tmem.de zone for validation.
+          cnameStrategy: Follow
           digitalocean:
             tokenSecretRef:
               name: digitalocean-dns
