@@ -4,8 +4,8 @@
 # or Helm and Flux fight over ownership and Helm prunes it.
 ---
 # Cluster-wide because game servers live in their own namespaces (minecraft,
-# satisfactory, ...). The bot lists managed workloads everywhere and triggers a
-# rollout restart by patching the pod template.
+# satisfactory, ...). The bot lists managed workloads everywhere, starts/stops them
+# (patch spec.replicas) and triggers rollout restarts (patch the pod template).
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
