@@ -1,0 +1,67 @@
+---
+# Nightly scale-to-zero to free the 4-8Gi memory reservation while nobody plays.
+# AUTOPAUSE already parks CPU when idle, but the pod keeps its RAM request; scaling
+# the Deployment to 0 releases it. There is deliberately NO scale-up CronJob: the
+# server is started on demand via the telegram-games-k8s bot (▶️ Start button).
+#
+# Patching spec.replicas directly needs only the "patch" verb (kubectl scale would
+# need the deployments/scale subresource). Flux does not revert this: drift detection
+# is opt-in and not enabled, so a manual replicas change persists across HelmRelease
+# reconciles until the release is next upgraded.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: satisfactory-scale
+  namespace: satisfactory
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: satisfactory-scale
+  namespace: satisfactory
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: satisfactory-scale
+  namespace: satisfactory
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: satisfactory-scale
+subjects:
+  - kind: ServiceAccount
+    name: satisfactory-scale
+    namespace: satisfactory
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: satisfactory-scale-down
+  namespace: satisfactory
+spec:
+  schedule: "0 2 * * *"
+  timeZone: Europe/Berlin
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          serviceAccountName: satisfactory-scale
+          restartPolicy: OnFailure
+          containers:
+            - name: kubectl
+              image: registry.k8s.io/kubectl:v1.36.3
+              args:
+                - patch
+                - deployment/satisfactory
+                - --type=merge
+                - -p
+                - '{"spec":{"replicas":0}}'
