@@ -32,9 +32,12 @@ spec:
       - "--serversTransport.maxIdleConnsPerHost=200"
       
       # Timeouts
-      - "--entryPoints.websecure.transport.respondingTimeouts.readTimeout=300s"
-      - "--entryPoints.websecure.transport.respondingTimeouts.writeTimeout=300s"
-      - "--entryPoints.websecure.transport.respondingTimeouts.idleTimeout=180s"
+      # writeTimeout bounds the total time spent writing a single response, so any
+      # finite value kills long-lived streams (IPTV/MPEG-TS, SSE) at that mark.
+      # 300s here was cutting Dispatcharr streams at exactly 5 minutes.
+      - "--entryPoints.websecure.transport.respondingTimeouts.readTimeout=0"
+      - "--entryPoints.websecure.transport.respondingTimeouts.writeTimeout=0"
+      - "--entryPoints.websecure.transport.respondingTimeouts.idleTimeout=600s"
       
       # Disable unnecessary features
       - "--global.checkNewVersion=false"
