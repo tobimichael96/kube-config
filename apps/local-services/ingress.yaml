@@ -86,7 +86,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: flightradar
+  name: adsb
   namespace: local-services
   annotations:
     kubernetes.io/tls-acme: "true"
@@ -97,8 +97,8 @@ spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - &host flightradar.internal.tmem.de
-      secretName: flightradar-tls
+        - &host adsb.internal.tmem.de
+      secretName: adsb-tls
   rules:
     - host: *host
       http:
@@ -107,6 +107,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: flightradar
+                name: adsb
                 port:
                   number: 80
