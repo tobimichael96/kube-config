@@ -252,7 +252,6 @@ spec:
           immich:
             app:
               - path: /mnt/nextcloud
-                readOnly: true
       model-cache:
         existingClaim: immich-model-cache-pvc
         advancedMounts:

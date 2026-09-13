@@ -1,0 +1,79 @@
+---
+# Immich writes into the Nextcloud data directory (duplicate cleanup,
+# deletions). Nextcloud keeps its own file index, so anything changed behind
+# its back stays visible as a ghost entry until occ files:scan runs.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nextcloud-files-scan
+  namespace: nextcloud
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: nextcloud-files-scan
+  namespace: nextcloud
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: nextcloud-files-scan
+  namespace: nextcloud
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: nextcloud-files-scan
+subjects:
+  - kind: ServiceAccount
+    name: nextcloud-files-scan
+    namespace: nextcloud
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nextcloud-files-scan
+  namespace: nextcloud
+spec:
+  schedule: "30 4 * * *"
+  timeZone: "Europe/Berlin"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: nextcloud-files-scan
+          containers:
+            - name: files-scan
+              image: docker.io/rancher/kubectl:v1.34.1
+              command:
+                - sh
+                - -c
+                - |
+                  set -eu
+                  for path in "/TobiMichael/files/Pictures" "/SelKle/files/Photos"; do
+                    echo "scanning $path"
+                    kubectl exec deploy/nextcloud -c nextcloud -- \
+                      su -s /bin/sh www-data -c \
+                      "php /var/www/html/occ files:scan --path=\"$path\""
+                  done
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 64Mi
+                limits:
+                  cpu: 500m
+                  memory: 256Mi

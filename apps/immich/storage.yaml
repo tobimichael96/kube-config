@@ -110,9 +110,11 @@ spec:
     requests:
       storage: 20Gi
 ---
-# Nextcloud user data, mounted read-only so Immich can index the existing
-# photos as an external library. Separate PV on the same host path as
-# nextcloud-pv, since a PV can only ever be bound to a single claim.
+# Nextcloud user data, mounted read-write so Immich can index the existing
+# photos as an external library and act on them (duplicate cleanup,
+# deletions). Separate PV on the same host path as nextcloud-pv, since a PV
+# can only ever be bound to a single claim. Deletions made here are invisible
+# to Nextcloud's file index until the nightly occ files:scan CronJob runs.
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -122,7 +124,7 @@ spec:
     storage: 150Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadOnlyMany
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
@@ -145,7 +147,7 @@ spec:
   storageClassName: local-storage
   volumeName: immich-nextcloud-data-pv
   accessModes:
-    - ReadOnlyMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 150Gi
