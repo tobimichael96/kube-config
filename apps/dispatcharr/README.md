@@ -5,9 +5,25 @@ through its web UI, not in this repo. The profile below is documented here as a
 reference and a backup — it is not the source of truth, so update it by hand
 when it changes in the UI.
 
+The one part that *is* source-controlled is the encoder-selection wrapper in
+[`configmaps.yaml`](configmaps.yaml), mounted at `/scripts/ffmpeg-venc.sh`. The
+profile invokes it instead of calling ffmpeg directly.
+
 ## Stream profile
 
+Profile "ffmpeg alternative", the default for all channels
+(`stream_settings.default_stream_profile`).
+
+**Command** field:
+
 ```
+/bin/sh
+```
+
+**Parameters** field:
+
+```
+/scripts/ffmpeg-venc.sh
 -hide_banner -loglevel warning -stats -stats_period 10
 -fflags +genpts+discardcorrupt
 -reconnect 1 -reconnect_streamed 1 -reconnect_at_eof 1
@@ -15,8 +31,7 @@ when it changes in the UI.
 -reconnect_delay_max 30 -rw_timeout 5000000
 -i {streamUrl}
 -map 0:v:0 -map 0:a:0 -sn -dn -ignore_unknown
--c:v h264_nvenc -preset p4 -tune hq -rc vbr -cq 21 -b:v 4M -maxrate 8M -bufsize 16M
--g 50 -forced-idr 1
+@VENC@
 -c:a aac -b:a 128k -ac 2 -ar 48000
 -af aresample=async=1000:first_pts=0
 -max_muxing_queue_size 2048
@@ -26,8 +41,42 @@ when it changes in the UI.
 Single line, for pasting into the UI:
 
 ```
--hide_banner -loglevel warning -stats -stats_period 10 -fflags +genpts+discardcorrupt -reconnect 1 -reconnect_streamed 1 -reconnect_at_eof 1 -reconnect_on_network_error 1 -reconnect_on_http_error 4xx,5xx -reconnect_delay_max 30 -rw_timeout 5000000 -i {streamUrl} -map 0:v:0 -map 0:a:0 -sn -dn -ignore_unknown -c:v h264_nvenc -preset p4 -tune hq -rc vbr -cq 21 -b:v 4M -maxrate 8M -bufsize 16M -g 50 -forced-idr 1 -c:a aac -b:a 128k -ac 2 -ar 48000 -af aresample=async=1000:first_pts=0 -max_muxing_queue_size 2048 -f mpegts pipe:1
+/scripts/ffmpeg-venc.sh -hide_banner -loglevel warning -stats -stats_period 10 -fflags +genpts+discardcorrupt -reconnect 1 -reconnect_streamed 1 -reconnect_at_eof 1 -reconnect_on_network_error 1 -reconnect_on_http_error 4xx,5xx -reconnect_delay_max 30 -rw_timeout 5000000 -i {streamUrl} -map 0:v:0 -map 0:a:0 -sn -dn -ignore_unknown @VENC@ -c:a aac -b:a 128k -ac 2 -ar 48000 -af aresample=async=1000:first_pts=0 -max_muxing_queue_size 2048 -f mpegts pipe:1
 ```
+
+Dispatcharr builds the process as `[command] + shlex.split(parameters)` and
+execs it without a shell (`core/models.py`, `StreamProfile.build_command`), so
+`/bin/sh` is the command and the script path is simply the first argument. No
+executable bit is needed on the mounted file, and `@VENC@` survives the split
+as its own argument.
+
+## Encoder selection
+
+There are no `-c:v` flags in the profile. The wrapper substitutes the `@VENC@`
+token with one of two encoder argument sets:
+
+| Path | Arguments |
+| --- | --- |
+| GPU | `-c:v h264_nvenc -preset p4 -tune hq -rc vbr -cq 21 -b:v 4M -maxrate 8M -bufsize 16M -g 50 -forced-idr 1 -profile:v high -pix_fmt yuv420p` |
+| CPU | `-c:v libx264 -preset veryfast -crf 23 -maxrate 4M -bufsize 8M -g 50 -keyint_min 50 -sc_threshold 0 -profile:v high -pix_fmt yuv420p -threads 3` |
+
+It picks between them by attempting a one-frame throwaway NVENC encode before
+starting the real one. That probe costs about 0.5s on every channel start.
+
+The reason is that the GPU is a single 6GB card shared with `immich-ml`,
+`jellyfin` and `unmanic`, with no VRAM partitioning — whichever pod allocates
+first wins. ffmpeg cannot fall back between encoders on its own, so without the
+wrapper a full card meant `h264_nvenc` failed to open with
+`CUDA_ERROR_OUT_OF_MEMORY` and Dispatcharr tore the channel down about three
+seconds after the client connected, having exhausted its stream retries. A
+software transcode at reduced bitrate is a much better outcome than a dead
+channel.
+
+The probe result is deliberately not cached. A cached "GPU is free" verdict that
+had gone stale would reintroduce exactly the hard failure the wrapper exists to
+prevent. Free VRAM as reported by `nvidia-smi` is not a usable substitute for
+the probe either, since it does not account for the encoder context NVENC needs
+on top of the frame buffers.
 
 ## Why these flags
 
@@ -39,6 +88,7 @@ tolerance.
 
 | Flag | Reason |
 | --- | --- |
+| `-profile:v high -pix_fmt yuv420p` | Without them the encoder inherits the input's format. A 4:4:4 or RGB upstream then yields `High 4:4:4 Predictive`, which no Android TV hardware decoder accepts — it fails as a black screen with working audio while desktop software players are fine, so it presents as a client bug rather than a profile one. Set on both encoder paths. |
 | `-rw_timeout 5000000` | Caps a stalled upstream read at 5s before the reconnect logic starts. At 15s the freeze was long enough to be obvious on screen. |
 | `+genpts` | IPTV feeds routinely have gapped or missing PTS. Without it the mpegts muxer forwards the discontinuity and clients render it as a freeze. |
 | `+discardcorrupt` | Drops packets flagged corrupt. Cuts both ways: a dropped reference frame freezes the picture until the next IDR, about 2s at `-g 50` on a 25fps source. Removing it gives brief macroblock artifacts instead. |
@@ -47,7 +97,31 @@ tolerance.
 | no `-flags low_delay` | Decoder-side latency cut that also removes frame-reorder tolerance. |
 | no `-muxdelay 0 -muxpreload 0` | Leaves the mpegts muxer its ~0.7s cushion. This is the jitter shock absorber; zeroing it makes every upstream hiccup immediately visible. |
 | `-stats -stats_period 10` | Throughput line every 10s. At a freeze this shows whether ffmpeg's speed dropped (upstream or encoder) or held steady (client side or Dispatcharr buffering). |
+| `-threads 3` (CPU path only) | Matches the container's 3000m CPU limit, so one software transcode cannot starve the Django workers sharing the container. |
 
 `-mpegts_flags +resend_headers` is deliberately absent: the mpegts muxer's
 `pat_period` already defaults to 0.1s, so PAT/PMT retransmission is frequent
 enough. Verified against ffmpeg 8.1.2 in the running pod.
+
+## Testing a profile change
+
+`-reconnect*` are HTTP-protocol options and error out on a local file input, so
+a realistic test needs an HTTP source. Serving a short clip over loopback inside
+the pod exercises the full argument list without involving the provider:
+
+```sh
+kubectl -n dispatcharr exec dispatcharr-0 -c app -- bash -lc '
+  cd /tmp
+  ffmpeg -f lavfi -i testsrc=size=1920x1080:rate=25 -f lavfi -i sine=frequency=440 \
+    -pix_fmt yuv420p -t 4 -c:v libx264 -c:a aac -f mpegts -y in.ts
+  python3 -m http.server 18099 --bind 127.0.0.1 & SRV=$!
+  sleep 2
+  /bin/sh /scripts/ffmpeg-venc.sh <parameters...> -i http://127.0.0.1:18099/in.ts \
+    ... -t 4 -f mpegts pipe:1 > out.ts
+  ffprobe -show_entries stream=codec_name,profile,pix_fmt -of default=noprint_wrappers=1 out.ts
+  kill $SRV'
+```
+
+Bound the output with `-t`: `-reconnect_at_eof 1` will otherwise re-read a
+finite file forever, which is correct for a live feed but never terminates on a
+test clip.
