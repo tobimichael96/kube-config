@@ -158,6 +158,14 @@ spec:
           dispatcharr:
             app:
               - path: /data
+      scripts:
+        type: configMap
+        name: dispatcharr-scripts
+        advancedMounts:
+          dispatcharr:
+            app:
+              - path: /scripts
+                readOnly: true
       logs:
         type: emptyDir
       tmp:

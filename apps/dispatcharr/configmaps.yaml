@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dispatcharr-scripts
+  namespace: dispatcharr
+data:
+  # language=shell
+  ffmpeg-venc.sh: |
+    # Pick a video encoder at stream start, then exec ffmpeg.
+    #
+    # Dispatcharr invokes this as [/bin/sh, <this>, <ffmpeg args...>] and reads
+    # MPEG-TS from stdout. The literal token @VENC@ in the arguments is replaced
+    # with a complete video encoder argument set.
+    #
+    # Why a wrapper: ffmpeg has no fallback when an encoder fails to open. The
+    # 6GB card is shared with immich-ml, jellyfin and unmanic, and when it is
+    # full h264_nvenc dies with CUDA_ERROR_OUT_OF_MEMORY, taking the channel
+    # down instead of degrading it. See README.md.
+
+    FFMPEG=/usr/local/bin/ffmpeg
+
+    # -profile:v high -pix_fmt yuv420p on both paths: without them nvenc
+    # inherits the input's format, and a 4:4:4 or RGB upstream yields
+    # "High 4:4:4 Predictive", which no Android TV hardware decoder handles.
+    # That fails as a black screen with working audio while desktop players
+    # are fine, so it looks like a client bug rather than a profile one.
+    NVENC="-c:v h264_nvenc -preset p4 -tune hq -rc vbr -cq 21 -b:v 4M -maxrate 8M -bufsize 16M -g 50 -forced-idr 1 -profile:v high -pix_fmt yuv420p"
+
+    # CPU path is deliberately cheaper than the GPU path: -threads 3 matches the
+    # container's 3000m CPU limit, and the lower ceiling keeps one software
+    # transcode from starving the Django workers in the same container.
+    X264="-c:v libx264 -preset veryfast -crf 23 -maxrate 4M -bufsize 8M -g 50 -keyint_min 50 -sc_threshold 0 -profile:v high -pix_fmt yuv420p -threads 3"
+
+    # Pre-flight probe, ~0.5s. Deliberately not cached: a cached "GPU is free"
+    # result that has since gone stale would reintroduce the exact hard failure
+    # this wrapper exists to prevent. Free VRAM from nvidia-smi is not a usable
+    # substitute either, as it does not account for the encoder context.
+    if "$FFMPEG" -hide_banner -loglevel quiet -f lavfi -i nullsrc=s=256x144 \
+        -frames:v 1 -c:v h264_nvenc -f null - >/dev/null 2>&1; then
+      VENC="$NVENC"
+    else
+      echo "ffmpeg-venc: NVENC unavailable, falling back to libx264 (CPU)" >&2
+      VENC="$X264"
+    fi
+
+    # Rebuild the argument list, expanding @VENC@ in place. Each pass takes one
+    # argument off the front and appends its replacement to the back, looping
+    # exactly as many times as there were original arguments -- so $VENC can
+    # word-split while every other argument stays intact, with no quoting
+    # games and no eval.
+    argc=$#
+    n=0
+    while [ "$n" -lt "$argc" ]; do
+      arg=$1
+      shift
+      if [ "$arg" = "@VENC@" ]; then
+        # shellcheck disable=SC2086
+        set -- "$@" $VENC
+      else
+        set -- "$@" "$arg"
+      fi
+      n=$((n + 1))
+    done
+
+    exec "$FFMPEG" "$@"
