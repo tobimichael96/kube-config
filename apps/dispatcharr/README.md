@@ -1,11 +1,11 @@
 # Dispatcharr
 
 Dispatcharr's ffmpeg stream profiles live in its own database and are edited
-through its web UI, not in this repo. The profile below is documented here as a
-reference and a backup — it is not the source of truth, so update it by hand
-when it changes in the UI.
+through its web UI, not in this repository. The profile below is documented
+here as a reference and a backup — it is not the source of truth, so update it
+by hand when it changes in the UI.
 
-The one part that *is* source-controlled is the encoder-selection wrapper in
+The one part that _is_ source-controlled is the encoder-selection wrapper in
 [`configmaps.yaml`](configmaps.yaml), mounted at `/scripts/ffmpeg-venc.sh`. The
 profile invokes it instead of calling ffmpeg directly.
 
@@ -16,13 +16,13 @@ Profile "ffmpeg alternative", the default for all channels
 
 **Command** field:
 
-```
+```text
 /bin/sh
 ```
 
 **Parameters** field:
 
-```
+```text
 /scripts/ffmpeg-venc.sh
 -hide_banner -loglevel warning -stats -stats_period 10
 -fflags +genpts+discardcorrupt
@@ -40,7 +40,7 @@ Profile "ffmpeg alternative", the default for all channels
 
 Single line, for pasting into the UI:
 
-```
+```text
 /scripts/ffmpeg-venc.sh -hide_banner -loglevel warning -stats -stats_period 10 -fflags +genpts+discardcorrupt -reconnect 1 -reconnect_streamed 1 -reconnect_at_eof 1 -reconnect_on_network_error 1 -reconnect_on_http_error 5xx,408 -reconnect_delay_max 30 -rw_timeout 5000000 -i {streamUrl} -map 0:v:0 -map 0:a:0 -sn -dn -ignore_unknown @VENC@ -c:a aac -b:a 128k -ac 2 -ar 48000 -af aresample=async=1000:first_pts=0 -max_muxing_queue_size 2048 -f mpegts pipe:1
 ```
 
@@ -55,10 +55,10 @@ as its own argument.
 There are no `-c:v` flags in the profile. The wrapper substitutes the `@VENC@`
 token with one of two encoder argument sets:
 
-| Path | Arguments |
-| --- | --- |
-| GPU | `-c:v h264_nvenc -preset p4 -tune hq -rc vbr -cq 21 -b:v 4M -maxrate 8M -bufsize 16M -g 50 -forced-idr 1 -profile:v high -pix_fmt yuv420p` |
-| CPU | `-c:v libx264 -preset veryfast -crf 23 -maxrate 4M -bufsize 8M -g 50 -keyint_min 50 -sc_threshold 0 -profile:v high -pix_fmt yuv420p -threads 3` |
+| Path | Arguments                                                                                                                                        |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| GPU  | `-c:v h264_nvenc -preset p4 -tune hq -rc vbr -cq 21 -b:v 4M -maxrate 8M -bufsize 16M -g 50 -forced-idr 1 -profile:v high -pix_fmt yuv420p`       |
+| CPU  | `-c:v libx264 -preset veryfast -crf 23 -maxrate 4M -bufsize 8M -g 50 -keyint_min 50 -sc_threshold 0 -profile:v high -pix_fmt yuv420p -threads 3` |
 
 It picks between them by attempting a one-frame throwaway NVENC encode before
 starting the real one. That probe costs about 0.5s on every channel start.
@@ -86,19 +86,19 @@ hiccup propagated straight through to the client as a visible gap. The current
 profile trades roughly one second of latency — irrelevant for live TV — for
 tolerance.
 
-| Flag | Reason |
-| --- | --- |
-| `-profile:v high -pix_fmt yuv420p` | Without them the encoder inherits the input's format. A 4:4:4 or RGB upstream then yields `High 4:4:4 Predictive`, which no Android TV hardware decoder accepts — it fails as a black screen with working audio while desktop software players are fine, so it presents as a client bug rather than a profile one. Set on both encoder paths. |
+| Flag                                               | Reason                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-profile:v high -pix_fmt yuv420p`                 | Without them the encoder inherits the input's format. A 4:4:4 or RGB upstream then yields `High 4:4:4 Predictive`, which no Android TV hardware decoder accepts — it fails as a black screen with working audio while desktop software players are fine, so it presents as a client bug rather than a profile one. Set on both encoder paths.                                                                                           |
 | `-reconnect_on_http_error 5xx,408` (not `4xx,5xx`) | One of the upstream accounts permits only a single concurrent connection and answers a taken slot with HTTP 458. Retrying a connection-limit error cannot succeed while the retrying process is itself what holds the slot, so a blanket `4xx` deadlocked the channel: ffmpeg looped on 458 indefinitely, never failing, so Dispatcharr never marked the stream dead and never failed over. Only genuinely transient codes belong here. |
-| `-rw_timeout 5000000` | Caps a stalled upstream read at 5s before the reconnect logic starts. At 15s the freeze was long enough to be obvious on screen. |
-| `+genpts` | IPTV feeds routinely have gapped or missing PTS. Without it the mpegts muxer forwards the discontinuity and clients render it as a freeze. |
-| `+discardcorrupt` | Drops packets flagged corrupt. Cuts both ways: a dropped reference frame freezes the picture until the next IDR, about 2s at `-g 50` on a 25fps source. Removing it gives brief macroblock artifacts instead. |
-| `aresample=async=1000` | `async=1` only fills and trims at stream start. A number is the maximum samples the filter may stretch or squeeze, which stops A/V drift accumulating over a long session and forcing a client resync. |
-| `-tune hq` (not `ll`) | `ll` disables NVENC lookahead. `hq` rides out rate spikes instead of passing them through. |
-| no `-flags low_delay` | Decoder-side latency cut that also removes frame-reorder tolerance. |
-| no `-muxdelay 0 -muxpreload 0` | Leaves the mpegts muxer its ~0.7s cushion. This is the jitter shock absorber; zeroing it makes every upstream hiccup immediately visible. |
-| `-stats -stats_period 10` | Throughput line every 10s. At a freeze this shows whether ffmpeg's speed dropped (upstream or encoder) or held steady (client side or Dispatcharr buffering). |
-| `-threads 3` (CPU path only) | Matches the container's 3000m CPU limit, so one software transcode cannot starve the Django workers sharing the container. |
+| `-rw_timeout 5000000`                              | Caps a stalled upstream read at 5s before the reconnect logic starts. At 15s the freeze was long enough to be obvious on screen.                                                                                                                                                                                                                                                                                                        |
+| `+genpts`                                          | IPTV feeds routinely have gapped or missing PTS. Without it the mpegts muxer forwards the discontinuity and clients render it as a freeze.                                                                                                                                                                                                                                                                                              |
+| `+discardcorrupt`                                  | Drops packets flagged corrupt. Cuts both ways: a dropped reference frame freezes the picture until the next IDR, about 2s at `-g 50` on a 25fps source. Removing it gives brief macroblock artifacts instead.                                                                                                                                                                                                                           |
+| `aresample=async=1000`                             | `async=1` only fills and trims at stream start. A number is the maximum samples the filter may stretch or squeeze, which stops A/V drift accumulating over a long session and forcing a client resync.                                                                                                                                                                                                                                  |
+| `-tune hq` (not `ll`)                              | `ll` disables NVENC lookahead. `hq` rides out rate spikes instead of passing them through.                                                                                                                                                                                                                                                                                                                                              |
+| no `-flags low_delay`                              | Decoder-side latency cut that also removes frame-reorder tolerance.                                                                                                                                                                                                                                                                                                                                                                     |
+| no `-muxdelay 0 -muxpreload 0`                     | Leaves the mpegts muxer its ~0.7s cushion. This is the jitter shock absorber; zeroing it makes every upstream hiccup immediately visible.                                                                                                                                                                                                                                                                                               |
+| `-stats -stats_period 10`                          | Throughput line every 10s. At a freeze this shows whether ffmpeg's speed dropped (upstream or encoder) or held steady (client-side or Dispatcharr buffering).                                                                                                                                                                                                                                                                           |
+| `-threads 3` (CPU path only)                       | Matches the container's 3000m CPU limit, so one software transcode cannot starve the Django workers sharing the container.                                                                                                                                                                                                                                                                                                              |
 
 `-mpegts_flags +resend_headers` is deliberately absent: the mpegts muxer's
 `pat_period` already defaults to 0.1s, so PAT/PMT retransmission is frequent
