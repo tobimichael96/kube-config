@@ -61,14 +61,20 @@ spec:
           containers:
             - name: files-scan
               image: docker.io/rancher/kubectl:v1.34.1
+              # The image ships kubectl and no shell, so exec it directly.
               command:
-                - sh
+                - kubectl
+                - exec
+                - deploy/nextcloud
                 - -c
-                - |
-                  set -eu
-                  kubectl exec deploy/nextcloud -c nextcloud -- \
-                    su -s /bin/sh www-data -c \
-                    "php /var/www/html/occ files:scan --all"
+                - nextcloud
+                - --
+                - su
+                - -s
+                - /bin/sh
+                - www-data
+                - -c
+                - php /var/www/html/occ files:scan --all
               resources:
                 requests:
                   cpu: 10m
