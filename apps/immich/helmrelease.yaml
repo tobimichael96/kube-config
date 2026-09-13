@@ -17,10 +17,28 @@ spec:
   interval: 5m
   releaseName: *app
   targetNamespace: *app
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
   values:
     controllers:
       immich:
         type: statefulset
+        initContainers:
+          wait-for-db:
+            image:
+              repository: ghcr.io/immich-app/postgres
+              tag: 14-vectorchord0.4.3-pgvectors0.2.0
+            command:
+              - sh
+              - -c
+              - until pg_isready -h immich-postgres -p 5432 -U immich; do
+                echo "waiting for postgres"; sleep 2; done
+            securityContext:
+              allowPrivilegeEscalation: false
         containers:
           app:
             image:
