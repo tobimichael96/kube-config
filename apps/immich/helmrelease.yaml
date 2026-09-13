@@ -94,8 +94,20 @@ spec:
               MACHINE_LEARNING_PORT: &mlPort 3003
               MACHINE_LEARNING_CACHE_FOLDER: /cache
               # Unload idle models after 60s (default 300) so the 6GB card is
-              # not held hostage from the transcoders sharing it.
+              # not held hostage from the transcoders sharing it. Note this
+              # returns memory to the ONNX arena, not to the driver -- the
+              # arena is shared per-device across sessions and never shrinks,
+              # so this alone does not free VRAM. The batch caps below bound
+              # how large that arena grows in the first place.
               MACHINE_LEARNING_MODEL_TTL: 60
+              # On CUDA+ONNX, facial recognition's default batch size is None,
+              # which means every face in an image goes through as one
+              # unbounded tensor (see models/facial_recognition/recognition.py).
+              # A single group photo could then claim ~100MB buffers and starve
+              # dispatcharr's h264_nvenc of a CUDA context. Double underscore
+              # is the pydantic env_nested_delimiter.
+              MACHINE_LEARNING_MAX_BATCH_SIZE__FACIAL_RECOGNITION: 8
+              MACHINE_LEARNING_MAX_BATCH_SIZE__OCR: 4
               NVIDIA_VISIBLE_DEVICES: "all"
               NVIDIA_DRIVER_CAPABILITIES: "all"
             resources:
