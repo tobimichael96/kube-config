@@ -14,7 +14,8 @@
       "/\\.ya?ml$/"
     ],
     "ignoreDeps": [
-      "josh5/unmanic"
+      "josh5/unmanic",
+      "ghcr.io/immich-app/postgres"
     ]
   },
   "kubernetes": {
@@ -34,7 +35,8 @@
       "**/flux-system/**"
     ],
     "ignoreDeps": [
-      "josh5/unmanic"
+      "josh5/unmanic",
+      "ghcr.io/immich-app/postgres"
     ]
   },
   "packageRules": [
