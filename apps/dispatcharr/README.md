@@ -27,7 +27,7 @@ Profile "ffmpeg alternative", the default for all channels
 -hide_banner -loglevel warning -stats -stats_period 10
 -fflags +genpts+discardcorrupt
 -reconnect 1 -reconnect_streamed 1 -reconnect_at_eof 1
--reconnect_on_network_error 1 -reconnect_on_http_error 4xx,5xx
+-reconnect_on_network_error 1 -reconnect_on_http_error 5xx,408
 -reconnect_delay_max 30 -rw_timeout 5000000
 -i {streamUrl}
 -map 0:v:0 -map 0:a:0 -sn -dn -ignore_unknown
@@ -41,7 +41,7 @@ Profile "ffmpeg alternative", the default for all channels
 Single line, for pasting into the UI:
 
 ```
-/scripts/ffmpeg-venc.sh -hide_banner -loglevel warning -stats -stats_period 10 -fflags +genpts+discardcorrupt -reconnect 1 -reconnect_streamed 1 -reconnect_at_eof 1 -reconnect_on_network_error 1 -reconnect_on_http_error 4xx,5xx -reconnect_delay_max 30 -rw_timeout 5000000 -i {streamUrl} -map 0:v:0 -map 0:a:0 -sn -dn -ignore_unknown @VENC@ -c:a aac -b:a 128k -ac 2 -ar 48000 -af aresample=async=1000:first_pts=0 -max_muxing_queue_size 2048 -f mpegts pipe:1
+/scripts/ffmpeg-venc.sh -hide_banner -loglevel warning -stats -stats_period 10 -fflags +genpts+discardcorrupt -reconnect 1 -reconnect_streamed 1 -reconnect_at_eof 1 -reconnect_on_network_error 1 -reconnect_on_http_error 5xx,408 -reconnect_delay_max 30 -rw_timeout 5000000 -i {streamUrl} -map 0:v:0 -map 0:a:0 -sn -dn -ignore_unknown @VENC@ -c:a aac -b:a 128k -ac 2 -ar 48000 -af aresample=async=1000:first_pts=0 -max_muxing_queue_size 2048 -f mpegts pipe:1
 ```
 
 Dispatcharr builds the process as `[command] + shlex.split(parameters)` and
@@ -89,6 +89,7 @@ tolerance.
 | Flag | Reason |
 | --- | --- |
 | `-profile:v high -pix_fmt yuv420p` | Without them the encoder inherits the input's format. A 4:4:4 or RGB upstream then yields `High 4:4:4 Predictive`, which no Android TV hardware decoder accepts — it fails as a black screen with working audio while desktop software players are fine, so it presents as a client bug rather than a profile one. Set on both encoder paths. |
+| `-reconnect_on_http_error 5xx,408` (not `4xx,5xx`) | One of the upstream accounts permits only a single concurrent connection and answers a taken slot with HTTP 458. Retrying a connection-limit error cannot succeed while the retrying process is itself what holds the slot, so a blanket `4xx` deadlocked the channel: ffmpeg looped on 458 indefinitely, never failing, so Dispatcharr never marked the stream dead and never failed over. Only genuinely transient codes belong here. |
 | `-rw_timeout 5000000` | Caps a stalled upstream read at 5s before the reconnect logic starts. At 15s the freeze was long enough to be obvious on screen. |
 | `+genpts` | IPTV feeds routinely have gapped or missing PTS. Without it the mpegts muxer forwards the discontinuity and clients render it as a freeze. |
 | `+discardcorrupt` | Drops packets flagged corrupt. Cuts both ways: a dropped reference frame freezes the picture until the next IDR, about 2s at `-g 50` on a 25fps source. Removing it gives brief macroblock artifacts instead. |
