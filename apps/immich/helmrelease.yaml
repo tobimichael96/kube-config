@@ -93,6 +93,9 @@ spec:
               TZ: "Europe/Berlin"
               MACHINE_LEARNING_PORT: &mlPort 3003
               MACHINE_LEARNING_CACHE_FOLDER: /cache
+              # Unload idle models after 60s (default 300) so the 6GB card is
+              # not held hostage from the transcoders sharing it.
+              MACHINE_LEARNING_MODEL_TTL: 60
               NVIDIA_VISIBLE_DEVICES: "all"
               NVIDIA_DRIVER_CAPABILITIES: "all"
             resources:
