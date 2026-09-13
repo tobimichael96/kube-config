@@ -1,0 +1,260 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app immich
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 5.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    controllers:
+      immich:
+        type: statefulset
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v3.2.0
+            env:
+              TZ: "Europe/Berlin"
+              IMMICH_PORT: &port 2283
+              DB_HOSTNAME: immich-postgres
+              DB_PORT: 5432
+              DB_USERNAME: immich
+              DB_DATABASE_NAME: immich
+              REDIS_HOSTNAME: immich-redis
+              REDIS_PORT: 6379
+              IMMICH_MACHINE_LEARNING_URL: http://immich-ml:3003
+            envFrom:
+              - secret: immich-db
+            resources:
+              requests:
+                cpu: 250m
+                memory: 1Gi
+              limits:
+                cpu: 4000m
+                memory: 8Gi
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/server/ping
+                    port: *port
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 5
+              readiness: *probes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+      machine-learning:
+        type: statefulset
+        pod:
+          runtimeClassName: "nvidia-cdi"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v3.2.0-cuda
+            env:
+              TZ: "Europe/Berlin"
+              MACHINE_LEARNING_PORT: &mlPort 3003
+              MACHINE_LEARNING_CACHE_FOLDER: /cache
+              NVIDIA_VISIBLE_DEVICES: "all"
+              NVIDIA_DRIVER_CAPABILITIES: "all"
+            resources:
+              requests:
+                cpu: 100m
+                memory: 1Gi
+              limits:
+                cpu: 2000m
+                memory: 8Gi
+                nvidia.com/gpu: 1
+            probes:
+              liveness: &mlProbes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: *mlPort
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 5
+              readiness: *mlProbes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+      redis:
+        type: statefulset
+        containers:
+          app:
+            image:
+              repository: docker.io/valkey/valkey
+              tag: 9-alpine
+            env:
+              TZ: "Europe/Berlin"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+            probes:
+              liveness: &redisProbes
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["sh", "-c", "valkey-cli ping | grep -q PONG"]
+                  initialDelaySeconds: 10
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *redisProbes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+      postgres:
+        type: statefulset
+        containers:
+          app:
+            image:
+              repository: ghcr.io/immich-app/postgres
+              tag: 14-vectorchord0.4.3-pgvectors0.2.0
+            env:
+              TZ: "Europe/Berlin"
+              POSTGRES_USER: immich
+              POSTGRES_DB: immich
+              POSTGRES_INITDB_ARGS: "--data-checksums"
+              POSTGRES_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-db
+                    key: DB_PASSWORD
+            resources:
+              requests:
+                cpu: 100m
+                memory: 512Mi
+              limits:
+                cpu: 2000m
+                memory: 4Gi
+            probes:
+              liveness: &pgProbes
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["pg_isready", "-U", "immich", "-d", "immich"]
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 5
+              readiness: *pgProbes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+    service:
+      app:
+        controller: immich
+        ports:
+          http:
+            port: *port
+      ml:
+        controller: machine-learning
+        ports:
+          http:
+            port: *mlPort
+      redis:
+        controller: redis
+        ports:
+          http:
+            port: 6379
+      postgres:
+        controller: postgres
+        ports:
+          http:
+            port: 5432
+    ingress:
+      app:
+        className: "traefik"
+        annotations:
+          kubernetes.io/tls-acme: "true"
+          traefik.ingress.kubernetes.io/ssl-redirect: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt"
+          traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
+          traefik.ingress.kubernetes.io/proxy-body-size: "0"
+          traefik.ingress.kubernetes.io/proxy-read-timeout: "600"
+          traefik.ingress.kubernetes.io/proxy-send-timeout: "600"
+        hosts:
+          - host: &host immich.internal.tmem.de
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: immich-tls
+    persistence:
+      library:
+        existingClaim: immich-library-pvc
+        advancedMounts:
+          immich:
+            app:
+              - path: /data
+      # Existing Nextcloud photos, indexed as an Immich external library.
+      nextcloud:
+        existingClaim: immich-nextcloud-data-pvc
+        advancedMounts:
+          immich:
+            app:
+              - path: /mnt/nextcloud
+                readOnly: true
+      model-cache:
+        existingClaim: immich-model-cache-pvc
+        advancedMounts:
+          machine-learning:
+            app:
+              - path: /cache
+      db:
+        existingClaim: immich-db-pvc
+        advancedMounts:
+          postgres:
+            app:
+              - path: /var/lib/postgresql/data
+      shm:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 128Mi
+        advancedMounts:
+          postgres:
+            app:
+              - path: /dev/shm
+      tmp:
+        type: emptyDir
+        advancedMounts:
+          immich:
+            app:
+              - path: /tmp
