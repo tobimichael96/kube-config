@@ -60,7 +60,7 @@ spec:
           serviceAccountName: nextcloud-files-scan
           containers:
             - name: files-scan
-              image: docker.io/rancher/kubectl:v1.34.1
+              image: docker.io/rancher/kubectl:v1.36.2
               # The image ships kubectl and no shell, so exec it directly.
               command:
                 - kubectl
