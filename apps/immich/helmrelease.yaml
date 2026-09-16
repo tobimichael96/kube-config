@@ -43,7 +43,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v3.2.1
+              tag: v3.2.2
             env:
               TZ: "Europe/Berlin"
               IMMICH_PORT: &port 2283
@@ -88,7 +88,7 @@ spec:
           app:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v3.2.1-cuda
+              tag: v3.2.2-cuda
             env:
               TZ: "Europe/Berlin"
               MACHINE_LEARNING_PORT: &mlPort 3003
