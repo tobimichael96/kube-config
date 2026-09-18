@@ -168,10 +168,3 @@ spec:
                 name: nextcloud
                 port:
                   number: 8080
-          - path: /cron.php
-            pathType: Exact
-            backend:
-              service:
-                name: nextcloud
-                port:
-                  number: 8080
