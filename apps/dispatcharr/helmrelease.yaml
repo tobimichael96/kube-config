@@ -60,18 +60,15 @@ spec:
             probes:
               readiness:
                 enabled: false
-              # gluetun's own health binary, not an external site: wget to
-              # am.i.mullvad.net returns rc=4 from inside this container even
-              # when the tunnel is healthy, which had kubelet killing the
-              # sidecar every few minutes and taking the tunnel with it.
-              liveness:
+              liveness: &probes
                 enabled: true
                 custom: true
                 spec:
                   exec:
                     command:
-                      - /gluetun-entrypoint
-                      - healthcheck
+                      - sh
+                      - -c
+                      - wget -qO- https://am.i.mullvad.net/connected | grep -q "You are connected to Mullvad"
                   initialDelaySeconds: 30
                   periodSeconds: 60
                   timeoutSeconds: 10
@@ -82,8 +79,9 @@ spec:
                 spec:
                   exec:
                     command:
-                      - /gluetun-entrypoint
-                      - healthcheck
+                      - sh
+                      - -c
+                      - wget -qO- https://am.i.mullvad.net/connected | grep -q "You are connected to Mullvad"
                   initialDelaySeconds: 5
                   periodSeconds: 5
                   timeoutSeconds: 10
