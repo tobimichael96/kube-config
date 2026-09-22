@@ -23,69 +23,6 @@ spec:
     controllers:
       dispatcharr:
         type: statefulset
-        initContainers:
-          gluetun:
-            restartPolicy: Always
-            image:
-              repository: ghcr.io/qdm12/gluetun
-              tag: v3.41.3
-            env:
-              TZ: Europe/Berlin
-              FIREWALL: on
-              FIREWALL_INPUT_PORTS: 9191,9999
-              VPN_TYPE: wireguard
-              VPN_SERVICE_PROVIDER: mullvad
-              SERVER_COUNTRIES: Germany
-              UPDATER_PERIOD: 12h
-              DOT: "on"
-              HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
-              WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL: "15s"
-              # The healthcheck resolves names through gluetun's own DoT
-              # resolver, which only starts once the tunnel is up. At the 6s
-              # default that race restarts the tunnel repeatedly before DNS
-              # is ready; 30s lets it settle on the first attempt.
-              HEALTH_VPN_DURATION_INITIAL: 30s
-            envFrom:
-              - secret: dispatcharr-vpn-config
-            # Configure the container-specific securityContext
-            securityContext:
-              capabilities:
-                add:
-                  - NET_ADMIN
-                  - SYS_MODULE
-            lifecycle:
-              postStart:
-                exec:
-                  command: [ "/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true" ]
-            probes:
-              readiness:
-                enabled: false
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  exec:
-                    command:
-                      - sh
-                      - -c
-                      - wget -qO- https://am.i.mullvad.net/connected | grep -q "You are connected to Mullvad"
-                  initialDelaySeconds: 30
-                  periodSeconds: 60
-                  timeoutSeconds: 10
-                  failureThreshold: 3
-              startup:
-                enabled: true
-                custom: true
-                spec:
-                  exec:
-                    command:
-                      - sh
-                      - -c
-                      - wget -qO- https://am.i.mullvad.net/connected | grep -q "You are connected to Mullvad"
-                  initialDelaySeconds: 5
-                  periodSeconds: 5
-                  timeoutSeconds: 10
-                  failureThreshold: 24
         containers:
           app:
             image:
@@ -127,6 +64,53 @@ spec:
                 add:
                   - SYS_NICE
               allowPrivilegeEscalation: false
+          gluetun:
+            dependsOn: app
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.41.3
+            env:
+              TZ: Europe/Berlin
+              FIREWALL: on
+              FIREWALL_INPUT_PORTS: 9191,9999
+              VPN_TYPE: wireguard
+              VPN_SERVICE_PROVIDER: mullvad
+              SERVER_COUNTRIES: Germany
+              UPDATER_PERIOD: 12h
+              DOT: off
+              DNS_ADDRESS: 192.168.178.91
+              FIREWALL_OUTBOUND_SUBNETS: "192.168.178.91/32"
+              HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
+              WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL: "15s"
+            envFrom:
+              - secret: dispatcharr-vpn-config
+            # Configure the container-specific securityContext
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - SYS_MODULE
+            lifecycle:
+              postStart:
+                exec:
+                  command: [ "/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true" ]
+            probes:
+              readiness:
+                enabled: false
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:
+                      - sh
+                      - -c
+                      - wget -qO- https://am.i.mullvad.net/connected | grep -q "You are connected to Mullvad"
+                  initialDelaySeconds: 30
+                  periodSeconds: 60
+                  timeoutSeconds: 10
+                  failureThreshold: 3
+              startup: *probes
     service:
       app:
         controller: *app
