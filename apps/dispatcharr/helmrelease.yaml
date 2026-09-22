@@ -37,7 +37,14 @@ spec:
               VPN_SERVICE_PROVIDER: mullvad
               SERVER_COUNTRIES: Germany
               UPDATER_PERIOD: 12h
-              DOT: "on"
+              # Do not use gluetun's internal DNS server: it binds [::]:53 while
+              # its own resolver dials 127.0.0.1:53 over IPv4, and with no working
+              # IPv6 in this netns that fails with "resource temporarily
+              # unavailable". Gluetun then cannot resolve its healthcheck targets
+              # and restarts its own tunnel in a loop.
+              DOT: "off"
+              DNS_ADDRESS: 192.168.178.91
+              FIREWALL_OUTBOUND_SUBNETS: "192.168.178.91/32"
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
               WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL: "15s"
               # The healthcheck resolves names through gluetun's own DoT
