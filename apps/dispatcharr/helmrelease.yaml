@@ -35,7 +35,12 @@ spec:
               FIREWALL_INPUT_PORTS: 9191,9999
               VPN_TYPE: wireguard
               VPN_SERVICE_PROVIDER: mullvad
-              SERVER_COUNTRIES: Germany
+              # Gluetun starts from its bundled server list (2025-10-03) and only
+              # refreshes it after UPDATER_PERIOD, so most German servers it picks
+              # are gone or have rotated keys and fail the healthcheck, stretching
+              # startup to ~2 minutes. Pin the ones verified against Mullvad's
+              # live relay list on 2026-10-12.
+              SERVER_HOSTNAMES: de-fra-wg-001,de-fra-wg-002,de-fra-wg-003,de-fra-wg-004,de-fra-wg-005,de-ber-wg-001,de-ber-wg-002
               UPDATER_PERIOD: 12h
               # Do not use gluetun's internal DNS server: it binds [::]:53 while
               # its own resolver dials 127.0.0.1:53 over IPv4, and with no working
@@ -47,11 +52,6 @@ spec:
               FIREWALL_OUTBOUND_SUBNETS: "192.168.178.91/32"
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
               WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL: "15s"
-              # This was 30s while the healthcheck resolved through gluetun's
-              # DoT resolver, which only starts once the tunnel is up. With DoT
-              # off, DNS goes to DNS_ADDRESS outside the tunnel and is ready
-              # immediately; 10s keeps a little margin over the 6s default.
-              HEALTH_VPN_DURATION_INITIAL: 10s
             envFrom:
               - secret: dispatcharr-vpn-config
             # Configure the container-specific securityContext
@@ -89,10 +89,10 @@ spec:
                       - sh
                       - -c
                       - wget -qO- https://am.i.mullvad.net/connected | grep -q "You are connected to Mullvad"
-                  initialDelaySeconds: 5
-                  periodSeconds: 5
+                  initialDelaySeconds: 0
+                  periodSeconds: 2
                   timeoutSeconds: 10
-                  failureThreshold: 24
+                  failureThreshold: 60
         containers:
           app:
             image:
