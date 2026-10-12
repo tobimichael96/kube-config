@@ -31,16 +31,23 @@ read -rp "Continue? This stops k3s and all its pods. [y/N] " answer
 [[ "$answer" =~ ^[Yy]$ ]] || exit 1
 
 # DKMS rebuilds the module on kernel updates, so a Debian kernel upgrade
-# doesn't leave the node without a GPU.
+# doesn't leave the node without a GPU. Kernels installed before DKMS knew
+# about the module don't get it automatically, though, so get headers for
+# the running kernel and the newest installed one (the one the reboot picks).
+running_kernel="$(uname -r)"
+newest_kernel="$(ls /lib/modules | sort -V | tail -1)"
 apt-get update
-apt-get install -y dkms build-essential "linux-headers-$(uname -r)"
+apt-get install -y dkms build-essential \
+  "linux-headers-$running_kernel" "linux-headers-$newest_kernel"
 
 run_file="NVIDIA-Linux-x86_64-$version.run"
 mkdir -p "$WORK_DIR"
 cd "$WORK_DIR"
-curl -fL --continue-at - -o "$run_file" "$BASE_URL/$version/$run_file"
 curl -fsS -o "$run_file.sha256sum" "$BASE_URL/$version/$run_file.sha256sum"
-sha256sum -c "$run_file.sha256sum"
+if ! sha256sum -c --status "$run_file.sha256sum" 2>/dev/null; then
+  curl -fL -o "$run_file" "$BASE_URL/$version/$run_file"
+  sha256sum -c "$run_file.sha256sum"
+fi
 chmod +x "$run_file"
 
 # `systemctl stop k3s` leaves containers running and holding /dev/nvidia*,
@@ -50,6 +57,15 @@ chmod +x "$run_file"
 # The installer uninstalls the previous .run driver itself. Headless server,
 # so no X config.
 "./$run_file" --dkms --no-questions --ui=none --no-x-check
+
+# The installer only builds for the running kernel. If a newer kernel is
+# already installed and waiting for a reboot, build for it too, or the node
+# comes back up without a driver.
+if [[ "$newest_kernel" != "$running_kernel" ]]; then
+  dkms install "nvidia/$version" -k "$newest_kernel"
+  # Keep nouveau out of that kernel's initramfs as well.
+  update-initramfs -u -k "$newest_kernel"
+fi
 
 echo
 echo "Installed $version. Reboot to load the new kernel module:"
