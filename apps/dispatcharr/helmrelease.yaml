@@ -47,11 +47,11 @@ spec:
               FIREWALL_OUTBOUND_SUBNETS: "192.168.178.91/32"
               HEALTH_SERVER_ADDRESS: "0.0.0.0:9999"
               WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL: "15s"
-              # The healthcheck resolves names through gluetun's own DoT
-              # resolver, which only starts once the tunnel is up. At the 6s
-              # default that race restarts the tunnel repeatedly before DNS
-              # is ready; 30s lets it settle on the first attempt.
-              HEALTH_VPN_DURATION_INITIAL: 30s
+              # This was 30s while the healthcheck resolved through gluetun's
+              # DoT resolver, which only starts once the tunnel is up. With DoT
+              # off, DNS goes to DNS_ADDRESS outside the tunnel and is ready
+              # immediately; 10s keeps a little margin over the 6s default.
+              HEALTH_VPN_DURATION_INITIAL: 10s
             envFrom:
               - secret: dispatcharr-vpn-config
             # Configure the container-specific securityContext
