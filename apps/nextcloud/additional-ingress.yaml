@@ -1,6 +1,9 @@
 ---
 # Public ingress for Nextcloud share links
 # These paths are accessible without the internal-only middleware
+# Traefik matches Prefix paths as plain string prefixes ("/s" would also
+# match /settings and /status.php), so prefixes end in "/" and single
+# endpoints use Exact.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -20,7 +23,7 @@ spec:
       http:
         paths:
           # Share link pages
-          - path: /s
+          - path: /s/
             pathType: Prefix
             backend:
               service:
@@ -28,7 +31,7 @@ spec:
                 port:
                   number: 8080
           # Alternative share link path
-          - path: /index.php/s
+          - path: /index.php/s/
             pathType: Prefix
             backend:
               service:
@@ -36,7 +39,7 @@ spec:
                 port:
                   number: 8080
           # WebDAV public file access (for public uploads/downloads)
-          - path: /remote.php/dav/public-files
+          - path: /remote.php/dav/public-files/
             pathType: Prefix
             backend:
               service:
@@ -45,6 +48,13 @@ spec:
                   number: 8080
           # Public.php WebDAV access
           - path: /public.php
+            pathType: Exact
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          - path: /public.php/
             pathType: Prefix
             backend:
               service:
@@ -52,7 +62,7 @@ spec:
                 port:
                   number: 8080
           # Guest avatars
-          - path: /avatar
+          - path: /avatar/
             pathType: Prefix
             backend:
               service:
@@ -60,7 +70,7 @@ spec:
                 port:
                   number: 8080
           # Share preview thumbnails
-          - path: /apps/files_sharing/publicpreview
+          - path: /apps/files_sharing/publicpreview/
             pathType: Prefix
             backend:
               service:
@@ -69,7 +79,14 @@ spec:
                   number: 8080
           # Core preview images
           - path: /core/preview
-            pathType: Prefix
+            pathType: Exact
+            backend:
+              service:
+                name: nextcloud
+                port:
+                  number: 8080
+          - path: /core/preview.png
+            pathType: Exact
             backend:
               service:
                 name: nextcloud
@@ -77,14 +94,14 @@ spec:
                   number: 8080
           # MIME type icons
           - path: /core/mimeicon
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: nextcloud
                 port:
                   number: 8080
           # Viewer app (image/video/pdf previews)
-          - path: /apps/viewer
+          - path: /apps/viewer/
             pathType: Prefix
             backend:
               service:
@@ -92,7 +109,7 @@ spec:
                 port:
                   number: 8080
           # PDF viewer app
-          - path: /apps/files_pdfviewer
+          - path: /apps/files_pdfviewer/
             pathType: Prefix
             backend:
               service:
@@ -100,7 +117,7 @@ spec:
                 port:
                   number: 8080
           # Core JS files
-          - path: /js
+          - path: /js/
             pathType: Prefix
             backend:
               service:
@@ -108,7 +125,7 @@ spec:
                 port:
                   number: 8080
           # Compiled assets (JS bundles)
-          - path: /dist
+          - path: /dist/
             pathType: Prefix
             backend:
               service:
@@ -116,7 +133,7 @@ spec:
                 port:
                   number: 8080
           # Text app assets for public text file viewing
-          - path: /apps/text
+          - path: /apps/text/
             pathType: Prefix
             backend:
               service:
@@ -124,35 +141,35 @@ spec:
                 port:
                   number: 8080
           # Static assets needed for share pages
-          - path: /core/js
+          - path: /core/js/
             pathType: Prefix
             backend:
               service:
                 name: nextcloud
                 port:
                   number: 8080
-          - path: /core/css
+          - path: /core/css/
             pathType: Prefix
             backend:
               service:
                 name: nextcloud
                 port:
                   number: 8080
-          - path: /core/fonts
+          - path: /core/fonts/
             pathType: Prefix
             backend:
               service:
                 name: nextcloud
                 port:
                   number: 8080
-          - path: /core/img
+          - path: /core/img/
             pathType: Prefix
             backend:
               service:
                 name: nextcloud
                 port:
                   number: 8080
-          - path: /apps/theming
+          - path: /apps/theming/
             pathType: Prefix
             backend:
               service:
