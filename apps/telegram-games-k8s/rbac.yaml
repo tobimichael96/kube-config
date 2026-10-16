@@ -1,11 +1,10 @@
 # NOTE: The ServiceAccount itself is created by the app-template chart (its default
 # ServiceAccount is named after the release, i.e. telegram-games-k8s). We only define
-# the cluster-scoped RBAC here and bind it to that SA. Do not also declare the SA here,
+# the RBAC here and bind it to that SA. Do not also declare the SA here,
 # or Helm and Flux fight over ownership and Helm prunes it.
 ---
-# Cluster-wide because game servers live in their own namespaces (minecraft,
-# satisfactory, ...). The bot lists managed workloads everywhere, starts/stops them
-# (patch spec.replicas) and triggers rollout restarts (patch the pod template).
+# Read-only, cluster-wide: game servers live in their own namespaces (minecraft,
+# satisfactory, ...), so the bot discovers managed workloads everywhere.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -13,7 +12,7 @@ metadata:
 rules:
   - apiGroups: ["apps"]
     resources: ["deployments", "statefulsets"]
-    verbs: ["get", "list", "watch", "patch", "update"]
+    verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -23,6 +22,33 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: telegram-games-k8s
+subjects:
+  - kind: ServiceAccount
+    name: telegram-games-k8s
+    namespace: telegram-games-k8s
+---
+# Write access (start/stop = patch spec.replicas, restart = patch the pod template)
+# is granted per game namespace only, so the bot can't modify workloads elsewhere
+# (traefik, flux, ...). When labelling a new game with games.telegram-bot/managed,
+# add a RoleBinding for its namespace below.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: telegram-games-k8s-control
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets"]
+    verbs: ["patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: telegram-games-k8s-control
+  namespace: satisfactory
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: telegram-games-k8s-control
 subjects:
   - kind: ServiceAccount
     name: telegram-games-k8s

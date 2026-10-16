@@ -10,14 +10,16 @@ only holds the Flux/Helm deployment (bjw-s `app-template`).
 | File | Purpose |
 |------|---------|
 | `namespace.yaml` | `telegram-games-k8s` namespace |
-| `rbac.yaml` | ServiceAccount + **ClusterRole/Binding** (list + rollout-restart Deployments/StatefulSets in every namespace) |
+| `rbac.yaml` | Read-only ClusterRole/Binding (list Deployments/StatefulSets everywhere) + `patch` via RoleBinding per game namespace |
 | `storage.yaml` | 1Gi local-storage PV/PVC on `homeserver` for the SQLite DB (mounted at `/data`) |
 | `secrets.yaml` | SOPS-encrypted `TELEGRAM_BOT_TOKEN`, `BOT_ADMINS` |
 | `ghcr-pull-secret.yaml` | SOPS-encrypted dockerconfig to pull the private GHCR image |
 | `helmrelease.yaml` | app-template release (long-polling, no Service/Ingress) |
 
-Cluster-wide RBAC is used on purpose: each game runs in its own namespace
-(`minecraft`, `satisfactory`, …), so the bot discovers and restarts across all of them.
+Each game runs in its own namespace (`minecraft`, `satisfactory`, …), so the bot can
+*list* workloads cluster-wide. It can only *patch* (start/stop/restart) in namespaces
+that have a `telegram-games-k8s-control` RoleBinding, so a leaked bot token or bot bug
+can't touch anything outside the game namespaces.
 
 ## Before it works
 
@@ -38,7 +40,9 @@ Cluster-wide RBAC is used on purpose: each game runs in its own namespace
        games.telegram-bot/name: "Minecraft"   # optional friendly name
    ```
    Add these labels to the `Deployment`/`StatefulSet` of each game (e.g. under
-   `games/minecraft`, `games/satisfactory`).
+   `games/minecraft`, `games/satisfactory`), and add a RoleBinding for the game's
+   namespace in `rbac.yaml` (copy the `satisfactory` one). Without it the bot lists the
+   server but start/stop/restart fail with `forbidden`.
 
 3. **Image pull access.** The image is the private `ghcr.io/tobimichael96/telegram-games-k8s`.
    `ghcr-pull-secret.yaml` holds the dockerconfig (reusing the same GHCR credentials as the
