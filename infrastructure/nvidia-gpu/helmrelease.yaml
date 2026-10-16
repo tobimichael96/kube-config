@@ -66,3 +66,7 @@ spec:
                 - envvar
     operator:
       defaultRuntime: containerd
+    # No Prometheus in the cluster; don't create ServiceMonitors (CRDs were removed).
+    dcgmExporter:
+      serviceMonitor:
+        enabled: false

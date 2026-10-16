@@ -17,8 +17,9 @@ spec:
   values:
     prometheus:
       enabled: true
+      # No Prometheus in the cluster; ServiceMonitor CRDs were removed.
       servicemonitor:
-        enabled: true
+        enabled: false
     installCRDs: true
     podDnsPolicy: "None"
     podDnsConfig:
