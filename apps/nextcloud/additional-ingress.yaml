@@ -108,14 +108,6 @@ spec:
                 name: nextcloud
                 port:
                   number: 8080
-          # Public share API endpoints
-          - path: /ocs/v2.php/apps/files_sharing/api/v1/shares
-            pathType: Prefix
-            backend:
-              service:
-                name: nextcloud
-                port:
-                  number: 8080
           # Compiled assets (JS bundles)
           - path: /dist
             pathType: Prefix
