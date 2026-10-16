@@ -4,9 +4,7 @@ metadata:
   name: jellyfin
   namespace: jellyfin
   annotations:
-    traefik.ingress.kubernetes.io/proxy-body-size: 5G
     kubernetes.io/tls-acme: "true"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   ingressClassName: "traefik"
@@ -32,9 +30,7 @@ metadata:
   name: jellyfin-internal
   namespace: jellyfin
   annotations:
-    traefik.ingress.kubernetes.io/proxy-body-size: 5G
     kubernetes.io/tls-acme: "true"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
     traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
 spec:

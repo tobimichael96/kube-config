@@ -4,9 +4,7 @@ metadata:
   name: filebrowser-additional
   namespace: filebrowser
   annotations:
-    traefik.ingress.kubernetes.io/proxy-body-size: "10G"
     kubernetes.io/tls-acme: "true"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   ingressClassName: "traefik"

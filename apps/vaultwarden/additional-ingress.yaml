@@ -5,11 +5,8 @@ metadata:
   namespace: vaultwarden
   annotations:
     kubernetes.io/tls-acme: "true"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    traefik.ingress.kubernetes.io/limit-rps: 3
-    traefik.ingress.kubernetes.io/auth-url: "https://oauth2.tmem.de/oauth2/auth"
-    traefik.ingress.kubernetes.io/auth-signin: "https://oauth2.tmem.de/oauth2/start?rd=$scheme://$host$request_uri"
+    traefik.ingress.kubernetes.io/router.middlewares: "oauth2-proxy-oauth@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:

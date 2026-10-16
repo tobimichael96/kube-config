@@ -9,7 +9,6 @@ metadata:
   annotations:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    traefik.ingress.kubernetes.io/proxy-body-size: 10G
 spec:
   ingressClassName: "traefik"
   tls:

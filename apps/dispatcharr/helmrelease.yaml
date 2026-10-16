@@ -150,18 +150,7 @@ spec:
         className: "traefik"
         annotations:
           kubernetes.io/tls-acme: "true"
-          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          traefik.ingress.kubernetes.io/enable-compression: "true"
-          traefik.ingress.kubernetes.io/upstream-keepalive-connections: "32"
-          traefik.ingress.kubernetes.io/upstream-keepalive-timeout: "60"
-          traefik.ingress.kubernetes.io/proxy-connect-timeout: "10"
-          traefik.ingress.kubernetes.io/proxy-buffering: "off"
-          traefik.ingress.kubernetes.io/proxy-read-timeout: "3600"
-          traefik.ingress.kubernetes.io/proxy-send-timeout: "3600"
-          traefik.ingress.kubernetes.io/proxy-body-size: "0"
-          traefik.ingress.kubernetes.io/proxy-buffer-size: "32k"
-          traefik.ingress.kubernetes.io/websocket-services: "dispatcharr-app"
           traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
         hosts:
           - host: &host dispatcharr.internal.tmem.de

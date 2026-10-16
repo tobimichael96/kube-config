@@ -5,7 +5,6 @@ metadata:
   namespace: quick-share
   annotations:
     kubernetes.io/tls-acme: "true"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   ingressClassName: "traefik"

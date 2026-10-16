@@ -55,10 +55,7 @@ spec:
         className: "traefik"
         annotations:
           kubernetes.io/tls-acme: "true"
-          traefik.ingress.kubernetes.io/ssl-redirect: "true"
           cert-manager.io/cluster-issuer: "letsencrypt"
-          traefik.ingress.kubernetes.io/proxy-read-timeout: "3600"
-          traefik.ingress.kubernetes.io/proxy-send-timeout: "3600"
           traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
         hosts:
           - host: &host ha.internal.tmem.de
