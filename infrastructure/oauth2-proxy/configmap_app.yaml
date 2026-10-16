@@ -5,12 +5,11 @@ metadata:
     namespace: oauth2-proxy
 data:
     #ENC[AES256_GCM,data:nIcJQwHaVqun9V1WIPw=,iv:liABoC28B0C4XjykUTshrLPqK2Lcbz8ZX7PPamgqKKM=,tag:njsQLURECB0pISTjGytT/Q==,type:comment]
-    oauth2-proxy.cfg: ENC[AES256_GCM,data:PNyVH7fBeTMIZQnTcXr9pDt/6oJgzqWZv87DbeqPNQQCIO92MrCnNsYt2sp9aPjULmAguxtH85Stv1rYIpvUr03hMQ4NPzibyWFpsPJNSS85PrLo3xDf3Nms4TbjE6Yoj7nv3wDd1YX41vTQbJuHxhogaS8vsi1EHrrQ46gZg1u7JJ4bPhGR3QebX6ClTujNb/7ag6JgcqfbaoahdHdPSn0q2gIcJ+rnR+5xr1Dx6vK0Yh3+4fbW5uKmjGiJKmGbqQSLiOQZVDi9lNbnNIbSBmkoFVTLiZwcorM2RQvfxUk8RB4U8IZD5ZGMLQoByV2sGvBgs8CTpim2bOmd94UWJopZGhJ8Nte2v79Pzq2gqCnvSu+lu6iqxLqpSyBetgVp0LUXnISjfaRLs+smrM1HTuuhmYM5bQh0L1hFz8UQMBZJdqtem10y67TNU3B2pBlkNa67YZichhkTkYFvZiuM+2LTDJAWpIvyBd/ra11nz8E76pMCxQ00/7wkXgdCGL62pvrKhSYvORTUfeKhd9cnjUsb37oI9CunntWlXl9Jorvpqz1iPJle9GhYLWnRu1lTapbJEXHeOuueBQ/JIARnXCkAQMMz4VR+I+ap7fHoMTK0AVvHibxfXJAhFeBaDNHd3g5ZkwkDUaTI/f9C4NXMyKbpDsRHbcJi02a5cMFThDwCRv0osY+b0IOtKj+qxPPORovFmVR0gyIJBbNNcmnPhS5hMdsGbhMxaIRW8L9in/uxeWS6ud/i2GZxc8LsA1S/Q1mC8Dun9l63sw/F/NpiHKReKSChWlhR8hQc2LsvJweOs0z0rgKuKzPIyzaK3y9TDw9HlTuwXUaesdUOXi+mGaJt/TkphETZfIwEr7vTj6+heNjeR30G5YJBJwIakglHKqItNkjdE5Zx01KIJvpaflhKbKEQg7nAdH9GclC3ysk6ZA1GMcEI3n4kSWb3PNHcTAQQsgtCm5jFh3DceSFTVyrWJ5M+1LLVVF1cqtqcqtARhC7mYaohWVK3ih0jF1ifi1FJmPvJNjs6wJBXGz/TRbrP6VR/+LbgVwryewexKN4D1Uidc/nh7cCpAhWGvu42VRhWDJKgMo2CQMkci4+dA14EfAonSuZrZwRe/1XPo6U=,iv:XMxBWAvUEfxadjT16zWiTkK6QwtRCVl/kBoKS6IPVTM=,tag:Zvx9+GegLPCnyG9yhn42AA==,type:str]
+    oauth2-proxy.cfg: ENC[AES256_GCM,data:JE4M8dVuO0fcCcFCocL/dTvYxo0HS6F/m86ONuGhZ3NFjBRS7p/uLvf9CMc5xjOFI1PxYZoh9jkZr3bUleiRzqvmxGHkT9pzip7jaKwFhKo4YivSHVYcYnEkL7DtTSuI3BxKlIMO5wWDuBiZ3uSvgwEEdDEIBIHYN2x2OQA7UmK/sG+P0tLGuQzGXERjgO6q7Q3fRumuelzvJX76ZBENYloENpDd5wEGKpn/IEH6+Nnd7dHJFhqd/HvEmwAfc4JvLWxBPGX30QCEGGI7BxS6rzejbsjTPhGLu2Zqu8pjas3nDpHxRBGr3/Dp7pizDuknIvAyWVZ8c4a3ZqUkUhFEZeujdEdU05Ty3XSKIJUxqi26xQY6HQZkHrYC59FqxIKtEveNr3uBLBJU5c7wFnkZb2/KzzlcrH19iVsS+OH/yfau9IkMqk5cL9YgY3fCv2S1fhtxMyUTa1g07GHTtAS5iETAEgiwP0x8Q9mhe5DGSM6DWn+CiyL5bVolFj7QYzWrv5G4zeN3Cnvxp5dwdXNKL/KiFjc6tWJQyLqJwlmh0WS4dslhZGl43lQghATZLDUKPNhLTtTHFkUhe8xrg19xX67P+EF+XENpD6nLO/LphcT12qGQCOke1V/BV7KKlOuo+7u6GJZkMHDCsFvOum/f9kZgMU6tj1cl14KtcZGejx+kjoLxu/CcBFLH1/A1/M/vlxRmWT2i/67KwnUWjfIDAfuesW4cA98fLBLLGYLyBHG3jcO6MczwhSyU0bkft8g2GVqXGt+mYtoUkJsTBiYXLd4lHlu89Tnq5iC5Cqv2zxcVC6TstgqMO48seIdWqhA1VywmxEnIt/8puxOQ/MfZi97lN78mlHhUdInMvFeYtiMhfrTY8wLMyDAbwTnfkJW52OMR7XLjK5ShOS9VaKyhQzO+Y+H7c/sIS5YkkPX5PzUbfCEvRbH8U+bsfPGk6uAcaa3ye17UrAYd+m3esOlV118qK1c5F+EC4wzAHJJ3zlHYnN5TzyVFfE19n1E6wNOcLWNIxpI7Zwa3witO3FZpGBZ8DwFPPw8b+ix3WThADaXBOxkkZ0PVVqc+pLWL6FQ9,iv:gzrEryD0VYP0NeWrGrvKd8OCIzMEzHp09Grngz/cZE0=,tag:rFmkiD6vaEoVlG+8TKn7oA==,type:str]
     authenticated_emails.cfg: ENC[AES256_GCM,data:P9HLSFzP6OyNgyWVtCxZBEllfi+zcU28OCBxgS0eI5LKFVogy84lcfYaWhMkKyjqw2Y+zy0ftVo6,iv:No1MB4VUCMpbiq4DddTkR0uHj2jSXG//Yezmi6URq0M=,tag:ZjleiGY+w/iCRuQ5PXek7g==,type:str]
 sops:
     age:
-        - recipient: age1099kpzqp5v429mcyekxxnnyfkyuqxgq3esxvamc0kv7tf7nh9g9qymcpmx
-          enc: |
+        - enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
             YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvSEJLNDZBWklJWkprRUNH
             UGNrQU1YRWRUeU5oam1XOHRCMlpiTzZlS0JFCjI3WHlmbjhaZEkzRFFKZnA5Sm9v
@@ -18,7 +17,8 @@ sops:
             eGh1ejNMbTJBUS9IMkJDYlFYZFF1Ym8KmtunSMvbuwLGDmK2fXJ5brxDdC0D2wEb
             mj/78+8LVJRwlp9w3URFYzlO3ecwQExj9bvfiR0/uiyfWSgmas2oBA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-02-13T22:20:17Z"
-    mac: ENC[AES256_GCM,data:Y+Bvdvz0vey5kAC4fsiNmPzi22IBk7xCLCLYXhm6fzrtOXf7cHm4qUukzGP+wtSNGJg6RNpWmMwW1JEC2hEY/7AcU3DX8CwXhpyRDNaPIbNxD7eygNg2bR61OY5abXqwM6rkLwpecnBR//z9PB20ldRx1W3TweGub1IXFXLDC80=,iv:8q6UnAx5IrYDXG4Oo7+k+FMAWYnyzGbpJSVAB33xvk8=,tag:vkJIZRbLwfqj+0C8lJoBCw==,type:str]
+          recipient: age1099kpzqp5v429mcyekxxnnyfkyuqxgq3esxvamc0kv7tf7nh9g9qymcpmx
     encrypted_regex: ^(data|stringData)$
-    version: 3.11.0
+    lastmodified: "2026-10-16T21:15:29Z"
+    mac: ENC[AES256_GCM,data:+fiBEN2wLpSKeixX20ZZOqJDiCUdmDqRocb7ofoC8Uoy95UzCy3KsBALQwiP7sU/tdx9bFfEo+q2hnnKCcpC98HzTL2CHBq/bEzUtmYu4vK/EjnyMwGY+BDXg50VJMdVxXT/1lD+vJf3FMCXMBaj9JSNthO/HvJtMc0HyouLxS8=,iv:2g/xervWE9cxiMR/zW27/ktf8xMU1hpIKv9f2nkpEt8=,tag:WptlyWrtnMfGxeXvrW9qyA==,type:str]
+    version: 3.13.3
