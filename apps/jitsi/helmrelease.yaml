@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app jitsi
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: jitsi-meet
+      version: 3.10.0
+      sourceRef:
+        kind: HelmRepository
+        name: *app
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    fullnameOverride: *app
+    publicURL: https://meet.tmem.de
+    tz: Europe/Berlin
+    # No login: anyone with the link can open a room. Keep room names unguessable.
+    enableAuth: false
+    web:
+      extraEnvs:
+        # The group mostly talks without video
+        START_WITH_VIDEO_MUTED: "true"
+    jvb:
+      # Media goes over UDP 10000 straight to the node, not through Traefik.
+      # Forward UDP 10000 on the router to the homeserver.
+      useHostPort: true
+      UDPPort: 10000
+      # Public address is discovered via the default external STUN server,
+      # so the dynamic home IP is picked up on pod start.
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 1Gi
