@@ -82,7 +82,13 @@ spec:
               memory: 32Mi
             limits:
               memory: 128Mi
+    # The chart does not roll pods when their ConfigMaps change
+    jicofo:
+      annotations:
+        reloader.stakater.com/auto: "true"
     web:
+      annotations:
+        reloader.stakater.com/auto: "true"
       extraEnvs:
         # The group mostly talks without video
         START_WITH_VIDEO_MUTED: "true"
