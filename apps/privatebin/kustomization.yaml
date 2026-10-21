@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - helmrelease.yaml
-- ingress.yaml
+# PHP2Shell (CVE-2026-109618/109619): re-enable once the image ships a patched PHP
+# - ingress.yaml
