@@ -17,6 +17,8 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
+    # PHP2Shell (CVE-2026-109618/109619): scaled down until the image ships a patched PHP
+    replicaCount: 0
     resources:
       requests:
         cpu: 5m
