@@ -20,68 +20,8 @@ spec:
     fullnameOverride: *app
     publicURL: https://meet.tmem.de
     tz: Europe/Berlin
-    # Secure domain: only the host account (secrets.yaml) can start a meeting.
-    # Everyone else joins as a guest once the host is in the room.
-    enableAuth: true
-    enableGuests: true
-    prosody:
-      persistence:
-        enabled: true
-        existingClaim: jitsi-pvc
-      annotations:
-        secret.reloader.stakater.com/reload: jitsi-host-account
-      # The chart cannot create users. This sidecar creates the host account
-      # once prosody is up and resets its password to the one in the Secret,
-      # the same way the image's register-setup creates focus and jvb.
-      extraInitContainers:
-        - name: host-account
-          image: ghcr.io/jitsi/prosody:stable-11248
-          restartPolicy: Always
-          command: ["/bin/bash", "-c"]
-          args:
-            - |
-              set -u
-              until curl -fs -o /dev/null http://127.0.0.1:5280/health; do sleep 2; done
-              cfg=/run/prosody/config/prosody.cfg.lua
-              jid="$HOST_USER@meet.jitsi"
-              prosodyctl --config "$cfg" shell user create "$jid" "$HOST_PASSWORD" ||
-                true
-              prosodyctl --config "$cfg" shell user password "$jid" "$HOST_PASSWORD" &&
-                echo "host account $jid ready"
-              exec sleep infinity
-          env:
-            - name: HOST_USER
-              valueFrom:
-                secretKeyRef:
-                  name: jitsi-host-account
-                  key: username
-            - name: HOST_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: jitsi-host-account
-                  key: password
-          volumeMounts:
-            - name: run
-              mountPath: /run
-            - name: tmp
-              mountPath: /tmp
-            - name: prosody-data
-              mountPath: /var/lib/prosody
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-          resources:
-            requests:
-              cpu: 5m
-              memory: 32Mi
-            limits:
-              memory: 128Mi
+    # No login: anyone with the link can open a room. Keep room names unguessable.
+    enableAuth: false
     # The chart does not roll pods when their ConfigMaps change
     jicofo:
       annotations:
