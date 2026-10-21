@@ -20,10 +20,10 @@ spec:
     resources:
       requests:
         cpu: 5m
-        memory: 32Mi
+        memory: 64Mi
       limits:
         cpu: 50m
-        memory: 64Mi
+        memory: 128Mi
     configs:
       conf.php: |-
         [main]
@@ -46,8 +46,8 @@ spec:
         syntaxhighlightingtheme = "sons-of-obsidian"
         ; size limit per paste or comment in bytes, defaults to 10 Gibibytes
         sizelimit = 10737418240
-        ; template to include, default is "bootstrap" (tpl/bootstrap.php)
-        template = "bootstrap-dark"
+        ; template to include, default is "bootstrap5" (tpl/bootstrap5.php)
+        template = "bootstrap5"
         ; (optional) notice to display
         notice = "Note: This is a private service: Data may be deleted anytime. Kittens will die if you abuse this service."
         ; by default PrivateBin will guess the visitors language based on the browsers
