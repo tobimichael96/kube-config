@@ -32,6 +32,16 @@ spec:
       extraEnvs:
         # The group mostly talks without video
         START_WITH_VIDEO_MUTED: "true"
+        # Rooms are open, so don't advertise "Start meeting" on the root page.
+        # Direct room links keep working.
+        ENABLE_WELCOME_PAGE: "false"
+        # No Gravatar etc.: browsers only talk to this server
+        ENABLE_THIRD_PARTY_REQUESTS: "false"
+        # JVB sends every stream out over the home upload, so cap video at 360p
+        RESOLUTION: "360"
+        RESOLUTION_WIDTH: "640"
+        # Fewer buttons for a non-technical group
+        TOOLBAR_BUTTONS: "microphone,camera,chat,raisehand,tileview,settings,hangup"
     jvb:
       # Media goes over UDP 10000 straight to the node, not through Traefik.
       # Forward UDP 10000 on the router to the homeserver.
