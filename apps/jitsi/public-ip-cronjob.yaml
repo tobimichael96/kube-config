@@ -1,0 +1,84 @@
+---
+# JVB learns the public IP via STUN only at startup, so after the home IP changes
+# it keeps advertising the old address and calls connect without audio.
+#
+# This job writes the current public IP into the jitsi-public-ip ConfigMap every
+# 5 minutes. kubectl apply only changes the ConfigMap when the IP differs, and
+# Reloader (configmap.reloader.stakater.com/reload on the JVB deployment) then
+# restarts JVB. Creating the ConfigMap on the first run does not trigger a restart.
+#
+# The ConfigMap is deliberately not in Git: Flux would reset the ip on every
+# reconcile and cause a restart each time.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jitsi-public-ip
+  namespace: jitsi
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: jitsi-public-ip
+  namespace: jitsi
+rules:
+  # create cannot be limited by resourceNames
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["create"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    resourceNames: ["jitsi-public-ip"]
+    verbs: ["get", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: jitsi-public-ip
+  namespace: jitsi
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: jitsi-public-ip
+subjects:
+  - kind: ServiceAccount
+    name: jitsi-public-ip
+    namespace: jitsi
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: jitsi-public-ip
+  namespace: jitsi
+spec:
+  schedule: "*/5 * * * *"
+  timeZone: Europe/Berlin
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 120
+      template:
+        spec:
+          serviceAccountName: jitsi-public-ip
+          restartPolicy: Never
+          containers:
+            - name: check
+              image: alpine/k8s:1.37.1
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  set -eu
+                  ip=$(curl -4fsS --max-time 10 https://api.ipify.org || curl -4fsS --max-time 10 https://ifconfig.me)
+                  # Never write an error page or empty answer: that would restart JVB
+                  echo "$ip" | grep -Eq '^([0-9]{1,3}\.){3}[0-9]{1,3}$' || { echo "bad answer: $ip"; exit 1; }
+                  echo "public ip: $ip"
+                  kubectl create configmap jitsi-public-ip --from-literal=ip="$ip" \
+                    --dry-run=client -o yaml | kubectl apply -f -
+              resources:
+                requests:
+                  cpu: 10m
+                  memory: 32Mi
+                limits:
+                  memory: 128Mi

@@ -32,7 +32,10 @@ spec:
       useHostPort: true
       UDPPort: 10000
       # Public address is discovered via the default external STUN server,
-      # so the dynamic home IP is picked up on pod start.
+      # so the dynamic home IP is picked up on pod start. public-ip-cronjob.yaml
+      # restarts JVB when that IP changes.
+      annotations:
+        configmap.reloader.stakater.com/reload: jitsi-public-ip
       resources:
         requests:
           cpu: 100m
