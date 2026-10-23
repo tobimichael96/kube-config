@@ -5,6 +5,5 @@ resources:
 - storage.yaml
 - secrets.yaml
 - helmrelease.yaml
-# PHP2Shell (CVE-2026-109618/109619): re-enable once the image ships PHP >= 8.5.12
-# - additional-ingress.yaml
+- additional-ingress.yaml
 - files-scan.yaml
