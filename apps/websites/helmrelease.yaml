@@ -138,6 +138,9 @@ spec:
       nginx-config:
         data:
           default.conf: |
+            # tobieffner.com logs no visitor data (no IP, referrer or user agent), as promised
+            # in its privacy policy
+            log_format noip '[$time_local] "$request" $status $body_bytes_sent';
             server {
                 listen 80;
                 server_name tobiasmichael.de www.tobiasmichael.de tm28.de tmem.de;
@@ -161,6 +164,7 @@ spec:
                 server_name tobieffner.com www.tobieffner.com;
                 root /usr/share/nginx/html/tobieffner;
                 index index.html;
+                access_log /var/log/nginx/access.log noip;
                 error_page 404 /error.html;
                 location = /error.html {
                     internal;
