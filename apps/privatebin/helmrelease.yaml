@@ -17,8 +17,9 @@ spec:
   releaseName: *app
   targetNamespace: *app
   values:
-    # PHP2Shell (CVE-2026-109618/109619): scaled down until the image ships a patched PHP
-    replicaCount: 0
+    image:
+      # Pinned by digest: the tag gets rebuilt in place, and IfNotPresent would keep a stale image
+      tag: 2.1.0@sha256:0f80fb240c3c3073c53a82893da7c7d62f03f4e05403855b720e4371541ba412
     resources:
       requests:
         cpu: 5m
