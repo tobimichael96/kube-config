@@ -176,6 +176,19 @@ spec:
                 location = /error.html {
                     internal;
                 }
+                # Umami (analytics.tmem.de) under the site's own address, so the CSP stays 'self'
+                # and no third-party request is made. Umami gets the visitor's IP (from Traefik) only
+                # for its daily-rotating visitor hash and the country; it doesn't store it
+                resolver 10.43.0.10 valid=30s;
+                set $umami http://umami-main.umami.svc.cluster.local:3000;
+                location = /stats/script.js {
+                    proxy_pass $umami/script.js;
+                    proxy_set_header X-Forwarded-For $http_x_forwarded_for;
+                }
+                location = /stats/api/send {
+                    proxy_pass $umami/api/send;
+                    proxy_set_header X-Forwarded-For $http_x_forwarded_for;
+                }
             }
     persistence:
       nginx-config:
