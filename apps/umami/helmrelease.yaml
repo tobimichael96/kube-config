@@ -36,11 +36,11 @@ spec:
               - secret: umami-app-config
             resources:
               requests:
-                cpu: 10m
-                memory: 128Mi
+                cpu: 50m
+                memory: 256Mi
               limits:
-                cpu: 100m
-                memory: 350Mi
+                cpu: 1000m
+                memory: 768Mi
             probes:
               liveness:
                 enabled: true
@@ -78,11 +78,11 @@ spec:
               - secret: umami-db-config
             resources:
               requests:
-                cpu: 10m
-                memory: 64Mi
-              limits:
-                cpu: 100m
+                cpu: 25m
                 memory: 128Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
             probes:
               liveness:
                 enabled: true
