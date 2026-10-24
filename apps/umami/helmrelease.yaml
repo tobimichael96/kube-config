@@ -30,6 +30,8 @@ spec:
               tag: 3.4.1
             env:
               TZ: Europe/Berlin
+              # new anonymous visitor ID every day instead of every month (privacy)
+              SALT_ROTATION: day
             envFrom:
               - secret: umami-app-config
             resources:
