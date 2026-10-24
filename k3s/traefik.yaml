@@ -20,8 +20,9 @@ spec:
     
     # Performance tuning
     additionalArguments:
-      # Redirect HTTP to HTTPS
-      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      # Redirect HTTP to HTTPS. A port instead of the entry point name, otherwise the
+      # redirect points at websecure's internal port (https://host:8443/)
+      - "--entryPoints.web.http.redirections.entryPoint.to=:443"
       - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
       - "--entryPoints.web.http.redirections.entryPoint.permanent=true"
 
