@@ -18,6 +18,14 @@ spec:
   values:
     controllers:
       static-sites:
+        # two pods, and a new one has to be ready before an old one stops (the default Recreate
+        # stopped the only pod first, so every config change took all sites down for a while);
+        # the RWO volume is fine with that, all pods run on the same node
+        replicas: 2
+        strategy: RollingUpdate
+        rollingUpdate:
+          unavailable: 0
+          surge: 1
         containers:
           app:
             image:
