@@ -72,8 +72,6 @@ spec:
       app:
         className: "traefik"
         annotations:
-          kubernetes.io/tls-acme: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
           traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
         hosts:
           - host: &host bazarr.internal.tmem.de
@@ -85,7 +83,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: bazarr-tls
     persistence:
       config:
         existingClaim: bazarr-config-pvc

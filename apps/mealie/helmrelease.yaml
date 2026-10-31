@@ -68,8 +68,6 @@ spec:
         enabled: true
         className: "traefik"
         annotations:
-          kubernetes.io/tls-acme: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
           traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
         hosts:
           - host: &host mealie.internal.tmem.de
@@ -82,7 +80,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: mealie-tls
     persistence:
       config:
         enabled: true

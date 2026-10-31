@@ -45,13 +45,10 @@ spec:
       enabled: true
       className: "traefik"
       annotations:
-        kubernetes.io/tls-acme: "true"
-        cert-manager.io/cluster-issuer: "letsencrypt"
         traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
       host: &host vault.internal.tmem.de
       tls:
-        - secretName: vaultwarden-tls
-          hosts:
+        - hosts:
             - *host
     persistence:
       enabled: true

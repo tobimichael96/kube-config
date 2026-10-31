@@ -5,15 +5,12 @@ metadata:
   name: komodo
   namespace: local-services
   annotations:
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt"
     traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
         - &host komodo.internal.tmem.de
-      secretName: komodo-tls
   rules:
     - host: *host
       http:
@@ -32,15 +29,12 @@ metadata:
   name: adguard
   namespace: local-services
   annotations:
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt"
     traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
         - &host adguard.internal.tmem.de
-      secretName: adguard-tls
   rules:
     - host: *host
       http:
@@ -59,15 +53,12 @@ metadata:
   name: ddns
   namespace: local-services
   annotations:
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt"
     traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
         - &host ddns.internal.tmem.de
-      secretName: ddns-tls
   rules:
     - host: *host
       http:
@@ -86,15 +77,12 @@ metadata:
   name: adsb
   namespace: local-services
   annotations:
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt"
     traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
         - &host adsb.internal.tmem.de
-      secretName: adsb-tls
   rules:
     - host: *host
       http:

@@ -74,8 +74,6 @@ spec:
         enabled: true
         className: "traefik"
         annotations:
-          kubernetes.io/tls-acme: "true"
-          cert-manager.io/cluster-issuer: "letsencrypt"
           traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
         hosts:
           - host: &host unmanic.internal.tmem.de
@@ -88,7 +86,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: unmanic-tls
     persistence:
       cache:
         enabled: true

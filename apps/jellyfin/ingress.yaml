@@ -30,15 +30,12 @@ metadata:
   name: jellyfin-internal
   namespace: jellyfin
   annotations:
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt"
     traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
         - &i-host jellyfin.internal.tmem.de
-      secretName: jellyfin-internal-tls
   rules:
     - host: *i-host
       http:
