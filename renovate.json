@@ -41,15 +41,6 @@
   },
   "packageRules": [
     {
-      "matchPackageNames": [
-        "factorio**",
-        "nvidia**",
-        "gpu**"
-      ],
-      "automerge": false,
-      "automergeType": "pr"
-    },
-    {
       "matchUpdateTypes": [
         "minor",
         "patch",
@@ -57,6 +48,16 @@
         "digest"
       ],
       "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "matchPackageNames": [
+        "factorio**",
+        "nvidia**",
+        "gpu**",
+        "ollama/**"
+      ],
+      "automerge": false,
       "automergeType": "pr"
     }
   ]
