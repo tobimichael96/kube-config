@@ -1,0 +1,17 @@
+---
+# Served by Traefik as the default certificate (see infrastructure/traefik/tls-store.yaml),
+# so internal ingresses only list their host and don't request a cert of their own.
+# This also keeps internal hostnames out of the Certificate Transparency logs.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: internal-wildcard
+  namespace: kube-system
+spec:
+  secretName: internal-wildcard-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  dnsNames:
+    - internal.tmem.de
+    - "*.internal.tmem.de"

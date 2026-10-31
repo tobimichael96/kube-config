@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - secrets.yaml
   - cluster-issuers.yaml
+  - certificates.yaml
