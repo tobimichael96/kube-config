@@ -32,6 +32,8 @@ spec:
               ENABLE_OPENAI_API: "false"
               WEBUI_URL: "https://openwebui.internal.tmem.de"
               ENABLE_SIGNUP: "false"
+              # Only applies while no default is set in Admin Settings (persistent config).
+              DEFAULT_MODELS: "qwen3:30b-a3b-instruct-2507-q4_K_M"
             resources:
               requests:
                 cpu: 50m

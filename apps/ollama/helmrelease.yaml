@@ -50,6 +50,7 @@ spec:
                 memory: 2Gi
               limits:
                 cpu: 6000m
+                # qwen3:30b-a3b keeps its experts in system RAM (~14GB mapped) and the rest on the GPU.
                 memory: 18Gi
                 nvidia.com/gpu: 1
             probes:
