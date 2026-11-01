@@ -5,7 +5,7 @@ metadata:
   name: ollama-models-pv
 spec:
   capacity:
-    storage: 200Gi
+    storage: 350Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -34,7 +34,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Gi
+      storage: 350Gi
 ---
 apiVersion: v1
 kind: PersistentVolume
