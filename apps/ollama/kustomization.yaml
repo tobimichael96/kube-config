@@ -4,4 +4,3 @@ resources:
 - namespace.yaml
 - storage.yaml
 - helmrelease.yaml
-- open-webui.yaml

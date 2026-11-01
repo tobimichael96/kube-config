@@ -34,7 +34,7 @@ spec:
               OLLAMA_MODELS: /models
               # The 6GB card is shared with jellyfin/dispatcharr/unmanic/bazarr: keep one
               # model (~3.3GB + ~0.9GB KV at 12k) and unload it when idle to free VRAM for NVENC.
-              OLLAMA_KEEP_ALIVE: "30m"
+              OLLAMA_KEEP_ALIVE: "5m"
               OLLAMA_MAX_LOADED_MODELS: "1"
               OLLAMA_NUM_PARALLEL: "1"
               OLLAMA_FLASH_ATTENTION: "1"
@@ -50,8 +50,7 @@ spec:
                 memory: 2Gi
               limits:
                 cpu: 6000m
-                # qwen3:30b-a3b keeps its experts in system RAM (~14GB mapped) and the rest on the GPU.
-                memory: 18Gi
+                memory: 12Gi
                 nvidia.com/gpu: 1
             probes:
               liveness:
