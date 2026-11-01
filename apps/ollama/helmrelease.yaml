@@ -50,7 +50,7 @@ spec:
                 memory: 2Gi
               limits:
                 cpu: 6000m
-                memory: 12Gi
+                memory: 18Gi
                 nvidia.com/gpu: 1
             probes:
               liveness:
