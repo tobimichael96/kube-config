@@ -40,15 +40,17 @@ spec:
               OLLAMA_FLASH_ATTENTION: "1"
               OLLAMA_KV_CACHE_TYPE: "q8_0"
               OLLAMA_CONTEXT_LENGTH: "8192"
+              # llama.cpp's host-RAM prompt cache defaults to 8GiB, which got the pod OOMKilled.
+              LLAMA_ARG_CACHE_RAM: "2048"
               NVIDIA_VISIBLE_DEVICES: "all"
               NVIDIA_DRIVER_CAPABILITIES: "compute,utility"
             resources:
               requests:
                 cpu: 200m
-                memory: 1Gi
+                memory: 2Gi
               limits:
-                cpu: 4000m
-                memory: 8Gi
+                cpu: 6000m
+                memory: 12Gi
                 nvidia.com/gpu: 1
             probes:
               liveness:
