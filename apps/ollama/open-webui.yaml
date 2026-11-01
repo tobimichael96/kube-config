@@ -34,6 +34,11 @@ spec:
               ENABLE_SIGNUP: "false"
               # Only applies while no default is set in Admin Settings (persistent config).
               DEFAULT_MODELS: "qwen3:30b-a3b-instruct-2507-q4_K_M"
+              # Same caveat: these were already persisted at first boot, so they were set once in
+              # Admin Settings > Web Search and only take effect from here on a fresh database.
+              ENABLE_WEB_SEARCH: "true"
+              WEB_SEARCH_ENGINE: "searxng"
+              SEARXNG_QUERY_URL: "http://searxng.searxng.svc.cluster.local:8080/search?q=<query>"
             resources:
               requests:
                 cpu: 50m

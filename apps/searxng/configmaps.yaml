@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: searxng-config
+  namespace: searxng
+data:
+  settings.yml: |
+    use_default_settings: true
+    general:
+      instance_name: "SearXNG"
+    server:
+      # Only reachable in-cluster (Open WebUI), so the bot limiter and image proxy aren't needed.
+      # secret_key comes from SEARXNG_SECRET.
+      limiter: false
+      image_proxy: false
+      public_instance: false
+    search:
+      safe_search: 0
+      # Open WebUI queries the JSON API.
+      formats:
+        - html
+        - json
