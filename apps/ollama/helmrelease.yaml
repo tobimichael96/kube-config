@@ -33,13 +33,13 @@ spec:
               OLLAMA_HOST: "0.0.0.0:11434"
               OLLAMA_MODELS: /models
               # The 6GB card is shared with jellyfin/dispatcharr/unmanic/bazarr: keep one
-              # model (~3.3GB + ~0.6GB KV at 8k) and unload it when idle to free VRAM for NVENC.
+              # model (~3.3GB + ~0.9GB KV at 12k) and unload it when idle to free VRAM for NVENC.
               OLLAMA_KEEP_ALIVE: "5m"
               OLLAMA_MAX_LOADED_MODELS: "1"
               OLLAMA_NUM_PARALLEL: "1"
               OLLAMA_FLASH_ATTENTION: "1"
               OLLAMA_KV_CACHE_TYPE: "q8_0"
-              OLLAMA_CONTEXT_LENGTH: "8192"
+              OLLAMA_CONTEXT_LENGTH: "12288"
               # llama.cpp's host-RAM prompt cache defaults to 8GiB, which got the pod OOMKilled.
               LLAMA_ARG_CACHE_RAM: "2048"
               NVIDIA_VISIBLE_DEVICES: "all"
