@@ -2,43 +2,47 @@
 
 Telegram bot that lets authorized users restart game servers. Anyone can message the bot
 and request access; a bootstrap admin approves them and is notified on each restart.
-Source and image build live in the separate `telegram-games-k8s` repo; this directory
+Source and image build live in the separate `telegram-games-k8s` repository; this directory
 only holds the Flux/Helm deployment (bjw-s `app-template`).
 
 ## What gets deployed
 
-| File | Purpose |
-|------|---------|
-| `namespace.yaml` | `telegram-games-k8s` namespace |
-| `rbac.yaml` | Read-only ClusterRole/Binding (list Deployments/StatefulSets everywhere) + `patch` via RoleBinding per game namespace |
-| `storage.yaml` | 1Gi local-storage PV/PVC on `homeserver` for the SQLite DB (mounted at `/data`) |
-| `secrets.yaml` | SOPS-encrypted `TELEGRAM_BOT_TOKEN`, `BOT_ADMINS` |
-| `ghcr-pull-secret.yaml` | SOPS-encrypted dockerconfig to pull the private GHCR image |
-| `helmrelease.yaml` | app-template release (long-polling, no Service/Ingress) |
+| File                    | Purpose                                                                                                               |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `namespace.yaml`        | `telegram-games-k8s` namespace                                                                                        |
+| `rbac.yaml`             | Read-only ClusterRole/Binding (list Deployments/StatefulSets everywhere) + `patch` via RoleBinding per game namespace |
+| `storage.yaml`          | 1Gi `local-storage` PV/PVC on `homeserver` for the SQLite DB (mounted at `/data`)                                     |
+| `secrets.yaml`          | SOPS-encrypted `TELEGRAM_BOT_TOKEN`, `BOT_ADMINS`                                                                     |
+| `ghcr-pull-secret.yaml` | SOPS-encrypted dockerconfig to pull the private GHCR image                                                            |
+| `helmrelease.yaml`      | app-template release (long-polling, no Service/Ingress)                                                               |
 
 Each game runs in its own namespace (`minecraft`, `satisfactory`, …), so the bot can
-*list* workloads cluster-wide. It can only *patch* (start/stop/restart) in namespaces
+_list_ workloads cluster-wide. It can only _patch_ (start/stop/restart) in namespaces
 that have a `telegram-games-k8s-control` RoleBinding, so a leaked bot token or bot bug
 can't touch anything outside the game namespaces.
 
 ## Before it works
 
 1. **Set the real secrets** (needs the age key):
+
    ```sh
    sops apps/telegram-games-k8s/secrets.yaml
    ```
+
    Replace the placeholder bot token and the bootstrap admin user IDs (the admins who
    approve access requests). Admins must start a chat with the bot to get notifications.
    **Keep the values quoted** (e.g. `BOT_ADMINS: "13556577"`) — an unquoted number is
    parsed as an int and rejected by the Secret's `stringData` (Flux dry-run fails).
 
 2. **Label the game servers** you want to manage. The bot only sees workloads carrying:
+
    ```yaml
    metadata:
      labels:
        games.telegram-bot/managed: "true"
-       games.telegram-bot/name: "Minecraft"   # optional friendly name
+       games.telegram-bot/name: "Minecraft" # optional friendly name
    ```
+
    Add these labels to the `Deployment`/`StatefulSet` of each game (e.g. under
    `games/minecraft`, `games/satisfactory`), and add a RoleBinding for the game's
    namespace in `rbac.yaml` (copy the `satisfactory` one). Without it the bot lists the

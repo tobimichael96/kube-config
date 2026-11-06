@@ -35,7 +35,7 @@ read -rp "Continue? This stops k3s and all its pods. [y/N] " answer
 # about the module don't get it automatically, though, so get headers for
 # the running kernel and the newest installed one (the one the reboot picks).
 running_kernel="$(uname -r)"
-newest_kernel="$(ls /lib/modules | sort -V | tail -1)"
+newest_kernel="$(find /lib/modules -mindepth 1 -maxdepth 1 -printf '%f\n' | sort -V | tail -1)"
 apt-get update
 apt-get install -y dkms build-essential \
   "linux-headers-$running_kernel" "linux-headers-$newest_kernel"

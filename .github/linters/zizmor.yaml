@@ -1,0 +1,6 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        # Renovate bumps actions by tag; hash pins would add a digest PR per release.
+        "*": ref-pin

@@ -1,64 +1,31 @@
 {
-  "extends": [
-    "config:recommended"
-  ],
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "enabledManagers": [
-    "flux",
-    "kubernetes",
-    "helm-values",
-    "github-actions"
-  ],
-  "flux": {
-    "managerFilePatterns": [
-      "/\\.ya?ml$/"
-    ],
-    "ignoreDeps": [
-      "josh5/unmanic",
-      "ghcr.io/immich-app/postgres"
-    ]
-  },
-  "kubernetes": {
-    "managerFilePatterns": [
-      "/\\.ya?ml$/"
-    ],
-    "ignorePaths": [
-      "**/flux-system/**"
-    ]
-  },
-  "helm-values": {
-    "commitMessageTopic": "Helm values {{depName}}",
-    "managerFilePatterns": [
-      "/\\.ya?ml$/"
-    ],
-    "ignorePaths": [
-      "**/flux-system/**"
-    ],
-    "ignoreDeps": [
-      "josh5/unmanic",
-      "ghcr.io/immich-app/postgres"
-    ]
-  },
-  "packageRules": [
-    {
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "automerge": true,
-      "automergeType": "pr"
-    },
-    {
-      "matchPackageNames": [
-        "factorio**",
-        "nvidia**",
-        "gpu**",
-        "ollama/**"
-      ],
-      "automerge": false,
-      "automergeType": "pr"
-    }
-  ]
+	"extends": ["config:recommended"],
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"enabledManagers": ["flux", "kubernetes", "helm-values", "github-actions"],
+	"flux": {
+		"managerFilePatterns": ["/\\.ya?ml$/"],
+		"ignoreDeps": ["josh5/unmanic", "ghcr.io/immich-app/postgres"]
+	},
+	"kubernetes": {
+		"managerFilePatterns": ["/\\.ya?ml$/"],
+		"ignorePaths": ["**/flux-system/**"]
+	},
+	"helm-values": {
+		"commitMessageTopic": "Helm values {{depName}}",
+		"managerFilePatterns": ["/\\.ya?ml$/"],
+		"ignorePaths": ["**/flux-system/**"],
+		"ignoreDeps": ["josh5/unmanic", "ghcr.io/immich-app/postgres"]
+	},
+	"packageRules": [
+		{
+			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+			"automerge": true,
+			"automergeType": "pr"
+		},
+		{
+			"matchPackageNames": ["factorio**", "nvidia**", "gpu**", "ollama/**"],
+			"automerge": false,
+			"automergeType": "pr"
+		}
+	]
 }

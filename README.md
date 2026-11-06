@@ -2,10 +2,10 @@
 
 Flux repository for my personal kubernetes setup.
 
-### Structure
+## Structure
 
 There are two main folders: apps and infrastructure.
 
-### Secrets
+## Secrets
 
 Secrets are encrypted using [SOPS](https://github.com/mozilla/sops).

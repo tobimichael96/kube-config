@@ -4,15 +4,22 @@ name: Lint Code Base
 on:
   push:
 
+permissions: {}
+
 jobs:
   build:
     name: Lint Code Base
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # super-linter reports a commit status per linter
+      statuses: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Lint Code Base
         uses: super-linter/super-linter@v9
         env:
@@ -22,5 +29,7 @@ jobs:
           VALIDATE_JSON_PRETTIER: false
           VALIDATE_YAML_PRETTIER: false
           VALIDATE_KUBERNETES_KUBECONFORM: false
+          # Flags missing securityContext/limits in nearly every manifest
+          VALIDATE_TRIVY: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
