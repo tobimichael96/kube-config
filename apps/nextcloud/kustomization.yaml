@@ -6,4 +6,3 @@ resources:
 - secrets.yaml
 - helmrelease.yaml
 - additional-ingress.yaml
-- files-scan.yaml
