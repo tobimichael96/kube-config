@@ -32,6 +32,8 @@ spec:
               tag: "2026.11.0"
             env:
               TZ: "Europe/Berlin"
+              # SQLite temp files (recorder repack = full DB copy) go to the PV, not the node disk
+              SQLITE_TMPDIR: "/config/tmp"
             securityContext:
               allowPrivilegeEscalation: false
               capabilities:
