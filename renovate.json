@@ -4,7 +4,7 @@
 	"enabledManagers": ["flux", "kubernetes", "helm-values", "github-actions"],
 	"flux": {
 		"managerFilePatterns": ["/\\.ya?ml$/"],
-		"ignoreDeps": ["josh5/unmanic", "ghcr.io/immich-app/postgres"]
+		"ignoreDeps": ["josh5/unmanic"]
 	},
 	"kubernetes": {
 		"managerFilePatterns": ["/\\.ya?ml$/"],
@@ -14,7 +14,7 @@
 		"commitMessageTopic": "Helm values {{depName}}",
 		"managerFilePatterns": ["/\\.ya?ml$/"],
 		"ignorePaths": ["**/flux-system/**"],
-		"ignoreDeps": ["josh5/unmanic", "ghcr.io/immich-app/postgres"]
+		"ignoreDeps": ["josh5/unmanic"]
 	},
 	"packageRules": [
 		{

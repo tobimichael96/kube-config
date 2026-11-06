@@ -60,8 +60,8 @@ token with one of two encoder argument sets:
 It picks between them by attempting a one-frame throwaway NVENC encode before
 starting the real one. That probe costs about 0.5s on every channel start.
 
-The reason is that the GPU is a single 6GB card shared with `immich-ml`,
-`jellyfin` and `unmanic`, with no VRAM partitioning — whichever pod allocates
+The reason is that the GPU is a single 6GB card shared with `jellyfin`, `bazarr`,
+`unmanic` and `ollama`, with no VRAM partitioning — whichever pod allocates
 first wins. ffmpeg cannot fall back between encoders on its own, so without the
 wrapper a full card meant `h264_nvenc` failed to open with
 `CUDA_ERROR_OUT_OF_MEMORY` and Dispatcharr tore the channel down about three

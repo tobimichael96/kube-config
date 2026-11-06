@@ -13,7 +13,7 @@ data:
     # with a complete video encoder argument set.
     #
     # Why a wrapper: ffmpeg has no fallback when an encoder fails to open. The
-    # 6GB card is shared with immich-ml, jellyfin and unmanic, and when it is
+    # 6GB card is shared with jellyfin, bazarr, unmanic and ollama, and when it is
     # full h264_nvenc dies with CUDA_ERROR_OUT_OF_MEMORY, taking the channel
     # down instead of degrading it. See README.md.
 
