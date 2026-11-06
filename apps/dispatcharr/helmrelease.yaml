@@ -38,9 +38,9 @@ spec:
               # Gluetun starts from its bundled server list (2025-10-03) and only
               # refreshes it after UPDATER_PERIOD, so most German servers it picks
               # are gone or have rotated keys and fail the healthcheck, stretching
-              # startup to ~2 minutes. Pin the ones verified against Mullvad's
-              # live relay list on 2026-10-12.
-              SERVER_HOSTNAMES: de-fra-wg-001,de-fra-wg-002,de-fra-wg-003,de-fra-wg-004,de-fra-wg-005,de-ber-wg-001,de-ber-wg-002
+              # startup to ~2 minutes. Pin the ones present in both the bundled
+              # list and Mullvad's live relay list (checked 2026-11-06).
+              SERVER_HOSTNAMES: se-sto-wg-001,se-sto-wg-003,se-sto-wg-008,se-sto-wg-009,se-sto-wg-010,se-sto-wg-011
               UPDATER_PERIOD: 12h
               # Do not use gluetun's internal DNS server: it binds [::]:53 while
               # its own resolver dials 127.0.0.1:53 over IPv4, and with no working
