@@ -1,0 +1,98 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/common-3.2.0/charts/library/common/values.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app netalertx
+  namespace: *app
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 5.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 5m
+  releaseName: *app
+  targetNamespace: *app
+  values:
+    defaultPodOptions:
+      # Host network for arp-scan, nmap, nbtscan and mDNS on the LAN (enp5s0, 192.168.178.0/24)
+      hostNetwork: true
+    controllers:
+      main:
+        strategy: Recreate
+        containers:
+          netalertx:
+            image:
+              repository: ghcr.io/jokob-sk/netalertx
+              # Pinned by digest: the tag gets rebuilt in place, and IfNotPresent would keep a stale image
+              tag: 26.10.28@sha256:ebce55cdbccc0f71544e6997541fe81db803b8c8bec3079435b8cd0a40d49b7e
+            env:
+              TZ: "Europe/Berlin"
+              LISTEN_ADDR: "0.0.0.0"
+              PORT: "20211"
+              GRAPHQL_PORT: "20212"
+            securityContext:
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+                add:
+                  - NET_ADMIN         # arp-scan, nmap, nbtscan, traceroute, zero-conf
+                  - NET_RAW
+                  - NET_BIND_SERVICE  # nbtscan binds a privileged port
+                  - CHOWN             # root entrypoint chowns /data and /tmp ...
+                  - SETUID            # ... then drops to uid/gid 20211
+                  - SETGID
+            probes:
+              readiness:
+                enabled: true
+                spec:
+                  initialDelaySeconds: 20
+                  periodSeconds: 30
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 20211
+    ingress:
+      main:
+        enabled: true
+        className: "traefik"
+        annotations:
+          traefik.ingress.kubernetes.io/router.middlewares: "kube-system-internal-only@kubernetescrd"
+        hosts:
+          - host: &host netalertx.internal.tmem.de
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      data:
+        enabled: true
+        existingClaim: netalertx-data-pvc
+        globalMounts:
+          - path: /data
+      # The image writes only to /data and /tmp (read-only root filesystem)
+      tmp:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 256Mi
+        globalMounts:
+          - path: /tmp
