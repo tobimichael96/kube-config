@@ -28,8 +28,9 @@ spec:
           netalertx:
             image:
               repository: ghcr.io/jokob-sk/netalertx
-              # Pinned by digest: the tag gets rebuilt in place, and IfNotPresent would keep a stale image
-              tag: 26.10.28@sha256:ebce55cdbccc0f71544e6997541fe81db803b8c8bec3079435b8cd0a40d49b7e
+              tag: 26.10.28
+              # The tag gets rebuilt in place; Always keeps a restarted pod from reusing a stale cached image
+              pullPolicy: Always
             env:
               TZ: "Europe/Berlin"
               LISTEN_ADDR: "0.0.0.0"
