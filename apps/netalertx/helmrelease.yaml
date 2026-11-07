@@ -38,7 +38,10 @@ spec:
               GRAPHQL_PORT: "20212"
             securityContext:
               readOnlyRootFilesystem: true
-              allowPrivilegeEscalation: false
+              # Must stay true: arp-scan, nmap, nbtscan and traceroute get NET_RAW/NET_ADMIN through file
+              # capabilities, and the server runs as the unprivileged user netalert. false sets no_new_privs,
+              # which makes the kernel ignore file capabilities ("pcap_activate: You don't have permission").
+              allowPrivilegeEscalation: true
               capabilities:
                 drop:
                   - ALL
