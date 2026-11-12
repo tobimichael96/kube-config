@@ -27,7 +27,7 @@ spec:
           umami:
             image:
               repository: umamisoftware/umami
-              tag: 3.4.1
+              tag: 3.5.0
             env:
               TZ: Europe/Berlin
               # new anonymous visitor ID every day instead of every month (privacy)
