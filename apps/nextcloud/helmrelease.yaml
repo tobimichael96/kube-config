@@ -81,7 +81,7 @@ spec:
 
     image:
       repository: nextcloud
-      tag: 35.0.2-apache
+      tag: 35.0.3-apache
       # The tag gets rebuilt in place; Always keeps a restarted pod from reusing a stale cached image
       pullPolicy: Always
 
