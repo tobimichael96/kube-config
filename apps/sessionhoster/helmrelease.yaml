@@ -155,7 +155,7 @@ spec:
           postgres:
             image:
               repository: postgres
-              tag: 18-alpine
+              tag: 19-alpine
             env:
               POSTGRES_DB: calendar
               POSTGRES_USER: calendar
