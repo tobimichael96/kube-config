@@ -59,7 +59,7 @@ spec:
               # (403/511 on stream URLs while the account API still works), so
               # keep to Mullvad's own network, AS31173 (checked 2026-11-26).
               # Remaining blocks need a reconnect through the control server.
-              SERVER_CITIES: Berlin,Frankfurt
+              SERVER_CITIES: Berlin,Frankfurt,Stockholm
               ISP: "31173"
               UPDATER_PERIOD: 12h
               # The updater rejects a list with fewer than MIN_RATIO of the
