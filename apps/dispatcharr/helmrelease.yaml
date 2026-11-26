@@ -58,7 +58,7 @@ spec:
               # The IPTV providers block some exit IPs (401/403 on stream URLs while
               # the account API still works) and gluetun cannot exclude hostnames,
               # so a blocked exit needs a reconnect through the control server.
-              SERVER_CITIES: Stockholm
+              SERVER_CITIES: Berlin,Frankfurt
               UPDATER_PERIOD: 12h
               # The updater rejects a list with fewer than MIN_RATIO of the
               # bundled server count. Mullvad has retired enough servers since
