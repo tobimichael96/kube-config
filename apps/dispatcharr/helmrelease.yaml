@@ -24,11 +24,25 @@ spec:
       dispatcharr:
         type: statefulset
         initContainers:
-          gluetun:
-            restartPolicy: Always
-            image:
+          # Gluetun treats IPv6 as supported as soon as any non-loopback IPv6
+          # route exists, and the kernel's link-local fe80::/64 on eth0 counts.
+          # It then sometimes picks a server's IPv6 endpoint, which fails the
+          # healthcheck because the pod network has no IPv6. Gluetun has no
+          # IPv4-only setting, so drop the link-local address (and with it the
+          # route) from the shared netns before gluetun starts.
+          disable-ipv6:
+            image: &gluetunImage
               repository: ghcr.io/qdm12/gluetun
               tag: v3.41.3
+            command: ["/bin/sh", "-c", "set -e; ip -6 addr flush dev eth0; ip -6 route flush dev eth0; ip -6 route"]
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+          gluetun:
+            dependsOn: disable-ipv6
+            restartPolicy: Always
+            image: *gluetunImage
             env:
               TZ: Europe/Berlin
               FIREWALL: on
