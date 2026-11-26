@@ -60,6 +60,10 @@ spec:
               # so a blocked exit needs a reconnect through the control server.
               SERVER_CITIES: Stockholm
               UPDATER_PERIOD: 12h
+              # The updater rejects a list with fewer than MIN_RATIO of the
+              # bundled server count. Mullvad has retired enough servers since
+              # the bundle that the default 0.8 fails every update.
+              UPDATER_MIN_RATIO: "0.7"
               # Do not use gluetun's internal DNS server: it binds [::]:53 while
               # its own resolver dials 127.0.0.1:53 over IPv4, and with no working
               # IPv6 in this netns that fails with "resource temporarily
