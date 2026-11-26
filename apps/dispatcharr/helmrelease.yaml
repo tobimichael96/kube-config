@@ -55,10 +55,12 @@ spec:
               # (dead servers, rotated keys), so /gluetun is persisted below and
               # the list refreshed every UPDATER_PERIOD; only a first start on an
               # empty volume falls back to the bundled list.
-              # The IPTV providers block some exit IPs (401/403 on stream URLs while
-              # the account API still works) and gluetun cannot exclude hostnames,
-              # so a blocked exit needs a reconnect through the control server.
+              # The IPTV providers block exits on rented hosting networks
+              # (403/511 on stream URLs while the account API still works), so
+              # keep to Mullvad's own network, AS31173 (checked 2026-11-26).
+              # Remaining blocks need a reconnect through the control server.
               SERVER_CITIES: Berlin,Frankfurt
+              ISP: "31173"
               UPDATER_PERIOD: 12h
               # The updater rejects a list with fewer than MIN_RATIO of the
               # bundled server count. Mullvad has retired enough servers since
